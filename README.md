@@ -9,11 +9,49 @@ Aerial
 * **Tests and their automated implementation reacts on any requirement change** - most of test management systems simply store dedicated records for requirements, tests and automated tests. But they are just linked by abstract DB structure. Thus, if we do any modification into one of those items others wouldn't be reflected. Since **Aerial** generates tests and automated tests based on requirements as an input, any change to requirements will be immediately reflected. So, tests always correspond to requirements.
 * **Simplify requirements and test coverage calculation** - mainly such coverage is 100% by design
 
-How does it works? 
+How does it work? 
 ======
 
 Typical document structure
 ======
+
+```
+Feature: <Feature name>
+	<Feature Description>
+Case: <Case Name>
+Pre-requisites:
+	<Initial steps>
+Input:
+	<Input Description>
+Action:
+	<Action Steps>
+On Success:
+	<Steps Description>
+On Failure:
+	<Steps Description>
+
+```
+
+Feature
+------
+
+Case: <Case Name>
+------
+
+Pre-requisites:
+------
+
+Input:
+------
+
+Action:
+------
+
+On Success:
+------
+
+On Failure:
+------
 
 Features
 ======

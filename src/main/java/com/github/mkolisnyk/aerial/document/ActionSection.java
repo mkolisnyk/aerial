@@ -7,13 +7,17 @@ package com.github.mkolisnyk.aerial.document;
  * @author Myk Kolisnyk
  *
  */
-public class ActionSection extends DocumentSection {
+public class ActionSection extends DocumentSection<ActionSection> {
 
     /**
      * @param container
      */
-    public ActionSection(DocumentSection container) {
+    public ActionSection(DocumentSection<CaseSection> container) {
         super(container);
-        // TODO Auto-generated constructor stub
+    }
+
+    public ActionSection parse(String input) throws Exception {
+        super.parse(input);
+        return this;
     }
 }

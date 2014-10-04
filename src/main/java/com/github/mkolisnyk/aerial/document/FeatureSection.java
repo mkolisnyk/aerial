@@ -3,45 +3,31 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public class Document extends ContainerSection {
+public class FeatureSection extends ContainerSection {
 
-    private List<FeatureSection> features;
-
-    /**
-     * .
-     */
-    public Document() {
-        super(null);
-        features = new ArrayList<FeatureSection>();
-    }
-
-    /**
-     * @return the cases
-     */
-    public final List<FeatureSection> getFeatures() {
-        return features;
+    public FeatureSection(DocumentSection<?> container) {
+        super(container);
     }
 
     @Override
     public String[] getSectionTokens() {
         return new String[] {
-                Tokens.FEATURE_TOKEN
+                Tokens.CASE_TOKEN,
+                Tokens.ADDITIONAL_SCENARIOS_TOKEN
         };
     }
 
     @Override
     public String[] getMandatoryTokens() {
         return new String[] {
-                Tokens.FEATURE_TOKEN
+                Tokens.CASE_TOKEN
         };
     }
 
@@ -50,7 +36,9 @@ public class Document extends ContainerSection {
         return new HashMap<String, Class<?>>() {
             private static final long serialVersionUID = 1L;
             {
-                put(Tokens.FEATURE_TOKEN, FeatureSection.class);
+                put(Tokens.CASE_TOKEN, CaseSection.class);
+                put(Tokens.ADDITIONAL_SCENARIOS_TOKEN,
+                        AdditionalScenariosSection.class);
             }
         };
     }

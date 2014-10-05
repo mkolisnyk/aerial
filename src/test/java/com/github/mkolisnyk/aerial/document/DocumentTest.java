@@ -19,7 +19,7 @@ public class DocumentTest {
     private String sampleCaseDescription = "This is a sample test case" + lineSeparator
             + "With multiline description";
     private String sampleCaseAction = "Sample action";
-    private String sampleCaseInput = "| Name | Type | Format   |" + lineSeparator
+    private String sampleCaseInput = "| Name | Type | Value   |" + lineSeparator
             + "| Test | Int  | [0; 100) |";
     private String sampleCaseValidOutput = "This is what we see on success";
     private String sampleCaseErrorOutput = "This is what we see on error";

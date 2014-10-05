@@ -6,7 +6,11 @@ import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.Assert;
 
-public abstract class ContainerSection extends DocumentSection<ContainerSection> {
+import com.github.mkolisnyk.aerial.AerialGenerator;
+
+public abstract class ContainerSection
+                extends DocumentSection<ContainerSection>
+                implements AerialGenerator {
 
     private Map<String, DocumentSection<?>> sections;
 

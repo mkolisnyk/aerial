@@ -54,4 +54,9 @@ public class Document extends ContainerSection {
             }
         };
     }
+
+    public String generate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

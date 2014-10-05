@@ -3,6 +3,8 @@ package com.github.mkolisnyk.aerial.document;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Assert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,24 +16,24 @@ import org.junit.runners.Parameterized.Parameters;
 public class InputSectionTest {
 
     private InputSection section;
+    private static String ls = System.lineSeparator();
 
     private String inputText;
+    private boolean shouldPass;
+    private int recordsCount;
+
+    public InputSectionTest(String description, String inputTextValue, boolean shouldPassValue, int recordsCountValue) {
+        this.inputText = inputTextValue;
+        this.shouldPass = shouldPassValue;
+        this.recordsCount = recordsCountValue;
+    }
 
     @Parameters(name = "Test read input record: {0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"Normal set of fields",  "| nameValue | int | [0;100) | a > 0 |", "| Name | Type | Value | Condition |", false, "nameValue", "int", "[0;100)", "a > 0"},
-                {"Only type is missing",  "| nameValue | [0;100) | a > 0 |", "| Name | Value | Condition |", false, "nameValue", "", "[0;100)", "a > 0"},
-                {"Only value is missing", "| nameValue | int | a > 0 |", "| Name | Type | Condition |", false, "nameValue", "int", "", "a > 0"},
-                {"Only no condition",     "| nameValue | int | [0;100) |", "| Name | Type | Value |", false, "nameValue", "int", "[0;100)", ""},
-                {"Different order should fill values properly",  "| int | nameValue | a > 0 | [0;100) |", "| Type | Name | Condition | Value |", false, "nameValue", "int", "[0;100)", "a > 0"},
-                {"Varying header case should still work",  "| nameValue | int | [0;100) | a > 0 |", "| nAmE | TyPE | vaLUe | CoNDiTiON |", false, "nameValue", "int", "[0;100)", "a > 0"},
-                {"Spaces in header names should still work",  "| nameValue | int | [0;100) | a > 0 |", "| n A m E | T y P E | v a L U e | C o N D i T i O N |", false, "nameValue", "int", "[0;100)", "a > 0"},
-                {"The size of header doesn't match the line", "| nameValue | int | [0;100) | a > 0 |", "| Name | Type | Value |", true, "", "", "", ""},
-                {"Malformed Header should fail", "| nameValue | int | [0;100) | a > 0 |", "| Name | Type | Value | Condition", true, "", "", "", ""},
-                {"Malformed Line should fail", "| nameValue | int | [0;100) | a > 0", "| Name | Type | Value | Condition |", true, "", "", "", ""},
-                {"Name field shouldn't be empty",  "| | int | [0;100) | a > 0 |", "| Name | Type | Value | Condition |", true, "", "", "", ""},
-                {"Name field should be present",  "| int | [0;100) | a > 0 |", "| Type | Value | Condition |", true, "", "", "", ""},
+                {"Normal set of fields",  "| Name | Type | Value | Condition |" + ls + "| nameValue | int | [0;100) | a > 0 |", true, 1},
+                {"Only header is defined",  "| Name | Type | Value | Condition |", false, 0},
+                {"No header defined",  "| nameValue2 | int | [0;100) | a > 0 |" + ls + "| nameValue | int | [0;100) | a > 0 |", false, 0},
         });
     }
 
@@ -45,8 +47,16 @@ public class InputSectionTest {
     }
 
     @Test
-    public void testParseString() {
-        ;
+    public void testParseString() throws Exception {
+        try {
+            section.parse(inputText);
+        } catch (Throwable e) {
+            Assert.assertFalse("This was supposed to fail", shouldPass);
+            return;
+        }
+        Assert.assertEquals(
+                "The records count doesn't match",
+                this.recordsCount, section.getInputs().size());
     }
 
 }

@@ -1,7 +1,7 @@
 /**
  * .
  */
-package com.github.mkolisnyk.aerial;
+package com.github.mkolisnyk.aerial.core;
 
 /**
  * @author Myk Kolisnyk

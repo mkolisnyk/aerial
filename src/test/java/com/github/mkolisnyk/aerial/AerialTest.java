@@ -1,10 +1,11 @@
 package com.github.mkolisnyk.aerial;
 
 import org.junit.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.github.mkolisnyk.aerial.core.Aerial;
 
 public class AerialTest {
 

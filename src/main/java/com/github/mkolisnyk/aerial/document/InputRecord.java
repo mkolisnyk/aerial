@@ -1,7 +1,10 @@
 /**
- * 
+ * .
  */
 package com.github.mkolisnyk.aerial.document;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 import org.junit.Assert;
 import org.apache.commons.lang.ArrayUtils;
@@ -17,6 +20,7 @@ public class InputRecord {
     private String type;
     private String value;
     private String condition;
+    private boolean validInput;
 
     /**
      * .
@@ -30,11 +34,20 @@ public class InputRecord {
             String typeParam,
             String valueParam,
             String conditionParam) {
-        super();
+        this(nameParam, typeParam, valueParam, conditionParam, true);
+    }
+
+    public InputRecord(
+            String nameParam,
+            String typeParam,
+            String valueParam,
+            String conditionParam,
+            boolean validInputParam) {
         this.name = nameParam;
         this.type = typeParam;
         this.value = valueParam;
         this.condition = conditionParam;
+        this.validInput = validInputParam;
     }
 
     /**
@@ -65,6 +78,13 @@ public class InputRecord {
         return condition;
     }
 
+    /**
+     * @return the validInput
+     */
+    public final boolean isValidInput() {
+        return validInput;
+    }
+
     public void read(String line, String headerLine) throws Exception {
         Assert.assertTrue("The header doesn't match the format: |(.*)|",
                 headerLine.trim().matches("[|](.*)[|]"));
@@ -93,5 +113,80 @@ public class InputRecord {
         Assert.assertFalse(
                 "The name field shouldn't be empty",
                 this.name.trim().equals(""));
+    }
+
+    public List<InputRecord> expand() {
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((condition == null) ? 0 : condition.hashCode());
+        result = prime * result
+                + ((name == null) ? 0 : name.hashCode());
+        result = prime * result
+                + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + (validInput ? 1231 : 1237);
+        result = prime * result
+                + ((value == null) ? 0 : value.hashCode());
+        return result;
+    }
+
+    private boolean compareField(Field field, InputRecord other)
+            throws Exception {
+        if (field.getType().isPrimitive()) {
+            if (field.get(this) != field.get(other)) {
+                return false;
+            }
+        } else {
+            if (field.get(this) == null) {
+                if (field.get(other) != null) {
+                    return false;
+                }
+            } else if (!field.get(this).equals(field.get(other))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof InputRecord)) {
+            return false;
+        }
+        InputRecord other = (InputRecord) obj;
+        for (Field field : this.getClass().getDeclaredFields()) {
+            try {
+                if (!compareField(field, other)) {
+                    return false;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "InputRecord [name=" + name + ", type=" + type
+                + ", value=" + value + ", condition=" + condition
+                + ", validInput=" + validInput + "]";
     }
 }

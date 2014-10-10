@@ -361,6 +361,11 @@
 			<artifactId>cucumber-reporting</artifactId>
 			<version>0.0.21</version>
 		</dependency>
+		<dependency>
+		  <groupId>com.github.mkolisnyk</groupId>
+		  <artifactId>generex</artifactId>
+		  <version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

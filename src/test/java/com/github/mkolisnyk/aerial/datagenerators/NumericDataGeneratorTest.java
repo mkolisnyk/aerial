@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -102,7 +101,7 @@ public class NumericDataGeneratorTest {
     }
 
     @Test
-    public void testGenerate() {
+    public void testGenerate() throws Exception {
         List<InputRecord> actualList = generator.generate();
         for (InputRecord actual : actualList) {
             Assert.assertTrue("Unexpected record found: " + actual,

@@ -14,7 +14,7 @@ import org.apache.commons.lang.StringUtils;
  * @author Myk Kolisnyk
  *
  */
-public class InputRecord {
+public class InputRecord implements Cloneable {
 
     private String name;
     private String type;
@@ -188,5 +188,14 @@ public class InputRecord {
         return "InputRecord [name=" + name + ", type=" + type
                 + ", value=" + value + ", condition=" + condition
                 + ", validInput=" + validInput + "]";
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        // TODO Auto-generated method stub
+        return super.clone();
     }
 }

@@ -6,6 +6,7 @@ package com.github.mkolisnyk.aerial.datagenerators;
 import java.util.List;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
+import com.github.mkolisnyk.aerial.expressions.ValueExpression;
 
 /**
  * @author Myk Kolisnyk
@@ -35,6 +36,12 @@ public class StringDataGenerator extends TypedDataGenerator {
     public void validate() {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public ValueExpression[] getApplicableExpressions() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

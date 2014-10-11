@@ -97,6 +97,14 @@ public class InputRecordTest {
                 "The condition is unexpected",
                 this.condition,
                 this.record.getCondition());
+        Assert.assertEquals(
+                "Expected and actual records aren't the same",
+                new InputRecord(
+                        this.name,
+                        this.type,
+                        this.value,
+                        this.condition),
+                this.record);
     }
 
 }

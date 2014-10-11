@@ -9,10 +9,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 
+@RunWith(Parameterized.class)
 public class StringDataGeneratorTest {
 
     private InputRecord record;

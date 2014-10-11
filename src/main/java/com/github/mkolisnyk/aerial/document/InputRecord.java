@@ -3,12 +3,11 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
-import org.junit.Assert;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
 
 /**
  * @author Myk Kolisnyk
@@ -138,24 +137,6 @@ public class InputRecord implements Cloneable {
         return result;
     }
 
-    private boolean compareField(Field field, InputRecord other)
-            throws Exception {
-        if (field.getType().isPrimitive()) {
-            if (field.get(this) != field.get(other)) {
-                return false;
-            }
-        } else {
-            if (field.get(this) == null) {
-                if (field.get(other) != null) {
-                    return false;
-                }
-            } else if (!field.get(this).equals(field.get(other))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -168,16 +149,7 @@ public class InputRecord implements Cloneable {
             return false;
         }
         InputRecord other = (InputRecord) obj;
-        for (Field field : this.getClass().getDeclaredFields()) {
-            try {
-                if (!compareField(field, other)) {
-                    return false;
-                }
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return true;
+        return other.toString().equals(this.toString());
     }
 
     /* (non-Javadoc)

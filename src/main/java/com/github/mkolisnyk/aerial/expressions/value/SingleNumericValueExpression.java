@@ -59,6 +59,6 @@ public class SingleNumericValueExpression extends ValueExpression {
      */
     @Override
     public String getMatchPattern() {
-        return "(\\d+)";
+        return "(([-0-9])(\\d*))";
     }
 }

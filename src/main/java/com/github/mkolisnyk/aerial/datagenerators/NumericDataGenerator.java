@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.NumericRangeValueExpression;
 import com.github.mkolisnyk.aerial.expressions.value.SingleNumericValueExpression;
 
 /**
@@ -43,7 +44,8 @@ public class NumericDataGenerator extends TypedDataGenerator {
     @Override
     public ValueExpression[] getApplicableExpressions() {
         return new ValueExpression[]{
-                new SingleNumericValueExpression(this.getInput())
+                new SingleNumericValueExpression(this.getInput()),
+                new NumericRangeValueExpression(this.getInput()),
         };
     }
 

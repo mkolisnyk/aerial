@@ -56,7 +56,6 @@ public class NumericDataGeneratorTest {
                         {
                             add(new InputRecord("Name", "int", "5", "", true));// In range value
                             add(new InputRecord("Name", "int", "0", "", true));// Border value
-                            add(new InputRecord("Name", "int", "9", "", true));// In range value
                             add(new InputRecord("Name", "int", "10", "", false));// In range value
                             add(new InputRecord("Name", "int", "11", "", false));// Out of range value
                             add(new InputRecord("Name", "int", "-1", "", false));// Out of range value
@@ -80,8 +79,6 @@ public class NumericDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "int", "5", "", true));// In range value
-                            add(new InputRecord("Name", "int", "1", "", true));// Border value
-                            add(new InputRecord("Name", "int", "9", "", true));// Border value
                             add(new InputRecord("Name", "int", "0", "", false));// Border value
                             add(new InputRecord("Name", "int", "10", "", false));// In range value
                             add(new InputRecord("Name", "int", "11", "", false));// Out of range value

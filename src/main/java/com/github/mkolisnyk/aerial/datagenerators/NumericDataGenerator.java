@@ -25,22 +25,6 @@ public class NumericDataGenerator extends TypedDataGenerator {
         // TODO Auto-generated constructor stub
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialDataGenerator#generate()
-     */
-    public List<InputRecord> generate() throws Exception {
-        List<InputRecord> result = new ArrayList<InputRecord>();
-        for (ValueExpression expression : this.getApplicableExpressions()) {
-            try {
-                expression.validate();
-            } catch (Throwable e) {
-                continue;
-            }
-            result.addAll(expression.generate());
-        }
-        return result;
-    }
-
     @Override
     public ValueExpression[] getApplicableExpressions() {
         return new ValueExpression[]{

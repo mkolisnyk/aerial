@@ -3,10 +3,9 @@
  */
 package com.github.mkolisnyk.aerial.datagenerators;
 
-import java.util.List;
-
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.StringRegexpValueExpression;
 
 /**
  * @author Myk Kolisnyk
@@ -22,26 +21,11 @@ public class StringDataGenerator extends TypedDataGenerator {
         // TODO Auto-generated constructor stub
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialDataGenerator#generate()
-     */
-    public List<InputRecord> generate() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialDataGenerator#validate()
-     */
-    public void validate() {
-        // TODO Auto-generated method stub
-
-    }
-
     @Override
     public ValueExpression[] getApplicableExpressions() {
-        // TODO Auto-generated method stub
-        return null;
+        return new ValueExpression[]{
+                new StringRegexpValueExpression(this.getInput()),
+        };
     }
 
 }

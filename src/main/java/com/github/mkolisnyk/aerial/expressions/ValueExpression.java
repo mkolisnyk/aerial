@@ -1,5 +1,5 @@
 /**
- * 
+ * .
  */
 package com.github.mkolisnyk.aerial.expressions;
 

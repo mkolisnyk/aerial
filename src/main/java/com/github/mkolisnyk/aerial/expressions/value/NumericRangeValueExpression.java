@@ -130,10 +130,18 @@ public class NumericRangeValueExpression extends ValueExpression {
      */
     @Override
     public String toString() {
+        String start = "(";
+        String end = ")";
+        if (includeLower) {
+            start = "[";
+        }
+        if (includeUpper) {
+            end = "]";
+        }
         return String.format("%s%d;%d%s",
-                includeLower ? "[" : "(",
+                start,
                 lower,
                 upper,
-                includeUpper ? "]" : ")");
+                end);
     }
 }

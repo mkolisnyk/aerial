@@ -368,6 +368,11 @@
 		  <artifactId>generex</artifactId>
 		  <version>0.0.2</version>
 		</dependency>
+		<dependency>
+          <groupId>joda-time</groupId>
+		  <artifactId>joda-time</artifactId>
+		  <version>2.5</version>
+		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

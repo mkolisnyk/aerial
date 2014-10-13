@@ -3,9 +3,6 @@
  */
 package com.github.mkolisnyk.aerial.datagenerators;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
 import com.github.mkolisnyk.aerial.expressions.value.NumericRangeValueExpression;

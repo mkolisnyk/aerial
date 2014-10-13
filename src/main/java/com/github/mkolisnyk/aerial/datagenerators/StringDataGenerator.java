@@ -18,7 +18,6 @@ public class StringDataGenerator extends TypedDataGenerator {
      */
     public StringDataGenerator(InputRecord inputValue) {
         super(inputValue);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

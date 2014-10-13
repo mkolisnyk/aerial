@@ -5,6 +5,7 @@ package com.github.mkolisnyk.aerial.datagenerators;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.SingleDateValueExpression;
 
 /**
  * @author Myk Kolisnyk
@@ -22,8 +23,9 @@ public class DateDataGenerator extends TypedDataGenerator {
 
     @Override
     public ValueExpression[] getApplicableExpressions() {
-        // TODO Auto-generated method stub
-        return null;
+        return new ValueExpression[]{
+                new SingleDateValueExpression(this.getInput()),
+        };
     }
 
 }

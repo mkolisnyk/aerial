@@ -84,6 +84,20 @@ public class InputRecord implements Cloneable {
         return validInput;
     }
 
+    /**
+     * @param valueValue the value to set
+     */
+    public final void setValue(String valueValue) {
+        this.value = valueValue;
+    }
+
+    /**
+     * @param validInputValue the validInput to set
+     */
+    public final void setValidInput(boolean validInputValue) {
+        this.validInput = validInputValue;
+    }
+
     public void read(String line, String headerLine) throws Exception {
         Assert.assertTrue("The header doesn't match the format: |(.*)|",
                 headerLine.trim().matches("[|](.*)[|]"));

@@ -43,25 +43,35 @@ public class StringRegexpValueExpression extends ValueExpression {
                         value.matches(testRecord.getValue()))
         );
         // Empty string
+        value = "";
         result.add(
                 new InputRecord(
                         testRecord.getName(),
                         testRecord.getType(),
-                        "",
+                        value,
                         testRecord.getCondition(),
                         value.matches(testRecord.getValue()))
         );
         // Doubled string (repetitive pattern)
+        value = generex.random(1);
+        value = value.concat(value);
         result.add(
                 new InputRecord(
                         testRecord.getName(),
                         testRecord.getType(),
-                        value.concat(value),
+                        value,
                         testRecord.getCondition(),
                         value.matches(testRecord.getValue()))
         );
         // Pattern itself
-        result.add(testRecord);
-        return null;
+        result.add(
+                new InputRecord(
+                    testRecord.getName(),
+                    testRecord.getType(),
+                    testRecord.getValue(),
+                    testRecord.getCondition(),
+                    testRecord.getValue().matches(testRecord.getValue()))
+                );
+        return result;
     }
 }

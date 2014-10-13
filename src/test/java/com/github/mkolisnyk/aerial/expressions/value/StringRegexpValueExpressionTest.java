@@ -19,28 +19,25 @@ import com.github.mkolisnyk.aerial.document.InputRecord;
 public class StringRegexpValueExpressionTest {
 
     private InputRecord record;
-    private List<InputRecord> expectedRecords;
     private StringRegexpValueExpression generator;
 
     public StringRegexpValueExpressionTest(
             String description,
-            InputRecord recordValue,
-            List<InputRecord> expectedRecordsValue) {
+            InputRecord recordValue) {
         this.record = recordValue;
-        this.expectedRecords = expectedRecordsValue;
     }
 
-    @Parameters(name = "Test read input record: {0}")
+    @Parameters(name = "Test generate regexp string: {0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"Single value field should return value or 0 for negative case",
-                    new InputRecord("Name", "string", "([a-z0-9]+)[@]([a-z0-9]+)[.]([a-z0-9]+)", ""),
-                    new ArrayList<InputRecord>()
-                    {
-                        {
-                            add(new InputRecord("Name", "string", "3", "", true));
-                        }
-                    }
+                {"Excercising e-mail format",
+                    new InputRecord("Name", "string", "(\\w+)[@](\\w+)[.](\\w+)", ""),
+                },
+                {"Excercising phone number format",
+                    new InputRecord("Name", "string", "\\+\\(\\d{1,3}\\) \\d{8}", ""),
+                },
+                {"Excercising enumerations",
+                    new InputRecord("Name", "string", "(JAN|FEB|MAR|APR|MAY|JUN)", ""),
                 },
         });
     }
@@ -58,13 +55,14 @@ public class StringRegexpValueExpressionTest {
     public void testGenerate() throws Exception {
         List<InputRecord> actualList = new ArrayList<InputRecord>();
         actualList = generator.generate();
+        Assert.assertTrue(actualList.size() > 1);
         for (InputRecord actual : actualList) {
-            Assert.assertTrue("Unexpected record found: " + actual,
-                    this.expectedRecords.contains(actual));
-        }
-        for (InputRecord expected : this.expectedRecords) {
-            Assert.assertTrue("Expected record wasn't found: " + expected,
-                    actualList.contains(expected));
+            Assert.assertEquals(String.format(
+                        "Inconsistent valid/invalid format for pattern: %s , value: %s , valid: %s",
+                        record.getValue(),
+                        actual.getValue(),
+                        "" + actual.isValidInput()),
+                    actual.getValue().matches(record.getValue()), actual.isValidInput());
         }
     }
 }

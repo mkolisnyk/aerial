@@ -20,7 +20,7 @@ public class StringDataGeneratorTest {
 
     private InputRecord record;
     private List<InputRecord> expectedRecords;
-    private NumericDataGenerator generator;
+    private StringDataGenerator generator;
 
     public StringDataGeneratorTest(String description,
             InputRecord recordValue, List<InputRecord> expectedRecordsValue) {
@@ -45,7 +45,7 @@ public class StringDataGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        generator = new NumericDataGenerator(record);
+        generator = new StringDataGenerator(record);
     }
 
     @After

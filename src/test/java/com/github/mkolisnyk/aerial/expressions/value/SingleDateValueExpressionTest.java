@@ -1,13 +1,13 @@
 package com.github.mkolisnyk.aerial.expressions.value;
 
-import static org.junit.Assert.*;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
-import org.apache.tools.ant.taskdefs.XSLTProcess.Param;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,6 +17,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
+import com.github.mkolisnyk.aerial.util.Clock;
 
 @RunWith(Parameterized.class)
 public class SingleDateValueExpressionTest {
@@ -48,8 +49,10 @@ public class SingleDateValueExpressionTest {
                     new ArrayList<InputRecord>()
                     {
                         {
-                            add(new InputRecord("Name", "date", "29/10/2014", "", true));
-                            add(new InputRecord("Name", "date", "11/09/2001", "", false));
+                            add(new InputRecord("Name", "date", "18/10/2014", "", true));
+                            add(new InputRecord("Name", "date", "12/04/1961", "", true));
+                            add(new InputRecord("Name", "date", "29/02/2014", "", false));
+                            add(new InputRecord("Name", "date", "", "", false));
                         }
                     },
                     true
@@ -57,9 +60,17 @@ public class SingleDateValueExpressionTest {
         });
     }
 
+    private class TestClock implements Clock {
+
+        public Date now() throws Exception {
+            DateFormat baseFormat = new SimpleDateFormat("dd-mm-yyyy");
+            return  baseFormat.parse("18-10-2014");
+        }
+    }
     @Before
     public void setUp() throws Exception {
         generator = new SingleDateValueExpression(record);
+        generator.setClock(new TestClock());
     }
 
     @After

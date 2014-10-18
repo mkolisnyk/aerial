@@ -14,5 +14,5 @@ import com.github.mkolisnyk.aerial.document.InputRecord;
 public interface AerialDataGenerator {
 
     List<InputRecord> generate() throws Exception;
-    void validate();
+    void validate() throws Exception;
 }

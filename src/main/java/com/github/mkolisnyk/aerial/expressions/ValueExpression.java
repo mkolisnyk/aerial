@@ -38,7 +38,7 @@ public abstract class ValueExpression implements AerialDataGenerator {
         return "(.*)";
     }
 
-    public void validate() {
+    public void validate() throws Exception {
         Assert.assertTrue(
                 String.format(
                         "The \"%s\" input value doesn't match"

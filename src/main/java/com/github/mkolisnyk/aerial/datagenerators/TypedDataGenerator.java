@@ -6,6 +6,8 @@ package com.github.mkolisnyk.aerial.datagenerators;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 import com.github.mkolisnyk.aerial.AerialDataGenerator;
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
@@ -38,6 +40,7 @@ public abstract class TypedDataGenerator implements
      */
     public List<InputRecord> generate() throws Exception {
         List<InputRecord> result = new ArrayList<InputRecord>();
+        this.validate();
         for (ValueExpression expression : this.getApplicableExpressions()) {
             try {
                 expression.validate();
@@ -52,7 +55,7 @@ public abstract class TypedDataGenerator implements
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialDataGenerator#validate()
      */
-    public void validate() {
+    public void validate() throws Exception {
         boolean validated = false;
         for (ValueExpression expression : this.getApplicableExpressions()) {
             try {
@@ -65,7 +68,8 @@ public abstract class TypedDataGenerator implements
                 break;
             }
         }
+        Assert.assertTrue("At least one expression type should match the input", validated);
     }
 
-    public abstract ValueExpression[] getApplicableExpressions();
+    public abstract ValueExpression[] getApplicableExpressions() throws Exception;
 }

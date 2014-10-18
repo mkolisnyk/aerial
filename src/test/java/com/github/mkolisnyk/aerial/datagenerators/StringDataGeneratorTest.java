@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -15,6 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 
+@Ignore
 @RunWith(Parameterized.class)
 public class StringDataGeneratorTest {
 
@@ -36,8 +38,8 @@ public class StringDataGeneratorTest {
                     new ArrayList<InputRecord>()
                     {
                         {
-                            add(new InputRecord("Name", "int", "3", "", true));
-                            add(new InputRecord("Name", "int", "0", "", false));
+                            add(new InputRecord("Name", "string", "3", "", true));
+                            add(new InputRecord("Name", "string", "0", "", false));
                         }
                 }},
         });

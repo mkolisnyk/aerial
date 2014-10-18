@@ -84,7 +84,7 @@ public class NumericRangeValueExpression extends ValueExpression {
      * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#validate()
      */
     @Override
-    public void validate() {
+    public void validate() throws Exception {
         super.validate();
         this.parse();
         Assert.assertTrue(

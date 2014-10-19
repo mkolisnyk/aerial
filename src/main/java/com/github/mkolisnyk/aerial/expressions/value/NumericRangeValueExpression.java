@@ -10,6 +10,7 @@ import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
 
 /**
  * @author Myk Kolisnyk
@@ -78,6 +79,14 @@ public class NumericRangeValueExpression extends ValueExpression {
                         testRecord.getCondition(),
                         false));
         return result;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#getValueType()
+     */
+    @Override
+    public ValueExpressionType getValueType() {
+        return ValueExpressionType.INTEGER;
     }
 
     /* (non-Javadoc)

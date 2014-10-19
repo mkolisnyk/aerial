@@ -97,7 +97,7 @@ public abstract class ContainerSection
         return this;
     }
 
-    public void validate() {
+    public void validate() throws Exception {
         for (String token:this.getMandatoryTokens()) {
             Assert.assertTrue(this.sections.containsKey(token));
             this.sections.get(token).validate();

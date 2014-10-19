@@ -15,6 +15,7 @@ import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
 import com.github.mkolisnyk.aerial.util.Clock;
 import com.github.mkolisnyk.aerial.util.SystemClock;
 
@@ -105,6 +106,14 @@ public class DateRangeValueExpression extends ValueExpression {
         result.add(inputValue);
 
         return result;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#getValueType()
+     */
+    @Override
+    public ValueExpressionType getValueType() {
+        return ValueExpressionType.DATE;
     }
 
     /* (non-Javadoc)

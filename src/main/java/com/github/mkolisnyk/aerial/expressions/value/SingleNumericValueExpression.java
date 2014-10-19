@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
 
 /**
  * @author Myk Kolisnyk
@@ -52,6 +53,14 @@ public class SingleNumericValueExpression extends ValueExpression {
                 input.getCondition(),
                 false);
         return testRecord;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#getValueType()
+     */
+    @Override
+    public ValueExpressionType getValueType() {
+        return ValueExpressionType.INTEGER;
     }
 
     /* (non-Javadoc)

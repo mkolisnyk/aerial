@@ -11,21 +11,35 @@ import org.junit.Assert;
 import com.github.mkolisnyk.aerial.AerialDataGenerator;
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.DateRangeValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.NumericRangeValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.SingleDateValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.SingleNumericValueExpression;
+import com.github.mkolisnyk.aerial.expressions.value.StringRegexpValueExpression;
+import com.github.mkolisnyk.aerial.util.Clock;
+import com.github.mkolisnyk.aerial.util.SystemClock;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public abstract class TypedDataGenerator implements
+public class TypedDataGenerator implements
         AerialDataGenerator {
 
     private InputRecord input;
 
+    private Clock clock;
+
     /**
-     * .
+     * @param inputValue
      */
     public TypedDataGenerator(InputRecord inputValue) {
         this.input = inputValue;
+        this.clock = new SystemClock();
+    }
+
+    public void setClock(Clock clockValue) {
+        this.clock = clockValue;
     }
 
     /**
@@ -58,9 +72,6 @@ public abstract class TypedDataGenerator implements
     public void validate() throws Exception {
         boolean validated = true;
         ValueExpression[] expressions = this.getApplicableExpressions();
-        if (expressions == null) {
-            return;
-        }
         for (ValueExpression expression : expressions) {
             try {
                 expression.validate();
@@ -75,5 +86,13 @@ public abstract class TypedDataGenerator implements
         Assert.assertTrue("At least one expression type should match the input", validated);
     }
 
-    public abstract ValueExpression[] getApplicableExpressions() throws Exception;
+    public ValueExpression[] getApplicableExpressions() throws Exception {
+        return new ValueExpression[]{
+                new StringRegexpValueExpression(this.getInput()),
+                new SingleDateValueExpression(this.getInput(), this.clock),
+                new DateRangeValueExpression(this.getInput(), this.clock),
+                new SingleNumericValueExpression(this.getInput()),
+                new NumericRangeValueExpression(this.getInput()),
+        };
+    }
 }

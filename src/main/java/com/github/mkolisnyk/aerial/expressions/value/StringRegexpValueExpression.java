@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
 import com.mifmif.common.regex.Generex;
 
 /**
@@ -23,6 +24,15 @@ public class StringRegexpValueExpression extends ValueExpression {
         super(inputValue);
         // TODO Auto-generated constructor stub
     }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#getValueType()
+     */
+    @Override
+    public ValueExpressionType getValueType() {
+        return ValueExpressionType.STRING;
+    }
+
 
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#generate()

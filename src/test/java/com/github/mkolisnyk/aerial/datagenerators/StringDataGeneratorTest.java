@@ -21,7 +21,7 @@ public class StringDataGeneratorTest {
 
     private String format;
     private InputRecord record;
-    private StringDataGenerator generator;
+    private TypedDataGenerator generator;
 
     public StringDataGeneratorTest(String description,
             String formatValue,
@@ -58,7 +58,7 @@ public class StringDataGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        generator = new StringDataGenerator(record);
+        generator = new TypedDataGenerator(record);
     }
 
     @After

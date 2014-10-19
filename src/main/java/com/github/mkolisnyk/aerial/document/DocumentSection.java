@@ -55,12 +55,12 @@ public abstract class DocumentSection<T extends DocumentSection<?>>
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialParser#validate(java.lang.String)
      */
-    public void validate(String input) {
+    public void validate(String input) throws Exception {
         Assert.assertFalse(input == null);
         Assert.assertFalse(input.trim().equals(""));
     }
 
-    public void validate() {
+    public void validate() throws Exception {
         validate(this.getContent());
     }
 }

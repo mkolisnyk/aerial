@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.Assert;
 
+import com.github.mkolisnyk.aerial.datagenerators.TypedDataGenerator;
+
 /**
  * @author Myk Kolisnyk
  *
@@ -47,7 +49,10 @@ public class InputSection extends DocumentSection<InputSection> {
         return this;
     }
 
-    public void validate(String input) {
-        // TODO Auto-generated method stub
+    public void validate(String input) throws Exception {
+        for (InputRecord record : inputs) {
+            TypedDataGenerator generator = new TypedDataGenerator(record);
+            generator.validate();
+        }
     }
 }

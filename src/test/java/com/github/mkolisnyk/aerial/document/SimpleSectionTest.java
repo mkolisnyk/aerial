@@ -88,12 +88,12 @@ public class SimpleSectionTest {
     }
 
     @Test(expected = Throwable.class)
-    public void testValidateShouldReturnExceptionOnEmptyInput() {
+    public void testValidateShouldReturnExceptionOnEmptyInput() throws Exception {
         section.validate("");
     }
 
     @Test(expected = Throwable.class)
-    public void testValidateShouldReturnExceptionOnNullInput() {
+    public void testValidateShouldReturnExceptionOnNullInput() throws Exception {
         section.validate(null);
     }
 }

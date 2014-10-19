@@ -38,7 +38,12 @@ public abstract class ValueExpression implements AerialDataGenerator {
         return "(.*)";
     }
 
+    public ValueExpressionType getValueType() {
+        return ValueExpressionType.UNKNOWN;
+    }
+
     public void validate() throws Exception {
+        Assert.assertTrue(this.getValueType().isOfType(this.getInput().getType()));
         Assert.assertTrue(
                 String.format(
                         "The \"%s\" input value doesn't match"

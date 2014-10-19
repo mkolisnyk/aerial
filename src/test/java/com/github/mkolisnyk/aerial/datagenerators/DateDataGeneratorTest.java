@@ -38,7 +38,7 @@ public class DateDataGeneratorTest {
 
     private InputRecord record;
     private List<InputRecord> expectedRecords;
-    private DateDataGenerator generator;
+    private TypedDataGenerator generator;
 
     public DateDataGeneratorTest(String description,
             InputRecord recordValue, List<InputRecord> expectedRecordsValue) {
@@ -130,7 +130,7 @@ public class DateDataGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        generator = new DateDataGenerator(record);
+        generator = new TypedDataGenerator(record);
         generator.setClock(new TestClock());
     }
 

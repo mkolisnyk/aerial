@@ -56,8 +56,12 @@ public abstract class TypedDataGenerator implements
      * @see com.github.mkolisnyk.aerial.AerialDataGenerator#validate()
      */
     public void validate() throws Exception {
-        boolean validated = false;
-        for (ValueExpression expression : this.getApplicableExpressions()) {
+        boolean validated = true;
+        ValueExpression[] expressions = this.getApplicableExpressions();
+        if (expressions == null) {
+            return;
+        }
+        for (ValueExpression expression : expressions) {
             try {
                 expression.validate();
                 validated = true;

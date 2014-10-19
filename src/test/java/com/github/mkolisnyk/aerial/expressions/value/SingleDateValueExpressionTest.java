@@ -44,14 +44,26 @@ public class SingleDateValueExpressionTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
                 {"Simple date format: ",
-                    "dd/mm/yyyy",
-                    new InputRecord("Name", "date", "dd/mm/yyyy", ""),
+                    "dd/MM/yyyy",
+                    new InputRecord("Name", "date", "dd/MM/yyyy", ""),
                     new ArrayList<InputRecord>()
                     {
                         {
                             add(new InputRecord("Name", "date", "18/10/2014", "", true));
                             add(new InputRecord("Name", "date", "12/04/1961", "", true));
-                            add(new InputRecord("Name", "date", "29/02/2014", "", false));
+                            add(new InputRecord("Name", "date", "", "", false));
+                        }
+                    },
+                    true
+                },
+                {"Another date format: ",
+                    "dd MMM, yyyy",
+                    new InputRecord("Name", "date", "dd MMM, yyyy", ""),
+                    new ArrayList<InputRecord>()
+                    {
+                        {
+                            add(new InputRecord("Name", "date", "18 Oct, 2014", "", true));
+                            add(new InputRecord("Name", "date", "12 Apr, 1961", "", true));
                             add(new InputRecord("Name", "date", "", "", false));
                         }
                     },
@@ -63,7 +75,7 @@ public class SingleDateValueExpressionTest {
     private class TestClock implements Clock {
 
         public Date now() throws Exception {
-            DateFormat baseFormat = new SimpleDateFormat("dd-mm-yyyy");
+            DateFormat baseFormat = new SimpleDateFormat("dd-MM-yyyy");
             return  baseFormat.parse("18-10-2014");
         }
     }

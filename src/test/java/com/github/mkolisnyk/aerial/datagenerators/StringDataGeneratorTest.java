@@ -16,32 +16,43 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
 
-@Ignore
 @RunWith(Parameterized.class)
 public class StringDataGeneratorTest {
 
+    private String format;
     private InputRecord record;
-    private List<InputRecord> expectedRecords;
     private StringDataGenerator generator;
 
     public StringDataGeneratorTest(String description,
-            InputRecord recordValue, List<InputRecord> expectedRecordsValue) {
+            String formatValue,
+            InputRecord recordValue) {
+        this.format = formatValue;
         this.record = recordValue;
-        this.expectedRecords = expectedRecordsValue;
     }
 
-    @Parameters(name = "Test read input record: {0}")
+    @Parameters(name = "Test String generation: {0}.")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"Single value field should return value or 0 for negative case",
-                    new InputRecord("Name", "int", "3", ""),
-                    new ArrayList<InputRecord>()
-                    {
-                        {
-                            add(new InputRecord("Name", "string", "3", "", true));
-                            add(new InputRecord("Name", "string", "0", "", false));
-                        }
-                }},
+                {"Any character string",
+                    "(.*)",
+                    new InputRecord("Name", "string", "(.*)", "")
+                },
+                {"Any number string",
+                    "(\\d+)",
+                    new InputRecord("Name", "string", "(\\d+)", "")
+                },
+                {"Any word string",
+                    "(\\w+)",
+                    new InputRecord("Name", "string", "(\\w+)", "")
+                },
+                {"Any space string",
+                    "(\\s+)",
+                    new InputRecord("Name", "string", "(\\s+)", "")
+                },
+                {"Specific format string",
+                    "This is just a string",
+                    new InputRecord("Name", "string", "This is just a string", "")
+                },
         });
     }
 
@@ -58,12 +69,11 @@ public class StringDataGeneratorTest {
     public void testGenerate() throws Exception {
         List<InputRecord> actualList = generator.generate();
         for (InputRecord actual : actualList) {
-            Assert.assertTrue("Unexpected record found: " + actual,
-                    this.expectedRecords.contains(actual));
-        }
-        for (InputRecord expected : this.expectedRecords) {
-            Assert.assertTrue("Expected record wasn't found: " + expected,
-                    actualList.contains(expected));
+            Assert.assertTrue(
+                    String.format("The generated string '%s' doesn't match the format '%s'",
+                            actual.getValue(),
+                            this.format),
+                    actual.getValue().matches(format) == actual.isValidInput());
         }
     }
 

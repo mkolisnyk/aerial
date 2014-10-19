@@ -4,9 +4,13 @@
 package com.github.mkolisnyk.aerial.expressions.value;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -25,6 +29,7 @@ public class DateRangeValueExpression extends ValueExpression {
     private static final String SPACE_DELIMITER_PATTERN = "(\\s*)";
     private boolean includeLower = false;
     private boolean includeUpper = false;
+    private String formatString;
     private Date lower;
     private Date upper;
 
@@ -35,10 +40,15 @@ public class DateRangeValueExpression extends ValueExpression {
      * @throws Exception .
      */
     public DateRangeValueExpression(InputRecord inputValue) throws Exception {
+        this(inputValue, new SystemClock());
+    }
+
+    public DateRangeValueExpression(InputRecord inputValue, Clock clockValue) throws Exception {
         super(inputValue);
-        this.clock = new SystemClock();
+        this.clock = clockValue;
         this.lower = clock.now();
         this.upper = clock.now();
+        this.formatString = "dd-MM-yyyy";
     }
 
     /**
@@ -53,8 +63,48 @@ public class DateRangeValueExpression extends ValueExpression {
      */
     @Override
     public List<InputRecord> generate() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        List<InputRecord> result = new ArrayList<InputRecord>();
+        this.validate();
+
+        InputRecord inputValue = (InputRecord) this.getInput().clone();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(this.formatString);
+        DateTime start = new DateTime(lower);
+        DateTime end = new DateTime(upper);
+
+        // Valid in range value
+        int range = Days.daysBetween(start, end).getDays();
+        calendar.setTime(lower);
+        calendar.add(Calendar.DAY_OF_YEAR, range / 2);
+        inputValue.setValue(format.format(calendar.getTime()));
+        inputValue.setValidInput(true);
+        result.add(inputValue);
+        // Lower border value
+        inputValue = (InputRecord) this.getInput().clone();
+        inputValue.setValue(format.format(lower));
+        inputValue.setValidInput(this.includeLower);
+        result.add(inputValue);
+        // Upper border value
+        inputValue = (InputRecord) this.getInput().clone();
+        inputValue.setValue(format.format(upper));
+        inputValue.setValidInput(this.includeUpper);
+        result.add(inputValue);
+        // Day before lower
+        inputValue = (InputRecord) this.getInput().clone();
+        calendar.setTime(lower);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        inputValue.setValue(format.format(calendar.getTime()));
+        inputValue.setValidInput(false);
+        result.add(inputValue);
+        // Day after upper
+        inputValue = (InputRecord) this.getInput().clone();
+        calendar.setTime(upper);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        inputValue.setValue(format.format(calendar.getTime()));
+        inputValue.setValidInput(false);
+        result.add(inputValue);
+
+        return result;
     }
 
     /* (non-Javadoc)
@@ -92,7 +142,8 @@ public class DateRangeValueExpression extends ValueExpression {
         String pattern = this.getMatchPattern();
         this.includeLower = input.replaceFirst(pattern, "$1").equals("[");
         this.includeUpper = input.replaceFirst(pattern, "$8").equals("]");
-        SimpleDateFormat format = new SimpleDateFormat(input.replaceFirst(pattern, "$10"));
+        this.formatString = input.replaceFirst(pattern, "$10");
+        SimpleDateFormat format = new SimpleDateFormat(this.formatString);
         String lowerString = input.replaceFirst(pattern, "$3");
         String upperString = input.replaceFirst(pattern, "$6");
         this.lower = format.parse(lowerString);

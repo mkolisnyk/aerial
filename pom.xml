@@ -45,7 +45,7 @@
 	</ciManagement>
 	<build>
 		<plugins>
-			<!-- <plugin>
+			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<version>0.8</version>
@@ -67,7 +67,7 @@
 						<phase>site</phase>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
@@ -363,14 +363,19 @@
 			<version>0.0.21</version>
 		</dependency>
 		<dependency>
-		  <groupId>com.github.mkolisnyk</groupId>
-		  <artifactId>generex</artifactId>
-		  <version>0.0.2</version>
+			<groupId>com.github.mkolisnyk</groupId>
+			<artifactId>generex</artifactId>
+			<version>0.0.2</version>
 		</dependency>
 		<dependency>
-          <groupId>joda-time</groupId>
-		  <artifactId>joda-time</artifactId>
-		  <version>2.5</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
 		</dependency>
 	</dependencies>
 	<reporting>

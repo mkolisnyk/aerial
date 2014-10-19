@@ -50,7 +50,11 @@ public class InputSection extends DocumentSection<InputSection> {
     }
 
     public void validate(String input) throws Exception {
+        if (inputs == null) {
+            this.parse(input);
+        }
         for (InputRecord record : inputs) {
+            Assert.assertFalse("The name must be non-empty", record.getName().trim().equals(""));
             TypedDataGenerator generator = new TypedDataGenerator(record);
             generator.validate();
         }

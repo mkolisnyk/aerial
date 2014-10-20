@@ -20,7 +20,7 @@ public class DocumentTest {
             + "With multiline description";
     private String sampleCaseAction = "Sample action";
     private String sampleCaseInput = "| Name | Type | Value   |" + lineSeparator
-            + "| Test | Int  | [0; 100) |";
+            + "| Test | Int  | [0;100) |";
     private String sampleCaseValidOutput = "This is what we see on success";
     private String sampleCaseErrorOutput = "This is what we see on error";
     private String samplePrerequisites = "These are our pre-requisites";

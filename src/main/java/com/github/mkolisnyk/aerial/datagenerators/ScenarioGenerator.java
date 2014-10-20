@@ -34,15 +34,48 @@ public class ScenarioGenerator {
                 + " ValidInput varchar(5))");
 
         for (InputRecord record : expanded) {
+            String validInput = "false";
+            if (record.isValidInput()) {
+                validInput = "true";
+            }
             db.execute(String.format("INSERT INTO input (Name, Type, Value, Condition, ValidInput)"
                     + " VALUES ('%s','%s','%s','%s','%s')",
                     record.getName(),
                     record.getType(),
                     record.getValue(),
                     record.getCondition(),
-                    record.isValidInput() ? "true" : "false"));
+                    validInput));
         }
 
+        /*
+         * SELECT 
+    S1.Value AS 'Number',
+    S2.Value AS 'Text',
+    S3.Value AS 'Date',
+    CASE WHEN (S1.ValidInput = 'true' AND S2.ValidInput = 'true' AND S3.ValidInput = 'true') THEN 'true' ELSE 'false' END AS Valid
+FROM
+(
+SELECT [Value]
+      ,[Condition]
+      ,[ValidInput]
+  FROM [Test].[dbo].[InputTable] WHERE Name = 'Number') AS S1
+  CROSS JOIN
+(
+SELECT [Value]
+      ,[Condition]
+      ,[ValidInput]
+  FROM [Test].[dbo].[InputTable] WHERE Name = 'Text') AS S2
+  CROSS JOIN
+(
+SELECT [Value]
+      ,[Condition]
+      ,[ValidInput]
+  FROM [Test].[dbo].[InputTable] WHERE Name = 'Date') AS S3
+  
+ORDER BY Valid DESC
+
+         */
+        
         db.closeConnection();
         db.stopServer();
         return null;

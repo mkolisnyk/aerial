@@ -5,6 +5,7 @@ package com.github.mkolisnyk.aerial.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -65,11 +66,25 @@ public class HsqlDBWrapper {
 
     public void execute(String query) throws SQLException {
         LOG.info("Running query: " + query);
-        connection.prepareStatement(query).execute();
+        PreparedStatement statement = connection.prepareStatement(query);
+        try {
+            statement.execute();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        statement.close();
     }
 
     public ResultSet executeQuery(String query) throws SQLException {
         LOG.info("Running query: " + query);
-        return connection.prepareStatement(query).executeQuery();
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet result = null;
+        try {
+            result = statement.executeQuery();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        statement.close();
+        return result;
     }
 }

@@ -36,6 +36,7 @@ public class InputSection extends DocumentSection<InputSection> {
 
 
     public InputSection parse(String input) throws Exception {
+        inputs = new ArrayList<InputRecord>();
         this.setContent(input);
         String[] lines = input.split(lineSeparator);
         Assert.assertTrue(

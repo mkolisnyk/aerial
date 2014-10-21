@@ -44,7 +44,6 @@ public class FeatureSection extends ContainerSection {
     }
 
     public String generate() {
-        // TODO Auto-generated method stub
         return null;
     }
 }

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.github.mkolisnyk.aerial.datagenerators.ScenarioGenerator;
 
 /**
@@ -49,18 +51,35 @@ public class CaseSection extends ContainerSection {
         };
     }
 
-    private String generatePositiveTestData(Map<String, List<String>> testData) {
-        return "";
-    }
-
-    private String generateNegativeTestData(Map<String, List<String>> testData) {
-        return "";
+    private String generateTestData(Map<String, List<String>> testData, boolean positive) {
+        String content = "| " + StringUtils.join(testData.keySet().iterator(), " | ") + " |";
+        int count = testData.get(testData.keySet().iterator().next()).size();
+        for (int i = 0; i < count; i++) {
+            if (testData.get("ValidInput").get(i).trim().equals("false") != positive) {
+                continue;
+            }
+            for (String key : testData.keySet()) {
+                content = content.concat("| " + testData.get(key).get(i) + " ");
+            }
+            content = content.concat("|");
+        }
+        return content;
     }
 
     public String generate() throws Exception {
         InputSection input = (InputSection) this.getSections().get(Tokens.INPUT_TOKEN);
         ScenarioGenerator dataGenerator = new ScenarioGenerator(input.getInputs());
         Map<String, List<String>> testData = dataGenerator.generateTestData();
-        return null;
+        String content = "Scenario Outline: positive test";
+        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate();
+        content += this.getSections().get(Tokens.ACTION_TOKEN).generate();
+        content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).generate();
+        content += "Examples:" + this.generateTestData(testData, true);
+        content += "Scenario Outline: negative test";
+        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate();
+        content += this.getSections().get(Tokens.ACTION_TOKEN).generate();
+        content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).generate();
+        content += "Examples:" + this.generateTestData(testData, false);
+        return content;
     }
 }

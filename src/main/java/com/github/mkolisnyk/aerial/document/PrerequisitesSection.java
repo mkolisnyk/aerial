@@ -21,4 +21,9 @@ public class PrerequisitesSection
         super.parse(input);
         return this;
     }
+
+    public String generate() throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

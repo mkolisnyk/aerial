@@ -79,7 +79,7 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGenerateValidSetOfData() throws Exception {
-        Map<String, List<String>> actualResult = generator.generate();
+        Map<String, List<String>> actualResult = generator.generateTestData();
         Assert.assertEquals(60, actualResult.get("Name").size());
         Assert.assertEquals(60, actualResult.get("Date").size());
         Assert.assertEquals(60, actualResult.get("Count").size());

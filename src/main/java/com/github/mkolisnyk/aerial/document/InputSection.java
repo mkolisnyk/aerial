@@ -60,4 +60,9 @@ public class InputSection extends DocumentSection<InputSection> {
             generator.validate();
         }
     }
+
+    public String generate() throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

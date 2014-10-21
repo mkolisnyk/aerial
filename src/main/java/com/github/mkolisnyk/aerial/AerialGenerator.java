@@ -8,5 +8,5 @@ package com.github.mkolisnyk.aerial;
  *
  */
 public interface AerialGenerator {
-    String generate();
+    String generate() throws Exception;
 }

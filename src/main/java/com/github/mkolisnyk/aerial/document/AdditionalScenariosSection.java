@@ -21,4 +21,8 @@ public class AdditionalScenariosSection extends
         super.parse(input);
         return this;
     }
+
+    public String generate() throws Exception {
+        return this.getContent();
+    }
 }

@@ -20,4 +20,8 @@ public class ActionSection extends DocumentSection<ActionSection> {
         super.parse(input);
         return this;
     }
+
+    public String generate() throws Exception {
+        return "When " + this.getContent();
+    }
 }

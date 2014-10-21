@@ -18,4 +18,8 @@ public class ErrorOutput extends DocumentSection<ErrorOutput> {
         super.parse(input);
         return this;
     }
+
+    public String generate() throws Exception {
+        return "Then " + this.getContent();
+    }
 }

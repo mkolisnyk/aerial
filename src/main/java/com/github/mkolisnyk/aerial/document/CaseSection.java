@@ -4,7 +4,10 @@
 package com.github.mkolisnyk.aerial.document;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.github.mkolisnyk.aerial.datagenerators.ScenarioGenerator;
 
 /**
  * @author Myk Kolisnyk
@@ -46,8 +49,18 @@ public class CaseSection extends ContainerSection {
         };
     }
 
-    public String generate() {
-        // TODO Auto-generated method stub
+    private String generatePositiveTestData(Map<String, List<String>> testData) {
+        return "";
+    }
+
+    private String generateNegativeTestData(Map<String, List<String>> testData) {
+        return "";
+    }
+
+    public String generate() throws Exception {
+        InputSection input = (InputSection) this.getSections().get(Tokens.INPUT_TOKEN);
+        ScenarioGenerator dataGenerator = new ScenarioGenerator(input.getInputs());
+        Map<String, List<String>> testData = dataGenerator.generateTestData();
         return null;
     }
 }

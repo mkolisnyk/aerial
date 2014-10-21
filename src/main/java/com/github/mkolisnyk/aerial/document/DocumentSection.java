@@ -5,6 +5,7 @@ package com.github.mkolisnyk.aerial.document;
 
 import org.junit.Assert;
 
+import com.github.mkolisnyk.aerial.AerialGenerator;
 import com.github.mkolisnyk.aerial.AerialParser;
 
 /**
@@ -12,7 +13,7 @@ import com.github.mkolisnyk.aerial.AerialParser;
  *
  */
 public abstract class DocumentSection<T extends DocumentSection<?>>
-        implements AerialParser<T> {
+        implements AerialParser<T>, AerialGenerator {
     private DocumentSection<?> parent;
     private String content;
 

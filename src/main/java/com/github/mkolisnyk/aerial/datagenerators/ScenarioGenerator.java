@@ -57,7 +57,7 @@ public class ScenarioGenerator {
         return query;
     }
 
-    public Map<String, List<String>> generate() throws Exception {
+    public Map<String, List<String>> generateTestData() throws Exception {
         List<InputRecord> expanded = new ArrayList<InputRecord>();
         this.validate();
         for (InputRecord record : this.records) {

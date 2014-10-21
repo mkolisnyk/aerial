@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hsqldb.Server;
@@ -75,16 +79,39 @@ public class HsqlDBWrapper {
         statement.close();
     }
 
-    public ResultSet executeQuery(String query) throws SQLException {
+    public List<String> getColumnNames(ResultSet result) throws SQLException {
+        List<String> names = new ArrayList<String>();
+        int count = result.getMetaData().getColumnCount();
+        for (int i = 1; i <= count; i++) {
+            names.add(result.getMetaData().getColumnLabel(i));
+        }
+        return names;
+    }
+
+    public Map<String, List<String>> executeQuery(String query) throws SQLException {
+        Map<String, List<String>> output = new HashMap<String, List<String>>();
         LOG.info("Running query: " + query);
         PreparedStatement statement = connection.prepareStatement(query);
         ResultSet result = null;
         try {
             result = statement.executeQuery();
+            List<String> names = this.getColumnNames(result);
+            result.next();
+            while (!result.isAfterLast()) {
+                for (String name: names) {
+                    List<String> column = new ArrayList<String>();
+                    if (output.containsKey(name)) {
+                        column = output.get(name);
+                    }
+                    column.add(result.getString(name));
+                    output.put(name, column);
+                }
+                result.next();
+            }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
         statement.close();
-        return result;
+        return output;
     }
 }

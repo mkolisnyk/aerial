@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
+
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.util.HsqlDBWrapper;
 
@@ -12,12 +14,52 @@ public class ScenarioGenerator {
     private List<InputRecord> records;
 
     public ScenarioGenerator(List<InputRecord> recordsList) throws Exception {
+        if (recordsList == null) {
+            recordsList = new ArrayList<InputRecord>();
+        }
         this.records = recordsList;
-        this.validate();
+    }
+
+    String[] getUniqueNames() {
+        List<String> names = new ArrayList<String>();
+        for (InputRecord record : this.records) {
+            if (!names.contains(record.getName())) {
+                names.add(record.getName());
+            }
+        }
+        String[] result = new String[names.size()];
+        result = names.toArray(result);
+        return result;
+    }
+
+    String generateQueryString(String[] names) {
+        String query = "SELECT ";
+        for (int i = 0; i < names.length; i++) {
+            query = query.concat(String.format("S%d.Value AS \"%s\", ", i, names[i]));
+        }
+        query = query.concat(" CASE WHEN (");
+        for (int i = 0; i < names.length; i++) {
+            query = query.concat(String.format("S%d.ValidInput = 'true' AND ", i));
+        }
+        query = query.concat(" 1 = 1 ) THEN 'true' ELSE 'false' END AS \"ValidInput\" FROM ");
+        for (int i = 0; i < names.length - 1; i++) {
+            query = query.concat(
+                    String.format(
+                            "(SELECT Name,Value,Condition,ValidInput "
+                            + "FROM input WHERE Name = '%s') AS S%d  CROSS JOIN ",
+                            names[i], i));
+        }
+        query = query.concat(
+                String.format(
+                        "(SELECT Name,Value,Condition,ValidInput "
+                        + "FROM input WHERE Name = '%s') AS S%d ORDER BY \"ValidInput\" DESC",
+                        names[names.length - 1], names.length - 1));
+        return query;
     }
 
     public Map<String, List<String>> generate() throws Exception {
         List<InputRecord> expanded = new ArrayList<InputRecord>();
+        this.validate();
         for (InputRecord record : this.records) {
             TypedDataGenerator generator = new TypedDataGenerator(record);
             expanded.addAll(generator.generate());
@@ -47,38 +89,19 @@ public class ScenarioGenerator {
                     validInput));
         }
 
-        /*
-         * SELECT 
-    S1.Value AS 'Number',
-    S2.Value AS 'Text',
-    S3.Value AS 'Date',
-    CASE WHEN (S1.ValidInput = 'true' AND S2.ValidInput = 'true' AND S3.ValidInput = 'true') THEN 'true' ELSE 'false' END AS Valid
-FROM
-(
-SELECT [Value]
-      ,[Condition]
-      ,[ValidInput]
-  FROM [Test].[dbo].[InputTable] WHERE Name = 'Number') AS S1
-  CROSS JOIN
-(
-SELECT [Value]
-      ,[Condition]
-      ,[ValidInput]
-  FROM [Test].[dbo].[InputTable] WHERE Name = 'Text') AS S2
-  CROSS JOIN
-(
-SELECT [Value]
-      ,[Condition]
-      ,[ValidInput]
-  FROM [Test].[dbo].[InputTable] WHERE Name = 'Date') AS S3
-  
-ORDER BY Valid DESC
+        String[] names = this.getUniqueNames();
+        String query = this.generateQueryString(names);
 
-         */
-        
+        Map<String, List<String>> output = db.executeQuery(query);
+        for (String name: names) {
+            Assert.assertTrue(
+                    String.format("The '%s' column wasn't found in the result set", name),
+                    output.containsKey(name));
+        }
+
         db.closeConnection();
         db.stopServer();
-        return null;
+        return output;
     }
 
     public void validate() throws Exception {

@@ -11,6 +11,7 @@ import java.util.Map;
  *
  */
 public class FeatureSection extends ContainerSection {
+    private String ls = System.lineSeparator();
 
     public FeatureSection(DocumentSection<?> container) {
         super(container);
@@ -43,7 +44,11 @@ public class FeatureSection extends ContainerSection {
         };
     }
 
-    public String generate() {
-        return null;
+    public String generate() throws Exception {
+        Map<String, DocumentSection<?>> sections = this.getSections();
+        String content = "Feature: <feature name>" + ls;
+        content += sections.get(Tokens.CASE_TOKEN).generate() + ls;
+        content += sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN).generate();
+        return content;
     }
 }

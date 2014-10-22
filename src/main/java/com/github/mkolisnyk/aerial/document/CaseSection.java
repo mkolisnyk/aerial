@@ -15,6 +15,8 @@ import com.github.mkolisnyk.aerial.datagenerators.ScenarioGenerator;
  * @author Myk Kolisnyk
  */
 public class CaseSection extends ContainerSection {
+    private int offset = 1;
+    private String ls = System.lineSeparator();
 
     public CaseSection(DocumentSection<?> container) {
         super(container);
@@ -52,16 +54,18 @@ public class CaseSection extends ContainerSection {
     }
 
     private String generateTestData(Map<String, List<String>> testData, boolean positive) {
-        String content = "| " + StringUtils.join(testData.keySet().iterator(), " | ") + " |";
+        String content = StringUtils.repeat("\t", offset + 1) + "| "
+                + StringUtils.join(testData.keySet().iterator(), " | ") + " |"  + ls
+                + StringUtils.repeat("\t", offset + 1);
         int count = testData.get(testData.keySet().iterator().next()).size();
         for (int i = 0; i < count; i++) {
-            if (testData.get("ValidInput").get(i).trim().equals("false") != positive) {
+            if (testData.get("ValidInput").get(i).trim().equals("false") == positive) {
                 continue;
             }
             for (String key : testData.keySet()) {
                 content = content.concat("| " + testData.get(key).get(i) + " ");
             }
-            content = content.concat("|");
+            content = content.concat("|" + ls + StringUtils.repeat("\t", offset + 1));
         }
         return content;
     }
@@ -70,16 +74,18 @@ public class CaseSection extends ContainerSection {
         InputSection input = (InputSection) this.getSections().get(Tokens.INPUT_TOKEN);
         ScenarioGenerator dataGenerator = new ScenarioGenerator(input.getInputs());
         Map<String, List<String>> testData = dataGenerator.generateTestData();
-        String content = "Scenario Outline: positive test";
-        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate();
-        content += this.getSections().get(Tokens.ACTION_TOKEN).generate();
-        content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).generate();
-        content += "Examples:" + this.generateTestData(testData, true);
-        content += "Scenario Outline: negative test";
-        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate();
-        content += this.getSections().get(Tokens.ACTION_TOKEN).generate();
-        content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).generate();
-        content += "Examples:" + this.generateTestData(testData, false);
+        String content = StringUtils.repeat("\t", offset) + "Scenario Outline: positive test" + ls;
+        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate()  + ls;
+        content += this.getSections().get(Tokens.ACTION_TOKEN).generate() + ls;
+        content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).generate() + ls;
+        content += StringUtils.repeat("\t", offset)
+                + "Examples:" + ls + this.generateTestData(testData, true) + ls;
+        content += StringUtils.repeat("\t", offset) + "Scenario Outline: negative test" + ls;
+        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).generate() + ls;
+        content += this.getSections().get(Tokens.ACTION_TOKEN).generate() + ls;
+        content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).generate() + ls;
+        content += StringUtils.repeat("\t", offset) + "Examples:"
+                + ls + this.generateTestData(testData, false) + ls;
         return content;
     }
 }

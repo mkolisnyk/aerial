@@ -1,7 +1,5 @@
 package com.github.mkolisnyk.aerial.document;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +25,7 @@ public class DocumentTest {
 
     private String sampleFeatureText =
             sampleDocumentDescription + lineSeparator
-            + "Feature:" + lineSeparator 
+            + "Feature:" + lineSeparator
             + sampleFeatureDescription + lineSeparator
             + "Case:" + lineSeparator
             + sampleCaseDescription + lineSeparator
@@ -90,5 +88,12 @@ public class DocumentTest {
         document.parse(sampleFeatureText);
         Assert.assertEquals(sampleDocumentDescription, document.getDescription());
         Assert.assertNotNull(document.getSections().get(Tokens.FEATURE_TOKEN));
+    }
+
+    @Test
+    public void testGenerateShouldReturnValidFormattedText() throws Exception {
+        document.parse(sampleFeatureText);
+        String actual = document.generate();
+        Assert.assertEquals("", actual);
     }
 }

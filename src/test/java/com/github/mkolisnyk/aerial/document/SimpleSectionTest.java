@@ -24,22 +24,24 @@ public class SimpleSectionTest {
     private DocumentSection<?> section;
     private String content;
     private Class<?> clazz;
-    private String description;
+    private String expected;
+    private static String contentString = "I log into the system\n"
+            + "Navigate to the Home Page";
 
-    public SimpleSectionTest(Class<?> classValue, String descriptionValue) {
-        this.description = descriptionValue;
+    public SimpleSectionTest(Class<?> classValue, String description, String expectedValue) {
         this.clazz = classValue;
+        this.expected = expectedValue;
     }
 
     @Parameters(name = "Test: {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {ActionSection.class, "Action Section"},
-                {ValidOutput.class, "Valid Output Section"},
-                {ErrorOutput.class, "Error Output Section"},
-                {PrerequisitesSection.class, "Prerequisites Section"},
+                {ActionSection.class, "Action Section", "When " + contentString},
+                {ValidOutput.class, "Valid Output Section", "Then " + contentString},
+                {ErrorOutput.class, "Error Output Section", "Then " + contentString},
+                {PrerequisitesSection.class, "Prerequisites Section", "Given " + contentString},
                 {AdditionalScenariosSection.class,
-                                        "Additional Scenario Section"}
+                                        "Additional Scenario Section", contentString}
            });
     }
 
@@ -50,8 +52,7 @@ public class SimpleSectionTest {
     public void setUp() throws Exception {
         section = (DocumentSection<?>) clazz.getConstructors()[0]
                                             .newInstance(new Object[]{null});
-        content = "I log into the system\n"
-                + "Navigate to the Home Page";
+        content = contentString;
     }
 
     /**
@@ -95,5 +96,12 @@ public class SimpleSectionTest {
     @Test(expected = Throwable.class)
     public void testValidateShouldReturnExceptionOnNullInput() throws Exception {
         section.validate(null);
+    }
+
+    @Test
+    public void testGenerateShouldReturnFormattedString() throws Exception {
+        section = section.parse(content);
+        String actual = section.generate();
+        Assert.assertEquals("Generated string differs from expected", this.expected, actual);
     }
 }

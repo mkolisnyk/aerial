@@ -105,4 +105,12 @@ public class FeatureSectionTest {
         Assert.assertNotNull(section.getSections()
                 .get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
     }
+
+    @Test
+    public void testGenerateShouldReturnValidFormattedText() throws Exception {
+        String expected = "";
+        section.parse(sampleFeatureText);
+        String actual = section.generate();
+        Assert.assertEquals(expected, actual);
+    }
 }

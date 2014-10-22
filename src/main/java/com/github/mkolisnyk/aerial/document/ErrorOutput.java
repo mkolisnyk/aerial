@@ -3,11 +3,15 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Myk Kolisnyk
  *
  */
 public class ErrorOutput extends DocumentSection<ErrorOutput> {
+
+    private final int offset = 2;
 
     public ErrorOutput(DocumentSection<CaseSection> container) {
         super(container);
@@ -20,6 +24,7 @@ public class ErrorOutput extends DocumentSection<ErrorOutput> {
     }
 
     public String generate() throws Exception {
-        return "Then " + this.getContent();
+        return StringUtils.repeat("\t", offset)
+                + "Then " + this.getContent();
     }
 }

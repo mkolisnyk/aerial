@@ -3,11 +3,15 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Myk Kolisnyk
  */
 public class PrerequisitesSection
                 extends DocumentSection<PrerequisitesSection> {
+
+    private final int offset = 2;
 
     /**
      * @param container
@@ -23,7 +27,7 @@ public class PrerequisitesSection
     }
 
     public String generate() throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+        return StringUtils.repeat("\t", offset)
+                + "Given " + this.getContent();
     }
 }

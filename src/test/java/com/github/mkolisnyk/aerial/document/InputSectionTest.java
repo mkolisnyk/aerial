@@ -58,5 +58,4 @@ public class InputSectionTest {
                 "The records count doesn't match",
                 this.recordsCount, section.getInputs().size());
     }
-
 }

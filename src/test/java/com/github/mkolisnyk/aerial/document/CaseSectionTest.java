@@ -3,6 +3,7 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -15,27 +16,27 @@ import org.junit.Test;
 public class CaseSectionTest {
 
     private CaseSection section;
-    private String lineSeparator = System.lineSeparator();
+    private String ls = System.lineSeparator();
 
-    private String sampleCaseDescription = "This is a sample test case" + lineSeparator
+    private String sampleCaseDescription = "This is a sample test case" + ls
             + "With multiline description";
     private String sampleCaseAction = "Sample action";
-    private String sampleCaseInput = "| Name | Type | Value |" + lineSeparator
+    private String sampleCaseInput = "| Name | Type | Value |" + ls
             + "| Test | int  | [0;100) |";
     private String sampleCaseValidOutput = "This is what we see on success";
     private String sampleCaseErrorOutput = "This is what we see on error";
     private String samplePrerequisites = "These are our pre-requisites";
-    private String sampleCaseText = sampleCaseDescription + lineSeparator
-            + "Action:" + lineSeparator
-            + sampleCaseAction + lineSeparator
-            + "Input:" + lineSeparator
-            + sampleCaseInput + lineSeparator
-            + "On Success:" + lineSeparator
-            + sampleCaseValidOutput + lineSeparator
-            + "On Failure:" + lineSeparator
-            + sampleCaseErrorOutput + lineSeparator
-            + "Pre-requisites:" + lineSeparator
-            + samplePrerequisites + lineSeparator;
+    private String sampleCaseText = sampleCaseDescription + ls
+            + "Action:" + ls
+            + sampleCaseAction + ls
+            + "Input:" + ls
+            + sampleCaseInput + ls
+            + "On Success:" + ls
+            + sampleCaseValidOutput + ls
+            + "On Failure:" + ls
+            + sampleCaseErrorOutput + ls
+            + "Pre-requisites:" + ls
+            + samplePrerequisites + ls;
 
     /**
      * @throws java.lang.Exception
@@ -97,12 +98,12 @@ public class CaseSectionTest {
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.document.CaseSection#getDescription()}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testParseForTextWithNoTokensShouldReturnJustDescription() throws Exception {
         String descriptionText = "This is sample case description"
-                + lineSeparator + "With multiline";
+                + ls + "With multiline";
         section.parse(descriptionText);
         Assert.assertEquals(descriptionText, section.getDescription());
         Assert.assertEquals(0, section.getSections().size());
@@ -110,7 +111,7 @@ public class CaseSectionTest {
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.document.CaseSection#parse(java.lang.String)}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testParseValidScenarioShouldFillAllSections() throws Exception {
@@ -128,4 +129,31 @@ public class CaseSectionTest {
            section.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).getContent());
     }
 
+    @Test
+    public void testGenerateShouldReturnValidFormattedText() throws Exception {
+        String shortOffset = StringUtils.repeat("\t", 1);
+        String midOffset = StringUtils.repeat("\t", 2);
+        String expected = shortOffset + "Scenario Outline: positive test" + ls
+                          + midOffset + "Given These are our pre-requisites" + ls
+                          + midOffset + "When Sample action" + ls
+                          + midOffset + "Then This is what we see on success" + ls
+                          + shortOffset + "Examples:" + ls
+                          + midOffset + "| Test | ValidInput |" + ls
+                          + midOffset + "| 50 | true  |" + ls
+                          + midOffset + "| 0 | true  |" + ls
+                          + midOffset + "" + ls
+                          + shortOffset + "Scenario Outline: negative test" + ls
+                          + midOffset + "Given These are our pre-requisites" + ls
+                          + midOffset + "When Sample action" + ls
+                          + midOffset + "Then This is what we see on error" + ls
+                          + shortOffset + "Examples:" + ls
+                          + midOffset + "| Test | ValidInput |" + ls
+                          + midOffset + "| 100 | false |" + ls
+                          + midOffset + "| -1 | false |" + ls
+                          + midOffset + "| 101 | false |" + ls
+                          + midOffset + ls;
+        section.parse(sampleCaseText);
+        String actual = section.generate();
+        Assert.assertEquals(expected, actual);
+    }
 }

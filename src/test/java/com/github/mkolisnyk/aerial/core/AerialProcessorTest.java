@@ -1,5 +1,6 @@
 package com.github.mkolisnyk.aerial.core;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -86,9 +87,9 @@ public class AerialProcessorTest {
                 + "\t\t" + ls
                 + "" + ls
                 + "Scenario: Sample Scenario 1";
-        this.input.open(sampleFeatureText);
+        this.input.open(sampleFeatureText, sampleFeatureText);
         processor.process(input, output);
-        Assert.assertEquals(expected, processor.getContent());
+        Assert.assertEquals(StringUtils.repeat(expected, 2), processor.getContent());
     }
 
 }

@@ -188,7 +188,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<preparationGoals>package install:install-file</preparationGoals>
+					<preparationGoals>package install:install-file site</preparationGoals>
 					<scmCommentPrefix>#42'[ci skip]'</scmCommentPrefix>
 				</configuration>
 			</plugin>

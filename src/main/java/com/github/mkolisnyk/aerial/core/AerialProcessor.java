@@ -23,8 +23,8 @@ public class AerialProcessor {
 
     public void process(AerialReader input, AerialWriter output)
             throws Exception {
-        Document document = new Document();
         while (input.hasNext()) {
+            Document document = new Document();
             document = (Document) document.parse(input.readNext());
             output.open(document);
             while (output.hasNext()) {

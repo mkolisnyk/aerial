@@ -22,8 +22,9 @@ public interface AerialReader {
     /**
      * .
      * @return .
+     * @throws Exception .
      */
-    String readNext();
+    String readNext() throws Exception;
     /**
      * .
      * @return .

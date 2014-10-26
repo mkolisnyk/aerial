@@ -17,7 +17,7 @@ import com.github.mkolisnyk.aerial.AerialReader;
 public class AerialStringReaderTest {
 
     private AerialReader reader;
-    
+
     /**
      * @throws java.lang.Exception
      */
@@ -36,9 +36,10 @@ public class AerialStringReaderTest {
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.readers.AerialStringReader#AerialStringReader()}.
+     * @throws Exception 
      */
     @Test
-    public void testConstructorShouldCreateObjectWithEmptyContent() {
+    public void testConstructorShouldCreateObjectWithEmptyContent() throws Exception {
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readNext());
     }

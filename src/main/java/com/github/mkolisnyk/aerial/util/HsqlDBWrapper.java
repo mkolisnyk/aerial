@@ -22,7 +22,7 @@ import org.hsqldb.Server;
  */
 public class HsqlDBWrapper {
 
-    private static final Logger LOG = LoogerFactory.create(HsqlDBWrapper.class);
+    private static final Logger LOG = LoggerFactory.create(HsqlDBWrapper.class);
 
     private String dbName;
     private Server hsqlServer = null;

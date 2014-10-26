@@ -4,9 +4,9 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
-public final class LoogerFactory {
+public final class LoggerFactory {
 
-    private LoogerFactory() {
+    private LoggerFactory() {
     }
     public static Logger create(Class<?> clazz) {
         ConsoleAppender console = new ConsoleAppender(); //create appender

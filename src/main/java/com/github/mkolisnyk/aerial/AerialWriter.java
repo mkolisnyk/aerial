@@ -24,8 +24,9 @@ public interface AerialWriter {
     /**
      * .
      * @return .
+     * @throws Exception .
      */
-    void writeNext();
+    String writeNext() throws Exception;
     /**
      * .
      * @return .

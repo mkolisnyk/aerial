@@ -13,10 +13,12 @@ import com.github.mkolisnyk.aerial.document.Document;
  */
 public class AerialProcessor {
 
+    private String content;
     /**
      * .
      */
     public AerialProcessor() {
+        this.content = "";
     }
 
     public void process(AerialReader input, AerialWriter output)
@@ -26,9 +28,16 @@ public class AerialProcessor {
             document = (Document) document.parse(input.readNext());
             output.open(document);
             while (output.hasNext()) {
-                output.writeNext();
+                content = content.concat(output.writeNext());
             }
             output.close();
         }
+    }
+
+    /**
+     * @return the content
+     */
+    public final String getContent() {
+        return content;
     }
 }

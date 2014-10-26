@@ -2,6 +2,8 @@ package com.github.mkolisnyk.aerial.document;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -75,7 +77,7 @@ public class FeatureSectionTest {
     public void testValidateShouldFailIfMandatorySectionsAreMissing() throws Exception {
         section.parse(sampleFeatureText);
         for (String token : section.getMandatoryTokens()) {
-            DocumentSection<?> item = section.getSections().get(token);
+            ArrayList<DocumentSection<?>> item = section.getSections().get(token);
             section.getSections().remove(token);
             try {
                 section.validate();
@@ -108,7 +110,28 @@ public class FeatureSectionTest {
 
     @Test
     public void testGenerateShouldReturnValidFormattedText() throws Exception {
-        String expected = "";
+        String expected = "Feature: <feature name>" + lineSeparator
+        + "\tScenario Outline: positive test" + lineSeparator
+        + "\t\tGiven These are our pre-requisites" + lineSeparator
+        + "\t\tWhen Sample action" + lineSeparator
+        + "\t\tThen This is what we see on success" + lineSeparator
+        + "\tExamples:" + lineSeparator
+        + "\t\t| Test | ValidInput |" + lineSeparator
+        + "\t\t| 50 | true  |" + lineSeparator
+        + "\t\t| 0 | true  |" + lineSeparator
+        + "\t\t" + lineSeparator
+        + "\tScenario Outline: negative test" + lineSeparator
+        + "\t\tGiven These are our pre-requisites" + lineSeparator
+        + "\t\tWhen Sample action" + lineSeparator
+        + "\t\tThen This is what we see on error" + lineSeparator
+        + "\tExamples:" + lineSeparator
+        + "\t\t| Test | ValidInput |" + lineSeparator
+        + "\t\t| 100 | false |" + lineSeparator
+        + "\t\t| -1 | false |" + lineSeparator
+        + "\t\t| 101 | false |" + lineSeparator
+        + "\t\t" + lineSeparator
+        + "" + lineSeparator
+        + "Scenario: Sample Scenario 1";
         section.parse(sampleFeatureText);
         String actual = section.generate();
         Assert.assertEquals(expected, actual);

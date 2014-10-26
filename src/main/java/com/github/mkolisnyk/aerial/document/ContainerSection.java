@@ -1,5 +1,6 @@
 package com.github.mkolisnyk.aerial.document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public abstract class ContainerSection
                 extends DocumentSection<ContainerSection>
                 implements AerialGenerator {
 
-    private Map<String, DocumentSection<?>> sections;
+    private Map<String, ArrayList<DocumentSection<?>>> sections;
 
     private String description;
 
@@ -26,14 +27,14 @@ public abstract class ContainerSection
     /**
      * @return the sections
      */
-    public Map<String, DocumentSection<?>> getSections() {
+    public Map<String, ArrayList<DocumentSection<?>>> getSections() {
         return sections;
     }
 
     public ContainerSection(DocumentSection<?> container) {
         super(container);
         this.description = "";
-        this.sections = new HashMap<String, DocumentSection<?>>();
+        this.sections = new HashMap<String, ArrayList<DocumentSection<?>>>();
     }
 
     public abstract String[] getSectionTokens();
@@ -59,9 +60,17 @@ public abstract class ContainerSection
             this.description = content;
             content = "";
         } else {
+            /*this.sections.put(
+                    currentSectionName,
+                    currentSection.parse(content));*/
+            ArrayList<DocumentSection<?>> sectionItem = new ArrayList<DocumentSection<?>>();
+            if (this.sections.containsKey(currentSectionName)) {
+                sectionItem = this.sections.get(currentSectionName);
+            }
+            sectionItem.add(currentSection.parse(content));
             this.sections.put(
                     currentSectionName,
-                    currentSection.parse(content));
+                    sectionItem);
         }
     }
     public ContainerSection parse(String input) throws Exception {
@@ -100,12 +109,16 @@ public abstract class ContainerSection
     public void validate() throws Exception {
         for (String token:this.getMandatoryTokens()) {
             Assert.assertTrue(this.sections.containsKey(token));
-            this.sections.get(token).validate();
+            for (DocumentSection<?> item : this.sections.get(token)) {
+                item.validate();
+            }
         }
         for (String token:this.getSectionTokens()) {
             if (!ArrayUtils.contains(this.getMandatoryTokens(), token)
                     && this.sections.containsKey(token)) {
-                this.sections.get(token).validate();
+                for (DocumentSection<?> item : this.sections.get(token)) {
+                    item.validate();
+                }
             }
         }
     }

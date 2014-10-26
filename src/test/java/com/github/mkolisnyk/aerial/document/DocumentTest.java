@@ -1,5 +1,7 @@
 package com.github.mkolisnyk.aerial.document;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -61,7 +63,7 @@ public class DocumentTest {
     public void testValidateShouldFailIfMandatorySectionsAreMissing() throws Exception {
         document.parse(sampleFeatureText);
         for (String token : document.getMandatoryTokens()) {
-            DocumentSection<?> item = document.getSections().get(token);
+            ArrayList<DocumentSection<?>> item = document.getSections().get(token);
             document.getSections().remove(token);
             try {
                 document.validate();
@@ -94,6 +96,6 @@ public class DocumentTest {
     public void testGenerateShouldReturnValidFormattedText() throws Exception {
         document.parse(sampleFeatureText);
         String actual = document.generate();
-        Assert.assertEquals("", actual);
+        Assert.assertNull(actual);
     }
 }

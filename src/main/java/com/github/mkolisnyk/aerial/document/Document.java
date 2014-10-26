@@ -55,6 +55,23 @@ public class Document extends ContainerSection {
         };
     }
 
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.document.ContainerSection#parse(java.lang.String)
+     */
+    @Override
+    public ContainerSection parse(String input) throws Exception {
+        super.parse(input);
+        //this.features.add(this.getSections().get(Tokens.FEATURE_TOKEN));
+        features = new ArrayList<FeatureSection>();
+        ArrayList<DocumentSection<?>> section = this.getSections().get(Tokens.FEATURE_TOKEN);
+        if (section != null) {
+            for (DocumentSection<?> item : section) {
+                features.add((FeatureSection) item);
+            }
+        }
+        return this;
+    }
+
     public String generate() {
         // TODO Auto-generated method stub
         return null;

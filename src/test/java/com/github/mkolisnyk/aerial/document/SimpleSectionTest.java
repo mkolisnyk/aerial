@@ -36,10 +36,10 @@ public class SimpleSectionTest {
     @Parameters(name = "Test: {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {ActionSection.class, "Action Section", "When " + contentString},
-                {ValidOutput.class, "Valid Output Section", "Then " + contentString},
-                {ErrorOutput.class, "Error Output Section", "Then " + contentString},
-                {PrerequisitesSection.class, "Prerequisites Section", "Given " + contentString},
+                {ActionSection.class, "Action Section", "\t\tWhen " + contentString},
+                {ValidOutput.class, "Valid Output Section", "\t\tThen " + contentString},
+                {ErrorOutput.class, "Error Output Section", "\t\tThen " + contentString},
+                {PrerequisitesSection.class, "Prerequisites Section", "\t\tGiven " + contentString},
                 {AdditionalScenariosSection.class,
                                         "Additional Scenario Section", contentString}
            });

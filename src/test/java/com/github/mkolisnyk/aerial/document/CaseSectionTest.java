@@ -3,6 +3,8 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.After;
@@ -83,7 +85,7 @@ public class CaseSectionTest {
     public void testValidateShouldFailIfMandatorySectionsAreMissing() throws Exception {
         section.parse(sampleCaseText);
         for (String token : section.getMandatoryTokens()) {
-            DocumentSection<?> item = section.getSections().get(token);
+            ArrayList<DocumentSection<?>> item = section.getSections().get(token);
             section.getSections().remove(token);
             try {
                 section.validate();
@@ -118,15 +120,15 @@ public class CaseSectionTest {
         section.parse(sampleCaseText);
         Assert.assertEquals(sampleCaseDescription, section.getDescription());
         Assert.assertEquals(samplePrerequisites,
-           section.getSections().get(Tokens.PREREQUISITES_TOKEN).getContent());
+           section.getSections().get(Tokens.PREREQUISITES_TOKEN).get(0).getContent());
         Assert.assertEquals(sampleCaseInput,
-           section.getSections().get(Tokens.INPUT_TOKEN).getContent());
+           section.getSections().get(Tokens.INPUT_TOKEN).get(0).getContent());
         Assert.assertEquals(sampleCaseAction,
-           section.getSections().get(Tokens.ACTION_TOKEN).getContent());
+           section.getSections().get(Tokens.ACTION_TOKEN).get(0).getContent());
         Assert.assertEquals(sampleCaseValidOutput,
-           section.getSections().get(Tokens.VALID_OUTPUT_TOKEN).getContent());
+           section.getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).getContent());
         Assert.assertEquals(sampleCaseErrorOutput,
-           section.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).getContent());
+           section.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).getContent());
     }
 
     @Test

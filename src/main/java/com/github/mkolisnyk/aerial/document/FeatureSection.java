@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
+
 /**
  * @author Myk Kolisnyk
  *
@@ -78,5 +80,14 @@ public class FeatureSection extends ContainerSection {
         }
         content += sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN).get(0).generate();
         return content;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.document.ContainerSection#validate()
+     */
+    @Override
+    public void validate() throws Exception {
+        super.validate();
+        Assert.assertTrue(this.getName().trim().length() > 0);
     }
 }

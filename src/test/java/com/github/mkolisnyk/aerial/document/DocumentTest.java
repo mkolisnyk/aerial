@@ -27,9 +27,9 @@ public class DocumentTest {
 
     private String sampleFeatureText =
             sampleDocumentDescription + lineSeparator
-            + "Feature:" + lineSeparator
+            + "Feature: Sample Feature" + lineSeparator
             + sampleFeatureDescription + lineSeparator
-            + "Case:" + lineSeparator
+            + "Case: Sample Case 001" + lineSeparator
             + sampleCaseDescription + lineSeparator
             + "Action:" + lineSeparator
             + sampleCaseAction + lineSeparator

@@ -14,10 +14,12 @@ import com.github.mkolisnyk.aerial.AerialParser;
  */
 public abstract class DocumentSection<T extends DocumentSection<?>>
         implements AerialParser<T>, AerialGenerator {
+    private String name;
     private DocumentSection<?> parent;
     private String content;
 
     public DocumentSection(DocumentSection<?> container) {
+        this.name = "";
         this.parent = container;
         this.content = "";
     }
@@ -41,6 +43,20 @@ public abstract class DocumentSection<T extends DocumentSection<?>>
      */
     public void setContent(String contentValue) {
         this.content = contentValue;
+    }
+
+    /**
+     * @return the name
+     */
+    public final String getName() {
+        return name;
+    }
+
+    /**
+     * @param nameValue the name to set
+     */
+    public final void setName(String nameValue) {
+        this.name = nameValue;
     }
 
     /* (non-Javadoc)

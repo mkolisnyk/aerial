@@ -9,15 +9,17 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.util.LoggerFactory;
 
 /**
  * @author Myk Kolisnyk
  *
  */
 public class AerialFileReader implements AerialReader {
-
+    private static final Logger LOG = LoggerFactory.create(AerialFileReader.class);
     private List<File> files;
     private Iterator<File> iterator;
 
@@ -25,8 +27,9 @@ public class AerialFileReader implements AerialReader {
      * .
      */
     public AerialFileReader() {
-        this.files = null;
-        this.iterator = null;
+        LOG.info("Initializing File Reader");
+        this.files = new ArrayList<File>();
+        this.iterator = this.files.iterator();
     }
 
     /**
@@ -36,15 +39,40 @@ public class AerialFileReader implements AerialReader {
         return files;
     }
 
+    private boolean compareFileName(String path, String pattern) {
+        LOG.debug(String.format("Check if \"%s\" path contains the \"%s\" pattern", path, pattern));
+        if (path.contains(pattern)) {
+            return true;
+        }
+        LOG.debug(String.format("Compare \"%s\" path against the \"%s\" pattern", path, pattern));
+        if (path.matches(pattern)) {
+            return true;
+        }
+        path = path.replaceAll("[\\\\]", "/");
+        LOG.debug(String.format("Compare \"%s\" path against the \"%s\" pattern", path, pattern));
+        if (path.matches(pattern)) {
+            return true;
+        }
+        LOG.debug(String.format("Check if \"%s\" path contains the \"%s\" pattern", path, pattern));
+        if (path.contains(pattern)) {
+            return true;
+        }
+        return false;
+    }
+
     private List<File> listFiles(File rootFolder, List<String> matchPatterns) {
+        LOG.debug(String.format("Processing files in the \"%s\" folder", rootFolder.getAbsolutePath()));
         List<File> outList = new ArrayList<File>();
-        for (String name : rootFolder.list()) {
-            File child = new File(name);
+        for (File child : rootFolder.getAbsoluteFile().listFiles()) {
+            LOG.debug(String.format("Found \"%s\" file", child.getAbsolutePath()));
             if (child.isDirectory()) {
-                outList.addAll(listFiles(child, matchPatterns));
+                LOG.debug("This is a directory");
+                outList.addAll(listFiles(child.getAbsoluteFile(), matchPatterns));
+                LOG.debug("Directory processing is done");
             } else {
                 for (String pattern : matchPatterns) {
-                    if (child.getAbsolutePath().matches(pattern)) {
+                    if (compareFileName(child.getAbsolutePath(), pattern)) {
+                        LOG.debug("It matches!!! Adding to list");
                         outList.add(child);
                         break;
                     }
@@ -58,10 +86,11 @@ public class AerialFileReader implements AerialReader {
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
     public void open(Object... params) throws Exception {
-        File root = new File("./");
+        File root = new File("").getAbsoluteFile();
         List<String> matchPatterns = new ArrayList<String>();
         for (int i = 0; i < params.length; i++) {
             matchPatterns.add((String) params[i]);
+            LOG.debug("Adding parameter: " + params[i]);
         }
         this.files = listFiles(root, matchPatterns);
         this.iterator = this.files.iterator();
@@ -71,17 +100,16 @@ public class AerialFileReader implements AerialReader {
      * @see com.github.mkolisnyk.aerial.AerialReader#close()
      */
     public void close() throws Exception {
-        if (this.files != null) {
-            this.files.clear();
-        }
-        this.files = null;
+        this.files.clear();
+        this.files = new ArrayList<File>();
+        this.iterator = this.files.iterator();
     }
 
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialReader#readNext()
      */
     public String readNext() throws Exception {
-        if (this.iterator != null && this.hasNext()) {
+        if (this.hasNext()) {
             return FileUtils.readFileToString(this.iterator.next());
         }
         return null;
@@ -91,10 +119,7 @@ public class AerialFileReader implements AerialReader {
      * @see com.github.mkolisnyk.aerial.AerialReader#hasNext()
      */
     public boolean hasNext() {
-        if (this.iterator != null) {
-            return this.iterator.hasNext();
-        }
-        return false;
+        return this.iterator.hasNext();
     }
 
 }

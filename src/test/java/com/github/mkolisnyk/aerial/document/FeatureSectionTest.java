@@ -27,7 +27,7 @@ public class FeatureSectionTest {
 
     private String sampleFeatureText =
             sampleFeatureDescription + lineSeparator
-            + "Case:" + lineSeparator
+            + "Case: Sample Case 001" + lineSeparator
             + sampleCaseDescription + lineSeparator
             + "Action:" + lineSeparator
             + sampleCaseAction + lineSeparator
@@ -45,6 +45,7 @@ public class FeatureSectionTest {
     @Before
     public void setUp() throws Exception {
         section = new FeatureSection(null);
+        section.setName("Sample Feature");
     }
 
     @After

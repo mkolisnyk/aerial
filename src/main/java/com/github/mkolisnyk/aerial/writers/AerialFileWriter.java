@@ -3,54 +3,54 @@
  */
 package com.github.mkolisnyk.aerial.writers;
 
+import java.io.File;
+import java.util.Iterator;
+
+import org.apache.commons.io.FileUtils;
+
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.document.Document;
+import com.github.mkolisnyk.aerial.document.FeatureSection;
 
 /**
  * @author Myk Kolisnyk
  *
  */
 public class AerialFileWriter implements AerialWriter {
-
+    private Iterator<FeatureSection> iterator;
     /**
      * .
      */
     public AerialFileWriter() {
-        // TODO Auto-generated constructor stub
+        this.iterator = null;
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialWriter#open(com.github.mkolisnyk.aerial.document.Document,
-     *  java.lang.Object[])
-     */
     public void open(Document document, Object... params)
             throws Exception {
-        // TODO Auto-generated method stub
-
+        this.iterator = document.getFeatures().iterator();
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialWriter#close()
-     */
     public void close() throws Exception {
-        // TODO Auto-generated method stub
-
+        if (this.iterator != null) {
+            this.iterator = null;
+        }
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialWriter#writeNext()
-     */
     public String writeNext() throws Exception {
-        // TODO Auto-generated method stub
+        if (this.iterator != null) {
+            FeatureSection section = this.iterator.next();
+            String text = section.generate();
+            File output = new File("TestName.feature");
+            FileUtils.writeStringToFile(output, text);
+            return text;
+        }
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see com.github.mkolisnyk.aerial.AerialWriter#hasNext()
-     */
     public boolean hasNext() {
-        // TODO Auto-generated method stub
+        if (this.iterator != null) {
+            return iterator.hasNext();
+        }
         return false;
     }
-
 }

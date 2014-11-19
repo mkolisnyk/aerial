@@ -46,6 +46,7 @@ public class CaseSectionTest {
     @Before
     public void setUp() throws Exception {
         section = new CaseSection(null);
+        section.setName("Sample Name");
     }
 
     /**

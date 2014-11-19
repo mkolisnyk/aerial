@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.datagenerators.ScenarioGenerator;
 
@@ -88,5 +89,14 @@ public class CaseSection extends ContainerSection {
         content += StringUtils.repeat("\t", offset) + "Examples:"
                 + ls + this.generateTestData(testData, false) + ls;
         return content;
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.document.ContainerSection#validate()
+     */
+    @Override
+    public void validate() throws Exception {
+        super.validate();
+        Assert.assertTrue(this.getName().trim().length() > 0);
     }
 }

@@ -83,9 +83,9 @@ public abstract class ContainerSection
             boolean isToken = false;
             String tokenFound = "";
             for (String token : this.getSectionTokens()) {
-                if (line.trim().equals(token)) {
+                if (line.trim().startsWith(token)) {
                     isToken = true;
-                    tokenFound = line.trim();
+                    tokenFound = token;
                     break;
                 }
             }
@@ -93,6 +93,12 @@ public abstract class ContainerSection
                 setCurrentSection(currentSectionName, currentSection, content);
                 currentSectionName = tokenFound;
                 currentSection = createSection(tokenFound);
+                String trimLine = line.trim();
+                if (trimLine.equals(tokenFound)) {
+                    currentSection.setName("");
+                } else {
+                    currentSection.setName(trimLine.substring(tokenFound.length()));
+                }
                 content = "";
             } else {
                 if (content.equals("")) {

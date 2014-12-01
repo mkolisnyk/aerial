@@ -27,7 +27,7 @@ public class PrerequisitesSection
     }
 
     public String generate() throws Exception {
-        return StringUtils.repeat("\t", offset)
-                + "Given " + this.getContent();
+        return StringUtils.repeat("    ", offset)
+                + "Given " + this.getContent().trim();
     }
 }

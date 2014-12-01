@@ -27,7 +27,7 @@ public class ValidOutput extends DocumentSection<ValidOutput> {
     }
 
     public String generate() throws Exception {
-        return StringUtils.repeat("\t", offset)
-                + "Then " + this.getContent();
+        return StringUtils.repeat("    ", offset)
+                + "Then " + this.getContent().trim();
     }
 }

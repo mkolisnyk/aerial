@@ -22,14 +22,16 @@ public class AerialFileReader implements AerialReader {
     private static final Logger LOG = LoggerFactory.create(AerialFileReader.class);
     private List<File> files;
     private Iterator<File> iterator;
+    private String rootDirectory;
 
     /**
      * .
      */
-    public AerialFileReader() {
+    public AerialFileReader(String rootDirectoryValue) {
         LOG.info("Initializing File Reader");
         this.files = new ArrayList<File>();
         this.iterator = this.files.iterator();
+        this.rootDirectory = rootDirectoryValue;
     }
 
     /**
@@ -86,7 +88,7 @@ public class AerialFileReader implements AerialReader {
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
     public void open(Object... params) throws Exception {
-        File root = new File("").getAbsoluteFile();
+        File root = new File(this.rootDirectory).getAbsoluteFile();
         List<String> matchPatterns = new ArrayList<String>();
         for (int i = 0; i < params.length; i++) {
             matchPatterns.add((String) params[i]);

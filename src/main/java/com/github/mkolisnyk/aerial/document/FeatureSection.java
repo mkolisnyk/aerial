@@ -74,7 +74,7 @@ public class FeatureSection extends ContainerSection {
 
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
-        String content = "Feature: <feature name>" + ls;
+        String content = "Feature: " + this.getName() + ls;
         for (CaseSection section : this.cases) {
             content = content.concat(section.generate() + ls);
         }

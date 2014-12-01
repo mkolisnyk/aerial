@@ -1,11 +1,11 @@
 This is a sample document
 With multiline description
 
-Feature:
+Feature: Sample Feature
     This is a sample feature
     With multiline description
 
-    Case:
+    Case: Sample Test
         This is a sample test case
         With multiline description
 

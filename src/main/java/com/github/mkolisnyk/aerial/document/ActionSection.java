@@ -26,7 +26,7 @@ public class ActionSection extends DocumentSection<ActionSection> {
     }
 
     public String generate() throws Exception {
-        return StringUtils.repeat("\t", offset)
-                + "When " + this.getContent();
+        return StringUtils.repeat("    ", offset)
+                + "When " + this.getContent().trim();
     }
 }

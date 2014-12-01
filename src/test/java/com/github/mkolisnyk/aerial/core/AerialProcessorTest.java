@@ -65,26 +65,26 @@ public class AerialProcessorTest {
 
     @Test
     public void testProcessOnValidDocument() throws Exception {
-        String expected = "Feature: <feature name>" + ls
-                + "\tScenario Outline: positive test" + ls
-                + "\t\tGiven These are our pre-requisites" + ls
-                + "\t\tWhen Sample action" + ls
-                + "\t\tThen This is what we see on success" + ls
-                + "\tExamples:" + ls
-                + "\t\t| Test | ValidInput |" + ls
-                + "\t\t| 50 | true  |" + ls
-                + "\t\t| 0 | true  |" + ls
-                + "\t\t" + ls
-                + "\tScenario Outline: negative test" + ls
-                + "\t\tGiven These are our pre-requisites" + ls
-                + "\t\tWhen Sample action" + ls
-                + "\t\tThen This is what we see on error" + ls
-                + "\tExamples:" + ls
-                + "\t\t| Test | ValidInput |" + ls
-                + "\t\t| 100 | false |" + ls
-                + "\t\t| -1 | false |" + ls
-                + "\t\t| 101 | false |" + ls
-                + "\t\t" + ls
+        String expected = "Feature: " + ls
+                + "    Scenario Outline: positive test" + ls
+                + "        Given These are our pre-requisites" + ls
+                + "        When Sample action" + ls
+                + "        Then This is what we see on success" + ls
+                + "    Examples:" + ls
+                + "        | Test | ValidInput |" + ls
+                + "        | 50 | true  |" + ls
+                + "        | 0 | true  |" + ls
+                + "" + ls
+                + "    Scenario Outline: negative test" + ls
+                + "        Given These are our pre-requisites" + ls
+                + "        When Sample action" + ls
+                + "        Then This is what we see on error" + ls
+                + "    Examples:" + ls
+                + "        | Test | ValidInput |" + ls
+                + "        | 100 | false |" + ls
+                + "        | -1 | false |" + ls
+                + "        | 101 | false |" + ls
+                + "" + ls
                 + "" + ls
                 + "Scenario: Sample Scenario 1";
         this.input.open(sampleFeatureText, sampleFeatureText);

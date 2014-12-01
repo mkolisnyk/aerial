@@ -134,8 +134,8 @@ public class CaseSectionTest {
 
     @Test
     public void testGenerateShouldReturnValidFormattedText() throws Exception {
-        String shortOffset = StringUtils.repeat("\t", 1);
-        String midOffset = StringUtils.repeat("\t", 2);
+        String shortOffset = StringUtils.repeat("    ", 1);
+        String midOffset = StringUtils.repeat("    ", 2);
         String expected = shortOffset + "Scenario Outline: positive test" + ls
                           + midOffset + "Given These are our pre-requisites" + ls
                           + midOffset + "When Sample action" + ls
@@ -144,7 +144,7 @@ public class CaseSectionTest {
                           + midOffset + "| Test | ValidInput |" + ls
                           + midOffset + "| 50 | true  |" + ls
                           + midOffset + "| 0 | true  |" + ls
-                          + midOffset + "" + ls
+                          + "" + ls
                           + shortOffset + "Scenario Outline: negative test" + ls
                           + midOffset + "Given These are our pre-requisites" + ls
                           + midOffset + "When Sample action" + ls
@@ -154,7 +154,7 @@ public class CaseSectionTest {
                           + midOffset + "| 100 | false |" + ls
                           + midOffset + "| -1 | false |" + ls
                           + midOffset + "| 101 | false |" + ls
-                          + midOffset + ls;
+                          + ls;
         section.parse(sampleCaseText);
         String actual = section.generate();
         Assert.assertEquals(expected, actual);

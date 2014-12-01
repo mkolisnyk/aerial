@@ -18,15 +18,20 @@ import com.github.mkolisnyk.aerial.document.FeatureSection;
  */
 public class AerialFileWriter implements AerialWriter {
     private Iterator<FeatureSection> iterator;
+    private String outputFolder = "";
     /**
      * .
      */
-    public AerialFileWriter() {
+    public AerialFileWriter(String outputFolderValue) {
         this.iterator = null;
+        this.outputFolder = outputFolderValue;
     }
 
     public void open(Document document, Object... params)
             throws Exception {
+        if (document == null) {
+            return;
+        }
         this.iterator = document.getFeatures().iterator();
     }
 
@@ -37,10 +42,11 @@ public class AerialFileWriter implements AerialWriter {
     }
 
     public String writeNext() throws Exception {
-        if (this.iterator != null) {
+        if (this.iterator != null && this.hasNext()) {
             FeatureSection section = this.iterator.next();
             String text = section.generate();
-            File output = new File("TestName.feature");
+            File output = new File(this.outputFolder + File.separator
+                    + section.getName().replaceAll(" ", "") + ".feature");
             FileUtils.writeStringToFile(output, text);
             return text;
         }

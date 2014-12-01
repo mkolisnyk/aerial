@@ -27,6 +27,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.pmd.excludes>**/generated-sources/**</maven.pmd.excludes>
+		<spring.version>3.1.4.RELEASE</spring.version>
 	</properties>
 	<scm>
 		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
@@ -376,6 +377,51 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openengsb.wrapped</groupId>
+			<artifactId>jira-rest-java-client-api</artifactId>
+			<version>2.0.0-m32.w1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openengsb.wrapped</groupId>
+			<artifactId>jira-rest-java-client-core</artifactId>
+			<version>2.0.0-m32.w1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-asm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 	<reporting>

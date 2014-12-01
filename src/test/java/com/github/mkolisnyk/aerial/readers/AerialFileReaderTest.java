@@ -21,7 +21,7 @@ public class AerialFileReaderTest {
 
     @Before
     public void setUp() {
-        reader = new AerialFileReader();
+        reader = new AerialFileReader("src/test/resources");
     }
 
     @After

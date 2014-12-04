@@ -1,6 +1,5 @@
 package com.github.mkolisnyk.aerial;
 
-import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +17,8 @@ public class AerialTest {
     }
 
     @Test
-    public void testMain() {
+    public void testMainForNullArgumentListShouldReturnNoErrors() throws Exception {
         Aerial.main(null);
-        Assert.assertTrue(true);
     }
 }
 

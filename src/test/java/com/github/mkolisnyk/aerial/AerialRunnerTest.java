@@ -24,7 +24,7 @@ public class AerialRunnerTest {
             "target/cucumber.json",
             "target/cucumber-pretty.txt",
             "target/cucumber-usage.json",
-            "src/test/resources/output/"
+            "output/"
     };
 
     private String[] expectedMethods = {
@@ -42,7 +42,7 @@ public class AerialRunnerTest {
                       "pretty:target/cucumber-pretty.txt",
                       "usage:target/cucumber-usage.json"
                      },
-            features = {"src/test/resources/output" },
+            features = {"output/" },
             glue = {"com/github/mkolisnyk/aerial" },
             tags = { }
     )
@@ -50,7 +50,7 @@ public class AerialRunnerTest {
             inputType = AerialSourceType.FILE,
             source = "src/test/resources",
             additionalParams = { "" },
-            destination = "src/test/resources/output")
+            destination = "output/")
     public static class TestSubClass {
         @AerialBeforeSuite
         public static void setUp() {
@@ -70,11 +70,7 @@ public class AerialRunnerTest {
             if (!file.exists()) {
                 continue;
             }
-            if (file.isDirectory()) {
-                FileUtils.deleteDirectory(file);
-            } else {
-                FileUtils.deleteQuietly(file);
-            }
+            FileUtils.deleteQuietly(file);
         }
         AerialGluCode.getCallsList().clear();
     }

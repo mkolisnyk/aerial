@@ -274,7 +274,7 @@
 				<version>2.6</version>
 				<configuration>
 					<check>
-						<haltOnFailure>false</haltOnFailure>
+						<haltOnFailure>true</haltOnFailure>
 						<totalBranchRate>80</totalBranchRate>
 						<totalLineRate>80</totalLineRate>
 						<packageLineRate>80</packageLineRate>
@@ -282,7 +282,6 @@
 					</check>
 					<instrumentation>
 						<excludes>
-							<exclude>**/Aerial.class</exclude>
 							<exclude>**/HelpMojo.class</exclude>
 						</excludes>
 					</instrumentation>

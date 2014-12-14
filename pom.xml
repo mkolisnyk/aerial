@@ -24,10 +24,10 @@
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.pmd.excludes>**/generated-sources/**</maven.pmd.excludes>
+		<spring.version>3.1.4.RELEASE</spring.version>
 	</properties>
 	<scm>
 		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
@@ -189,7 +189,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<preparationGoals>package install:install-file</preparationGoals>
+					<preparationGoals>package install:install-file site</preparationGoals>
 					<scmCommentPrefix>#42'[ci skip]'</scmCommentPrefix>
 				</configuration>
 			</plugin>
@@ -257,6 +257,8 @@
 					<configLocation>./sun_checks.xml</configLocation>
 					<suppressionsLocation>./checkstyle-suppressions.xml</suppressionsLocation>
 					<failOnViolation>true</failOnViolation>
+					<failsOnError>true</failsOnError>
+					<violationSeverity>info</violationSeverity>
 				</configuration>
 				<executions>
 					<execution>
@@ -280,7 +282,6 @@
 					</check>
 					<instrumentation>
 						<excludes>
-							<exclude>**/Aerial.class</exclude>
 							<exclude>**/HelpMojo.class</exclude>
 						</excludes>
 					</instrumentation>
@@ -343,24 +344,81 @@
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>1.1.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.1.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
 			<version>0.0.21</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.mkolisnyk</groupId>
+			<artifactId>generex</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openengsb.wrapped</groupId>
+			<artifactId>jira-rest-java-client-api</artifactId>
+			<version>2.0.0-m32.w1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openengsb.wrapped</groupId>
+			<artifactId>jira-rest-java-client-core</artifactId>
+			<version>2.0.0-m32.w1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-asm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 	<reporting>

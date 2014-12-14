@@ -5,4 +5,4 @@
  * @author Myk Kolisnyk
  *
  */
-package com.github.mkolisnyk.aerial.generators;
+package com.github.mkolisnyk.aerial.util;

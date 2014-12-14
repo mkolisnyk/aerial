@@ -5,4 +5,9 @@
        <Method name="build" />
        <Bug pattern="OBL_UNSATISFIED_OBLIGATION" />
      </Match>
+     <Match>
+     	<Class name="com.github.mkolisnyk.aerial.util.HsqlDBWrapper" />
+     	<Method name="openConnection" />
+     	<Bug pattern="DMI_EMPTY_DB_PASSWORD" />
+     </Match>
 </FindBugsFilter>

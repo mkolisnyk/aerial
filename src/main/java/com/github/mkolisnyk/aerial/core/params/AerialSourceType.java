@@ -4,7 +4,8 @@ public enum AerialSourceType {
     NONE("none"),
     STRING("text"),
     FILE("file"),
-    JIRA("jira");
+    JIRA("jira"),
+    CUSTOM("custom");
 
     private String name;
     private AerialSourceType(String value) {

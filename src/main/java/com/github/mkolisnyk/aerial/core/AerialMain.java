@@ -9,12 +9,12 @@ import com.github.mkolisnyk.aerial.core.params.AerialParams;
  * @author Myk Kolisnyk
  *
  */
-public final class Aerial {
+public final class AerialMain {
 
     /**
      * .
      */
-    private Aerial() {
+    private AerialMain() {
     }
 
     /**

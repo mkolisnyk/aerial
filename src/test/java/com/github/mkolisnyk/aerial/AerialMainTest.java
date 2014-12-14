@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mkolisnyk.aerial.core.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialMain;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
-public class AerialTest {
+public class AerialMainTest {
 
     @Before
     public void setUp() throws Exception {
@@ -29,12 +29,12 @@ public class AerialTest {
 
     @Test
     public void testMainForNullArgumentListShouldReturnNoErrors() throws Exception {
-        Aerial.main(null);
+        AerialMain.main(null);
     }
 
     @Test
     public void testMainForStringInput() throws Exception {
-        Aerial.main(new String[] {
+        AerialMain.main(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.STRING.toString(),
                 AerialParamKeys.SOURCE.toString(), "This is the test document",
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
@@ -44,7 +44,7 @@ public class AerialTest {
 
     @Test
     public void testMainForJiraInput() throws Exception {
-        Aerial.main(new String[] {
+        AerialMain.main(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.JIRA.toString(),
                 AerialParamKeys.SOURCE.toString(), "This is the test document",
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
@@ -54,7 +54,7 @@ public class AerialTest {
 
     @Test
     public void testMainForFileInput() throws Exception {
-        Aerial.main(new String[] {
+        AerialMain.main(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
                 AerialParamKeys.SOURCE.toString(), "src/test/resources/",
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),

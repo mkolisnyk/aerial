@@ -9,7 +9,7 @@ package com.github.mkolisnyk.aerial.document;
  */
 public class AdditionalScenariosSection extends
         DocumentSection<AdditionalScenariosSection> {
-
+    private String ls = System.lineSeparator();
     /**
      * @param container
      */
@@ -23,6 +23,6 @@ public class AdditionalScenariosSection extends
     }
 
     public String generate() throws Exception {
-        return this.getContent();
+        return ls + this.getContent();
     }
 }

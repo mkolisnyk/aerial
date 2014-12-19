@@ -112,7 +112,7 @@ public class FeatureSectionTest {
     @Test
     public void testGenerateShouldReturnValidFormattedText() throws Exception {
         String expected = "Feature: Sample Feature" + lineSeparator
-        + "    Scenario Outline: positive test" + lineSeparator
+        + "    Scenario Outline:  Sample Case 001 positive test" + lineSeparator
         + "        Given These are our pre-requisites" + lineSeparator
         + "        When Sample action" + lineSeparator
         + "        Then This is what we see on success" + lineSeparator
@@ -121,7 +121,7 @@ public class FeatureSectionTest {
         + "        | 50 | true  |" + lineSeparator
         + "        | 0 | true  |" + lineSeparator
         + "" + lineSeparator
-        + "    Scenario Outline: negative test" + lineSeparator
+        + "    Scenario Outline:  Sample Case 001 negative test" + lineSeparator
         + "        Given These are our pre-requisites" + lineSeparator
         + "        When Sample action" + lineSeparator
         + "        Then This is what we see on error" + lineSeparator
@@ -130,6 +130,7 @@ public class FeatureSectionTest {
         + "        | 100 | false |" + lineSeparator
         + "        | -1 | false |" + lineSeparator
         + "        | 101 | false |" + lineSeparator
+        + "" + lineSeparator
         + "" + lineSeparator
         + "" + lineSeparator
         + "Scenario: Sample Scenario 1";

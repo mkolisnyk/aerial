@@ -25,7 +25,8 @@ public class SimpleSectionTest {
     private String content;
     private Class<?> clazz;
     private String expected;
-    private static String contentString = "I log into the system\n"
+    private static String ls = System.lineSeparator();
+    private static String contentString = "I log into the system" + ls
             + "Navigate to the Home Page";
 
     public SimpleSectionTest(Class<?> classValue, String description, String expectedValue) {
@@ -102,6 +103,6 @@ public class SimpleSectionTest {
     public void testGenerateShouldReturnFormattedString() throws Exception {
         section = section.parse(content);
         String actual = section.generate();
-        Assert.assertEquals("Generated string differs from expected", this.expected, actual);
+        Assert.assertEquals("Generated string differs from expected", this.expected.trim(), actual.trim());
     }
 }

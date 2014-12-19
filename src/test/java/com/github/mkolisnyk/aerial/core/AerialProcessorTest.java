@@ -66,7 +66,7 @@ public class AerialProcessorTest {
     @Test
     public void testProcessOnValidDocument() throws Exception {
         String expected = "Feature: " + ls
-                + "    Scenario Outline: positive test" + ls
+                + "    Scenario Outline:  positive test" + ls
                 + "        Given These are our pre-requisites" + ls
                 + "        When Sample action" + ls
                 + "        Then This is what we see on success" + ls
@@ -75,7 +75,7 @@ public class AerialProcessorTest {
                 + "        | 50 | true  |" + ls
                 + "        | 0 | true  |" + ls
                 + "" + ls
-                + "    Scenario Outline: negative test" + ls
+                + "    Scenario Outline:  negative test" + ls
                 + "        Given These are our pre-requisites" + ls
                 + "        When Sample action" + ls
                 + "        Then This is what we see on error" + ls
@@ -84,6 +84,7 @@ public class AerialProcessorTest {
                 + "        | 100 | false |" + ls
                 + "        | -1 | false |" + ls
                 + "        | 101 | false |" + ls
+                + "" + ls
                 + "" + ls
                 + "" + ls
                 + "Scenario: Sample Scenario 1";

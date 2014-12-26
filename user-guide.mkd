@@ -1,0 +1,121 @@
+---
+title: Aerial User Guide
+layout: default
+---
+
+# Getting Started
+
+All Aerial transformation is mainly done in 3 steps:
+
+1. Create requirements document
+
+2. Configure Cucumber code generation
+
+3. Run JUnit test
+
+# Document Structure
+
+Each Aerial document has the structure like:
+
+{% highlight bat linenos=table %}
+&lt;Entire document description &gt;
+
+Feature: &lt; Feature Name &gt;
+    &lt; Feature description &gt;
+
+    Case: &lt; Case Name &gt;
+        &lt; Case Description &gt;
+
+        Action:
+            &lt; Action text &gt;
+        Input:
+            &lt; Input Data Table &gt;
+        On Success:
+            &lt; Actions in case of success &gt;
+        On Failure:
+            &lt; Actions in case of error &gt;
+        Pre-requisites:
+            &lt; Pre-requisites steps &gt;
+    Additional Scenarios:
+        &lt; Explicitly defined custom Cucumber scenarios &gt;
+{% endhighlight %}
+
+## Feature Section
+
+| **Description** | Topmost section of the document. Groups multiple cases and scenarios. Directly maps to Cucumber features during generation |
+| **Parent Section** | Entire Document |
+| **Multiple Entries** | Yes |
+| **Mandatory** | No |
+| **If Not Specified** | If not defined only document description is allowed |
+
+## Case Section
+
+| **Description** | Contains specific case within the feature. Maps to group of Cucumber scenarios |
+| **Parent Section** | Feature |
+| **Multiple Entries** | Yes |
+| **Mandatory** | No |
+| **If Not Specified** | If not specified the **Additional Scenarios** section is allowed |
+
+### Pre-requisites
+
+| **Description** | Contains test scenario pre-conditions. Belongs to each specific **Case Section**. |
+| **Parent Section** | Case |
+| **Multiple Entries** | No |
+| **Mandatory** | No |
+| **If Not Specified** | If empty, no pre-conditions are defined |
+
+### Action
+
+| **Description** | Contains instructions responsible for main scenario actions before verification section |
+| **Parent Section** | Case |
+| **Multiple Entries** | No |
+| **Mandatory** | Yes |
+| **If Not Specified** | The validation will fail |
+
+### Input
+
+| **Description** | Contains the table of input value descriptions being used within specific case for Action, On Success, On Failure and Pre-Requisites sections |
+| **Parent Section** | Case |
+| **Multiple Entries** | No |
+| **Mandatory** | Yes |
+| **If Not Specified** | The validation will fail |
+
+### On Success
+
+| **Description** | Contains the set of instructions to be used in case of positive test scenarios |
+| **Parent Section** | Case |
+| **Multiple Entries** | No |
+| **Mandatory** | Yes |
+| **If Not Specified** | The validation will fail |
+
+### On Failure
+
+| **Description** | Contains the set of instructions to be used in case of negative test scenarios |
+| **Parent Section** | Case |
+| **Multiple Entries** | No |
+| **Mandatory** | Yes |
+| **If Not Specified** | The validation will fail |
+
+## Additional Scenarios
+
+| **Description** | Contains plain Cucumber scenarios to be used in addition to scenarios generated from data in **Case** section |
+| **Parent Section** | Feature |
+| **Multiple Entries** | Yes |
+| **Mandatory** | No |
+| **If Not Specified** | Only generated scenarios will be used |
+
+# Input Data Description
+
+## Input Section Structure
+
+## Data Types in Use
+
+# Input/Output Sources
+
+## Input Sources
+
+## Output Sources
+
+# Java Annotations
+
+

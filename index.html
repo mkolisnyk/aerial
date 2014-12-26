@@ -1,46 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Aerial by mkolisnyk</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Aerial : Executable Requirements are now really executable">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Aerial</title>
   </head>
+
   <body>
 
-      <header>
-        <h1>Aerial</h1>
-        <p>Executable Requirements are now really executable</p>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mkolisnyk/aerial">View on GitHub</a>
 
-      <div id="banner">
-        <span id="logo"></span>
+          <h1 id="project_title">Aerial</h1>
+          <h2 id="project_tagline">Executable Requirements are now really executable</h2>
 
-        <a href="https://github.com/mkolisnyk/aerial" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/mkolisnyk/aerial/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/mkolisnyk/aerial/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mkolisnyk/aerial/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mkolisnyk/aerial/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
-<a name="aerial" class="anchor" href="#aerial"><span class="octicon octicon-link"></span></a>Aerial</h1>
+<a id="aerial" class="anchor" href="#aerial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aerial</h1>
 
 <p><strong>Aerial</strong> is an engine implementing the approach of <strong>Executable Requirements</strong>. Mainly it is designed as an extension of <strong>Cucumber</strong> to provide the following possibilities:</p>
 
@@ -57,31 +49,176 @@
 <strong>Tests and their automated implementation reacts on any requirement change</strong> - most of test management systems simply store dedicated records for requirements, tests and automated tests. But they are just linked by abstract DB structure. Thus, if we do any modification into one of those items others wouldn't be reflected. Since <strong>Aerial</strong> generates tests and automated tests based on requirements as an input, any change to requirements will be immediately reflected. So, tests always correspond to requirements.</li>
 <li>
 <strong>Simplify requirements and test coverage calculation</strong> - mainly such coverage is 100% by design</li>
-</ul><h1>
-<a name="how-does-it-works-" class="anchor" href="#how-does-it-works-"><span class="octicon octicon-link"></span></a>How does it works? </h1>
+</ul>
 
 <h1>
-<a name="typical-document-structure" class="anchor" href="#typical-document-structure"><span class="octicon octicon-link"></span></a>Typical document structure</h1>
+<a id="why-using-aerial" class="anchor" href="#why-using-aerial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why using Aerial?</h1>
+
+<p>All the time when we design test scenarios we have a lot of typical and "routine" checks actions to perform and checkpoints to make. E.g. any time we encounter field containing an e-mail we should check:</p>
+
+<ul>
+<li>Value matching e-mail format ( @. )</li>
+<li>Value containing multiple @ characters</li>
+<li>Empty value</li>
+<li>Simple text value</li>
+<li>Spaces in the address</li>
+<li>Special characters in the address (E.g. multiple dots are acceptable in e-mail address)
+For other data types there would be different checks depending on the data structure. </li>
+</ul>
+
+<p>Main thing is that in most cases we have to do typical cases for all those data. So, in such cases it's enough just to define the data structure and the flow to use in each specific case. Thus we'll get declarative representation of the business function which (representation) can be used for tests generation.
+Thus, we'll have to use declarative representation of the functionality to test which looks pretty similar to requirements and technical specification. As the result, we have an ability to combine requirements, tests and their automated implementation within common resource. So, in this structure our tests are generated based on requirements and auto-tests are generated based on tests.</p>
+
+<p>What does it give to us? Main benefits:</p>
+
+<ul>
+<li>We always sure requirements are linked to tests. Just by design.</li>
+<li>If we want to change requirements our tests will be changed as well, so we never care if our tests are in sync with requirements</li>
+<li>Since the system is targeted to generate test scenarios based on formal description we get an advantage it writing efforts as a lot of routine actions are simply generated. Thus, we minimise human factor on such tasks. </li>
+</ul>
 
 <h1>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h1>
+<a id="how-does-it-work-" class="anchor" href="#how-does-it-work-" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work? </h1>
+
+<p>The engine is designed to generate <a href="http://cukes.info">Cucumber</a> features based on specific document description. After generation is done it triggers Cucumber run the same way as we do for any other tests of that kind.</p>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Main source for generation is the document. It defines rules to generate feature file. Here is an example of it:</p>
+
+<p><strong>src/test/resources/SampleDocument.document</strong>:</p>
+
+<pre><code>This is a sample document
+With multiline description
+
+Feature: Sample Feature
+    This is a sample feature
+    With multiline description
+
+    Case: Sample Test
+        This is a sample test case
+        With multiline description
+
+        Action:
+            Sample action
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+        Pre-requisites:
+            These are our pre-requisites
+    Additional Scenarios:
+    Scenario: Sample Scenario 1
+
+</code></pre>
+
+<p>Then we define the test class which should be the runner for the above document description:</p>
+
+<p><strong>src/test/java/com/sample/aerial/AerialSampleClass.java</strong>:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smp">com.sample.aerial</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.Aerial</span>;
+<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.AerialAfterSuite</span>;
+<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite</span>;
+<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.core.AerialRunner</span>;
+<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.core.params.AerialSourceType</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.CucumberOptions</span>;
+
+@CucumberOptions(
+        format <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>html:target/cucumber-html-report<span class="pl-pds">"</span></span>,
+                  <span class="pl-s1"><span class="pl-pds">"</span>json:target/cucumber.json<span class="pl-pds">"</span></span>,
+                  <span class="pl-s1"><span class="pl-pds">"</span>pretty:target/cucumber-pretty.txt<span class="pl-pds">"</span></span>,
+                  <span class="pl-s1"><span class="pl-pds">"</span>usage:target/cucumber-usage.json<span class="pl-pds">"</span></span>
+                 },
+        features <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span> },
+        glue <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>com/github/mkolisnyk/aerial<span class="pl-pds">"</span></span> },
+        tags <span class="pl-k">=</span> { }
+)
+@Aerial(
+        inputType <span class="pl-k">=</span> <span class="pl-stj">AerialSourceType</span><span class="pl-c1"><span class="pl-k">.</span>FILE</span>,
+        source <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>src/test/resources<span class="pl-pds">"</span></span>,
+        additionalParams <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> },
+        destination <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span>)
+@RunWith(<span class="pl-stj">AerialRunner</span><span class="pl-k">.</span>class)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">AerialSampleClass</span> {
+}</pre></div>
+
+<p>It's empty class but most of the parameters are defined in annotations:</p>
+
+<ul>
+<li>
+<strong>@CucumberOptions</strong> - on the back it's Cucumber tests so the configuration parameters. This is Cucumber annotation and the parameters can be see on the <a href="https://github.com/cucumber/cucumber-jvm/blob/master/core/src/main/java/cucumber/api/CucumberOptions.java">GitHub Source</a>.
+Main items we are interested in are:
+
+<ul>
+<li>
+<strong>features</strong> - we should make sure that Aerial outputs generated features to the same folder so that Cucumber will pick them up and execute</li>
+<li>
+<strong>glue</strong> - we should have reserved location where our glue code is stored</li>
+</ul>
+</li>
+<li>
+<strong><a href="https://github.com/Aerial" class="user-mention">@Aerial</a></strong> - main annotation for Aerial engine generation. Mainly it defines the source and the destination of the generated content. We should make sure that <strong>destination</strong> parameter of this annotation points to the same location as <strong>features</strong> option in the <strong>@CucumberOptions</strong> definition.</li>
+<li>
+<strong>@RunWith(AerialRunner.class)</strong> - this will drive all the magic. Initially it runs features generation and then it runs Cucumber.</li>
+</ul>
+
+<p>Then we prepare Java glue code for text instructions binding:</p>
+
+<p><strong>src/test/java/com/sample/aerial/AerialGluCode.java</strong>:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smp">com.sample.aerial</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.Given</span>;
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.Then</span>;
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.When</span>;
+
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">AerialGluCode</span> {
+
+    <span class="pl-st">@Given</span>(<span class="pl-s1"><span class="pl-pds">"</span>^These are our pre-requisites$<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">theseAreOurPreRequisites</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    }
+
+    <span class="pl-st">@When</span>(<span class="pl-s1"><span class="pl-pds">"</span>^Sample action$<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">sampleAction</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    }
+
+    <span class="pl-st">@Then</span>(<span class="pl-s1"><span class="pl-pds">"</span>^This is what we see on success$<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">thisIsWhatWeSeeOnSuccess</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    }
+
+    <span class="pl-st">@Then</span>(<span class="pl-s1"><span class="pl-pds">"</span>^This is what we see on error$<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">thisIsWhatWeSeeOnError</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    }
+}</pre></div>
+
+<p>After that we can run our test as ordinary JUnit test. On the background it will be executed via <strong>Cucumber</strong> runner.</p>
 
 <h1>
-<a name="user-reference-guide" class="anchor" href="#user-reference-guide"><span class="octicon octicon-link"></span></a>User Reference Guide</h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h1>
 
 <h1>
-<a name="releases" class="anchor" href="#releases"><span class="octicon octicon-link"></span></a>Releases</h1>
+<a id="user-reference-guide" class="anchor" href="#user-reference-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Reference Guide</h1>
 
 <h1>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
+<a id="releases" class="anchor" href="#releases" aria-hidden="true"><span class="octicon octicon-link"></span></a>Releases</h1>
 
 <h1>
-<a name="blog-posts--live-demos" class="anchor" href="#blog-posts--live-demos"><span class="octicon octicon-link"></span></a>Blog Posts &amp; Live Demos</h1>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<h1>
+<a id="blog-posts--live-demos" class="anchor" href="#blog-posts--live-demos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Blog Posts &amp; Live Demos</h1>
 
 <p><a href="http://mkolisnyk.blogspot.com">Blog: Test Automation From Inside</a></p>
 
 <h1>
-<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h1>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h1>
 
 <p>Myk Kolisnyk (<a href="mailto:kolesnik.nickolay@gmail.com">kolesnik.nickolay@gmail.com</a>) </p>
 
@@ -89,12 +226,17 @@
 <a href="http://plus.google.com/108480514086204589709?prsrc=3">
 <img src="http://ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"></a></p>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/mkolisnyk">mkolisnyk</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Aerial maintained by <a href="https://github.com/mkolisnyk">mkolisnyk</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     
+
   </body>
 </html>

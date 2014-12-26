@@ -72,13 +72,23 @@ public class FeatureSection extends ContainerSection {
         return parsedSection;
     }
 
+    private String generateAdditionalScenarios(ArrayList<DocumentSection<?>> scenarios) throws Exception {
+        String result = "";
+        if (scenarios != null) {
+            for (DocumentSection<?> scenario : scenarios) {
+                result = result.concat(scenario.generate());
+            }
+        }
+        return result;
+    }
+
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
         String content = "Feature: " + this.getName() + ls;
         for (CaseSection section : this.cases) {
             content = content.concat(section.generate() + ls);
         }
-        content += sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN).get(0).generate();
+        content += this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
         return content;
     }
 

@@ -20,6 +20,7 @@ public class InputRecord implements Cloneable {
     private String value;
     private String condition;
     private boolean validInput;
+    private String unique;
 
     /**
      * .
@@ -42,11 +43,22 @@ public class InputRecord implements Cloneable {
             String valueParam,
             String conditionParam,
             boolean validInputParam) {
+        this(nameParam, typeParam, valueParam, conditionParam, validInputParam, "false");
+    }
+
+    public InputRecord(
+            String nameParam,
+            String typeParam,
+            String valueParam,
+            String conditionParam,
+            boolean validInputParam,
+            String uniqueParam) {
         this.name = nameParam;
         this.type = typeParam;
         this.value = valueParam;
         this.condition = conditionParam;
         this.validInput = validInputParam;
+        this.unique = uniqueParam;
     }
 
     /**
@@ -82,6 +94,13 @@ public class InputRecord implements Cloneable {
      */
     public final boolean isValidInput() {
         return validInput;
+    }
+
+    /**
+     * @return the unique
+     */
+    public final boolean isUnique() {
+        return unique.trim().equalsIgnoreCase("true");
     }
 
     /**
@@ -162,7 +181,7 @@ public class InputRecord implements Cloneable {
     public String toString() {
         return "InputRecord [name=" + name + ", type=" + type
                 + ", value=" + value + ", condition=" + condition
-                + ", validInput=" + validInput + "]";
+                + ", validInput=" + validInput + ", unique=" + unique + "]";
     }
 
     /* (non-Javadoc)

@@ -3,6 +3,7 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,18 +73,33 @@ public class CaseSection extends ContainerSection {
         return content;
     }
 
+    private String generatePreRequisites(ArrayList<DocumentSection<?>> preRequisites) throws Exception {
+        String result = "";
+        if (preRequisites != null) {
+            for (DocumentSection<?> section : preRequisites) {
+                result = result.concat(section.generate()  + ls);
+            }
+        }
+        return result;
+    }
+
     public String generate() throws Exception {
         InputSection input = (InputSection) this.getSections().get(Tokens.INPUT_TOKEN).get(0);
         ScenarioGenerator dataGenerator = new ScenarioGenerator(input.getInputs());
         Map<String, List<String>> testData = dataGenerator.generateTestData();
-        String content = StringUtils.repeat("    ", offset) + "Scenario Outline: positive test" + ls;
-        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).get(0).generate()  + ls;
+        String content = StringUtils.repeat("    ", offset) + "Scenario Outline: "
+                            + this.getName() + " positive test" + ls;
+
+        content += this.generatePreRequisites(this.getSections().get(Tokens.PREREQUISITES_TOKEN));
+
         content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
         content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate() + ls;
         content += StringUtils.repeat("    ", offset)
                 + "Examples:" + ls + this.generateTestData(testData, true) + ls;
-        content += StringUtils.repeat("    ", offset) + "Scenario Outline: negative test" + ls;
-        content += this.getSections().get(Tokens.PREREQUISITES_TOKEN).get(0).generate() + ls;
+        content += StringUtils.repeat("    ", offset) + "Scenario Outline: " + this.getName() + " negative test" + ls;
+
+        content += this.generatePreRequisites(this.getSections().get(Tokens.PREREQUISITES_TOKEN));
+
         content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
         content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
         content += StringUtils.repeat("    ", offset) + "Examples:"

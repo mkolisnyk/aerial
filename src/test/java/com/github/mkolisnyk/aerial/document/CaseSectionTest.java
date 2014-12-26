@@ -136,7 +136,7 @@ public class CaseSectionTest {
     public void testGenerateShouldReturnValidFormattedText() throws Exception {
         String shortOffset = StringUtils.repeat("    ", 1);
         String midOffset = StringUtils.repeat("    ", 2);
-        String expected = shortOffset + "Scenario Outline: positive test" + ls
+        String expected = shortOffset + "Scenario Outline: Sample Name positive test" + ls
                           + midOffset + "Given These are our pre-requisites" + ls
                           + midOffset + "When Sample action" + ls
                           + midOffset + "Then This is what we see on success" + ls
@@ -145,7 +145,7 @@ public class CaseSectionTest {
                           + midOffset + "| 50 | true  |" + ls
                           + midOffset + "| 0 | true  |" + ls
                           + "" + ls
-                          + shortOffset + "Scenario Outline: negative test" + ls
+                          + shortOffset + "Scenario Outline: Sample Name negative test" + ls
                           + midOffset + "Given These are our pre-requisites" + ls
                           + midOffset + "When Sample action" + ls
                           + midOffset + "Then This is what we see on error" + ls

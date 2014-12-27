@@ -62,11 +62,11 @@ Feature: < Feature Name >
 
 ## Feature Section
 
-|_. **Description** | Topmost section of the document. Groups multiple cases and scenarios. Directly maps to Cucumber features during generation |
-|_. **Parent Section** | Entire Document |
-|_. **Multiple Entries** | Yes |
-|_. **Mandatory** | No |
-|_. **If Not Specified** | If not defined only document description is allowed |
+| **Description** | Topmost section of the document. Groups multiple cases and scenarios. Directly maps to Cucumber features during generation |
+| **Parent Section** | Entire Document |
+| **Multiple Entries** | Yes |
+| **Mandatory** | No |
+| **If Not Specified** | If not defined only document description is allowed |
 
 ## Case Section
 
@@ -196,5 +196,114 @@ Usually string acceptable value rules are defined using regular expression. It m
 
 ## @Aerial
 
+Main annotation identifying Aerial generation attributes. This annotation is set for test class which should be JUnit runnable. So, initially the class should look like:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+
+import cucumber.api.CucumberOptions;
+
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
+{% endhighlight %}
+
+Thus, we target JUnit to run tests using **AerialRunner** class which will drive Cucumber features generation with further Cucumber run.
+After that we're ready to add @Aerial annotation. Here is an example of generator configuration targeted to read requirement documents from files located in the **src/test/resources** folder and write generated files into **./output/** folder:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
+{% endhighlight %}
+
+The last part is to add **CucumberOptions** annotation to point Cucumber where to take the input from:
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
+{% endhighlight %}
+
 ## @AerialBeforeSuite and @AerialAfterSuite
 
+As it was mentioned before the AerialRunner is wrapper on Cucumber JUnit runner class. So, all annotations applicable to Cucumber runner are applicable there. But there may be a need to perform some actions before and/or after any code generation or tests execution.
+For this purpose there're dedicated annotations named @AerialBeforeSuite and @AerialAfterSuite correspondingly. They are assigned to methods which are supposed to be executed before and after entire suite run. With these annotations the above example can be appended like this:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+    @AerialBeforeSuite
+    public static void setUp() {
+        System.out.println("setUp");
+    }
+    @AerialAfterSuite
+    public static void tearDown() {
+        System.out.println("tearDown");
+    }
+}
+{% endhighlight %}

@@ -62,11 +62,11 @@ Feature: < Feature Name >
 
 ## Feature Section
 
-| **Description** | Topmost section of the document. Groups multiple cases and scenarios. Directly maps to Cucumber features during generation |
-| **Parent Section** | Entire Document |
-| **Multiple Entries** | Yes |
-| **Mandatory** | No |
-| **If Not Specified** | If not defined only document description is allowed |
+|_. **Description** | Topmost section of the document. Groups multiple cases and scenarios. Directly maps to Cucumber features during generation |
+|_. **Parent Section** | Entire Document |
+|_. **Multiple Entries** | Yes |
+|_. **Mandatory** | No |
+|_. **If Not Specified** | If not defined only document description is allowed |
 
 ## Case Section
 
@@ -182,8 +182,19 @@ Usually string acceptable value rules are defined using regular expression. It m
 
 ## Input Sources
 
+| Source | Description | Parameters Specified |
+| ------ | ----------- | -------------------- |
+| *File* | Indicates that input Aerial document is read from file system | Root directory where to take files from. Additionally files can be specified by mask to filter out unnecessary documents |  
+
 ## Output Sources
+
+| Source | Description | Parameters Specified |
+| ------ | ----------- | -------------------- |
+| *File* | Indicates that generated Cucumber features are written into text files. This is the main output type as it is targeted to Cucumber which mainly supports files | |
 
 # Java Annotations
 
+## @Aerial
+
+## @AerialBeforeSuite and @AerialAfterSuite
 

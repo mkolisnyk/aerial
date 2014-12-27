@@ -184,13 +184,13 @@ Usually string acceptable value rules are defined using regular expression. It m
 
 | Source | Description | Parameters Specified |
 | ------ | ----------- | -------------------- |
-| *File* | Indicates that input Aerial document is read from file system | Root directory where to take files from. Additionally files can be specified by mask to filter out unnecessary documents |  
+| **File** | Indicates that input Aerial document is read from file system | Root directory where to take files from. Additionally files can be specified by mask to filter out unnecessary documents |  
 
 ## Output Sources
 
 | Source | Description | Parameters Specified |
 | ------ | ----------- | -------------------- |
-| *File* | Indicates that generated Cucumber features are written into text files. This is the main output type as it is targeted to Cucumber which mainly supports files | |
+| **File** | Indicates that generated Cucumber features are written into text files. This is the main output type as it is targeted to Cucumber which mainly supports files | |
 
 # Java Annotations
 

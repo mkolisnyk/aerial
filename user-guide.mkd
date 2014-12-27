@@ -5,39 +5,59 @@ layout: default
 
 # Getting Started
 
-All Aerial transformation is mainly done in 3 steps:
+All Aerial transformation is mainly done in 4 steps:
 
-1. Create requirements document
+1. Include dependency
 
-2. Configure Cucumber code generation
+2. Create requirements document
 
-3. Run JUnit test
+3. Configure Cucumber code generation
+
+4. Run JUnit test
+
+# Including Aerial as Dependency
+
+Aerial is provided as Maven dependency and can be included using the construction like:
+
+{% highlight xml linenos=table %}
+<dependency>
+	<groupId>com.github.mkolisnyk</groupId>
+	<artifactId>aerial</artifactId>
+	<version>0.0.1</version>
+</dependency>
+{% endhighlight %}
+
+or for Gradle:
+
+{% highlight groovy linenos=table %}
+'com.github.mkolisnyk:aerial:0.0.1'
+{% endhighlight %}
 
 # Document Structure
 
 Each Aerial document has the structure like:
 
 {% highlight bat linenos=table %}
-&lt;Entire document description &gt;
+< Entire document description >
 
-Feature: &lt; Feature Name &gt;
-    &lt; Feature description &gt;
+Feature: < Feature Name >
+    < Feature description >
 
-    Case: &lt; Case Name &gt;
-        &lt; Case Description &gt;
+    Case: < Case Name >
+        < Case Description >
 
         Action:
-            &lt; Action text &gt;
+            < Action text >
         Input:
-            &lt; Input Data Table &gt;
+            < Input Data Table >
         On Success:
-            &lt; Actions in case of success &gt;
+            < Actions in case of success >
         On Failure:
-            &lt; Actions in case of error &gt;
+            < Actions in case of error >
         Pre-requisites:
-            &lt; Pre-requisites steps &gt;
+            < Pre-requisites steps >
     Additional Scenarios:
-        &lt; Explicitly defined custom Cucumber scenarios &gt;
+        < Explicitly defined custom Cucumber scenarios >
 {% endhighlight %}
 
 ## Feature Section
@@ -106,9 +126,55 @@ Feature: &lt; Feature Name &gt;
 
 # Input Data Description
 
+Input data is specific section which contains input values definitions with the rules how they should be validated. This section is core part of data generation. Here is some example of input section:
+
+{% highlight bat linenos=table %}
+Input:
+    | Name | Type | Value   |
+    | Test | Int  | [0;100) |
+{% endhighlight %}
+
+This section defines single integer parameter named **Test** which acceptable values are from 0 (inclusively) to 100 (exclusively). So, Aerial will generate scenarios for different inputs for this parameter.
+
 ## Input Section Structure
 
-## Data Types in Use
+Input section is represented as the table with the following columns:
+
+| Column Name | Description |
+| ----------- | ----------- |
+| Name        | Contains the name of the field |
+| Type        | Defines the type of the field. The test data will be generated based on the input type |
+| Value       | Identifies rule the current field should meet in order to be of acceptable value |
+| Condition   | Identifies boolean condition when the Value is applied |
+| Unique      | Flag identifying whether the value of this field should be unique in this scenario. This is needed for specific scenario generation |
+
+## Data Types in Use and Acceptable Value Patterns
+
+The most complicated and important part of this table is supported data types and value pattern to be used for generation. Currently the following data types are supported:
+
+* Int - numeric value
+
+* Date - any formatted date
+
+* String - text string
+
+Depending on data type we should use appropriate patterns.
+
+### Numeric Value Patterns
+
+| Pattern | Description | Example |
+| &lt;Any explicit value&gt; | Explicitly defined value. It means that this field can accept only value like this | 9 |
+| **[A;B]** or **[A;B)** or **(A;B]** or **(A;B)** | Range value patterns. Depending on bracket types the range can include or exclude corner value. Square bracket indicates inclusive range while round bracket excludes corner value | [0, 10) |
+
+### Date Value Patterns
+
+| Pattern | Description | Example |
+| &lt;single date pattern&gt; | Uses explicit date pattern for single date. For test data generation purpose there would be current date used | dd-MM-yyyy |
+| [A;B], Format: &lt; Date Format &gt;| Format which accepts date range from start to end point. Depending on bracket type the range can be exclusive or inclusive. The range values should have the same format as it's defined after the **Format** keyword | [01-01-2000;02-10-2010), Format: dd-MM-yyyy |
+
+### String Value Patterns
+
+Usually string acceptable value rules are defined using regular expression. It means that text value should match some specific regular expression pattern. 
 
 # Input/Output Sources
 

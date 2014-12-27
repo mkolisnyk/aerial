@@ -163,12 +163,14 @@ Depending on data type we should use appropriate patterns.
 ### Numeric Value Patterns
 
 | Pattern | Description | Example |
+| ------- | ----------- | ------- |
 | &lt;Any explicit value&gt; | Explicitly defined value. It means that this field can accept only value like this | 9 |
 | **[A;B]** or **[A;B)** or **(A;B]** or **(A;B)** | Range value patterns. Depending on bracket types the range can include or exclude corner value. Square bracket indicates inclusive range while round bracket excludes corner value | [0, 10) |
 
 ### Date Value Patterns
 
 | Pattern | Description | Example |
+| ------- | ----------- | ------- |
 | &lt;single date pattern&gt; | Uses explicit date pattern for single date. For test data generation purpose there would be current date used | dd-MM-yyyy |
 | [A;B], Format: &lt; Date Format &gt;| Format which accepts date range from start to end point. Depending on bracket type the range can be exclusive or inclusive. The range values should have the same format as it's defined after the **Format** keyword | [01-01-2000;02-10-2010), Format: dd-MM-yyyy |
 

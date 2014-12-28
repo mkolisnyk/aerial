@@ -1,0 +1,11 @@
+---
+title: Release Notes
+layout: default
+---
+
+# Current Versions
+
+**Latest Snapshot**: 0.0.1-SNAPSHOT ( [Project Documentation](/aerial/0.0.1-SNAPSHOT) )
+**Latest Release**: N/A
+
+# Release Notes

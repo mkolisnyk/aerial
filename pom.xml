@@ -5,6 +5,7 @@
 	<artifactId>aerial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Aerial</name>
+	<description>Generates Cucumber scenarios based on text descriptions</description>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -49,12 +50,11 @@
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.8</version>
+				<version>0.10</version>
 				<configuration>
-					<message>Creating site for
-						${project.groupId}:${project.artifactId}:${project.version}</message>
+					<message>Creating site for ${project.groupId}:${project.artifactId}:${project.version}</message>
 					<oauth2Token>6cbcb8e3d8031bdd0637256be9da89c57ea26949</oauth2Token>
-					<repositoryName>Muto</repositoryName>
+					<repositoryName>aerial</repositoryName>
 					<repositoryOwner>mkolisnyk</repositoryOwner>
 					<merge>true</merge>
 					<path>${project.version}</path>
@@ -189,7 +189,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<preparationGoals>package install:install-file site</preparationGoals>
+					<preparationGoals>package install site</preparationGoals>
 					<scmCommentPrefix>#42'[ci skip]'</scmCommentPrefix>
 				</configuration>
 			</plugin>
@@ -375,7 +375,7 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.3.2</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.openengsb.wrapped</groupId>
 			<artifactId>jira-rest-java-client-api</artifactId>
 			<version>2.0.0-m32.w1</version>
@@ -419,7 +419,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 	<reporting>
 		<plugins>

@@ -5,7 +5,15 @@ layout: default
 
 # Current Versions
 
-**Latest Snapshot**: 0.0.1-SNAPSHOT ( [Project Documentation](/aerial/0.0.1-SNAPSHOT) )
-**Latest Release**: N/A
+**Latest Snapshot**: 0.0.2-SNAPSHOT ( [Project Documentation](/aerial/0.0.2-SNAPSHOT) )
+**Latest Release**: 0.0.1 ( [Project Documentation](/aerial/0.0.1) )
 
 # Release Notes
+
+## 0.0.1
+
+Initial Release. Includes:
+* Basic functionality implementation
+* File input/output support was added
+* Basic positive/negative scenario generation was added
+* Command line runner was set up

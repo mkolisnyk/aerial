@@ -3,7 +3,7 @@
  */
 package com.github.mkolisnyk.aerial.core;
 
-import java.util.Map;
+//import java.util.Map;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -21,21 +21,32 @@ import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
  */
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class AerialMavenGeneratorPlugin extends AbstractMojo {
+    /**
+     * .
+     */
     @Parameter(property = "aerial.input.type", defaultValue = "FILE")
     private AerialSourceType inputType;
+    /**
+     * .
+     */
     @Parameter(property = "aerial.input.source", defaultValue = "", required = true)
     private String source;
+    /**
+     * .
+     */
     @Parameter(property = "aerial.output.type", defaultValue = "FILE")
     private AerialSourceType outputType;
+    /**
+     * .
+     */
     @Parameter(property = "aerial.output.destination", defaultValue = "", required = true)
     private String destination;
-    @Parameter
-    private Map<String, String> extraParams;
+    /*@Parameter
+    private Map<String, String> extraParams;*/
 
-    /* (non-Javadoc)
-     * @see org.apache.maven.plugin.Mojo#execute()
+    /**
+     * .
      */
-    @Override
     public void execute() throws MojoExecutionException,
             MojoFailureException {
         try {
@@ -81,9 +92,9 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
      * @param extraParamsValue the extraParams to set
      */
-    public final void setExtraParams(Map<String, String> extraParamsValue) {
+    /*public final void setExtraParams(Map<String, String> extraParamsValue) {
         this.extraParams = extraParamsValue;
-    }
+    }*/
 
 }
 

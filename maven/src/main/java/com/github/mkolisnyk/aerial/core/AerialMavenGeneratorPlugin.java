@@ -3,7 +3,9 @@
  */
 package com.github.mkolisnyk.aerial.core;
 
-//import java.util.Map;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -29,7 +31,8 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
      * .
      */
-    @Parameter(property = "aerial.input.source", defaultValue = "", required = true)
+    @Parameter(property = "aerial.input.source",
+            defaultValue = "", required = true)
     private String source;
     /**
      * .
@@ -39,23 +42,35 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
      * .
      */
-    @Parameter(property = "aerial.output.destination", defaultValue = "", required = true)
+    @Parameter(property = "aerial.output.destination",
+            defaultValue = "", required = true)
     private String destination;
-    /*@Parameter
-    private Map<String, String> extraParams;*/
+    @Parameter
+    private Map<String, String> extraParams;
 
     /**
      * .
      */
     public void execute() throws MojoExecutionException,
             MojoFailureException {
+        ArrayList<String> params = new ArrayList<String>();
+        params.add(AerialParamKeys.INPUT_TYPE.toString());
+        params.add(inputType.toString());
+        params.add(AerialParamKeys.SOURCE.toString());
+        params.add(source);
+        params.add(AerialParamKeys.OUTPUT_TYPE.toString());
+        params.add(outputType.toString());
+        params.add(AerialParamKeys.DESTINATION.toString());
+        params.add(destination);
+        if (extraParams != null) {
+            for (Entry<String, String> entry : extraParams.entrySet()) {
+                params.add(entry.getKey() + "=" + entry.getValue());
+            }
+        }
+        String[] paramsArray = new String[params.size()];
+        paramsArray = params.toArray(paramsArray);
         try {
-            AerialMain.main(new String[] {
-                    AerialParamKeys.INPUT_TYPE.toString(), inputType.toString(),
-                    AerialParamKeys.SOURCE.toString(), source,
-                    AerialParamKeys.OUTPUT_TYPE.toString(), outputType.toString(),
-                    AerialParamKeys.DESTINATION.toString(), destination
-            });
+            AerialMain.main(paramsArray);
         } catch (Exception e) {
             throw new MojoFailureException("Failed to execute generation");
         }
@@ -92,9 +107,9 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
      * @param extraParamsValue the extraParams to set
      */
-    /*public final void setExtraParams(Map<String, String> extraParamsValue) {
+    public final void setExtraParams(Map<String, String> extraParamsValue) {
         this.extraParams = extraParamsValue;
-    }*/
+    }
 
 }
 

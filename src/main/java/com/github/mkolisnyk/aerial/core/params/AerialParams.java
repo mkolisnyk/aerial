@@ -114,7 +114,7 @@ public class AerialParams {
                 reader = new AerialFileReader(getSource());
                 break;
             case JIRA:
-                reader = new AerialJiraReader();
+                //reader = new AerialJiraReader();
                 break;
             default:
                 break;

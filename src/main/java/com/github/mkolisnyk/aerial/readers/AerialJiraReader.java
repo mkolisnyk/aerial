@@ -8,14 +8,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.atlassian.jira.rest.client.api.JiraRestClient;
-import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
-import com.atlassian.jira.rest.client.api.SearchRestClient;
-import com.atlassian.jira.rest.client.api.domain.Issue;
-import com.atlassian.jira.rest.client.api.domain.IssueField;
-import com.atlassian.jira.rest.client.api.domain.SearchResult;
-import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
-import com.atlassian.util.concurrent.Promise;
+import javax.ws.rs.core.UriBuilder;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+//import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
+
 import com.github.mkolisnyk.aerial.AerialReader;
 
 /**
@@ -52,21 +56,39 @@ public class AerialJiraReader implements AerialReader {
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
     public void open(Object... params) throws Exception {
-        JiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
-        URI uri = new URI(url);
-        JiraRestClient client = factory.createWithBasicHttpAuthentication(uri, userName, password);
-        SearchRestClient searchClient = client.getSearchClient();
         content = new ArrayList<String>();
+
+        DefaultHttpClient client = new DefaultHttpClient();
+        client.getCredentialsProvider().setCredentials(
+                AuthScope.ANY,
+                new UsernamePasswordCredentials(userName, password));
+
         for (Object query : params) {
-            Promise<SearchResult> result = searchClient.searchJql((String) query);
-            Iterable<Issue> issues = result.get().getIssues();
-            for (Issue issue : issues) {
-                IssueField field = issue.getField(fieldName);
-                content.add((String) field.getValue());
+            URI uri = UriBuilder.fromUri(url)
+                    .path("/rest/api/2/search")
+                    .queryParam("jql", query)
+                    .queryParam("fields", "key," + fieldName).build();
+            HttpGet request = new HttpGet(uri);
+            HttpResponse response = client.execute(request);
+            String responseText = EntityUtils.toString(response.getEntity());
+            JSONObject json = new JSONObject(responseText);
+            JSONArray array = json.getJSONArray("issues");
+            for (int i = 0; i < array.length(); i++) {
+                String value = null;
+                if (!array.getJSONObject(i).has("fields")) {
+                    continue;
+                }
+                if (!array.getJSONObject(i).getJSONObject("fields").has(fieldName)) {
+                    continue;
+                }
+                value = array.getJSONObject(i).getJSONObject("fields").getString(fieldName);
+                if (!value.equals("null")) {
+                    content.add(value);
+                }
             }
         }
+        client.getConnectionManager().shutdown();
         this.iterator = content.iterator();
-        client.close();
     }
 
     /* (non-Javadoc)

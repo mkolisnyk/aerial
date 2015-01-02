@@ -8,7 +8,7 @@ import org.junit.Assert;
 import com.github.mkolisnyk.aerial.AerialReader;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
-import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
+//import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
 import com.github.mkolisnyk.aerial.writers.AerialFileWriter;
 import com.github.mkolisnyk.aerial.writers.AerialStringWriter;

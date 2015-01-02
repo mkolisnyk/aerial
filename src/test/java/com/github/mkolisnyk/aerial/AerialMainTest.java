@@ -44,7 +44,7 @@ public class AerialMainTest {
                 AerialParamKeys.DESTINATION.toString(), outputPath
         });
     }
-
+/*
     @Test
     public void testMainForJiraInput() throws Exception {
         AerialMain.main(new String[] {
@@ -54,7 +54,7 @@ public class AerialMainTest {
                 AerialParamKeys.DESTINATION.toString(), outputPath
         });
     }
-
+*/
     @Test
     public void testMainForFileInput() throws Exception {
         AerialMain.main(new String[] {

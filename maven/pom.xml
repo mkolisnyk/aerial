@@ -13,6 +13,7 @@
 
 	<properties>
 		<scm.repository.name>aerial</scm.repository.name>
+		<maven.site.dryrun>true</maven.site.dryrun>
 	</properties>
 	<build>
 		<plugins>

@@ -4,6 +4,7 @@
 package com.github.mkolisnyk.aerial.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -46,7 +47,9 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
             defaultValue = "", required = true)
     private String destination;
     @Parameter
-    private Map<String, String> extraParams;
+    private Map<String, String> namedParams;
+    @Parameter
+    private List<String> valueParams;
 
     /**
      * .
@@ -62,9 +65,15 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
         params.add(outputType.toString());
         params.add(AerialParamKeys.DESTINATION.toString());
         params.add(destination);
-        if (extraParams != null) {
-            for (Entry<String, String> entry : extraParams.entrySet()) {
+        if (namedParams != null) {
+            for (Entry<String, String> entry : namedParams.entrySet()) {
                 params.add(entry.getKey() + "=" + entry.getValue());
+            }
+        }
+        if (valueParams != null) {
+            for (String param : valueParams) {
+                param = param.replaceAll("=", "\\=");
+                params.add(param);
             }
         }
         String[] paramsArray = new String[params.size()];
@@ -107,9 +116,15 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
      * @param extraParamsValue the extraParams to set
      */
-    public final void setExtraParams(Map<String, String> extraParamsValue) {
-        this.extraParams = extraParamsValue;
+    public final void setNamedParams(Map<String, String> extraParamsValue) {
+        this.namedParams = extraParamsValue;
     }
 
+    /**
+     * @param valueParamsValue the valueParams to set
+     */
+    public final void setValueParams(List<String> valueParamsValue) {
+        this.valueParams = valueParamsValue;
+    }
 }
 

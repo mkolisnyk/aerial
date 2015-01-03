@@ -19,35 +19,66 @@ import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
 /**
+ * Generates Cucumber feature files based on Aerial document descriptions.
+ * Input documents can be stored in many accessible types (controlled by
+ * {@link AerialMavenGeneratorPlugin#inputType} field.
  * @author Myk Kolisnyk
- *
  */
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class AerialMavenGeneratorPlugin extends AbstractMojo {
     /**
-     * .
+     * Identifies input type to use for source data. Available values are: FILE, JIRA, STRING, CUSTOM.
+     * @since 0.0.1
      */
     @Parameter(property = "aerial.input.type", defaultValue = "FILE")
     private AerialSourceType inputType;
     /**
-     * .
+     * Identifies the actual source to get data from. Depending on {@link AerialMavenGeneratorPlugin#inputType}
+     * parameter value it can be:
+     * <ul>
+     * <li> For FILE - main folder where to get document files from
+     * <li> For JIRA - base JIRA URL to send queries to
+     * <li> For STRING - ignored as not needed
+     * <li> For CUSTOM - anything that's defined in appropriate handler
+     * </ul>
+     * @since 0.0.1
      */
     @Parameter(property = "aerial.input.source",
             defaultValue = "", required = true)
     private String source;
     /**
-     * .
+     * Identifies output type to use for generated data. Available values are: FILE, CUSTOM.
+     * @since 0.0.1
      */
     @Parameter(property = "aerial.output.type", defaultValue = "FILE")
     private AerialSourceType outputType;
     /**
-     * .
+     * Identifies output location depending on {@link AerialMavenGeneratorPlugin#outputType}.
+     * For FILE it indicates output directory.
+     * @since 0.0.1
      */
     @Parameter(property = "aerial.output.destination",
             defaultValue = "", required = true)
     private String destination;
+    /**
+     * Some sources require additional information to be passed in addition to input and output locations.
+     * E.g. JIRA source additionally requires user name, password and field name. Some other sources may
+     * require something else. Main feature is that this field contain parameters with known name.
+     * @since 0.0.1
+     */
     @Parameter
     private Map<String, String> namedParams;
+    /**
+     * Contains the list of additional values passed with the input sources.
+     * Mainly they contain some search filters or input strings which can be passed
+     * in big quantity and processed uniformly. E.g. :
+     * <ul>
+     * <li> For STRING source type this is the actual container of input text.
+     * <li> For FILE source it is the list of file name filters.
+     * <li> For JIRA source it is the list of JQL queries to use for data retrieval.
+     * </ul>
+     * @since 0.0.1
+     */
     @Parameter
     private List<String> valueParams;
 

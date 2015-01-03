@@ -9,73 +9,23 @@ digraph G {
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.github.mkolisnyk.aerial.core.AerialSourceTypeTest
-	c33 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialSourceTypeTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialSourceTypeTest.html">
+	// com.github.mkolisnyk.aerial.core.AerialMavenGeneratorPluginTest
+	c0 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialMavenGeneratorPluginTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialMavenGeneratorPluginTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialSourceTypeTest </td></tr>
+<tr><td align="center" balign="center"> AerialMavenGeneratorPluginTest </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialSourceTypeTest() </td></tr>
+<tr><td align="left" balign="left"> + AerialMavenGeneratorPluginTest() </td></tr>
 <tr><td align="left" balign="left"> + setUp() </td></tr>
 <tr><td align="left" balign="left"> + tearDown() </td></tr>
-<tr><td align="left" balign="left"> + testToStringValidKeysShouldReturnProperValues() </td></tr>
-<tr><td align="left" balign="left"> + testIsValueValidKeysShouldReturnTrueForMatchingKey() </td></tr>
-<tr><td align="left" balign="left"> + testIsValueWrongKeysShouldReturnFalseForNotMatchingKey() </td></tr>
-<tr><td align="left" balign="left"> + testFromStringValidKeysShouldReturnProperValues() </td></tr>
-<tr><td align="left" balign="left"> + testFromStringInvalidKeyShouldReturnNoneValue() </td></tr>
+<tr><td align="left" balign="left"> + testExecuteStringReader() </td></tr>
+<tr><td align="left" balign="left"> + testExecuteJiraReader() </td></tr>
+<tr><td align="left" balign="left"> + testExecuteMissingParametersShouldCauseError() </td></tr>
+<tr><td align="left" balign="left"> + testExecuteWrongParametersShouldCauseError() </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AerialSourceTypeTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
-	// com.github.mkolisnyk.aerial.core.AerialProcessorTest
-	c34 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialProcessorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialProcessorTest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialProcessorTest </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialProcessorTest() </td></tr>
-<tr><td align="left" balign="left"> + setUp() </td></tr>
-<tr><td align="left" balign="left"> + tearDown() </td></tr>
-<tr><td align="left" balign="left"> + testProcessOnValidDocument() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./AerialProcessorTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
-	// com.github.mkolisnyk.aerial.core.AerialParamsTest
-	c35 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialParamsTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialParamsTest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialParamsTest </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialParamsTest(description : String, commandLineValue : String[], expectedInputTypeValue : AerialSourceType, expectedSourceValue : String, expectedOutputTypeValue : AerialSourceType, expectedDestinationValue : String, expectedExtraParamsValue : Map&lt;String, String&gt;, validationPassValue : boolean) </td></tr>
-<tr><td align="left" balign="left"> + data() : Collection&lt;Object&gt; </td></tr>
-<tr><td align="left" balign="left"> + setUp() </td></tr>
-<tr><td align="left" balign="left"> + tearDown() </td></tr>
-<tr><td align="left" balign="left"> + testParse() </td></tr>
-<tr><td align="left" balign="left"> + testValidate() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./AerialParamsTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
-	// com.github.mkolisnyk.aerial.core.AerialParamKeysTest
-	c36 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialParamKeysTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialParamKeysTest.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialParamKeysTest </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialParamKeysTest() </td></tr>
-<tr><td align="left" balign="left"> + testToStringValidKeysShouldReturnProperValues() </td></tr>
-<tr><td align="left" balign="left"> + testIsValueValidKeysShouldReturnTrueForMatchingKey() </td></tr>
-<tr><td align="left" balign="left"> + testIsValueWrongKeysShouldReturnFalseForNotMatchingKey() </td></tr>
-<tr><td align="left" balign="left"> + testFromStringValidKeysShouldReturnProperValues() </td></tr>
-<tr><td align="left" balign="left"> + testFromStringInvalidKeyShouldReturnOtherValue() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./AerialParamKeysTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AerialMavenGeneratorPluginTest.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

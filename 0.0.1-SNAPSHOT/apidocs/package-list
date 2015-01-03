@@ -1,11 +1,1 @@
-com.github.mkolisnyk.aerial
-com.github.mkolisnyk.aerial.annotations
 com.github.mkolisnyk.aerial.core
-com.github.mkolisnyk.aerial.core.params
-com.github.mkolisnyk.aerial.datagenerators
-com.github.mkolisnyk.aerial.document
-com.github.mkolisnyk.aerial.expressions
-com.github.mkolisnyk.aerial.expressions.value
-com.github.mkolisnyk.aerial.readers
-com.github.mkolisnyk.aerial.util
-com.github.mkolisnyk.aerial.writers

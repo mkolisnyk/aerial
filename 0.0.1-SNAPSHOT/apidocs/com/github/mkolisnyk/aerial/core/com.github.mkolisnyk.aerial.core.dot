@@ -9,45 +9,37 @@ digraph G {
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.github.mkolisnyk.aerial.core.AerialRunner
-	c98 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialRunner" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialRunner.html">
+	// com.github.mkolisnyk.aerial.core.HelpMojo
+	c0 [label=<<table title="com.github.mkolisnyk.aerial.core.HelpMojo" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HelpMojo.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialRunner </td></tr>
+<tr><td align="center" balign="center"> HelpMojo </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialRunner(clazzValue : Class&lt;?&gt;) </td></tr>
-<tr><td align="left" balign="left"> + getDescription() : Description </td></tr>
-<tr><td align="left" balign="left"> + run(notifier : RunNotifier) </td></tr>
+<tr><td align="left" balign="left"> + HelpMojo() </td></tr>
+<tr><td align="left" balign="left"> + execute() </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AerialRunner.html", fontname="arial", fontcolor="black", fontsize=10.0];
-	// com.github.mkolisnyk.aerial.core.AerialProcessor
-	c99 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialProcessor" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialProcessor.html">
+		</table>>, URL="./HelpMojo.html", fontname="arial", fontcolor="black", fontsize=10.0];
+	// com.github.mkolisnyk.aerial.core.AerialMavenGeneratorPlugin
+	c1 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialMavenGeneratorPlugin" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialMavenGeneratorPlugin.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialProcessor </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AerialProcessor() </td></tr>
-<tr><td align="left" balign="left"> + process(input : AerialReader, output : AerialWriter) </td></tr>
-<tr><td align="left" balign="left"> + getContent() : String </td></tr>
-		</table></td></tr>
-		</table>>, URL="./AerialProcessor.html", fontname="arial", fontcolor="black", fontsize=10.0];
-	// com.github.mkolisnyk.aerial.core.AerialMain
-	c100 [label=<<table title="com.github.mkolisnyk.aerial.core.AerialMain" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AerialMain.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AerialMain </td></tr>
+<tr><td align="center" balign="center"> AerialMavenGeneratorPlugin </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
+<tr><td align="left" balign="left"> + AerialMavenGeneratorPlugin() </td></tr>
+<tr><td align="left" balign="left"> + execute() </td></tr>
+<tr><td align="left" balign="left"> + setInputType(inputTypeValue : AerialSourceType) </td></tr>
+<tr><td align="left" balign="left"> + setSource(sourceValue : String) </td></tr>
+<tr><td align="left" balign="left"> + setOutputType(outputTypeValue : AerialSourceType) </td></tr>
+<tr><td align="left" balign="left"> + setDestination(destinationValue : String) </td></tr>
+<tr><td align="left" balign="left"> + setNamedParams(extraParamsValue : Map&lt;String, String&gt;) </td></tr>
+<tr><td align="left" balign="left"> + setValueParams(valueParamsValue : List&lt;String&gt;) </td></tr>
 		</table></td></tr>
-		</table>>, URL="./AerialMain.html", fontname="arial", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./AerialMavenGeneratorPlugin.html", fontname="arial", fontcolor="black", fontsize=10.0];
 }
 

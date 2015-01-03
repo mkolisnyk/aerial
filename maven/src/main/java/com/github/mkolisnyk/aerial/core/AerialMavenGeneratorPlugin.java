@@ -81,6 +81,7 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
         try {
             AerialMain.main(paramsArray);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new MojoFailureException("Failed to execute generation");
         }
     }

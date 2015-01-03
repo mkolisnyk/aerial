@@ -12,7 +12,6 @@
 	</parent>
 
 	<properties>
-		<fail.coverage>false</fail.coverage>
 		<scm.repository.name>aerial</scm.repository.name>
 	</properties>
 	<build>
@@ -38,6 +37,12 @@
 			<groupId>com.github.mkolisnyk</groupId>
 			<artifactId>aerial</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.github.kristofa</groupId>
+		    <artifactId>mock-http-server</artifactId>
+		    <version>4.1</version>
+		    <scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

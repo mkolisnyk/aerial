@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.core.AerialProcessor;
+import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 import com.github.mkolisnyk.aerial.document.Document;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
 
@@ -23,8 +26,16 @@ public class AerialFileWriterTest {
     public void setUp() throws Exception {
         String fileName = "src/test/resources/SampleDocument1.document";
         writer = new AerialFileWriter("src/test/resources/temp");
-        reader = new AerialFileReader("src/test/resources");
-        reader.open(fileName);
+        AerialParams params = new AerialParams();
+        params.parse(new String[] {
+                AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
+                AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
+                AerialParamKeys.SOURCE.toString(), "src/test/resources/",
+                AerialParamKeys.DESTINATION.toString(), "output",
+                fileName
+        });
+        reader = new AerialFileReader(params);
+        reader.open(params);
     }
 
     @After

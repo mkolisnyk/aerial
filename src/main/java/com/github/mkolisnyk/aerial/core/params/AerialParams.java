@@ -1,6 +1,8 @@
 package com.github.mkolisnyk.aerial.core.params;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -8,6 +10,7 @@ import org.junit.Assert;
 import com.github.mkolisnyk.aerial.AerialReader;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
+import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 //import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
 import com.github.mkolisnyk.aerial.writers.AerialFileWriter;
@@ -19,14 +22,16 @@ public class AerialParams {
     private String source;
     private AerialSourceType outputType;
     private String destination;
-    private Map<String, String> extraParams;
+    private Map<String, String> namedParams;
+    private List<String> valueParams;
 
     public AerialParams() {
         this.inputType = AerialSourceType.NONE;
         this.source = "";
         this.outputType = AerialSourceType.NONE;
         this.destination = "";
-        this.extraParams = new HashMap<String, String>();
+        this.namedParams = new HashMap<String, String>();
+        this.valueParams = new ArrayList<String>();
     }
 
     /**
@@ -60,13 +65,21 @@ public class AerialParams {
     /**
      * @return the extraParams
      */
-    public final Map<String, String> getExtraParams() {
-        return extraParams;
+    public final Map<String, String> getNamedParams() {
+        return namedParams;
+    }
+
+    /**
+     * @return the valueParams
+     */
+    public final List<String> getValueParams() {
+        return valueParams;
     }
 
     public void parse(String[] args) {
         int index = 0;
-        this.extraParams = new HashMap<String, String>();
+        this.namedParams = new HashMap<String, String>();
+        this.valueParams = new ArrayList<String>();
         while (index < args.length) {
             AerialParamKeys key = AerialParamKeys.fromString(args[index]);
             switch (key) {
@@ -84,10 +97,10 @@ public class AerialParams {
                     break;
                 default:
                     String param = args[index];
-                    if (param.matches("([^=]+)=(.*)")) {
-                        this.extraParams.put(param.split("=")[0], param.substring(param.indexOf("=") + 1));
+                    if (param.matches("([^=]+)[^\\\\]=(.*)")) {
+                        this.namedParams.put(param.split("=")[0], param.substring(param.indexOf("=") + 1));
                     } else {
-                        this.extraParams.put(param, "");
+                        this.valueParams.add(param.replaceAll("\\\\=", "="));
                     }
                     break;
             }
@@ -108,19 +121,16 @@ public class AerialParams {
         AerialReader reader = null;
         switch (this.getInputType()) {
             case STRING:
-                reader = new AerialStringReader();
+                reader = new AerialStringReader(this);
                 break;
             case FILE:
-                reader = new AerialFileReader(getSource());
+                reader = new AerialFileReader(this);
                 break;
             case JIRA:
-                //reader = new AerialJiraReader();
+                reader = new AerialJiraReader(this);
                 break;
             default:
                 break;
-        }
-        if (reader != null) {
-            reader.open(this.getSource());
         }
         return reader;
     }

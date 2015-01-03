@@ -1,5 +1,5 @@
 /**
- * 
+ * .
  */
 package com.github.mkolisnyk.aerial.readers;
 
@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
 /**
  * @author Myk Kolisnyk
@@ -17,13 +20,23 @@ import com.github.mkolisnyk.aerial.AerialReader;
 public class AerialStringReaderTest {
 
     private AerialReader reader;
+    private AerialParams params;
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        reader = new AerialStringReader();
+        params = new AerialParams();
+        params.parse(new String[] {
+                AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.STRING.toString(),
+                AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.STRING.toString(),
+                "Text String 1",
+                "Text String 2",
+                "Text String 3",
+                "Text String 4"
+        });
+        reader = new AerialStringReader(params);
     }
 
     /**
@@ -36,27 +49,33 @@ public class AerialStringReaderTest {
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.readers.AerialStringReader#AerialStringReader()}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testConstructorShouldCreateObjectWithEmptyContent() throws Exception {
+        reader.close();
+        params.parse(new String[] {
+                AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.STRING.toString(),
+                AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.STRING.toString()
+        });
+        reader = new AerialStringReader(params);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readNext());
     }
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.readers.AerialStringReader#open(java.lang.Object[])}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testOpenWithParametersShouldStoreAllStringsPassed() throws Exception {
-        String expected[] = {
+        String[] expected = {
                 "Text String 1",
                 "Text String 2",
                 "Text String 3",
                 "Text String 4"
         };
-        reader.open(expected[0],expected[1],expected[2],expected[3]);
+        reader.open(params);
         for (String expectedItem : expected) {
             Assert.assertTrue(reader.hasNext());
             Assert.assertEquals(expectedItem, reader.readNext());
@@ -67,28 +86,23 @@ public class AerialStringReaderTest {
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.readers.AerialStringReader#open(java.lang.Object[])}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testOpenWithoutParametersShouldStoreNoValues() throws Exception {
-        reader.open();
+        params.getValueParams().clear();
+        reader.open(params);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readNext());
     }
 
     /**
      * Test method for {@link com.github.mkolisnyk.aerial.readers.AerialStringReader#close()}.
-     * @throws Exception 
+     * @throws Exception .
      */
     @Test
     public void testCloseOpenedReaderRemovesAllValues() throws Exception {
-        String expected[] = {
-                "Text String 1",
-                "Text String 2",
-                "Text String 3",
-                "Text String 4"
-        };
-        reader.open(expected[0],expected[1],expected[2],expected[3]);
+        reader.open(params);
         reader.close();
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readNext());
@@ -96,7 +110,8 @@ public class AerialStringReaderTest {
 
     @Test
     public void testCloseOfClosedReaderShouldntThrowErrors() throws Exception {
-        reader.open();
+        params.getValueParams().clear();
+        reader.open(params);
         reader.close();
         try {
             reader.close();

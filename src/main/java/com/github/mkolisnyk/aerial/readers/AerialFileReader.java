@@ -12,13 +12,14 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.util.LoggerFactory;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public class AerialFileReader implements AerialReader {
+public class AerialFileReader extends AerialReader {
     private static final Logger LOG = LoggerFactory.create(AerialFileReader.class);
     private List<File> files;
     private Iterator<File> iterator;
@@ -26,12 +27,23 @@ public class AerialFileReader implements AerialReader {
 
     /**
      * .
+     * @throws Exception .
      */
-    public AerialFileReader(String rootDirectoryValue) {
+    /*public AerialFileReader(String rootDirectoryValue) {
         LOG.info("Initializing File Reader");
         this.files = new ArrayList<File>();
         this.iterator = this.files.iterator();
         this.rootDirectory = rootDirectoryValue;
+    }*/
+    public AerialFileReader(AerialParams params) throws Exception {
+        super(params);
+        this.files = new ArrayList<File>();
+        this.iterator = this.files.iterator();
+        this.rootDirectory = params.getSource();
+        if (params.getValueParams().size() == 0) {
+            params.getValueParams().add("(.*)");
+        }
+        this.open(params);
     }
 
     /**
@@ -87,12 +99,16 @@ public class AerialFileReader implements AerialReader {
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
-    public void open(Object... params) throws Exception {
+    public void open(AerialParams params) throws Exception {
         File root = new File(this.rootDirectory).getAbsoluteFile();
         List<String> matchPatterns = new ArrayList<String>();
-        for (int i = 0; i < params.length; i++) {
+        /*for (int i = 0; i < params.length; i++) {
             matchPatterns.add((String) params[i]);
             LOG.debug("Adding parameter: " + params[i]);
+        }*/
+        for (String param : params.getValueParams()) {
+            matchPatterns.add(param);
+            LOG.debug("Adding parameter: " + param);
         }
         this.files = listFiles(root, matchPatterns);
         this.iterator = this.files.iterator();

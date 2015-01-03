@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.AerialReader;
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
 import com.github.mkolisnyk.aerial.writers.AerialStringWriter;
 
@@ -53,7 +54,9 @@ public class AerialProcessorTest {
     @Before
     public void setUp() throws Exception {
         this.processor = new AerialProcessor();
-        this.input = new AerialStringReader();
+        AerialParams params = new AerialParams();
+        params.parse(new String[] {sampleFeatureText, sampleFeatureText});
+        this.input = new AerialStringReader(params);
         this.output = new AerialStringWriter();
     }
 
@@ -88,7 +91,6 @@ public class AerialProcessorTest {
                 + "" + ls
                 + "" + ls
                 + "Scenario: Sample Scenario 1";
-        this.input.open(sampleFeatureText, sampleFeatureText);
         processor.process(input, output);
         Assert.assertEquals(StringUtils.repeat(expected, 2), processor.getContent());
     }

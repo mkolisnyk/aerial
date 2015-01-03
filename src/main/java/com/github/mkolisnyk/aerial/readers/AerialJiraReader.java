@@ -21,12 +21,13 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public class AerialJiraReader implements AerialReader {
+public class AerialJiraReader extends AerialReader {
 
     private String userName;
     private String password;
@@ -42,20 +43,26 @@ public class AerialJiraReader implements AerialReader {
      */
     private Iterator<String> iterator;
 
-    /**
-     * .
-     */
+    /*
     public AerialJiraReader(String urlValue, String userNameValue, String passwordValue, String fieldNameValue) {
         this.userName = userNameValue;
         this.password = passwordValue;
         this.url = urlValue;
         this.fieldName = fieldNameValue;
+    }*/
+    public AerialJiraReader(AerialParams params) throws Exception {
+        super(params);
+        this.url = params.getSource();
+        this.userName = params.getNamedParams().get("user");
+        this.password = params.getNamedParams().get("password");
+        this.fieldName = params.getNamedParams().get("field");
+        this.open(params);
     }
 
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
-    public void open(Object... params) throws Exception {
+    public void open(AerialParams params) throws Exception {
         content = new ArrayList<String>();
 
         DefaultHttpClient client = new DefaultHttpClient();
@@ -63,7 +70,7 @@ public class AerialJiraReader implements AerialReader {
                 AuthScope.ANY,
                 new UsernamePasswordCredentials(userName, password));
 
-        for (Object query : params) {
+        for (String query : params.getValueParams()) {
             URI uri = UriBuilder.fromUri(url)
                     .path("/rest/api/2/search")
                     .queryParam("jql", query)

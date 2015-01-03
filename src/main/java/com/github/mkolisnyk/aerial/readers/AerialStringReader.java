@@ -8,12 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public class AerialStringReader implements AerialReader {
+public class AerialStringReader extends AerialReader {
 
     /**
      * .
@@ -25,18 +26,20 @@ public class AerialStringReader implements AerialReader {
     private Iterator<String> iterator;
     /**
      * .
+     * @throws Exception .
      */
-    public AerialStringReader() {
-        // TODO Auto-generated constructor stub
+    public AerialStringReader(AerialParams params) throws Exception {
+        super(params);
+        this.open(params);
     }
 
     /* (non-Javadoc)
      * @see com.github.mkolisnyk.aerial.AerialReader#open(java.lang.Object[])
      */
-    public final void open(Object... params) throws Exception {
+    public final void open(AerialParams params) throws Exception {
         content = new ArrayList<String>();
-        for (Object param : params) {
-            content.add((String) param);
+        for (String param : params.getValueParams()) {
+            content.add(param);
         }
         iterator = content.iterator();
     }

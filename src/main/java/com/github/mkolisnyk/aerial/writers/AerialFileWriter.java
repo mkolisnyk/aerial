@@ -47,6 +47,7 @@ public class AerialFileWriter implements AerialWriter {
             String text = section.generate();
             File output = new File(this.outputFolder + File.separator
                     + section.getName().replaceAll(" ", "") + ".feature");
+            //output.getParentFile().mkdirs();
             FileUtils.writeStringToFile(output, text);
             return text;
         }

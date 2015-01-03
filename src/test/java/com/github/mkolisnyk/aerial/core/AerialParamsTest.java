@@ -141,7 +141,7 @@ public class AerialParamsTest {
                     "src/test/resources/sample",
                     new HashMap<String, String>() {
                         {
-                            put("TestValue", "");
+                            //put("TestValue", "");
                         }
                     },
                     true
@@ -165,8 +165,8 @@ public class AerialParamsTest {
         Assert.assertEquals(expectedOutputType, params.getOutputType());
         Assert.assertEquals(expectedSource, params.getSource());
         Assert.assertEquals(expectedDestination, params.getDestination());
-        Assert.assertEquals(this.expectedExtraParams.size(), params.getExtraParams().size());
-        for (Entry<String, String> item : params.getExtraParams().entrySet()) {
+        Assert.assertEquals(this.expectedExtraParams.size(), params.getNamedParams().size());
+        for (Entry<String, String> item : params.getNamedParams().entrySet()) {
             Assert.assertTrue(this.expectedExtraParams.containsKey(item.getKey()));
             Assert.assertEquals(this.expectedExtraParams.get(item.getKey()), item.getValue());
         }

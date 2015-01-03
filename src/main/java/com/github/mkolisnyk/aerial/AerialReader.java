@@ -3,31 +3,40 @@
  */
 package com.github.mkolisnyk.aerial;
 
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
+
 /**
  * @author Myk Kolisnyk
  *
  */
-public interface AerialReader {
+public abstract class AerialReader {
+    /**
+     * .
+     * @param params .
+     */
+    public  AerialReader(AerialParams params) {
+        params.toString();
+    }
     /**
      * .
      * @param params .
      * @throws Exception .
      */
-    void open(Object... params) throws Exception;
+    public abstract void open(AerialParams params) throws Exception;
     /**
      * .
      * @throws Exception .
      */
-    void close() throws Exception;
+    public abstract void close() throws Exception;
     /**
      * .
      * @return .
      * @throws Exception .
      */
-    String readNext() throws Exception;
+    public abstract String readNext() throws Exception;
     /**
      * .
      * @return .
      */
-    boolean hasNext();
+    public abstract boolean hasNext();
 }

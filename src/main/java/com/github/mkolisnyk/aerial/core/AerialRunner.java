@@ -3,6 +3,7 @@ package com.github.mkolisnyk.aerial.core;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
@@ -23,7 +24,7 @@ public class AerialRunner extends Runner {
     public AerialRunner(Class<?> clazzValue) throws Exception {
         clazz = clazzValue;
         Aerial annotation = clazz.getAnnotation(Aerial.class);
-        AerialMain.main(new String[] {
+        String[] args = (String[]) ArrayUtils.addAll(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(),
                 annotation.inputType().toString(),
                 AerialParamKeys.SOURCE.toString(),
@@ -31,7 +32,8 @@ public class AerialRunner extends Runner {
                 AerialParamKeys.OUTPUT_TYPE.toString(),
                 AerialSourceType.FILE.toString(),
                 AerialParamKeys.DESTINATION.toString(),
-                annotation.destination()});
+                annotation.destination()}, annotation.additionalParams());
+        AerialMain.main(args);
         cucumber = new Cucumber(clazz);
     }
 

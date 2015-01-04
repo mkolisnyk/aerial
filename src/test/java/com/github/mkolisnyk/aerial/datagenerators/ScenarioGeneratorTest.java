@@ -79,10 +79,11 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGenerateValidSetOfData() throws Exception {
+        final int expectedSize = 90;
         Map<String, List<String>> actualResult = generator.generateTestData();
-        Assert.assertEquals(60, actualResult.get("Name").size());
-        Assert.assertEquals(60, actualResult.get("Date").size());
-        Assert.assertEquals(60, actualResult.get("Count").size());
-        Assert.assertEquals(60, actualResult.get("ValidInput").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Name").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Date").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Count").size());
+        Assert.assertEquals(expectedSize, actualResult.get("ValidInput").size());
     }
 }

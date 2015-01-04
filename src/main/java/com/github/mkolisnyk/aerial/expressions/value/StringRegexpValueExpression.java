@@ -42,16 +42,19 @@ public class StringRegexpValueExpression extends ValueExpression {
         List<InputRecord> result = new ArrayList<InputRecord>();
         // Generated valid string
         Generex generex = new Generex(this.getInput().getValue());
-        String value = generex.random(1);
+        String value = "";
         InputRecord testRecord = this.getInput();
-        result.add(
-                new InputRecord(
-                        testRecord.getName(),
-                        testRecord.getType(),
-                        value,
-                        testRecord.getCondition(),
-                        value.matches(testRecord.getValue()))
-        );
+        for (int i = 0; i < 2; i++) {
+            value = generex.random(1);
+            result.add(
+                    new InputRecord(
+                            testRecord.getName(),
+                            testRecord.getType(),
+                            value,
+                            testRecord.getCondition(),
+                            value.matches(testRecord.getValue()))
+            );
+        }
         // Empty string
         value = "";
         result.add(

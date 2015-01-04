@@ -50,6 +50,15 @@ public class NumericRangeValueExpression extends ValueExpression {
                         "" + (lower + upper) / 2,
                         testRecord.getCondition(),
                         true));
+        if (Math.abs(upper - lower) > 1) {
+            result.add(
+                    new InputRecord(
+                            testRecord.getName(),
+                            testRecord.getType(),
+                            "" + ((lower + upper) / 2 + 1),
+                            testRecord.getCondition(),
+                            true));
+        }
         result.add(
                 new InputRecord(
                         testRecord.getName(),

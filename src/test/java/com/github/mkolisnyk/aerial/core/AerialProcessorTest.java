@@ -76,6 +76,7 @@ public class AerialProcessorTest {
                 + "    Examples:" + ls
                 + "        | Test | ValidInput |" + ls
                 + "        | 50 | true  |" + ls
+                + "        | 51 | true  |" + ls
                 + "        | 0 | true  |" + ls
                 + "" + ls
                 + "    Scenario Outline:  negative test" + ls

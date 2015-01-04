@@ -6,6 +6,8 @@ package com.github.mkolisnyk.aerial.expressions.value;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
 import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
@@ -69,5 +71,15 @@ public class SingleNumericValueExpression extends ValueExpression {
     @Override
     public String getMatchPattern() {
         return "(([-0-9])(\\d*))";
+    }
+
+    /* (non-Javadoc)
+     * @see com.github.mkolisnyk.aerial.expressions.ValueExpression#validate()
+     */
+    @Override
+    public void validate() throws Exception {
+        super.validate();
+        Assert.assertFalse("Unique attribute isn't applicable for fixed value",
+                this.getInput().isUnique());
     }
 }

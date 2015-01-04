@@ -89,7 +89,7 @@ public class AerialJiraReader extends AerialReader {
                     continue;
                 }
                 value = array.getJSONObject(i).getJSONObject("fields").getString(fieldName);
-                if (!value.equals("null")) {
+                if (value != null && !value.equals("null")) {
                     content.add(value);
                 }
             }

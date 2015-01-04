@@ -143,6 +143,7 @@ public class CaseSectionTest {
                           + shortOffset + "Examples:" + ls
                           + midOffset + "| Test | ValidInput |" + ls
                           + midOffset + "| 50 | true  |" + ls
+                          + midOffset + "| 51 | true  |" + ls
                           + midOffset + "| 0 | true  |" + ls
                           + "" + ls
                           + shortOffset + "Scenario Outline: Sample Name negative test" + ls

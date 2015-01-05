@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
+[![parent-pom](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/parent-pom/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/parent-pom)
 
 Aerial
 ======

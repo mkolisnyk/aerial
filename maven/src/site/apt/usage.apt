@@ -1,0 +1,34 @@
+	------
+	Aerial Maven Example
+	------
+	Myk Kolisnyk
+	------
+	2015-01-05
+
++------+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+            <inputType>FILE</inputType>
+            <source>src/test/resources</source>
+            <outputType>FILE</outputType>
+            <destination>output/</destination>
+            <valueParams>
+                <param>(.*)Module1.document</param>
+                <param>(.*)Module2.document</param>
+            </valueParams>
+        </configuration>
+      </plugin>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++------+

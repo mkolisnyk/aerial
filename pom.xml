@@ -119,6 +119,16 @@
 			<version>2.14</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.github.kristofa</groupId>
 		    <artifactId>mock-http-server</artifactId>
 		    <version>4.1</version>

@@ -76,17 +76,13 @@ public class ScenarioGenerator {
                 + " ValidInput varchar(5))");
 
         for (InputRecord record : expanded) {
-            String validInput = "false";
-            if (record.isValidInput()) {
-                validInput = "true";
-            }
             db.execute(String.format("INSERT INTO input (Name, Type, Value, Condition, ValidInput)"
                     + " VALUES ('%s','%s','%s','%s','%s')",
                     record.getName(),
                     record.getType(),
                     record.getValue(),
                     record.getCondition(),
-                    validInput));
+                    "" + record.isValidInput()));
         }
 
         String[] names = this.getUniqueNames();

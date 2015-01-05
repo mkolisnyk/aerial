@@ -20,7 +20,7 @@ public class ScenarioGeneratorTest {
         List<InputRecord> initialData = new ArrayList<InputRecord>()
         {
             {
-                add(new InputRecord("Name", "string", "(\\d)-(\\S{1,3})", "", true));
+                add(new InputRecord("Name", "string", "(\\d)-([A-Za-z]{1,3})", "", true));
                 add(new InputRecord("Date", "date", "MM/dd/yyyy", "", true));
                 add(new InputRecord("Count", "int", "[0;100)", "", true));
             }

@@ -5,9 +5,11 @@ package com.github.mkolisnyk.aerial.document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
@@ -73,6 +75,29 @@ public class CaseSection extends ContainerSection {
         return content;
     }
 
+    private String generateUniqueScenarioData(
+            Map<String, List<String>> testData,
+            List<InputRecord> input,
+            String[] uniqueFields) {
+        System.out.println(testData.size());
+        System.out.println(input.size());
+        System.out.println(uniqueFields.length);
+        return "";
+    }
+
+    private String[] getFieldsWithUniqueAttributes(List<InputRecord> input) {
+        Set<String> fields = new HashSet<String>();
+        String[] result;
+        for (InputRecord record : input) {
+            if (record.isUnique()) {
+                fields.add(record.getName());
+            }
+        }
+        result = new String[fields.size()];
+        result = fields.toArray(result);
+        return result;
+    }
+
     private String generatePreRequisites(ArrayList<DocumentSection<?>> preRequisites) throws Exception {
         String result = "";
         if (preRequisites != null) {
@@ -104,6 +129,19 @@ public class CaseSection extends ContainerSection {
         content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
         content += StringUtils.repeat("    ", offset) + "Examples:"
                 + ls + this.generateTestData(testData, false) + ls;
+        String[] uniqueRecords = getFieldsWithUniqueAttributes(input.getInputs());
+        if (uniqueRecords.length > 0) {
+            content += StringUtils.repeat("    ", offset) + "Scenario Outline: " + this.getName()
+                        + " unique values test" + ls;
+            content += this.generatePreRequisites(this.getSections().get(Tokens.PREREQUISITES_TOKEN));
+
+            content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
+            content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate() + ls;
+            content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
+            content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
+            content += StringUtils.repeat("    ", offset) + "Examples:"
+                    + ls + this.generateUniqueScenarioData(testData, input.getInputs(), uniqueRecords) + ls;
+        }
         return content;
     }
 

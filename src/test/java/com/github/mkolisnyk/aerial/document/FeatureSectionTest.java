@@ -58,6 +58,12 @@ public class FeatureSectionTest {
         section.validate();
     }
 
+    @Test(expected = AssertionError.class)
+    public void testValidateShouldFailOnEmptyCaseName() throws Exception {
+        section.parse(sampleFeatureText.replace("Sample Case 001", ""));
+        section.validate();
+    }
+
     @Test
     public void testValidateScenariosSectionIsOptional() throws Exception {
         section.parse(sampleFeatureText);

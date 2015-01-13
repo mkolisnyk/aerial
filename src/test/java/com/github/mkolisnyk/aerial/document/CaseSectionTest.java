@@ -171,6 +171,7 @@ public class CaseSectionTest {
                 + "Input:" + ls
                 + "| Name | Type | Value | Unique |" + ls
                 + "| Unique | int  | [0;100) | true |" + ls
+                + "| Unique2 | int  | [100;200) | true |" + ls
                 + "| Non-Unique | Date  | [01-01-2000;02-10-2010], Format: dd-MM-yyyy | false |" + ls
                 + "On Success:" + ls
                 + sampleCaseValidOutput + ls
@@ -185,8 +186,9 @@ public class CaseSectionTest {
                 + midOffset + "When I test unique <Modified Unique> value with <Non-Unique> value" + ls
                 + midOffset + "Then This is what we see on error" + ls
                 + shortOffset + "Examples:" + ls
-                + midOffset + "| Unique | Modified Unique | ValidInput | Non-Unique |" + ls
-                + midOffset + "| 50 | 50 | true | 18-05-2005 |" + ls
+                + midOffset + "| Unique | Modified Unique | ValidInput | Non-Unique | Unique2 | Modified Unique2 |" + ls
+                + midOffset + "| 50 | 50 | true | 01-01-2000 | 150 | 151 |" + ls
+                + midOffset + "| 50 | 51 | true | 01-01-2000 | 150 | 150 |" + ls
                 + ls;
         section.parse(sampleUniqueCaseText);
         String actual = section.generate();

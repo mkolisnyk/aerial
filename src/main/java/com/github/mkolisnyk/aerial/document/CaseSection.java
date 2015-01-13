@@ -120,10 +120,22 @@ public class CaseSection extends ContainerSection {
         for (String field : uniqueFields) {
             content = content.concat(StringUtils.repeat("    ", offset + 1));
             for (Entry<String, String> entry : uniqueRow.entrySet()) {
+                String key = entry.getKey();
                 String value = entry.getValue();
-                if (!entry.getKey().equalsIgnoreCase("Modified " + field) &&
+                /*if (!entry.getKey().equalsIgnoreCase("Modified " + field) &&
                      !entry.getKey().equalsIgnoreCase(field)) {
                     value = getValueDifferentFrom(filteredData.get(entry.getKey()), value);
+                }*/
+                if (key.startsWith("Modified ")) {
+                    String modField = key.replaceFirst("Modified ", "");
+                    if (!modField.equals(field)) {
+                        value = getValueDifferentFrom(filteredData.get(modField), value);
+                    }
+                } else {
+                    if (!key.equalsIgnoreCase(field)
+                        && !ArrayUtils.contains(uniqueFields, key)) {
+                       value = getValueDifferentFrom(filteredData.get(key), value);
+                    }
                 }
                 content = content.concat("| " + value.trim() + " ");
             }

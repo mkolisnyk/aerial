@@ -6,11 +6,13 @@ package com.github.mkolisnyk.aerial.document;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
@@ -75,14 +77,59 @@ public class CaseSection extends ContainerSection {
         return content;
     }
 
+    Map<String, List<String>> filterBy(Map<String, List<String>> testData, String field, String value) {
+        Map<String, List<String>> result = new HashMap<String, List<String>>();
+        for (String key : testData.keySet()) {
+            result.put(key, new ArrayList<String>());
+        }
+        int count = testData.get(testData.keySet().iterator().next()).size();
+        for (int i = 0; i < count; i++) {
+            if (testData.get(field).get(i).trim().equals(value)) {
+                for (String key : testData.keySet()) {
+                    result.get(key).add(testData.get(key).get(i));
+                }
+            }
+        }
+        return result;
+    }
+
+    private String getValueDifferentFrom(List<String> input, String value) {
+        for (String item : input) {
+            if (!item.equals(value)) {
+                return item;
+            }
+        }
+        return value;
+    }
+
     private String generateUniqueScenarioData(
             Map<String, List<String>> testData,
-            List<InputRecord> input,
             String[] uniqueFields) {
-        System.out.println(testData.size());
-        System.out.println(input.size());
-        System.out.println(uniqueFields.length);
-        return "";
+        Map<String, List<String>> filteredData = filterBy(testData, "ValidInput", "true");
+        Map<String, String> uniqueRow = new LinkedHashMap<String, String>();
+        for (Entry<String, List<String>> entry : filteredData.entrySet()) {
+            String value = entry.getValue().get(0);
+            uniqueRow.put(entry.getKey(), value);
+            if (ArrayUtils.contains(uniqueFields, entry.getKey())) {
+                uniqueRow.put("Modified " + entry.getKey(), value);
+            }
+        }
+        String content = StringUtils.repeat("    ", offset + 1) + "| "
+                + StringUtils.join(uniqueRow.keySet().iterator(), " | ") + " |"  + ls;
+
+        for (String field : uniqueFields) {
+            content = content.concat(StringUtils.repeat("    ", offset + 1));
+            for (Entry<String, String> entry : uniqueRow.entrySet()) {
+                String value = entry.getValue();
+                if (!entry.getKey().equalsIgnoreCase("Modified " + field) &&
+                     !entry.getKey().equalsIgnoreCase(field)) {
+                    value = getValueDifferentFrom(filteredData.get(entry.getKey()), value);
+                }
+                content = content.concat("| " + value.trim() + " ");
+            }
+            content = content.concat("|" + ls);
+        }
+        return content;
     }
 
     private String[] getFieldsWithUniqueAttributes(List<InputRecord> input) {
@@ -137,10 +184,14 @@ public class CaseSection extends ContainerSection {
 
             content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
             content += this.getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate() + ls;
-            content += this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
-            content += this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
+            String secondPass = this.getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls
+                    + this.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
+            for (String field : uniqueRecords) {
+                secondPass = secondPass.replaceAll("<" + field + ">", "<Modified " + field + ">");
+            }
+            content += secondPass;
             content += StringUtils.repeat("    ", offset) + "Examples:"
-                    + ls + this.generateUniqueScenarioData(testData, input.getInputs(), uniqueRecords) + ls;
+                    + ls + this.generateUniqueScenarioData(testData, uniqueRecords) + ls;
         }
         return content;
     }

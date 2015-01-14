@@ -25,15 +25,15 @@ under the License.
       <question>What is Aerial?</question>
       <answer>
         <p>
-          Answer
+          Aerial is an engine generating test cases based on requirements description.
         </p>
       </answer>
     </faq>
     <faq id="question2">
-      <question>What is Aerial?</question>
+      <question>What does Aerial plugin generate?</question>
       <answer>
         <p>
-          Answer
+          Aerial Maven plugin is mainly targeted to generate Cucumber feature files based on requirement documents.
         </p>
       </answer>
     </faq>

@@ -9,11 +9,11 @@ import org.junit.Assert;
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.util.HsqlDBWrapper;
 
-public class ScenarioGenerator {
+public class TestDataGenerator {
 
     private List<InputRecord> records;
 
-    public ScenarioGenerator(List<InputRecord> recordsList) throws Exception {
+    public TestDataGenerator(List<InputRecord> recordsList) throws Exception {
         if (recordsList == null) {
             recordsList = new ArrayList<InputRecord>();
         }

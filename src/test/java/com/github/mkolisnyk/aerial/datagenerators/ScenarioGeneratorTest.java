@@ -13,7 +13,7 @@ import com.github.mkolisnyk.aerial.document.InputRecord;
 
 public class ScenarioGeneratorTest {
 
-    private ScenarioGenerator generator;
+    private TestDataGenerator generator;
 
     @Before
     public void setUp() throws Exception {
@@ -25,7 +25,7 @@ public class ScenarioGeneratorTest {
                 add(new InputRecord("Count", "int", "[0;100)", "", true));
             }
         };
-        generator = new ScenarioGenerator(initialData);
+        generator = new TestDataGenerator(initialData);
     }
 
     @After
@@ -41,7 +41,7 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGetUniqueNamesForEmptyInputShouldReturnEmptyList() throws Exception {
-        generator = new ScenarioGenerator(new ArrayList<InputRecord>());
+        generator = new TestDataGenerator(new ArrayList<InputRecord>());
         String[] expectedNames = {};
         String[] actualNames = generator.getUniqueNames();
         Assert.assertArrayEquals(expectedNames, actualNames);
@@ -49,7 +49,7 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGetUniqueNamesForNullInputShouldReturnEmptyList() throws Exception {
-        generator = new ScenarioGenerator(null);
+        generator = new TestDataGenerator(null);
         String[] expectedNames = {};
         String[] actualNames = generator.getUniqueNames();
         Assert.assertArrayEquals(expectedNames, actualNames);

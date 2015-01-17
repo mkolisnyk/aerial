@@ -23,10 +23,16 @@
 		<artifactId>parent-pom</artifactId>
 		<version>0.0.2</version>
 	</parent>
+	<scm>
+		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
+		<developerConnection>scm:git:git@github.com:mkolisnyk/aerial.git</developerConnection>
+		<url>https://github.com/mkolisnyk/aerial.git</url>
+		<tag>HEAD</tag>
+	</scm>
 	<properties>
 		<java.main.class>com.github.mkolisnyk.aerial.core.AerialMain</java.main.class>
 		
-		<release.preparation.goals>package install site</release.preparation.goals>
+		<release.preparation.goals>package install</release.preparation.goals>
 		<spring.version>3.1.4.RELEASE</spring.version>
 	</properties>
 	<build>

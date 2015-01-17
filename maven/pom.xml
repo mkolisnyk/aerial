@@ -46,6 +46,23 @@
 					<pomFileName>maven/pom.xml</pomFileName>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+					<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skipLocalStaging>true</skipLocalStaging>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>

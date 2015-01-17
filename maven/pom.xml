@@ -13,7 +13,7 @@
 		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
 		<developerConnection>scm:git:git@github.com:mkolisnyk/aerial.git</developerConnection>
 		<url>https://github.com/mkolisnyk/aerial.git</url>
-		<tag>HEAD</tag>
+		<tag>aerial-maven-plugin-0.0.2</tag>
 	</scm>
 	<properties>
 		<scm.repository.name>aerial</scm.repository.name>

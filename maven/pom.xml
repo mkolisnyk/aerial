@@ -8,12 +8,12 @@
 	<parent>
 		<groupId>com.github.mkolisnyk</groupId>
 		<artifactId>parent-pom</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<properties>
 		<scm.repository.name>aerial</scm.repository.name>
-		<maven.site.dryrun>true</maven.site.dryrun>
+		<maven.site.dryrun>false</maven.site.dryrun>
 	</properties>
 	<build>
 		<plugins>
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>com.github.mkolisnyk</groupId>
 			<artifactId>aerial</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.github.kristofa</groupId>

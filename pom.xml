@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>com.github.mkolisnyk</groupId>
 		<artifactId>parent-pom</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 	<properties>
 		<java.main.class>com.github.mkolisnyk.aerial.core.AerialMain</java.main.class>

@@ -9,6 +9,11 @@ layout: default
 
 ## Maven Plugin
 
+[![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
+
+Since 0.0.2 version the Aerial is provided not only as the library or command line utility but also as the Maven plugin which is bound to **generate-sources** phase. Main goal implementing generation is **aerial:generate**.
+More information can be found on [project documentation pages](http://mkolisnyk.github.io/aerial/aerial-maven-plugin-0.0.2/).
+
 ## Library
 
 # Input Sources Supported
@@ -18,6 +23,45 @@ layout: default
 ## File
 
 ## JIRA
+
+**Since version 0.0.2**
+
+In some cases initial requirements may be stored somewhere in tracking systems like Jira. E.g. we can use some specific issue type and all specifications are placed in the description field.
+In this case we should be able to retrieve them the same way as from multiple files. For this purpose we can use **JIRA** as an input source.
+
+Here is the Maven example on how to set Jira as an input source:
+{% highlight xml linenos=table %}
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.mkolisnyk.github</groupId>
+        <artifactId>aerial-maven-plugin</artifactId>
+        <version>0.0.2</version>
+        <configuration>
+            <inputType>JIRA</inputType>
+            <source>http://localhost:8080/jira</source>
+            <outputType>FILE</outputType>
+            <destination>output/</destination>
+            <namedParams>
+                <user>some_user</user>
+                <password>some_password</password>
+                <field>description</field>
+            </namedParams>
+            <valueParams>
+                <param>project=Wallboards AND status=Open</param>
+            </valueParams>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+{% endhighlight %}
+
+More detailed description of the above example can be found [here](http://mkolisnyk.github.io/aerial/aerial-maven-plugin-0.0.2/usage.html#Generating_Features_Based_on_JIRA_Content_Example).
 
 # Scenarios Generated
 

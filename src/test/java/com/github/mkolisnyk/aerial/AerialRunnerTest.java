@@ -49,7 +49,7 @@ public class AerialRunnerTest {
     @Aerial(
             inputType = AerialSourceType.FILE,
             source = "src/test/resources",
-            additionalParams = { "" },
+            additionalParams = { },
             destination = "output/")
     public static class TestSubClass {
         @AerialBeforeSuite

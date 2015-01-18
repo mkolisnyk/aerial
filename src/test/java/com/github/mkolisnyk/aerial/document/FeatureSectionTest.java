@@ -58,6 +58,12 @@ public class FeatureSectionTest {
         section.validate();
     }
 
+    @Test(expected = AssertionError.class)
+    public void testValidateShouldFailOnEmptyCaseName() throws Exception {
+        section.parse(sampleFeatureText.replace("Sample Case 001", ""));
+        section.validate();
+    }
+
     @Test
     public void testValidateScenariosSectionIsOptional() throws Exception {
         section.parse(sampleFeatureText);
@@ -119,6 +125,7 @@ public class FeatureSectionTest {
         + "    Examples:" + lineSeparator
         + "        | Test | ValidInput |" + lineSeparator
         + "        | 50 | true  |" + lineSeparator
+        + "        | 51 | true  |" + lineSeparator
         + "        | 0 | true  |" + lineSeparator
         + "" + lineSeparator
         + "    Scenario Outline:  Sample Case 001 negative test" + lineSeparator

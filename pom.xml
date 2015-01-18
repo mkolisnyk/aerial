@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aerial</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Aerial</name>
 	<description>Generates Cucumber scenarios based on text descriptions</description>
 	<licenses>
@@ -21,8 +21,14 @@
 	<parent>
 		<groupId>com.github.mkolisnyk</groupId>
 		<artifactId>parent-pom</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
+	<scm>
+		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
+		<developerConnection>scm:git:git@github.com:mkolisnyk/aerial.git</developerConnection>
+		<url>https://github.com/mkolisnyk/aerial.git</url>
+		<tag>HEAD</tag>
+	</scm>
 	<properties>
 		<java.main.class>com.github.mkolisnyk.aerial.core.AerialMain</java.main.class>
 		
@@ -104,14 +110,29 @@
 			<version>2.3.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openengsb.wrapped</groupId>
-			<artifactId>jira-rest-java-client-api</artifactId>
-			<version>2.0.0-m32.w1</version>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+			<version>1.3.7</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openengsb.wrapped</groupId>
-			<artifactId>jira-rest-java-client-core</artifactId>
-			<version>2.0.0-m32.w1</version>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+			<version>2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.github.kristofa</groupId>

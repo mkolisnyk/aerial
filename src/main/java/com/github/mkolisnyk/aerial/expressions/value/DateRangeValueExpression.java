@@ -80,6 +80,15 @@ public class DateRangeValueExpression extends ValueExpression {
         inputValue.setValue(format.format(calendar.getTime()));
         inputValue.setValidInput(true);
         result.add(inputValue);
+        // Another valid value
+        if (range > 1) {
+            inputValue = (InputRecord) this.getInput().clone();
+            calendar.setTime(lower);
+            calendar.add(Calendar.DAY_OF_YEAR, range / 2 + 1);
+            inputValue.setValue(format.format(calendar.getTime()));
+            inputValue.setValidInput(true);
+            result.add(inputValue);
+        }
         // Lower border value
         inputValue = (InputRecord) this.getInput().clone();
         inputValue.setValue(format.format(lower));

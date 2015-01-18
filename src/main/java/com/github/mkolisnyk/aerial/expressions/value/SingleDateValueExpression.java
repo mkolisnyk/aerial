@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 import com.github.mkolisnyk.aerial.document.InputRecord;
 import com.github.mkolisnyk.aerial.expressions.ValueExpression;
 import com.github.mkolisnyk.aerial.expressions.ValueExpressionType;
@@ -50,6 +52,8 @@ public class SingleDateValueExpression extends ValueExpression {
     public void validate() throws Exception {
         super.validate();
         new SimpleDateFormat(this.getInput().getValue());
+        Assert.assertFalse("Unique attribute isn't applicable for fixed value",
+                this.getInput().isUnique());
     }
 
     /**

@@ -1,0 +1,108 @@
+	------
+	Aerial Maven Example
+	------
+	Myk Kolisnyk
+	------
+	2015-01-05
+
+%{toc}
+
+Generating Features Based on File Content Example
+
+  The simplest flow (among the ones which are supposed to be used on practice) is generation based on requirements stored in file.
+  Major parameters to be defined here are:
+
+  * <<inputType>>, <<outputType>> - for file they both should be <<FILE>>
+
+  * <<source>> - the relative path to the location where input files will be taken from
+
+  * <<destination>> - the path where generated features will be placed
+
+  Additionally, if we need to filter files we can use <<valueParams>> list where each item represents regular expression to match.
+  If input file name matches any of those expressions the file will be processed.
+
+  Here is an example of Maven configuration generating features based on file content:
+
++------+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+            <inputType>FILE</inputType>
+            <source>src/test/resources</source>
+            <outputType>FILE</outputType>
+            <destination>output/</destination>
+            <valueParams>
+                <param>(.*)Module1.document</param>
+                <param>(.*)Module2.document</param>
+            </valueParams>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++------+
+
+Generating Features Based on JIRA Content Example
+
+  A lot of projects are being tracked in {{{Jira}http://jira.atlassian.com}}. So, it makes sense to provide some kind of integration with this system as well.
+  For Aerial Jira is normally queried using JQL queries and the input document content is taken from some specific field. So, if we want to configure Aerial
+  to read data from Jira we should specify the following configuration options:
+
+  * <<inputType>> - JIRA
+
+  * <<source>> - specify Jira base URL
+
+  * <<outputType>> - usially the value is FILE unless output goes somewhere else
+
+  * <<destination>> - the output location where generated files will be placed
+
+  * <<namedParams>> - additional set of parameters with pre-defined name. For Jira source they are:
+
+    * <<user>> - the Jira user name. It's needed for authentication
+
+    * <<password>> - the Jira password
+
+    * <<field>> - the id of the Jira issue field where actual input text will be taken from
+
+  * <<valueParams>> - the list of JQL queries to be sent to Jira
+
+  The below example shows how the configuraiton for Jira input source looks like:
+
++------+
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+            <inputType>JIRA</inputType>
+            <source>http://localhost:8080/jira</source>
+            <outputType>FILE</outputType>
+            <destination>output/</destination>
+            <namedParams>
+                <user>some_user</user>
+                <password>some_password</password>
+                <field>description</field>
+            </namedParams>
+            <valueParams>
+                <param>project=Wallboards AND status=Open</param>
+            </valueParams>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
++------+

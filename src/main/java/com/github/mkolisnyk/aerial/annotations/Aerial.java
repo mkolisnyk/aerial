@@ -10,8 +10,8 @@ import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE })
 public @interface Aerial {
-    AerialSourceType inputType();
+    AerialSourceType inputType() default AerialSourceType.FILE;
     String source();
     String destination();
-    String[] additionalParams();
+    String[] additionalParams() default { };
 }

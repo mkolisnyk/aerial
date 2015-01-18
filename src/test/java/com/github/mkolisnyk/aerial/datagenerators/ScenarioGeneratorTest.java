@@ -13,19 +13,19 @@ import com.github.mkolisnyk.aerial.document.InputRecord;
 
 public class ScenarioGeneratorTest {
 
-    private ScenarioGenerator generator;
+    private TestDataGenerator generator;
 
     @Before
     public void setUp() throws Exception {
         List<InputRecord> initialData = new ArrayList<InputRecord>()
         {
             {
-                add(new InputRecord("Name", "string", "(\\d)-(\\S{1,3})", "", true));
+                add(new InputRecord("Name", "string", "(\\d)-([A-Za-z]{1,3})", "", true));
                 add(new InputRecord("Date", "date", "MM/dd/yyyy", "", true));
                 add(new InputRecord("Count", "int", "[0;100)", "", true));
             }
         };
-        generator = new ScenarioGenerator(initialData);
+        generator = new TestDataGenerator(initialData);
     }
 
     @After
@@ -41,7 +41,7 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGetUniqueNamesForEmptyInputShouldReturnEmptyList() throws Exception {
-        generator = new ScenarioGenerator(new ArrayList<InputRecord>());
+        generator = new TestDataGenerator(new ArrayList<InputRecord>());
         String[] expectedNames = {};
         String[] actualNames = generator.getUniqueNames();
         Assert.assertArrayEquals(expectedNames, actualNames);
@@ -49,7 +49,7 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGetUniqueNamesForNullInputShouldReturnEmptyList() throws Exception {
-        generator = new ScenarioGenerator(null);
+        generator = new TestDataGenerator(null);
         String[] expectedNames = {};
         String[] actualNames = generator.getUniqueNames();
         Assert.assertArrayEquals(expectedNames, actualNames);
@@ -79,10 +79,11 @@ public class ScenarioGeneratorTest {
 
     @Test
     public void testGenerateValidSetOfData() throws Exception {
+        final int expectedSize = 90;
         Map<String, List<String>> actualResult = generator.generateTestData();
-        Assert.assertEquals(60, actualResult.get("Name").size());
-        Assert.assertEquals(60, actualResult.get("Date").size());
-        Assert.assertEquals(60, actualResult.get("Count").size());
-        Assert.assertEquals(60, actualResult.get("ValidInput").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Name").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Date").size());
+        Assert.assertEquals(expectedSize, actualResult.get("Count").size());
+        Assert.assertEquals(expectedSize, actualResult.get("ValidInput").size());
     }
 }

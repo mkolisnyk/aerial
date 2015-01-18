@@ -1,5 +1,5 @@
 /**
- * 
+ * .
  */
 package com.github.mkolisnyk.aerial.document;
 
@@ -143,6 +143,7 @@ public class CaseSectionTest {
                           + shortOffset + "Examples:" + ls
                           + midOffset + "| Test | ValidInput |" + ls
                           + midOffset + "| 50 | true  |" + ls
+                          + midOffset + "| 51 | true  |" + ls
                           + midOffset + "| 0 | true  |" + ls
                           + "" + ls
                           + shortOffset + "Scenario Outline: Sample Name negative test" + ls
@@ -158,5 +159,39 @@ public class CaseSectionTest {
         section.parse(sampleCaseText);
         String actual = section.generate();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGenerateWithUniqueFieldsShouldReturnUniqueValueScenario() throws Exception {
+        String shortOffset = StringUtils.repeat("    ", 1);
+        String midOffset = StringUtils.repeat("    ", 2);
+        String sampleUniqueCaseText = sampleCaseDescription + ls
+                + "Action:" + ls
+                + "I test unique <Unique> value with <Non-Unique> value" + ls
+                + "Input:" + ls
+                + "| Name | Type | Value | Unique |" + ls
+                + "| Unique | int  | [0;100) | true |" + ls
+                + "| Unique2 | int  | [100;200) | true |" + ls
+                + "| Non-Unique | Date  | [01-01-2000;02-10-2010], Format: dd-MM-yyyy | false |" + ls
+                + "On Success:" + ls
+                + sampleCaseValidOutput + ls
+                + "On Failure:" + ls
+                + sampleCaseErrorOutput + ls
+                + "Pre-requisites:" + ls
+                + samplePrerequisites + ls;
+        String expected = ls
+                + midOffset + "Given These are our pre-requisites" + ls
+                + midOffset + "When I test unique <Unique> value with <Non-Unique> value" + ls
+                + midOffset + "Then This is what we see on success" + ls
+                + midOffset + "When I test unique <Modified Unique> value with <Non-Unique> value" + ls
+                + midOffset + "Then This is what we see on error" + ls
+                + shortOffset + "Examples:" + ls
+                + midOffset + "| Unique | Modified Unique | ValidInput | Non-Unique | Unique2 | Modified Unique2 |" + ls
+                + midOffset + "| 50 | 50 | true | 01-01-2000 | 150 | 151 |" + ls
+                + midOffset + "| 50 | 51 | true | 01-01-2000 | 150 | 150 |" + ls
+                + ls;
+        section.parse(sampleUniqueCaseText);
+        String actual = section.generate();
+        Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name unique values test")[1]);
     }
 }

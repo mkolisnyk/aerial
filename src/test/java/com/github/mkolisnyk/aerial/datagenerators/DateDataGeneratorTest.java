@@ -66,6 +66,7 @@ public class DateDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "date", "17-05-2005", "", true));
+                            add(new InputRecord("Name", "date", "18-05-2005", "", true));
                             add(new InputRecord("Name", "date", "01-01-2000", "", true));
                             add(new InputRecord("Name", "date", "02-10-2010", "", true));
                             add(new InputRecord("Name", "date", "31-12-1999", "", false));
@@ -79,6 +80,7 @@ public class DateDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "date", "17-05-2005", "", true));
+                            add(new InputRecord("Name", "date", "18-05-2005", "", true));
                             add(new InputRecord("Name", "date", "01-01-2000", "", true));
                             add(new InputRecord("Name", "date", "02-10-2010", "", false));
                             add(new InputRecord("Name", "date", "31-12-1999", "", false));
@@ -92,6 +94,7 @@ public class DateDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "date", "17-05-2005", "", true));
+                            add(new InputRecord("Name", "date", "18-05-2005", "", true));
                             add(new InputRecord("Name", "date", "01-01-2000", "", false));
                             add(new InputRecord("Name", "date", "02-10-2010", "", false));
                             add(new InputRecord("Name", "date", "31-12-1999", "", false));
@@ -105,6 +108,7 @@ public class DateDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "date", "17-05-2005", "", true));
+                            add(new InputRecord("Name", "date", "18-05-2005", "", true));
                             add(new InputRecord("Name", "date", "01-01-2000", "", false));
                             add(new InputRecord("Name", "date", "02-10-2010", "", true));
                             add(new InputRecord("Name", "date", "31-12-1999", "", false));
@@ -118,6 +122,7 @@ public class DateDataGeneratorTest {
                     {
                         {
                             add(new InputRecord("Name", "date", "17-05-2005", "", true));
+                            add(new InputRecord("Name", "date", "18-05-2005", "", true));
                             add(new InputRecord("Name", "date", "01-01-2000", "", false));
                             add(new InputRecord("Name", "date", "02-10-2010", "", true));
                             add(new InputRecord("Name", "date", "31-12-1999", "", false));

@@ -1,3 +1,6 @@
+**Aerial**: [![Aerial](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial)
+**Aerial Maven Plugin**: [![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
+
 Aerial
 ======
 
@@ -8,6 +11,26 @@ Aerial
 * **Ability to perform static checks on requirements** - since we expand requirements into tests using some rules there's an ability to find out requirement inconsistencies during initial processing stage
 * **Tests and their automated implementation reacts on any requirement change** - most of test management systems simply store dedicated records for requirements, tests and automated tests. But they are just linked by abstract DB structure. Thus, if we do any modification into one of those items others wouldn't be reflected. Since **Aerial** generates tests and automated tests based on requirements as an input, any change to requirements will be immediately reflected. So, tests always correspond to requirements.
 * **Simplify requirements and test coverage calculation** - mainly such coverage is 100% by design
+
+Features
+======
+
+[Feature List](http://mkolisnyk.github.io/aerial/features) 
+
+User Reference Guide
+======
+
+[User Reference Guide Home Page](http://mkolisnyk.github.io/aerial/user-guide)
+
+Releases
+======
+
+[Release Notes Page](http://mkolisnyk.github.io/aerial/releases) 
+
+Blog Posts & Live Demos
+======
+
+[Blog: Test Automation From Inside](http://mkolisnyk.blogspot.com)
 
 Why using Aerial?
 ======
@@ -144,23 +167,6 @@ public class AerialGluCode {
 ```
 
 After that we can run our test as ordinary JUnit test. On the background it will be executed via **Cucumber** runner.
-
-Features
-======
-
-User Reference Guide
-======
-
-Releases
-======
-
-Documentation
-======
-
-Blog Posts & Live Demos
-======
-
-[Blog: Test Automation From Inside](http://mkolisnyk.blogspot.com)
 
 Authors
 ======

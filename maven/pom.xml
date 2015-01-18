@@ -18,7 +18,7 @@
 	<properties>
 		<scm.repository.name>aerial</scm.repository.name>
 		<maven.site.dryrun>false</maven.site.dryrun>
-		<release.preparation.goals>package install</release.preparation.goals>
+		<release.preparation.goals>package install site</release.preparation.goals>
 	</properties>
 	<build>
 		<plugins>

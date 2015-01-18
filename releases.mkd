@@ -27,7 +27,7 @@ layout: default
 
 * [Jira as input source](/aerial/features#jira) support was added
 
-* [Unique value scenarios generation](/aerial/scenario-generation#unique-value-scenarios) was added
+* [Unique value scenarios generation](/aerial/features#unique-value-scenarios) was added
 
 * [Aerial Maven plugin](/aerial/features#maven-plugin) was added
 

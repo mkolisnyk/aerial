@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -27,6 +28,7 @@ public class AerialParamsTest {
     private AerialSourceType expectedOutputType;
     private String expectedDestination;
     private Map<String, String> expectedExtraParams;
+    private AerialOutputFormat format;
     private boolean validationPass;
 
     private AerialParams params;
@@ -39,6 +41,7 @@ public class AerialParamsTest {
             AerialSourceType expectedOutputTypeValue,
             String expectedDestinationValue,
             Map<String, String> expectedExtraParamsValue,
+            AerialOutputFormat formatValue,
             boolean validationPassValue) {
         this.commandLine = commandLineValue;
         this.expectedInputType = expectedInputTypeValue;
@@ -46,6 +49,7 @@ public class AerialParamsTest {
         this.expectedOutputType = expectedOutputTypeValue;
         this.expectedDestination = expectedDestinationValue;
         this.expectedExtraParams = expectedExtraParamsValue;
+        this.format = formatValue;
         this.validationPass = validationPassValue;
     }
 
@@ -60,6 +64,7 @@ public class AerialParamsTest {
                     AerialSourceType.NONE,
                     "",
                     new HashMap<String, String>(),
+                    AerialOutputFormat.CUCUMBER,
                     false
                 },
                 {
@@ -67,6 +72,8 @@ public class AerialParamsTest {
                     new String[] {
                             AerialParamKeys.INPUT_TYPE.toString(),
                             AerialSourceType.STRING.toString(),
+                            AerialParamKeys.FORMAT.toString(),
+                            AerialOutputFormat.JBEHAVE.toString(),
                             AerialParamKeys.SOURCE.toString(),
                             "This is the sample String"
                             },
@@ -75,6 +82,7 @@ public class AerialParamsTest {
                     AerialSourceType.NONE,
                     "",
                     new HashMap<String, String>(),
+                    AerialOutputFormat.JBEHAVE,
                     false
                 },
                 {
@@ -82,6 +90,8 @@ public class AerialParamsTest {
                     new String[] {
                             AerialParamKeys.INPUT_TYPE.toString(),
                             AerialSourceType.STRING.toString(),
+                            AerialParamKeys.FORMAT.toString(),
+                            AerialOutputFormat.JUNIT.toString(),
                             AerialParamKeys.SOURCE.toString(),
                             "This is the sample String",
                             AerialParamKeys.OUTPUT_TYPE.toString(),
@@ -94,6 +104,7 @@ public class AerialParamsTest {
                     AerialSourceType.FILE,
                     "src/test/resources/sample",
                     new HashMap<String, String>(),
+                    AerialOutputFormat.JUNIT,
                     true
                 },
                 {
@@ -120,6 +131,7 @@ public class AerialParamsTest {
                             put("TestEmpty", "");
                         }
                     },
+                    AerialOutputFormat.CUCUMBER,
                     true
                 },
                 {
@@ -144,6 +156,7 @@ public class AerialParamsTest {
                             //put("TestValue", "");
                         }
                     },
+                    AerialOutputFormat.CUCUMBER,
                     true
                 },
         });
@@ -165,6 +178,7 @@ public class AerialParamsTest {
         Assert.assertEquals(expectedOutputType, params.getOutputType());
         Assert.assertEquals(expectedSource, params.getSource());
         Assert.assertEquals(expectedDestination, params.getDestination());
+        Assert.assertEquals(format, params.getFormat());
         Assert.assertEquals(this.expectedExtraParams.size(), params.getNamedParams().size());
         for (Entry<String, String> item : params.getNamedParams().entrySet()) {
             Assert.assertTrue(this.expectedExtraParams.containsKey(item.getKey()));

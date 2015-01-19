@@ -24,6 +24,7 @@ public class AerialParams {
     private String destination;
     private Map<String, String> namedParams;
     private List<String> valueParams;
+    private AerialOutputFormat format;
 
     public AerialParams() {
         this.inputType = AerialSourceType.NONE;
@@ -32,6 +33,7 @@ public class AerialParams {
         this.destination = "";
         this.namedParams = new HashMap<String, String>();
         this.valueParams = new ArrayList<String>();
+        this.format = AerialOutputFormat.CUCUMBER;
     }
 
     /**
@@ -60,6 +62,13 @@ public class AerialParams {
      */
     public final String getDestination() {
         return destination;
+    }
+
+    /**
+     * @return the format
+     */
+    public final AerialOutputFormat getFormat() {
+        return format;
     }
 
     /**
@@ -94,6 +103,9 @@ public class AerialParams {
                     break;
                 case DESTINATION:
                     this.destination = args[++index];
+                    break;
+                case FORMAT:
+                    this.format = AerialOutputFormat.fromString(args[++index]);
                     break;
                 default:
                     String param = args[index];

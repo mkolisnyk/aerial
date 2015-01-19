@@ -5,6 +5,7 @@ public enum AerialParamKeys {
     SOURCE("-s"),
     OUTPUT_TYPE("-o"),
     DESTINATION("-d"),
+    FORMAT("-f"),
     OTHER("");
 
     private String name;

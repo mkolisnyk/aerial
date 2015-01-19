@@ -3,15 +3,14 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import org.apache.commons.lang.StringUtils;
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 
 /**
  * @author Myk Kolisnyk
  *
  */
 public class ActionSection extends DocumentSection<ActionSection> {
-
-    private int offset = 2;
 
     /**
      * @param container
@@ -26,7 +25,7 @@ public class ActionSection extends DocumentSection<ActionSection> {
     }
 
     public String generate() throws Exception {
-        return StringUtils.repeat("    ", offset)
-                + "When " + this.getContent().trim();
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "action");
+        return template.replaceAll("\\{ACTION\\}", this.getContent().trim());
     }
 }

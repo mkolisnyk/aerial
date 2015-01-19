@@ -86,6 +86,7 @@ public class CaseSection extends ContainerSection {
                 content = content.concat(instance.generate());
             }
         }
+        content = content.replaceAll("\t", "    ");
         return content;
     }
 

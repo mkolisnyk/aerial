@@ -3,15 +3,14 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import org.apache.commons.lang.StringUtils;
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 
 /**
  * @author Myk Kolisnyk
  */
 public class PrerequisitesSection
                 extends DocumentSection<PrerequisitesSection> {
-
-    private final int offset = 2;
 
     /**
      * @param container
@@ -27,7 +26,7 @@ public class PrerequisitesSection
     }
 
     public String generate() throws Exception {
-        return StringUtils.repeat("    ", offset)
-                + "Given " + this.getContent().trim();
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "prerequisite");
+        return template.replaceAll("\\{CONTENT\\}", this.getContent().trim());
     }
 }

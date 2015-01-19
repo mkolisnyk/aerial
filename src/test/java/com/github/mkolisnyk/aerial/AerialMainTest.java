@@ -44,17 +44,19 @@ public class AerialMainTest {
                 AerialParamKeys.DESTINATION.toString(), outputPath
         });
     }
-/*
+
     @Test
     public void testMainForJiraInput() throws Exception {
         AerialMain.main(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.JIRA.toString(),
                 AerialParamKeys.SOURCE.toString(), "This is the test document",
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
-                AerialParamKeys.DESTINATION.toString(), outputPath
+                AerialParamKeys.DESTINATION.toString(), outputPath,
+                "user=test",
+                "password=pass"
         });
     }
-*/
+
     @Test
     public void testMainForFileInput() throws Exception {
         AerialMain.main(new String[] {

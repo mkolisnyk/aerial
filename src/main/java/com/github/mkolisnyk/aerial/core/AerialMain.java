@@ -30,6 +30,7 @@ public final class AerialMain {
             params.usage();
             return;
         }
+        params.getFormat().setCurrent();
         AerialProcessor processor = new AerialProcessor();
         processor.process(params.getReader(), params.getWriter());
     }

@@ -19,6 +19,19 @@ public enum AerialOutputFormat {
         return value.equals(name);
     }
 
+    public void setCurrent() {
+        System.setProperty("aerial.output.format", this.toString());
+    }
+
+    public static AerialOutputFormat getCurrent() {
+        String format = System.getProperty("aerial.output.format");
+        if (format == null) {
+            System.setProperty("aerial.output.format", AerialOutputFormat.CUCUMBER.toString());
+            format = System.getProperty("aerial.output.format");
+        }
+        return fromString(format);
+    }
+
     public static AerialOutputFormat fromString(String textValue) {
         AerialOutputFormat[] values = AerialOutputFormat.values();
         for (AerialOutputFormat value:values) {

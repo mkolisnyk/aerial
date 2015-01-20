@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.document.CaseSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -46,9 +48,9 @@ public class PositiveCaseScenarioGenerator extends
 
     @Override
     public String generate() throws Exception {
-        String content = StringUtils.repeat("    ", offset) + "Scenario Outline: "
-                + this.getSection().getName() + this.getScenarioName() + ls;
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
 
+        String content = "";
         content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.PREREQUISITES_TOKEN));
         content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
         if (isPositive()) {
@@ -56,9 +58,10 @@ public class PositiveCaseScenarioGenerator extends
         } else {
             content += this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
         }
-        content += StringUtils.repeat("    ", offset)
-            + "Examples:" + ls + this.generateTestData(this.getTestData(), isPositive()) + ls;
-        return content;
+        String result = template.replaceAll("\\{NAME\\}", this.getSection().getName() + this.getScenarioName())
+                            .replaceAll("\\{BODY\\}", content)
+                            .replaceAll("\\{DATA\\}", this.generateTestData(this.getTestData(), isPositive()));
+        return result;
     }
 
     @Override

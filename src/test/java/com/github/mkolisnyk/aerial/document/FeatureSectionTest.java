@@ -1,7 +1,5 @@
 package com.github.mkolisnyk.aerial.document;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 
 import org.junit.After;

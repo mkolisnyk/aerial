@@ -10,6 +10,9 @@ import java.util.Map;
 
 import org.junit.Assert;
 
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+
 /**
  * @author Myk Kolisnyk
  *
@@ -84,11 +87,15 @@ public class FeatureSection extends ContainerSection {
 
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
-        String content = "Feature: " + this.getName() + ls;
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "feature");
+        String content = template.replaceAll("\\{NAME\\}", this.getName());
+        String caseContent = "";
         for (CaseSection section : this.cases) {
-            content = content.concat(section.generate() + ls);
+            caseContent = caseContent.concat(section.generate() + ls);
         }
-        content += this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
+        content = content.replaceAll("\\{CASES\\}", caseContent);
+        content = content.replaceAll("\\{ADDITIONAL_SCENARIOS\\}",
+                this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN)));
         return content;
     }
 

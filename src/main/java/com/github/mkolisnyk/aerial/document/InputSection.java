@@ -34,7 +34,6 @@ public class InputSection extends DocumentSection<InputSection> {
         return inputs;
     }
 
-
     public InputSection parse(String input) throws Exception {
         inputs = new ArrayList<InputRecord>();
         this.setContent(input);

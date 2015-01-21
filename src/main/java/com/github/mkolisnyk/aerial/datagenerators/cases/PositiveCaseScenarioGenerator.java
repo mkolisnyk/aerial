@@ -1,11 +1,14 @@
 package com.github.mkolisnyk.aerial.datagenerators.cases;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.document.CaseSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -13,29 +16,39 @@ import com.github.mkolisnyk.aerial.document.Tokens;
 
 public class PositiveCaseScenarioGenerator extends
         CaseScenarioGenerator {
-    private int offset = 1;
-    private String ls = System.lineSeparator();
 
     public PositiveCaseScenarioGenerator(CaseSection sectionData,
             List<InputRecord> recordsList,
             Map<String, List<String>> testDataMap) {
         super(sectionData, recordsList, testDataMap);
-        // TODO Auto-generated constructor stub
     }
 
-    private String generateTestData(Map<String, List<String>> testData, boolean positive) {
-        String content = StringUtils.repeat("    ", offset + 1) + "| "
-                + StringUtils.join(testData.keySet().iterator(), " | ") + " |"  + ls;
+    private String generateTestData(Map<String, List<String>> testData, boolean positive) throws IOException {
+        String dataHeader = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
+        String dataHeaderDelimiter = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.header.delimiter");
+        String dataRow = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
+        String dataRowDelimiter = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.row.delimiter");
+        String content = dataHeader.replaceAll(
+                "\\{TITLES\\}",
+                StringUtils.join(testData.keySet().iterator(), dataHeaderDelimiter)
+        );
         int count = testData.get(testData.keySet().iterator().next()).size();
         for (int i = 0; i < count; i++) {
             if (testData.get("ValidInput").get(i).trim().equals("false") == positive) {
                 continue;
             }
-            content = content.concat(StringUtils.repeat("    ", offset + 1));
+            String dataRowText = "";
+            String[] row = new String[testData.entrySet().size()];
+            int j = 0;
             for (Entry<String, List<String>> entry : testData.entrySet()) {
-                content = content.concat("| " + entry.getValue().get(i) + " ");
+                row[j] = entry.getValue().get(i);
+                j++;
             }
-            content = content.concat("|" + ls);
+            dataRowText = StringUtils.join(row, dataRowDelimiter);
+            dataRowText = dataRow.replaceAll("\\{DATA\\}", dataRowText);
+            content = content.concat(dataRowText);
         }
         return content;
     }
@@ -46,19 +59,20 @@ public class PositiveCaseScenarioGenerator extends
 
     @Override
     public String generate() throws Exception {
-        String content = StringUtils.repeat("    ", offset) + "Scenario Outline: "
-                + this.getSection().getName() + this.getScenarioName() + ls;
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
 
+        String content = "";
         content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.PREREQUISITES_TOKEN));
-        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
+        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate();
         if (isPositive()) {
-            content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate() + ls;
+            content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate();
         } else {
-            content += this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
+            content += this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate();
         }
-        content += StringUtils.repeat("    ", offset)
-            + "Examples:" + ls + this.generateTestData(this.getTestData(), isPositive()) + ls;
-        return content;
+        String result = template.replaceAll("\\{NAME\\}", this.getSection().getName() + this.getScenarioName())
+                            .replaceAll("\\{BODY\\}", content)
+                            .replaceAll("\\{DATA\\}", this.generateTestData(this.getTestData(), isPositive()));
+        return result;
     }
 
     @Override

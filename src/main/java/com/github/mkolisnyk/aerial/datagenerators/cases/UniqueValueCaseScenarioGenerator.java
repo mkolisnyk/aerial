@@ -1,17 +1,20 @@
 package com.github.mkolisnyk.aerial.datagenerators.cases;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.document.CaseSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -19,9 +22,6 @@ import com.github.mkolisnyk.aerial.document.Tokens;
 
 public class UniqueValueCaseScenarioGenerator extends
         CaseScenarioGenerator {
-    private int    offset = 1;
-    private String ls     = System.lineSeparator();
-
     public UniqueValueCaseScenarioGenerator(CaseSection sectionData,
             List<InputRecord> recordsList,
             Map<String, List<String>> testDataMap) {
@@ -72,32 +72,40 @@ public class UniqueValueCaseScenarioGenerator extends
     }
 
     private String generateUniqueScenarioData(
-            Map<String, List<String>> testData, String[] uniqueFields) {
-        Map<String, List<String>> filteredData = filterBy(testData,
-                "ValidInput", "true");
+            Map<String, List<String>> testData, String[] uniqueFields) throws IOException {
+        Map<String, List<String>> filteredData = filterBy(testData, "ValidInput", "true");
         Map<String, String> uniqueRow = new LinkedHashMap<String, String>();
-        for (Entry<String, List<String>> entry : filteredData
-                .entrySet()) {
+        String dataHeader = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
+        String dataHeaderDelimiter = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.header.delimiter");
+        String dataRow = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
+        String dataRowDelimiter = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.row.delimiter");
+        String modifiedPrefix = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.field.modified_prefix");
+
+        for (Entry<String, List<String>> entry : filteredData.entrySet()) {
             String value = entry.getValue().get(0);
             uniqueRow.put(entry.getKey(), value);
             if (ArrayUtils.contains(uniqueFields, entry.getKey())) {
-                uniqueRow.put("Modified " + entry.getKey(), value);
+                uniqueRow.put(modifiedPrefix + entry.getKey(), value);
             }
         }
-        String content = StringUtils.repeat("    ", offset + 1)
-                + "| "
-                + StringUtils.join(uniqueRow.keySet().iterator(),
-                        " | ") + " |" + ls;
+        String content = dataHeader.replaceAll(
+                "\\{TITLES\\}",
+                StringUtils.join(uniqueRow.keySet().iterator(), dataHeaderDelimiter)
+        );
 
         for (String field : uniqueFields) {
-            content = content.concat(StringUtils.repeat("    ",
-                    offset + 1));
+            String dataRowText = "";
+            String[] row = new String[uniqueRow.entrySet().size()];
+            int j = 0;
+
             for (Entry<String, String> entry : uniqueRow.entrySet()) {
                 String key = entry.getKey();
                 String value = entry.getValue();
-                if (key.startsWith("Modified ")) {
-                    String modField = key.replaceFirst("Modified ",
-                            "");
+                if (key.startsWith(modifiedPrefix)) {
+                    String modField = key.replaceFirst(modifiedPrefix, "");
                     if (!modField.equals(field)) {
                         value = getValueDifferentFrom(
                                 filteredData.get(modField), value);
@@ -110,35 +118,40 @@ public class UniqueValueCaseScenarioGenerator extends
                                 filteredData.get(key), value);
                     }
                 }
-                content = content.concat("| " + value.trim() + " ");
+                row[j] = value.trim();
+                j++;
             }
-            content = content.concat("|" + ls);
+            dataRowText = StringUtils.join(row, dataRowDelimiter);
+            dataRowText = dataRow.replaceAll("\\{DATA\\}", dataRowText);
+            content = content.concat(dataRowText);
         }
         return content;
     }
 
     @Override
     public String generate() throws Exception {
+        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
+        String modifiedPrefix = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.field.modified_prefix");
+        String fieldPattern = AerialTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "data.field");
+
         String[] uniqueRecords = getFieldsWithUniqueAttributes(this.getRecords());
-        String content = StringUtils.repeat("    ", offset)
-                + "Scenario Outline: " + this.getSection().getName()
-                + this.getScenarioName() + ls;
+        String content = "";
         content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.PREREQUISITES_TOKEN));
-        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls;
-        content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate() + ls;
-        String secondPass = this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate() + ls
-                + this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate() + ls;
+        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate();
+        content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate();
+        String secondPass = this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate()
+                + this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate();
         for (String field : uniqueRecords) {
-            secondPass = secondPass.replaceAll("<" + field + ">",
-                    "<Modified " + field + ">");
+            secondPass = secondPass.replaceAll(fieldPattern.replaceAll("\\{NAME\\}", field),
+                    fieldPattern.replaceAll("\\{NAME\\}", modifiedPrefix + field));
         }
         content += secondPass;
-        content += StringUtils.repeat("    ", offset)
-                + "Examples:"
-                + ls
-                + this.generateUniqueScenarioData(this.getTestData(),
-                        uniqueRecords) + ls;
-        return content;
+        String result = template.replaceAll("\\{NAME\\}", this.getSection().getName() + this.getScenarioName())
+                .replaceAll("\\{BODY\\}", content)
+                .replaceAll("\\{DATA\\}", this.generateUniqueScenarioData(this.getTestData(), uniqueRecords));
+        return result;
     }
 
     @Override

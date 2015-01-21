@@ -23,6 +23,7 @@ public class AerialParamKeysTest {
                 put(AerialParamKeys.SOURCE, "-s");
                 put(AerialParamKeys.OUTPUT_TYPE, "-o");
                 put(AerialParamKeys.DESTINATION, "-d");
+                put(AerialParamKeys.FORMAT, "-f");
                 put(AerialParamKeys.OTHER, "");
             }
         };
@@ -52,6 +53,7 @@ public class AerialParamKeysTest {
                 put(AerialParamKeys.SOURCE, "-s");
                 put(AerialParamKeys.OUTPUT_TYPE, "-o");
                 put(AerialParamKeys.DESTINATION, "-d");
+                put(AerialParamKeys.FORMAT, "-f");
                 put(AerialParamKeys.OTHER, "");
             }
         };

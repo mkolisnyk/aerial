@@ -88,11 +88,6 @@ public class FeatureSection extends ContainerSection {
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
         String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "feature");
-        /*
-         * aerial.cucumber.feature=Feature: {NAME}\
-{CASES}\
-{ADDITIONAL_SCENARIOS}
-         */
         String content = template.replaceAll("\\{NAME\\}", this.getName());
         String caseContent = "";
         for (CaseSection section : this.cases) {
@@ -101,8 +96,6 @@ public class FeatureSection extends ContainerSection {
         content = content.replaceAll("\\{CASES\\}", caseContent);
         content = content.replaceAll("\\{ADDITIONAL_SCENARIOS\\}",
                 this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN)));
-        /*content += this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
-        return content;*/
         return content;
     }
 

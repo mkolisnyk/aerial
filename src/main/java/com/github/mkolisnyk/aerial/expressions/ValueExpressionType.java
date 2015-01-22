@@ -12,6 +12,7 @@ public enum ValueExpressionType {
     UNKNOWN("unknown"),
     INTEGER("int"),
     STRING("string"),
+    ENUM("enum"),
     DATE("date");
 
     private String valueType;

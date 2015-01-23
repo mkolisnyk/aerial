@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang.ArrayUtils;
+import org.paukov.combinatorics.Factory;
+import org.paukov.combinatorics.Generator;
+import org.paukov.combinatorics.ICombinatoricsVector;
 
 public class NWiseDataTestingAlgorithm {
 
@@ -39,11 +42,25 @@ public class NWiseDataTestingAlgorithm {
         return result;
     }
 
+    public List<String[]> getColumnGroups(String[] fieldNames) {
+        List<String[]> result = new ArrayList<String[]>();
+        ICombinatoricsVector<String> initialVector = Factory.createVector(fieldNames);
+
+        Generator<String> gen = Factory.createSimpleCombinationGenerator(initialVector, this.recordSize);
+
+        for (ICombinatoricsVector<String> combination : gen) {
+            String[] vector = new String[this.recordSize];
+            vector = combination.getVector().toArray(vector);
+            result.add(vector);
+        }
+        return result;
+    }
+
     public List<Map<String, String>> getUniqueCombinations(String[] fieldNames) {
         Map<String, List<String>> distinct = distinctTestData();
         List<Map<String, String>> result = new ArrayList<Map<String, String>>();
         if (fieldNames.length > 1) {
-            List<Map<String, String>> subMap = getUniqueCombinations(ArrayUtils.remove(fieldNames, 0));
+            List<Map<String, String>> subMap = getUniqueCombinations((String[]) ArrayUtils.remove(fieldNames, 0));
             for (String value : distinct.get(fieldNames[0])) {
                 for (Map<String, String> subRow : subMap) {
                     Map<String, String> dataItem = new HashMap<String, String>();
@@ -60,6 +77,17 @@ public class NWiseDataTestingAlgorithm {
                 dataItem.put(fieldNames[0], value);
                 result.add(dataItem);
             }
+        }
+        return result;
+    }
+
+    public List<Map<String, String>> getUniqueCombinations() {
+        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+        String[] fieldNames = new String[this.getTestData().keySet().size()];
+        fieldNames = this.getTestData().keySet().toArray(fieldNames);
+        List<String[]> columnGroups = this.getColumnGroups(fieldNames);
+        for (String[] group : columnGroups) {
+            result.addAll(getUniqueCombinations(group));
         }
         return result;
     }

@@ -81,13 +81,17 @@ public class NWiseDataTestingAlgorithm {
         return result;
     }
 
-    public List<Map<String, String>> getUniqueCombinations() {
-        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+    public List<FieldsRecord> getUniqueCombinations() {
+        List<FieldsRecord> result = new ArrayList<FieldsRecord>();
         String[] fieldNames = new String[this.getTestData().keySet().size()];
         fieldNames = this.getTestData().keySet().toArray(fieldNames);
         List<String[]> columnGroups = this.getColumnGroups(fieldNames);
         for (String[] group : columnGroups) {
-            result.addAll(getUniqueCombinations(group));
+            //result.addAll(getUniqueCombinations(group));
+            for (Map<String, String> item : getUniqueCombinations(group)) {
+                FieldsRecord record = new FieldsRecord(item);
+                result.add(record);
+            }
         }
         return result;
     }

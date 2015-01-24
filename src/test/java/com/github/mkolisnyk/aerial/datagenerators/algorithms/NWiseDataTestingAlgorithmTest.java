@@ -51,107 +51,125 @@ public class NWiseDataTestingAlgorithmTest {
     @Test
     public void testGetUniqueCombinations() {
 
-        List<Map<String, String>> expected = new ArrayList<Map<String, String>>() {
+        List<FieldsRecord> expected = new ArrayList<FieldsRecord>() {
             {
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-1");
-                                put("Column 3", "Value 3-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-1");
+                                    put("Column 3", "Value 3-1");
+                                }
                             }
-                        }
+                        )
                 );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-1");
-                                put("Column 3", "Value 3-2");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-1");
+                                    put("Column 3", "Value 3-2");
+                                }
                             }
-                        }
+                        )
                 );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-1");
-                                put("Column 3", "Value 3-3");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-1");
+                                    put("Column 3", "Value 3-3");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-2");
-                                put("Column 3", "Value 3-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-2");
+                                    put("Column 3", "Value 3-1");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-2");
-                                put("Column 3", "Value 3-2");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-2");
+                                    put("Column 3", "Value 3-2");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-2");
-                                put("Column 3", "Value 3-3");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-2");
+                                    put("Column 3", "Value 3-3");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-1");
-                                put("Column 1", "Value 1-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-1");
+                                    put("Column 1", "Value 1-1");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 2", "Value 2-2");
-                                put("Column 1", "Value 1-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-2");
+                                    put("Column 1", "Value 1-1");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 3", "Value 3-1");
-                                put("Column 1", "Value 1-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 3", "Value 3-1");
+                                    put("Column 1", "Value 1-1");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 3", "Value 3-2");
-                                put("Column 1", "Value 1-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 3", "Value 3-2");
+                                    put("Column 1", "Value 1-1");
+                                }
                             }
-                        }
+                        )
                  );
                 add(
-                        new HashMap<String, String>() {
-                            {
-                                put("Column 3", "Value 3-3");
-                                put("Column 1", "Value 1-1");
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 3", "Value 3-3");
+                                    put("Column 1", "Value 1-1");
+                                }
                             }
-                        }
+                        )
                  );
             }
         };
         algorithm = new NWiseDataTestingAlgorithm(testData, 2);
-        List<Map<String, String>> actual = algorithm.getUniqueCombinations();
+        List<FieldsRecord> actual = algorithm.getUniqueCombinations();
         Assert.assertEquals(expected.size(), actual.size());
         for (int i = 0; i < actual.size(); i++) {
-            Assert.assertEquals(expected.get(i).size(), actual.get(i).size());
-            for (String key : expected.get(i).keySet()) {
-                Assert.assertTrue(actual.get(i).containsKey(key));
-                Assert.assertEquals(expected.get(i).get(key), actual.get(i).get(key));
-            }
+            Assert.assertEquals(expected.get(i), actual.get(i));
         }
     }
 

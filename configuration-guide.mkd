@@ -113,7 +113,8 @@ Here is the list of acceptable suffixes with insertion patterns:
 </tr>
 </table>
 
-## Example
+
+<h2>Example</h2>
 
 The example below shows the configuration for [Cucumber](http://cukes.info) scenarios generation:
 

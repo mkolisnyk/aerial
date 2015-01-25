@@ -37,84 +37,23 @@ Where:
 
 Here is the list of acceptable suffixes with insertion patterns:
 
-<table>
-<tr><th>Property Suffix Name</th><th>Description</th><th>Macro insertions</th></tr>
-<tr><td>feature</td><td>Defines the format for entire feature</td>
-	<td>
-	<ul>
-	<li>{NAME} - place holder for feature name
-	<li>{CASES} - place holder for generated test scenarios
-	<li>{ADDITIONAL_SCENARIOS} - place holder for additional scenarios insertion
-	</ul>
-	</td>
-</tr>
-<tr><td>case</td><td>Defines the format for specific scenario</td>
-	<td>
-	<ul>
-	<li>{NAME} - place holder for test scenario name
-	<li>{BODY} - place holder for the scenario body
-	<li>{DATA} - place holder for test data to insert
-	</td>
-</tr>
-<tr><td>action</td><td>Defines the format for main actions to perform</td>
-	<td>
-	<ul>
-	<li> {ACTION} - the actual text of action
-	</ul>
-	</td>
-</tr>
-<tr><td>prerequisite</td><td>Defines the format for pre-condition actions</td>
-	<td>
-	<ul>
-	<li> {CONTENT} - place holder for the pre-condition content
-	</ul>
-	</td>
-</tr>
-<tr><td>output.valid</td><td>Defines the format for verification steps which are used when we expect correct behaviour</td>
-	<td>
-	<ul>
-	<li> {CONTENT} - place holder for the content
-	</ul>
-	</td>
-</tr>
-<tr><td>output.error</td><td>Defines the format for verification steps which are used when we expect some errors</td>
-	<td>
-	<ul>
-	<li> {CONTENT} - place holder for the content
-	</ul>
-	</td>
-</tr>
-<tr><td>additional_scenarios</td><td>Defines general pattern for additional scenarios insertion</td>
-	<td>
-	<ul>
-	<li> {CONTENT} - place holder for the additional scenario content
-	</ul>
-	</td>
-</tr>
-<tr><td>data.header</td><td>A part of complex data structures input. It defines general structure of header given that header content is passed as single value</td>
-	<td>
-	{TITLES} - place holder for the header text insertion
-	</td>
-</tr>
-<tr><td>data.header.delimiter</td><td>Defines the delimiter between each header item</td>
-	<td>N/A</td>
-</tr>
-<tr><td>data.row</td><td>A part of complex data structures input. It defines general structure of data row given that data rows content is passed as single value</td>
-	<td>{TITLES} - place holder for the data row text insertion</td>
-</tr>
-<tr><td>data.row.delimiter</td><td>Defines the delimiter between each data row item</td>
-	<td>N/A</td>
-</tr>
-<tr><td>data.field</td><td>Defines the pattern which is used to inject some variables into the generated instructions</td>
-	<td>{NAME} - place holder for the field name</td>
-</tr>
-<tr><td>data.field.modified_prefix</td><td>Defines the format of auxiliary variable which may be used in the scenarios requiring alternative value (e.g. [Unique value scenarios generation](/aerial/features#unique-value-scenarios))</td>
-	<td>N/A</td>
-</tr>
-</table>
+| Property Suffix Name | Description | Macro insertions |
+| -------------------- | ----------- | ---------------- |
+| feature | Defines the format for entire feature | <ul><li>{NAME} - place holder for feature name <li>{CASES} - place holder for generated test scenarios <li>{ADDITIONAL_SCENARIOS} - place holder for additional scenarios insertion |
+| case | Defines the format for specific scenario | <ul><li>{NAME} - place holder for test scenario name <li>{BODY} - place holder for the scenario body <li>{DATA} - place holder for test data to insert |
+| action | Defines the format for main actions to perform | {ACTION} - the actual text of action |
+| prerequisite | Defines the format for pre-condition actions | {CONTENT} - place holder for the pre-condition content |
+| output.valid | Defines the format for verification steps which are used when we expect correct behaviour | {CONTENT} - place holder for the content |
+| output.error | Defines the format for verification steps which are used when we expect some errors | {CONTENT} - place holder for the content |
+| additional_scenarios | Defines general pattern for additional scenarios insertion | {CONTENT} - place holder for the additional scenario content |
+| data.header | A part of complex data structures input. It defines general structure of header given that header content is passed as single value | {TITLES} - place holder for the header text insertion |
+| data.header.delimiter | Defines the delimiter between each header item | N/A |
+| data.row | A part of complex data structures input. It defines general structure of data row given that data rows content is passed as single value | {TITLES} - place holder for the data row text insertion |
+| data.row.delimiter | Defines the delimiter between each data row item | N/A |
+| data.field | Defines the pattern which is used to inject some variables into the generated instructions | {NAME} - place holder for the field name |
+| data.field.modified_prefix | Defines the format of auxiliary variable which may be used in the scenarios requiring alternative value (e.g. [Unique value scenarios generation](/aerial/features#unique-value-scenarios)) | N/A |
 
-
-<h2>Example</h2>
+## Example
 
 The example below shows the configuration for [Cucumber](http://cukes.info) scenarios generation:
 

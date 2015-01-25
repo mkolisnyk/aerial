@@ -70,8 +70,6 @@
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
 			<version>3.2</version>
-			<!-- annotations are not needed for plugin execution so you can remove 
-				this dependency for execution with using provided scope -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -133,6 +131,12 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 			<version>4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.combinatoricslib</groupId>
+			<artifactId>combinatoricslib</artifactId>
+			<version>2.1</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 		    <groupId>com.github.kristofa</groupId>

@@ -10,4 +10,12 @@
      	<Method name="openConnection" />
      	<Bug pattern="DMI_EMPTY_DB_PASSWORD" />
      </Match>
+     <Match>
+     	<Class name="com.github.mkolisnyk.aerial.datagenerators.algorithms.FieldsTable$ValueComparator" />
+     	<Bug pattern="SE_BAD_FIELD" />
+     </Match>
+     <Match>
+     	<Class name="com.github.mkolisnyk.aerial.datagenerators.algorithms.FieldsTable$ValueComparator" />
+     	<Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+     </Match>
 </FindBugsFilter>

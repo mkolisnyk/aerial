@@ -26,7 +26,7 @@ Such templates are defined in specific property files. There is a bunch of built
 All configuration properties are defined in the specific format:
 
 {% highlight bat linenos=table %}
-aerial.&lt;Format Name&gt;.&lt;Property Name&gt;
+aerial.<Format Name>.<Property Name>
 {% endhighlight %}
 
 Where:

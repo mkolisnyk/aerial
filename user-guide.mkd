@@ -158,6 +158,8 @@ The most complicated and important part of this table is supported data types an
 
 * String - text string
 
+* Enum - text string where each item is delimited with **;** (semi-colon) character
+
 Depending on data type we should use appropriate patterns.
 
 ### Numeric Value Patterns

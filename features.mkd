@@ -115,6 +115,12 @@ Positive scenarios operate with positive values and they are targeted to check e
         <The positive test data table>
 {% endhighlight %}
 
+## Combinatorial tests optimization
+
+In order to decrease the number of test scenarios to be performed positive test scenarios are additionally optimized using [combinatorial](http://pairwise.org/) methods. It means that is we have some set of valid input values the entire test data would contain not just all possible combinations but it should cover all possible combinations of N parameters (by default N equals 2 which leads to pair-wise testing). It is done to decrease the number of tests to be performed. In worst case the number of tests is the same as for all possible combinations. But normally, if N is less than number of fields the number of tests is smaller.
+
+Main idea behind that approach is that potentially error is caused when we process some combination of N parameters. The smaller N is the bigger optimization we have. E.g. If we have total number of fields equal 10 and we look for any records where each value is present at least once (N = 1) the number of tests to perform is the biggest number of values among all 10 fields.
+
 # Negative Scenarios
 
 Negative scenarios are built the same way as positive scenarios except they operate with negative test data where at least one item doesn't fit acceptable format. Also, since this scenario uses 
@@ -155,3 +161,31 @@ Thus, the unique value scenario can be described with the following template:
 # Date
 
 # String
+
+# Enums
+
+In some cases we have pre-defined set of input values and this list is fixed. Thus, the potential list of input parameters is limited with the list of specific values. In order to handle this the Enum data type was introduced.
+
+Here is an example of Enum type definition in the [Input](/aerial/user-guide#input) section:
+
+{% highlight bat linenos=table %}
+Input:
+    | Name   | Type | Value                       |
+    | Season | enum | Winter;Spring;Summer;Autumn |
+{% endhighlight %}
+
+All constant values are split with **;** (semi-colon) delimiter. If for any reason we need to include it into some enumerated string we can escape it with back-slash. E.g.:
+
+{% highlight bat linenos=table %}
+Input:
+    | Name   | Type | Value                       |
+    | Season | enum | Win\;ter;Spring;Summer;Autumn |
+{% endhighlight %}
+
+This way the first enum value would be **Win;ter**.
+
+When test data is generated based on this type it generates 2 set of values:
+
+* Positive - contains every single value which belongs to the enum
+
+* Negative - contains value which doesn't belong to enum

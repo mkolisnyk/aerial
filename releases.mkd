@@ -23,6 +23,14 @@ layout: default
 
 # Release Notes
 
+## 0.0.3 (preparation pending)
+
+* Functionality [to generate output files based on templates](/aerial/configuration-guide#scenario-generation-templates) was added
+
+* Positive scenarios are now generated using [combinatorial algorithm](/aerial/features#combinatorial-tests-optimization)
+
+* [Enum](/aerial/features#enums) data type definition was added
+
 ## 0.0.2
 
 * [Jira as input source](/aerial/features#jira) support was added

@@ -117,6 +117,8 @@ Positive scenarios operate with positive values and they are targeted to check e
 
 ## Combinatorial tests optimization
 
+**Since version 0.0.3**
+
 In order to decrease the number of test scenarios to be performed positive test scenarios are additionally optimized using [combinatorial](http://pairwise.org/) methods. It means that is we have some set of valid input values the entire test data would contain not just all possible combinations but it should cover all possible combinations of N parameters (by default N equals 2 which leads to pair-wise testing). It is done to decrease the number of tests to be performed. In worst case the number of tests is the same as for all possible combinations. But normally, if N is less than number of fields the number of tests is smaller.
 
 Main idea behind that approach is that potentially error is caused when we process some combination of N parameters. The smaller N is the bigger optimization we have. E.g. If we have total number of fields equal 10 and we look for any records where each value is present at least once (N = 1) the number of tests to perform is the biggest number of values among all 10 fields.
@@ -163,6 +165,8 @@ Thus, the unique value scenario can be described with the following template:
 # String
 
 # Enums
+
+**Since version 0.0.3**
 
 In some cases we have pre-defined set of input values and this list is fixed. Thus, the potential list of input parameters is limited with the list of specific values. In order to handle this the Enum data type was introduced.
 

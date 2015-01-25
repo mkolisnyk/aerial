@@ -1,6 +1,5 @@
 package com.github.mkolisnyk.aerial.datagenerators.algorithms;
 
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +56,8 @@ public class FieldsTable {
         return sortedMap;
     }
 
-    public static class ValueComparator implements Comparator<FieldsRecord>, Serializable {
+    public static class ValueComparator implements Comparator<FieldsRecord> {
 
-        private static final long serialVersionUID = 1L;
         private Map<FieldsRecord, Integer> map;
 
         public ValueComparator(Map<FieldsRecord, Integer> base) {
@@ -67,6 +65,12 @@ public class FieldsTable {
         }
 
         public int compare(FieldsRecord a, FieldsRecord b) {
+            if (map.get(a) == null) {
+                return 1;
+            }
+            if (map.get(b) == null) {
+                return -1;
+            }
             if (map.get(a) >= map.get(b)) {
                 return 1;
             } else {

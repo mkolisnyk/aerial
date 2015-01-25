@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -21,17 +22,44 @@ public class NWiseDataTestingAlgorithmTest {
                     add("Value 1-1");
                     add("Value 1-1");
                     add("Value 1-1");
+                    add("Value 1-1");
+                    add("Value 1-1");
+                    add("Value 1-1");
+                    add("Value 1-2");
+                    add("Value 1-2");
+                    add("Value 1-2");
+                    add("Value 1-2");
+                    add("Value 1-2");
+                    add("Value 1-2");
                 }
             });
             put("Column 2", new ArrayList<String>() {
                 {
                     add("Value 2-1");
                     add("Value 2-1");
+                    add("Value 2-1");
+                    add("Value 2-2");
+                    add("Value 2-2");
+                    add("Value 2-2");
+                    add("Value 2-1");
+                    add("Value 2-1");
+                    add("Value 2-1");
+                    add("Value 2-2");
+                    add("Value 2-2");
                     add("Value 2-2");
                 }
             });
             put("Column 3", new ArrayList<String>() {
                 {
+                    add("Value 3-1");
+                    add("Value 3-2");
+                    add("Value 3-3");
+                    add("Value 3-1");
+                    add("Value 3-2");
+                    add("Value 3-3");
+                    add("Value 3-1");
+                    add("Value 3-2");
+                    add("Value 3-3");
                     add("Value 3-1");
                     add("Value 3-2");
                     add("Value 3-3");
@@ -127,8 +155,28 @@ public class NWiseDataTestingAlgorithmTest {
                         new FieldsRecord(
                             new HashMap<String, String>() {
                                 {
+                                    put("Column 2", "Value 2-1");
+                                    put("Column 1", "Value 1-2");
+                                }
+                            }
+                        )
+                 );
+                add(
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
                                     put("Column 2", "Value 2-2");
                                     put("Column 1", "Value 1-1");
+                                }
+                            }
+                        )
+                 );
+                add(
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 2", "Value 2-2");
+                                    put("Column 1", "Value 1-2");
                                 }
                             }
                         )
@@ -147,8 +195,28 @@ public class NWiseDataTestingAlgorithmTest {
                         new FieldsRecord(
                             new HashMap<String, String>() {
                                 {
+                                    put("Column 3", "Value 3-1");
+                                    put("Column 1", "Value 1-2");
+                                }
+                            }
+                        )
+                 );
+                add(
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
                                     put("Column 3", "Value 3-2");
                                     put("Column 1", "Value 1-1");
+                                }
+                            }
+                        )
+                 );
+                add(
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 3", "Value 3-2");
+                                    put("Column 1", "Value 1-2");
                                 }
                             }
                         )
@@ -163,6 +231,16 @@ public class NWiseDataTestingAlgorithmTest {
                             }
                         )
                  );
+                add(
+                        new FieldsRecord(
+                            new HashMap<String, String>() {
+                                {
+                                    put("Column 3", "Value 3-3");
+                                    put("Column 1", "Value 1-2");
+                                }
+                            }
+                        )
+                 );
             }
         };
         algorithm = new NWiseDataTestingAlgorithm(testData, 2);
@@ -173,4 +251,26 @@ public class NWiseDataTestingAlgorithmTest {
         }
     }
 
+    @Test
+    public void testGenerateTestData() {
+        algorithm = new NWiseDataTestingAlgorithm(testData, 2);
+        Map<String, List<String>> result = algorithm.generateTestData();
+        int count = result.get(result.keySet().iterator().next()).size();
+        for (Entry<String, List<String>> entry : result.entrySet()) {
+            Assert.assertTrue(entry.getValue().size() > 0);
+            Assert.assertEquals(count, entry.getValue().size());
+        }
+        Assert.assertTrue(count < testData.get(testData.keySet().iterator().next()).size());
+    }
+    @Test
+    public void testGenerateTestFullRecordsData() {
+        algorithm = new NWiseDataTestingAlgorithm(testData, testData.keySet().size());
+        Map<String, List<String>> result = algorithm.generateTestData();
+        int count = result.get(result.keySet().iterator().next()).size();
+        for (Entry<String, List<String>> entry : result.entrySet()) {
+            Assert.assertTrue(entry.getValue().size() > 0);
+            Assert.assertEquals(count, entry.getValue().size());
+        }
+        Assert.assertEquals(count, testData.get(testData.keySet().iterator().next()).size());
+    }
 }

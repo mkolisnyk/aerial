@@ -18,15 +18,36 @@ public class FieldsRecord implements Comparable {
     }
 
     public boolean matches(FieldsRecord other) {
-        if (!other.getData().keySet().containsAll(this.getData().keySet())) {
+        if (!this.getData().keySet().containsAll(other.getData().keySet())) {
             return false;
         }
-        for (Entry<String, String> entry : this.getData().entrySet()) {
-            if (!other.getData().get(entry.getKey()).equals(entry.getValue())) {
+        for (Entry<String, String> entry : other.getData().entrySet()) {
+            if (!this.getData().get(entry.getKey()).equals(entry.getValue())) {
                 return false;
             }
         }
         return true;
+    }
+
+    public int rightDiff(FieldsRecord other) {
+        int count = 0;
+        for (Entry<String, String> entry : other.getData().entrySet()) {
+            if (!this.getData().containsKey(entry.getKey())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int rightValueDiff(FieldsRecord other) {
+        int count = 0;
+        for (Entry<String, String> entry : other.getData().entrySet()) {
+            if (this.getData().containsKey(entry.getKey())
+                    && !this.getData().get(entry.getKey()).equals(entry.getValue())) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /* (non-Javadoc)

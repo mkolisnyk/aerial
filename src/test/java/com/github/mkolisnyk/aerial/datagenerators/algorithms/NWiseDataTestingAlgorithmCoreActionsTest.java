@@ -22,7 +22,7 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
     private NWiseDataTestingAlgorithm algorithm;
     private String[] columnNames;
     private int recordSize;
-    private List<Map<String, String>> expected;
+    private List<FieldsRecord> expected;
     private List<String[]> expectedCombinations;
 
     private Map<String, List<String>> testData = new HashMap<String, List<String>>() {
@@ -54,7 +54,7 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
     public NWiseDataTestingAlgorithmCoreActionsTest(String description,
             String[] columnNamesValue,
             int recordSizeValue,
-            List<Map<String, String>> expectedValue,
+            List<FieldsRecord> expectedValue,
             List<String[]> expectedCombinationsValue) {
         this.columnNames = columnNamesValue;
         this.recordSize = recordSizeValue;
@@ -69,23 +69,27 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                     "Column with 1 value vs Column with 2 values. 2 fields",
                     new String[] {"Column 1", "Column 2"},
                     1,
-                    new ArrayList<Map<String, String>>() {
+                    new ArrayList<FieldsRecord>() {
                         {
                             add(
+                                new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
                                             put("Column 2", "Value 2-1");
                                         }
                                     }
+                                )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
                                             put("Column 2", "Value 2-2");
                                         }
                                     }
+                                    )
                             );
                         }
                     },
@@ -100,31 +104,37 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                     "Column with 1 value vs Column with 3 values. 2 fields",
                     new String[] {"Column 1", "Column 3"},
                     2,
-                    new ArrayList<Map<String, String>>() {
+                    new ArrayList<FieldsRecord>() {
                         {
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
                                             put("Column 3", "Value 3-1");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
                                             put("Column 3", "Value 3-2");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
                                             put("Column 3", "Value 3-3");
                                         }
                                     }
+                                    )
                             );
                         }
                     },
@@ -138,55 +148,67 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                     "Column with 2 values vs Column with 3 values. 2 fields",
                     new String[] {"Column 2", "Column 3"},
                     2,
-                    new ArrayList<Map<String, String>>() {
+                    new ArrayList<FieldsRecord>() {
                         {
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-1");
                                             put("Column 3", "Value 3-1");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-1");
                                             put("Column 3", "Value 3-2");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-1");
                                             put("Column 3", "Value 3-3");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-2");
                                             put("Column 3", "Value 3-1");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-2");
                                             put("Column 3", "Value 3-2");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 2", "Value 2-2");
                                             put("Column 3", "Value 3-3");
                                         }
                                     }
+                                    )
                             );
                         }
                     },
@@ -200,9 +222,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                     "3 Columns. 2 fields",
                     new String[] {"Column 1", "Column 2", "Column 3"},
                     2,
-                    new ArrayList<Map<String, String>>() {
+                    new ArrayList<FieldsRecord>() {
                         {
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -210,8 +233,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-1");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -219,8 +244,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-2");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -228,8 +255,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-3");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -237,8 +266,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-1");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -246,8 +277,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-2");
                                         }
                                     }
+                                    )
                             );
                             add(
+                                    new FieldsRecord(
                                     new HashMap<String, String>() {
                                         {
                                             put("Column 1", "Value 1-1");
@@ -255,8 +288,8 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
                                             put("Column 3", "Value 3-3");
                                         }
                                     }
+                                    )
                             );
-
                         }
                     },
                     new ArrayList<String[]>() {
@@ -282,14 +315,10 @@ public class NWiseDataTestingAlgorithmCoreActionsTest {
 
     @Test
     public void testGetUniqueCombinations() {
-        List<Map<String, String>> actual = algorithm.getUniqueCombinations(this.columnNames);
+        List<FieldsRecord> actual = algorithm.getUniqueCombinations(this.columnNames);
         Assert.assertEquals(expected.size(), actual.size());
         for (int i = 0; i < actual.size(); i++) {
-            Assert.assertEquals(expected.get(i).size(), actual.get(i).size());
-            for (String key : expected.get(i).keySet()) {
-                Assert.assertTrue(actual.get(i).containsKey(key));
-                Assert.assertEquals(expected.get(i).get(key), actual.get(i).get(key));
-            }
+            Assert.assertEquals(expected.get(i), actual.get(i));
         }
     }
 

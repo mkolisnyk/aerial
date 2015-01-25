@@ -56,26 +56,26 @@ public class NWiseDataTestingAlgorithm {
         return result;
     }
 
-    public List<Map<String, String>> getUniqueCombinations(String[] fieldNames) {
+    public List<FieldsRecord> getUniqueCombinations(String[] fieldNames) {
         Map<String, List<String>> distinct = distinctTestData();
-        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+        List<FieldsRecord> result = new ArrayList<FieldsRecord>();
         if (fieldNames.length > 1) {
-            List<Map<String, String>> subMap = getUniqueCombinations((String[]) ArrayUtils.remove(fieldNames, 0));
+            List<FieldsRecord> subMap = getUniqueCombinations((String[]) ArrayUtils.remove(fieldNames, 0));
             for (String value : distinct.get(fieldNames[0])) {
-                for (Map<String, String> subRow : subMap) {
+                for (FieldsRecord subRow : subMap) {
                     Map<String, String> dataItem = new HashMap<String, String>();
                     dataItem.put(fieldNames[0], value);
-                    for (Entry<String, String> entry : subRow.entrySet()) {
+                    for (Entry<String, String> entry : subRow.getData().entrySet()) {
                         dataItem.put(entry.getKey(), entry.getValue());
                     }
-                    result.add(dataItem);
+                    result.add(new FieldsRecord(dataItem));
                 }
             }
         } else {
             for (String value : distinct.get(fieldNames[0])) {
                 Map<String, String> dataItem = new HashMap<String, String>();
                 dataItem.put(fieldNames[0], value);
-                result.add(dataItem);
+                result.add(new FieldsRecord(dataItem));
             }
         }
         return result;
@@ -87,10 +87,68 @@ public class NWiseDataTestingAlgorithm {
         fieldNames = this.getTestData().keySet().toArray(fieldNames);
         List<String[]> columnGroups = this.getColumnGroups(fieldNames);
         for (String[] group : columnGroups) {
-            //result.addAll(getUniqueCombinations(group));
-            for (Map<String, String> item : getUniqueCombinations(group)) {
-                FieldsRecord record = new FieldsRecord(item);
+            for (FieldsRecord record : getUniqueCombinations(group)) {
                 result.add(record);
+            }
+        }
+        return result;
+    }
+
+    private FieldsRecord updateTable(FieldsTable table, FieldsRecord row) {
+        for (FieldsRecord record:table.getData().keySet()) {
+            if (row.matches(record)) {
+                table.increment(record);
+            }
+        }
+        return row;
+    }
+
+    private FieldsRecord getNextRow(FieldsTable table, List<FieldsRecord> totalRecords) {
+        if (table.areAllNonZeros()) {
+            return null;
+        }
+        FieldsRecord record = table.getSorted().firstKey();
+
+        FieldsRecord result = null;
+        for (int i = 0; i < totalRecords.size(); i++) {
+            result = totalRecords.get(i);
+            if (result.matches(record)) {
+                result = updateTable(table, result);
+                break;
+            }
+        }
+        totalRecords.remove(result);
+        return result;
+    }
+
+    public Map<String, List<String>> generateTestData() {
+        Map<String, List<String>> result = new HashMap<String, List<String>>();
+        List<FieldsRecord> totalRecords = new ArrayList<FieldsRecord>(); //getUniqueCombinations(fieldNames);
+        int count = this.getTestData().get(this.getTestData().keySet().iterator().next()).size();
+        for (int i = 0; i < count; i++) {
+            Map<String, String> localMap = new HashMap<String, String>();
+            for (Entry<String, List<String>> entry:this.getTestData().entrySet()) {
+                localMap.put(entry.getKey(), entry.getValue().get(i));
+            }
+            totalRecords.add(new FieldsRecord(localMap));
+        }
+        List<FieldsRecord> pairedRows = new ArrayList<FieldsRecord>();
+        FieldsTable table = new FieldsTable();
+        table.add(getUniqueCombinations());
+        for (int i = 0; i < count; i++) {
+            FieldsRecord row = getNextRow(table, totalRecords);
+            if (row == null) {
+                break;
+            } else {
+                pairedRows.add(row);
+            }
+        }
+        for (FieldsRecord row : pairedRows) {
+            for (Entry<String, String> entry : row.getData().entrySet()) {
+                if (!result.containsKey(entry.getKey())) {
+                    result.put(entry.getKey(), new ArrayList<String>());
+                }
+                result.get(entry.getKey()).add(entry.getValue());
             }
         }
         return result;

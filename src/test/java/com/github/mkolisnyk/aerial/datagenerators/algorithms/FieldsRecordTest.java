@@ -68,8 +68,9 @@ public class FieldsRecordTest {
 
     @Test
     public void testMatches() {
-        Assert.assertTrue(this.record.matches(biggerRecord));
-        Assert.assertFalse(biggerRecord.matches(this.record));
+        Assert.assertTrue(this.record.matches(record));
+        Assert.assertTrue(biggerRecord.matches(this.record));
+        Assert.assertFalse(this.record.matches(biggerRecord));
         Assert.assertFalse(differentRecord.matches(this.record));
         Assert.assertFalse(this.record.matches(differentRecord));
     }
@@ -106,5 +107,23 @@ public class FieldsRecordTest {
         Assert.assertEquals(-1, this.record.compareTo(new Integer(0)));
         Assert.assertEquals(1, this.record.compareTo(differentRecord));
         Assert.assertEquals(-1, this.record.compareTo(biggerRecord));
+    }
+
+    @Test
+    public void testRightDiffShouldReturnActualNumberOfDifferences() {
+        Assert.assertEquals(0, this.record.rightDiff(record));
+        Assert.assertEquals(0, this.biggerRecord.rightDiff(record));
+        Assert.assertEquals(0, this.record.rightDiff(differentRecord));
+        Assert.assertEquals(0, this.differentRecord.rightDiff(record));
+        Assert.assertEquals(3, this.record.rightDiff(biggerRecord));
+    }
+
+    @Test
+    public void testRightValueDiffShouldReturnActualNumberOfDifferences() {
+        Assert.assertEquals(0, this.record.rightValueDiff(record));
+        Assert.assertEquals(0, this.biggerRecord.rightValueDiff(record));
+        Assert.assertEquals(1, this.record.rightValueDiff(differentRecord));
+        Assert.assertEquals(1, this.differentRecord.rightValueDiff(record));
+        Assert.assertEquals(0, this.record.rightValueDiff(biggerRecord));
     }
 }

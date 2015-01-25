@@ -75,9 +75,9 @@ public class AerialProcessorTest {
                 + "        Then This is what we see on success" + ls
                 + "    Examples:" + ls
                 + "        | Test | ValidInput |" + ls
+                + "        | 0 | true  |" + ls
                 + "        | 50 | true  |" + ls
                 + "        | 51 | true  |" + ls
-                + "        | 0 | true  |" + ls
                 + "" + ls
                 + "    Scenario Outline:  negative test" + ls
                 + "        Given These are our pre-requisites" + ls

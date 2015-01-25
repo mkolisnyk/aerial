@@ -54,9 +54,9 @@ public class AerialFileWriterTest {
           + "        Then This is what we see on success" + lineSeparator
           + "    Examples:" + lineSeparator
           + "        | Test | ValidInput |" + lineSeparator
+          + "        | 0 | true  |" + lineSeparator
           + "        | 50 | true  |" + lineSeparator
           + "        | 51 | true  |" + lineSeparator
-          + "        | 0 | true  |" + lineSeparator
           + "" + lineSeparator
           + "    Scenario Outline:  Sample Test negative test" + lineSeparator
           + "        Given These are our pre-requisites" + lineSeparator

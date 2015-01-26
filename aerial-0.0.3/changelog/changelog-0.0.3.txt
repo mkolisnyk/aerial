@@ -1,5 +1,12 @@
 Changelog for Aerial version 0.0.3
 
+2015-01-26 23:19:26 +0000    Staging plugin was added to Aerial pom.xml (mkolisnyk)
+2015-01-26 23:15:11 +0000    #42[ci skip]rollback the release of aerial-0.0.3
+ (mkolisnyk)
+2015-01-26 23:03:07 +0000    #42[ci skip]prepare for next development iteration
+ (mkolisnyk)
+2015-01-26 23:02:42 +0000    #42[ci skip]prepare release aerial-0.0.3
+ (mkolisnyk)
 2015-01-26 22:33:05 +0000    Release Preparation: documentation update (mkolisnyk)
 2015-01-25 16:52:10 +0000    #12: pairwise data generation was completed and integrated into positive
 scenario generation functionality (mkolisnyk)

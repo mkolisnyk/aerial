@@ -104,7 +104,7 @@
 <p>All the time when we design test scenarios we have a lot of typical and "routine" checks actions to perform and checkpoints to make. E.g. any time we encounter field containing an e-mail we should check:</p>
 
 <ul>
-<li>Value matching e-mail format ( @. )</li>
+<li>Value matching e-mail format (&lt;addredd name&gt;@&lt;company/organization&gt;.&lt;domain&gt;)</li>
 <li>Value containing multiple @ characters</li>
 <li>Empty value</li>
 <li>Simple text value</li>
@@ -167,33 +167,33 @@ Feature: Sample Feature
 
 <p><strong>src/test/java/com/sample/aerial/AerialSampleClass.java</strong>:</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smp">com.sample.aerial</span>;
+<div class="highlight highlight-java"><pre><span class="kn">package</span> <span class="na">com.sample.aerial</span>;
 
-<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.Aerial</span>;
-<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.AerialAfterSuite</span>;
-<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite</span>;
-<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.core.AerialRunner</span>;
-<span class="pl-k">import</span> <span class="pl-smi">com.github.mkolisnyk.aerial.core.params.AerialSourceType</span>;
+<span class="kn">import</span> <span class="nn">com.github.mkolisnyk.aerial.annotations.Aerial</span>;
+<span class="kn">import</span> <span class="nn">com.github.mkolisnyk.aerial.annotations.AerialAfterSuite</span>;
+<span class="kn">import</span> <span class="nn">com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite</span>;
+<span class="kn">import</span> <span class="nn">com.github.mkolisnyk.aerial.core.AerialRunner</span>;
+<span class="kn">import</span> <span class="nn">com.github.mkolisnyk.aerial.core.params.AerialSourceType</span>;
 
-<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.CucumberOptions</span>;
+<span class="kn">import</span> <span class="nn">cucumber.api.CucumberOptions</span>;
 
-@CucumberOptions(
-        format <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>html:target/cucumber-html-report<span class="pl-pds">"</span></span>,
-                  <span class="pl-s1"><span class="pl-pds">"</span>json:target/cucumber.json<span class="pl-pds">"</span></span>,
-                  <span class="pl-s1"><span class="pl-pds">"</span>pretty:target/cucumber-pretty.txt<span class="pl-pds">"</span></span>,
-                  <span class="pl-s1"><span class="pl-pds">"</span>usage:target/cucumber-usage.json<span class="pl-pds">"</span></span>
+<span class="nd">@CucumberOptions</span>(
+        format <span class="kn">=</span> {<span class="s"><span class="pl-pds">"</span>html:target/cucumber-html-report<span class="pl-pds">"</span></span>,
+                  <span class="s"><span class="pl-pds">"</span>json:target/cucumber.json<span class="pl-pds">"</span></span>,
+                  <span class="s"><span class="pl-pds">"</span>pretty:target/cucumber-pretty.txt<span class="pl-pds">"</span></span>,
+                  <span class="s"><span class="pl-pds">"</span>usage:target/cucumber-usage.json<span class="pl-pds">"</span></span>
                  },
-        features <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span> },
-        glue <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>com/github/mkolisnyk/aerial<span class="pl-pds">"</span></span> },
-        tags <span class="pl-k">=</span> { }
+        features <span class="kn">=</span> {<span class="s"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span> },
+        glue <span class="kn">=</span> {<span class="s"><span class="pl-pds">"</span>com/github/mkolisnyk/aerial<span class="pl-pds">"</span></span> },
+        tags <span class="kn">=</span> { }
 )
-@Aerial(
-        inputType <span class="pl-k">=</span> <span class="pl-stj">AerialSourceType</span><span class="pl-c1"><span class="pl-k">.</span>FILE</span>,
-        source <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>src/test/resources<span class="pl-pds">"</span></span>,
-        additionalParams <span class="pl-k">=</span> { <span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> },
-        destination <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span>)
-@RunWith(<span class="pl-stj">AerialRunner</span><span class="pl-k">.</span>class)
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">AerialSampleClass</span> {
+<span class="nd">@Aerial</span>(
+        inputType <span class="kn">=</span> <span class="n">AerialSourceType</span><span class="na"><span class="kn">.</span>FILE</span>,
+        source <span class="kn">=</span> <span class="s"><span class="pl-pds">"</span>src/test/resources<span class="pl-pds">"</span></span>,
+        additionalParams <span class="kn">=</span> { <span class="s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> },
+        destination <span class="kn">=</span> <span class="s"><span class="pl-pds">"</span>output/<span class="pl-pds">"</span></span>)
+<span class="nd">@RunWith</span>(<span class="n">AerialRunner</span><span class="kn">.</span>class)
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AerialSampleClass</span> {
 }</pre></div>
 
 <p>It's empty class but most of the parameters are defined in annotations:</p>
@@ -220,28 +220,28 @@ Main items we are interested in are:
 
 <p><strong>src/test/java/com/sample/aerial/AerialGluCode.java</strong>:</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smp">com.sample.aerial</span>;
+<div class="highlight highlight-java"><pre><span class="kn">package</span> <span class="na">com.sample.aerial</span>;
 
-<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.Given</span>;
-<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.Then</span>;
-<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.java.en.When</span>;
+<span class="kn">import</span> <span class="nn">cucumber.api.java.en.Given</span>;
+<span class="kn">import</span> <span class="nn">cucumber.api.java.en.Then</span>;
+<span class="kn">import</span> <span class="nn">cucumber.api.java.en.When</span>;
 
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">AerialGluCode</span> {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AerialGluCode</span> {
 
-    <span class="pl-st">@Given</span>(<span class="pl-s1"><span class="pl-pds">"</span>^These are our pre-requisites$<span class="pl-pds">"</span></span>)
-    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">theseAreOurPreRequisites</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    <span class="nd">@Given</span>(<span class="s"><span class="pl-pds">"</span>^These are our pre-requisites$<span class="pl-pds">"</span></span>)
+    <span class="kd">public</span> <span class="nd">void</span> <span class="nf">theseAreOurPreRequisites</span>() <span class="kd">throws</span> <span class="n">Throwable</span> {
     }
 
-    <span class="pl-st">@When</span>(<span class="pl-s1"><span class="pl-pds">"</span>^Sample action$<span class="pl-pds">"</span></span>)
-    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">sampleAction</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    <span class="nd">@When</span>(<span class="s"><span class="pl-pds">"</span>^Sample action$<span class="pl-pds">"</span></span>)
+    <span class="kd">public</span> <span class="nd">void</span> <span class="nf">sampleAction</span>() <span class="kd">throws</span> <span class="n">Throwable</span> {
     }
 
-    <span class="pl-st">@Then</span>(<span class="pl-s1"><span class="pl-pds">"</span>^This is what we see on success$<span class="pl-pds">"</span></span>)
-    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">thisIsWhatWeSeeOnSuccess</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    <span class="nd">@Then</span>(<span class="s"><span class="pl-pds">"</span>^This is what we see on success$<span class="pl-pds">"</span></span>)
+    <span class="kd">public</span> <span class="nd">void</span> <span class="nf">thisIsWhatWeSeeOnSuccess</span>() <span class="kd">throws</span> <span class="n">Throwable</span> {
     }
 
-    <span class="pl-st">@Then</span>(<span class="pl-s1"><span class="pl-pds">"</span>^This is what we see on error$<span class="pl-pds">"</span></span>)
-    <span class="pl-s">public</span> <span class="pl-st">void</span> <span class="pl-en">thisIsWhatWeSeeOnError</span>() <span class="pl-s">throws</span> <span class="pl-stj">Throwable</span> {
+    <span class="nd">@Then</span>(<span class="s"><span class="pl-pds">"</span>^This is what we see on error$<span class="pl-pds">"</span></span>)
+    <span class="kd">public</span> <span class="nd">void</span> <span class="nf">thisIsWhatWeSeeOnError</span>() <span class="kd">throws</span> <span class="n">Throwable</span> {
     }
 }</pre></div>
 

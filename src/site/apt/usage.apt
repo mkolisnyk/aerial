@@ -1,47 +1,247 @@
 	------
-	Cucumber Report Example
+	Aerial Usage Example
 	------
 	Myk Kolisnyk
 	------
-	2013-11-03
+	2015-01-26
+
+%{toc}
+
+Introduction
+
+  This is an example of using the Aerial for test scenario generation.
+
+Write Requirements Document
+
+  The iniital input for scenarios generation is the requirements document. Here is the sample of it:
+
++------+
+This is a sample document
+With multiline description
+
+Feature: Sample Feature
+    This is a sample feature
+    With multiline description
+
+    Case: Sample Test
+        This is a sample test case
+        With multiline description
+
+        Action:
+            Sample action
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+        Pre-requisites:
+            These are our pre-requisites
+    Additional Scenarios:
+    Scenario: Sample Scenario 1
++------+
+
+  More details on requirement definition format can be found at {{{http://mkolisnyk.github.io/aerial/user-guide#document-structure}Document Structure section of User Guide}}
+
+  During generation stage this description will be transformed into the following Cucumber representation:
+
++------+
+Feature:  Sample Feature
+    Scenario Outline:  Sample Test positive test
+        Given These are our pre-requisites
+        When Sample action
+        Then This is what we see on success
+    Examples:
+        | Test | ValidInput |
+        | 0 | true  |
+        | 50 | true  |
+        | 51 | true  |
+
+    Scenario Outline:  Sample Test negative test
+        Given These are our pre-requisites
+        When Sample action
+        Then This is what we see on error
+    Examples:
+        | Test | ValidInput |
+        | 100 | false |
+        | -1 | false |
+        | 101 | false |
+
+
+
+    Scenario: Sample Scenario 1
++------+
+
+  Since our final representation looks like that we should make sure that it is picked up by Cucumber properly.
+  More details on scenario generation algorithms can be found at {{{http://mkolisnyk.github.io/aerial/features#scenarios-generated}Scenarios Generated section of Features description page}}
+
+Implement Glue Code
+
+  We have several Given-When-Then statements we should create glue code for. It's done with the following code:
+
++------+
+package com.sample.aerial;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class AerialGluCode {
+
+    @Given("^These are our pre-requisites$")
+    public void theseAreOurPreRequisites() throws Throwable {
+    }
+
+    @When("^Sample action$")
+    public void sampleAction() throws Throwable {
+    }
+
+    @Then("^This is what we see on success$")
+    public void thisIsWhatWeSeeOnSuccess() throws Throwable {
+    }
+
+    @Then("^This is what we see on error$")
+    public void thisIsWhatWeSeeOnError() throws Throwable {
+    }
+}
++------+
+
+Include dependency
+
+  Before going to test runner settings we should include Aerial Maven dependency:
 
 +------+
 <project>
   ...
   <build>
-    <!-- To define the plugin version in your parent POM -->
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>com.github.mkolisnyk</groupId>
-          <artifactId>sirius-maven-plugin</artifactId>
-          <version>${project.version}</version>
-        </plugin>
-        ...
-      </plugins>
-    </pluginManagement>
-    <!-- To use the plugin goals in your POM or parent POM -->
-    <plugins>
-      <plugin>
+    <dependencies>
+      .....
+      <dependency>
         <groupId>com.github.mkolisnyk</groupId>
-        <artifactId>sirius-maven-plugin</artifactId>
-        <version>${project.version}</version>
-      </plugin>
-      ...
-    </plugins>
+        <artifactId>aerial</artifactId>
+        <version>0.0.2</version>
+      </dependency>
+    <dependencies>
+    ......
   </build>
   ...
-  <!-- To use the report goals in your POM or parent POM -->
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>com.github.mkolisnyk</groupId>
-        <artifactId>sirius-maven-plugin</artifactId>
-        <version>${project.version}</version>
-      </plugin>
-      ...
-    </plugins>
-  </reporting>
-  ...
 </project>
++------+
+
+Include Runner
+
+  Then we should define test runner which is going to be used together with JUnit. For this purpose there is <<@RunWith(AerialRunner.class)>> annotation. So, initially test class looks like this:
+
++------+
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+
+import cucumber.api.CucumberOptions;
+
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
++------+
+
+Include Aerial Information
+
+  Next step is to add Aerial generation settings. This is done using <<@Aerial>> annotation where we define where requirement documents are taken from and where generated files should be dropped to:
+
++------+
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
++------+
+
+Include Cucumber Annotations
+
+  In the end we should add Cucumber annotations to point JUnit to resources generated by Aerial:
+
++------+
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+}
++------+
+
+Pre-setup Actions
+
+  Additionally we may define actions which are supposed to be done prior tests generation and/or in the end of entire suite execution. For this purpose we should mark appropriate methods with <<@AerialBeforeSuite>> and <<@AerialAfterSuite>> annotations respectively:
+
++------+
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+    @AerialBeforeSuite
+    public static void setUp() {
+        System.out.println("setUp");
+    }
+    @AerialAfterSuite
+    public static void tearDown() {
+        System.out.println("tearDown");
+    }
+}
 +------+

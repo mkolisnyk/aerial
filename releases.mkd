@@ -9,21 +9,21 @@ layout: default
 
 [![Aerial](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial)
 
-**Latest Snapshot**: 0.0.2-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.3-SNAPSHOT) )
+**Latest Snapshot**: 0.0.4-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.4-SNAPSHOT) )
 
-**Latest Release**: 0.0.2 ( [Project Documentation](/aerial/aerial-0.0.2) )
+**Latest Release**: 0.0.3 ( [Project Documentation](/aerial/aerial-0.0.3) )
 
 ## Aerial Maven Plugin
 
 [![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
 
-**Latest Snapshot**: 0.0.3-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.3-SNAPSHOT) )
+**Latest Snapshot**: 0.0.4-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.4-SNAPSHOT) )
 
-**Latest Release**: 0.0.2 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.2) )
+**Latest Release**: 0.0.3 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.3) )
 
 # Release Notes
 
-## 0.0.3 (preparation pending)
+## v0.0.3
 
 * Functionality [to generate output files based on templates](/aerial/configuration-guide#scenario-generation-templates) was added
 
@@ -31,7 +31,7 @@ layout: default
 
 * [Enum](/aerial/features#enums) data type definition was added
 
-## 0.0.2
+## v0.0.2
 
 * [Jira as input source](/aerial/features#jira) support was added
 
@@ -41,7 +41,7 @@ layout: default
 
 * Internal code unification and optimization
 
-## 0.0.1
+## v0.0.1
 
 Initial Release. Includes:
 

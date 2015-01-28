@@ -90,7 +90,6 @@ public class AerialProcessorTest {
                 + "        | 101 | false |" + ls
                 + "" + ls
                 + "" + ls
-                + "" + ls
                 + "Scenario: Sample Scenario 1";
         processor.process(input, output);
         Assert.assertEquals(StringUtils.repeat(expected, 2), processor.getContent());

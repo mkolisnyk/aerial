@@ -60,9 +60,6 @@ public abstract class ContainerSection
             this.description = content;
             content = "";
         } else {
-            /*this.sections.put(
-                    currentSectionName,
-                    currentSection.parse(content));*/
             ArrayList<DocumentSection<?>> sectionItem = new ArrayList<DocumentSection<?>>();
             if (this.sections.containsKey(currentSectionName)) {
                 sectionItem = this.sections.get(currentSectionName);

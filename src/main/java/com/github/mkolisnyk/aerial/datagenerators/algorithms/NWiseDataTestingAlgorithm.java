@@ -123,7 +123,7 @@ public class NWiseDataTestingAlgorithm {
 
     public Map<String, List<String>> generateTestData() {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
-        List<FieldsRecord> totalRecords = new ArrayList<FieldsRecord>(); //getUniqueCombinations(fieldNames);
+        List<FieldsRecord> totalRecords = new ArrayList<FieldsRecord>();
         int count = this.getTestData().get(this.getTestData().keySet().iterator().next()).size();
         for (int i = 0; i < count; i++) {
             Map<String, String> localMap = new HashMap<String, String>();

@@ -61,7 +61,6 @@ public class InputSection extends DocumentSection<InputSection> {
     }
 
     public String generate() throws Exception {
-        // TODO Auto-generated method stub
         return null;
     }
 }

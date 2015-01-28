@@ -25,16 +25,6 @@ public class AerialFileReader extends AerialReader {
     private Iterator<File> iterator;
     private String rootDirectory;
 
-    /**
-     * .
-     * @throws Exception .
-     */
-    /*public AerialFileReader(String rootDirectoryValue) {
-        LOG.info("Initializing File Reader");
-        this.files = new ArrayList<File>();
-        this.iterator = this.files.iterator();
-        this.rootDirectory = rootDirectoryValue;
-    }*/
     public AerialFileReader(AerialParams params) throws Exception {
         super(params);
         this.files = new ArrayList<File>();

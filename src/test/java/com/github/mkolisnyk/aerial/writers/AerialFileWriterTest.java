@@ -69,7 +69,6 @@ public class AerialFileWriterTest {
           + "        | 101 | false |" + lineSeparator
           + "" + lineSeparator
           + "" + lineSeparator
-          + "" + lineSeparator
           + "    Scenario: Sample Scenario 1";
         Document document = new Document();
         document = (Document) document.parse(reader.readNext());

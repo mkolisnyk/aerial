@@ -3,7 +3,7 @@ package com.github.mkolisnyk.aerial.datagenerators.algorithms;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class FieldsRecord implements Comparable {
+public class FieldsRecord implements Comparable<Object> {
     private Map<String, String> data;
 
     public FieldsRecord(Map<String, String> dataValue) {

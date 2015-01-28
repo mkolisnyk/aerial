@@ -9,8 +9,6 @@ import com.github.mkolisnyk.aerial.document.DocumentSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
 
 public abstract class CaseScenarioGenerator {
-    private String ls = System.lineSeparator();
-
     private CaseSection section;
     private List<InputRecord> records;
     private Map<String, List<String>> testData;
@@ -49,7 +47,7 @@ public abstract class CaseScenarioGenerator {
         String result = "";
         if (preRequisites != null) {
             for (DocumentSection<?> item : preRequisites) {
-                result = result.concat(item.generate()  + ls);
+                result = result.concat(item.generate());
             }
         }
         return result;

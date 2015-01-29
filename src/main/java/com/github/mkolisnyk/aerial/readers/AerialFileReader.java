@@ -92,10 +92,6 @@ public class AerialFileReader extends AerialReader {
     public void open(AerialParams params) throws Exception {
         File root = new File(this.rootDirectory).getAbsoluteFile();
         List<String> matchPatterns = new ArrayList<String>();
-        /*for (int i = 0; i < params.length; i++) {
-            matchPatterns.add((String) params[i]);
-            LOG.debug("Adding parameter: " + params[i]);
-        }*/
         for (String param : params.getValueParams()) {
             matchPatterns.add(param);
             LOG.debug("Adding parameter: " + param);

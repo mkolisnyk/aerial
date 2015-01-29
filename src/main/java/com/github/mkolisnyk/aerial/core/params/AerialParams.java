@@ -1,22 +1,26 @@
 package com.github.mkolisnyk.aerial.core.params;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.AerialReader;
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
 import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
-//import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
 import com.github.mkolisnyk.aerial.writers.AerialFileWriter;
 import com.github.mkolisnyk.aerial.writers.AerialStringWriter;
 
-public class AerialParams {
+public class AerialParams implements AerialGlobalProperties {
 
     private AerialSourceType inputType;
     private String source;
@@ -34,8 +38,19 @@ public class AerialParams {
         this.destination = "";
         this.namedParams = new HashMap<String, String>();
         this.valueParams = new ArrayList<String>();
-        this.format = AerialOutputFormat.CUCUMBER;
-        this.configuration = "";
+        this.format = null;
+        this.configuration = "main/resources/aerial.properties";
+    }
+
+    private void loadGlobalProperties(String path) throws IOException {
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(path);
+        Properties props = new Properties();
+        props.load(in);
+        in.close();
+        for (Entry<Object, Object> entry : System.getProperties().entrySet()) {
+            props.put(entry.getKey(), entry.getValue());
+        }
+        System.setProperties(props);
     }
 
     /**
@@ -94,7 +109,22 @@ public class AerialParams {
         return configuration;
     }
 
-    public void parse(String[] args) {
+    /**
+     * @return the readersMap
+     */
+    public final Map<AerialSourceType, Class<? extends AerialReader>> getReadersMap() {
+        return new HashMap<AerialSourceType, Class<? extends AerialReader>>() {
+            private static final long serialVersionUID = 1L;
+
+            {
+                put(AerialSourceType.STRING, AerialStringReader.class);
+                put(AerialSourceType.FILE, AerialFileReader.class);
+                put(AerialSourceType.JIRA, AerialJiraReader.class);
+            }
+        };
+    }
+
+    public void parse(String[] args) throws Exception {
         int index = 0;
         this.namedParams = new HashMap<String, String>();
         this.valueParams = new ArrayList<String>();
@@ -132,30 +162,33 @@ public class AerialParams {
         }
     }
 
-    public void validate() {
+    public void apply() throws Exception {
+        loadGlobalProperties(this.getConfiguration());
+        if (this.format == null) {
+            this.format = AerialOutputFormat.fromString(System.getProperty(AERIAL_OUTPUT_FORMAT));
+        }
+    }
+
+    public void validate() throws Exception {
         Assert.assertNotNull("The input type is undefined", this.getInputType());
         Assert.assertNotEquals("Illegal input type", AerialSourceType.NONE, this.getInputType());
         Assert.assertNotNull("The output type is undefined", this.getOutputType());
         Assert.assertNotEquals("Illegal output type", AerialSourceType.NONE, this.getOutputType());
         Assert.assertNotNull("The source value is undefined", this.getSource());
         Assert.assertNotNull("The destination value is undefined", this.getDestination());
+        if (this.getInputType().equals(AerialSourceType.CUSTOM)) {
+            Assert.assertTrue("If custom class is defined you must pass the 'inputClass' named parameter",
+                    this.getNamedParams().containsKey("inputClass"));
+            Class<?> clazz = Class.forName(this.getNamedParams().get("inputClass"));
+            this.getReadersMap().put(
+                    AerialSourceType.CUSTOM,
+                    clazz.asSubclass(AerialReader.class));
+        }
     }
 
     public AerialReader getReader() throws Exception {
         AerialReader reader = null;
-        switch (this.getInputType()) {
-            case STRING:
-                reader = new AerialStringReader(this);
-                break;
-            case FILE:
-                reader = new AerialFileReader(this);
-                break;
-            case JIRA:
-                reader = new AerialJiraReader(this);
-                break;
-            default:
-                break;
-        }
+        reader = this.getReadersMap().get(this.getInputType()).getConstructor(AerialParams.class).newInstance(this);
         return reader;
     }
 

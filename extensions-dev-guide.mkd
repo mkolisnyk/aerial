@@ -1,0 +1,45 @@
+---
+title: Aerial Extension Development Guide
+layout: default
+---
+
+# Getting Started
+
+[Aerial](/aerial) is designed to be extensible and to cover various input and output formats. It should be extensible not only by internal design it should also provide an ability to include some external modules which can be easily used together with the entire engine. Mainly, it's all about being able to create some kind of plug-ins. There are several areas where it can be done:
+
+* **Input readers** - components responsible for getting input data from some external source (any external system, file system etc.)
+
+* **Output writers** - components responsible for producing the output in some specific format
+
+* **Scenario generators** - components responsible for custom algorithms implementation which are targeted to produce new types of scenarios
+
+* **Test Data generators** - components targeted to implement various settings and algorithms for custom data types and corresponding input values generation process
+
+All of the above component types implement specific interface and main things the [Aerial](/aerial) needs are:
+
+* Configuration - the engine itself should be configured to use or include each specific module from specific location. Otherwise, it is decided that the component operates with built-in classes
+
+* Library availability in classpath - since we use Java and create some modules which are stand-alone libraries they definitely should be included into classpath before engine starts using it
+
+All the above things are needed to be defined. On this page we'll describe each of the component types in more details with examples of how to extend existing functionality in the direction of each specific component.
+
+# Custom Input Readers
+
+**Since version 0.0.4**
+
+## Overview
+
+All [Aerial](/aerial) input readers are defined via classes extending [AerialReader](https://github.com/mkolisnyk/aerial/blob/master/src/main/java/com/github/mkolisnyk/aerial/AerialReader.java) abstract class. Actually this class only defines default constructor and prototypes for core methods. They are:
+
+| Method | Description |
+| ------ | ----------- |
+| **open** | Performs data initialization. Normally it identifies the scope of items to process and contains either some references or local copies of resources to read |
+| **close** | Cleans up all data and resets the entire reader |
+| **hasNext** | Used for iterative input elements processing. It indicates whether input source with settings specified contains more data |
+| **readNext** | Reads next portion of data from the specified source |
+
+Since all the above methods are pretty typical by their structure and functions they are used in typical way. Actually, all necessary set of actions are performed by **AerialProcessor** class so it is highly recommended to keep existing structure and approaches for [AerialReader](https://github.com/mkolisnyk/aerial/blob/master/src/main/java/com/github/mkolisnyk/aerial/AerialReader.java) extensions.
+
+## Write Custom Reader
+
+## Configure Aerial to Use Custom Reader

@@ -47,6 +47,12 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
             defaultValue = "", required = true)
     private String source;
     /**
+     * Identifies path to global configuration file (if specified)
+     * @since 0.0.4
+     */
+    @Parameter(property = "aerial.global.config", defaultValue = "")
+    private String configurationFile;
+    /**
      * Identifies output type to use for generated data. Available values are: FILE, CUSTOM.
      * @since 0.0.1
      */
@@ -96,6 +102,8 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
         params.add(outputType.toString());
         params.add(AerialParamKeys.DESTINATION.toString());
         params.add(destination);
+        params.add(AerialParamKeys.CONFIGURATION.toString());
+        params.add(configurationFile);
         if (namedParams != null) {
             for (Entry<String, String> entry : namedParams.entrySet()) {
                 params.add(entry.getKey() + "=" + entry.getValue());
@@ -143,6 +151,13 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
      */
     public final void setDestination(String destinationValue) {
         this.destination = destinationValue;
+    }
+
+    /**
+     * @param configurationValue the configuration to set
+     */
+    public final void setConfigurationFile(String configurationValue) {
+        this.configurationFile = configurationValue;
     }
 
     /**

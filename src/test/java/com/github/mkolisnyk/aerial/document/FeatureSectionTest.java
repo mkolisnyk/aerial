@@ -137,7 +137,6 @@ public class FeatureSectionTest {
         + "        | 101 | false |" + lineSeparator
         + "" + lineSeparator
         + "" + lineSeparator
-        + "" + lineSeparator
         + "Scenario: Sample Scenario 1";
         section.parse(sampleFeatureText);
         String actual = section.generate();

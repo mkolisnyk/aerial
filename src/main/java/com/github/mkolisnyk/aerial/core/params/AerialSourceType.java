@@ -5,6 +5,8 @@ public enum AerialSourceType {
     STRING("text"),
     FILE("file"),
     JIRA("jira"),
+    GITHUB("github"),
+    GITHUB_WIKI("github_wiki"),
     CUSTOM("custom");
 
     private String name;

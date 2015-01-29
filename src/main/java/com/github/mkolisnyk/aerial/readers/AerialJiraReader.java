@@ -43,13 +43,6 @@ public class AerialJiraReader extends AerialReader {
      */
     private Iterator<String> iterator;
 
-    /*
-    public AerialJiraReader(String urlValue, String userNameValue, String passwordValue, String fieldNameValue) {
-        this.userName = userNameValue;
-        this.password = passwordValue;
-        this.url = urlValue;
-        this.fieldName = fieldNameValue;
-    }*/
     public AerialJiraReader(AerialParams params) throws Exception {
         super(params);
         this.url = params.getSource();

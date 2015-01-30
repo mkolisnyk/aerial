@@ -102,6 +102,12 @@ They are:
 Depending on scenario type different sections are used in different combinations.
 The below paragraphs contain more detailed description of each scenario generation.
 
+## Custom
+
+**Since version 0.0.4**
+
+Additionally Aerial has functionality to load and process custom classes defined outside of the box. For this purpose there is reserved **CUSTOM** keyword for input type. This is specific feature for better extensibility and customization without changing the core engine. More details on configuration and extensions development see the [Extensions Development Guide: Custom Input Readers](/aerial/extensions-dev-guide#custom-input-readers) chapter.
+
 # Positive Scenarios
 
 Positive scenarios operate with positive values and they are targeted to check expected behaviour. Mainly positive scenarios are generated from document description using the following structure:

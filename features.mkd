@@ -63,6 +63,12 @@ Here is the Maven example on how to set Jira as an input source:
 
 More detailed description of the above example can be found [here](http://mkolisnyk.github.io/aerial/aerial-maven-plugin-0.0.2/usage.html#Generating_Features_Based_on_JIRA_Content_Example).
 
+## Custom
+
+**Since version 0.0.4**
+
+Additionally Aerial has functionality to load and process custom classes defined outside of the box. For this purpose there is reserved **CUSTOM** keyword for input type. This is specific feature for better extensibility and customization without changing the core engine. More details on configuration and extensions development see the [Extensions Development Guide: Custom Input Readers](/aerial/extensions-dev-guide#custom-input-readers) chapter.
+
 # Scenarios Generated
 
 Aerial uses document in specific format to generate scenarios. Each document contains specific sections and generally can be represented with the following structure: 
@@ -101,12 +107,6 @@ They are:
 
 Depending on scenario type different sections are used in different combinations.
 The below paragraphs contain more detailed description of each scenario generation.
-
-## Custom
-
-**Since version 0.0.4**
-
-Additionally Aerial has functionality to load and process custom classes defined outside of the box. For this purpose there is reserved **CUSTOM** keyword for input type. This is specific feature for better extensibility and customization without changing the core engine. More details on configuration and extensions development see the [Extensions Development Guide: Custom Input Readers](/aerial/extensions-dev-guide#custom-input-readers) chapter.
 
 # Positive Scenarios
 

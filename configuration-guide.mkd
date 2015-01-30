@@ -15,6 +15,31 @@ layout: default
 
 Each of them is applied to different area and it is targeted to some specific part of the functionality.
 
+# General Configuration Options
+
+**Since version 0.0.4**
+
+In order to make [Aerial](/aerial) working the direction it is expected there is a need to define some global settings which will be applied to core runner resources. Mainly it is related to the input/output format definition/customization or some common algorithm specifics or in general settings which can be used in multiple places in different point of Aerial processing life-cycle. All such parameters are stored in global configuration file.
+
+During runtime all those values are stored in system properties.
+
+By default Aerial uses internal resource with the configuration. It is stored under **/src/main/resources/aerial.properties** location. But Aerial functionality supports overriding it via: 
+
+* [Command Line](/aerial/features#command-line)
+
+* [Maven Plugin Configuration](/aerial/features#maven-plugin)
+
+Currently the following properties are in use:
+
+| Property | Category    | Description | Introduced In |
+| -------- | ----------- | ----------- | ------------- |
+| aerial.output.format | Input/output | Identifies template being used for [output generation](/aerial/configuration-guide#scenario-generation-templates) | [0.0.4](/aerial/releases#v004) |
+| aerial.output.config | Input/output | Relevant to **aerial.output.format** property and it is used to point to custom template configuration in case **aerial.output.format** is set to **custom** | [0.0.4](/aerial/releases#v004) |
+| aerial.input.format  | Input/output | Identifies the template being used for input formats parsing | [0.0.4](/aerial/releases#v004) |
+| aerial.input.config  | Input/output | Used when **aerial.input.format** is set to **custom** and points to configuration file containing input format properties | [0.0.4](/aerial/releases#v004) |
+| aerial.gen.nwise.size | Case Generators | Used by [Combinatorial Tests Optimization](/aerial/features#combinatorial-tests-optimization) algorithms and defines the size of the record which unique combinations we should check. 0 means **Exhaustive Testing** | [0.0.4](/aerial/releases#v004) |
+| aerial.types.date.default | Data Types | Used for date values generation and defines the date format which is supposed to be used by default | [0.0.4](/aerial/releases#v004) |
+
 # Scenario Generation Templates
 
 **Since version 0.0.3**

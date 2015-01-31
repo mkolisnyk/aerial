@@ -9,8 +9,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.algorithms.NWiseDataTestingAlgorithm;
 import com.github.mkolisnyk.aerial.document.CaseSection;
@@ -46,11 +46,11 @@ public class PositiveCaseScenarioGenerator extends
     }
 
     private String generateTestData(Map<String, List<String>> testData) throws IOException {
-        String dataHeader = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
-        String dataHeaderDelimiter = AerialTemplateMap.get(
+        String dataHeader = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
+        String dataHeaderDelimiter = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.header.delimiter");
-        String dataRow = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
-        String dataRowDelimiter = AerialTemplateMap.get(
+        String dataRow = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
+        String dataRowDelimiter = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.row.delimiter");
         String content = dataHeader.replaceAll(
                 "\\{TITLES\\}",
@@ -78,15 +78,15 @@ public class PositiveCaseScenarioGenerator extends
 
     @Override
     public String generate() throws Exception {
-        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
+        String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
 
         String content = "";
-        content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.PREREQUISITES_TOKEN));
-        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate();
+        content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.getPrerequisitesToken()));
+        content += this.getSection().getSections().get(Tokens.getActionToken()).get(0).generate();
         if (isPositive()) {
-            content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate();
+            content += this.getSection().getSections().get(Tokens.getValidOutputToken()).get(0).generate();
         } else {
-            content += this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate();
+            content += this.getSection().getSections().get(Tokens.getErrorOutputToken()).get(0).generate();
         }
         Map<String, List<String>> testData = filterTestData(this.getTestData(), isPositive());
         if (isPositive()) {

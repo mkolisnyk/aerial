@@ -3,8 +3,8 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 
 /**
  * @author Myk Kolisnyk
@@ -23,7 +23,7 @@ public class ErrorOutput extends DocumentSection<ErrorOutput> {
     }
 
     public String generate() throws Exception {
-        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "output.error");
+        String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "output.error");
         return template.replaceAll("\\{CONTENT\\}", this.getContent().trim());
     }
 }

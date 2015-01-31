@@ -89,7 +89,7 @@ public class DocumentTest {
     public void testParseValidScenarioShouldFillAllSections() throws Exception {
         document.parse(sampleFeatureText);
         Assert.assertEquals(sampleDocumentDescription, document.getDescription());
-        Assert.assertNotNull(document.getSections().get(Tokens.FEATURE_TOKEN));
+        Assert.assertNotNull(document.getSections().get(Tokens.getFeatureToken()));
     }
 
     @Test

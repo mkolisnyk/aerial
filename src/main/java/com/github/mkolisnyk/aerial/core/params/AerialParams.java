@@ -14,6 +14,7 @@ import org.junit.Assert;
 import com.github.mkolisnyk.aerial.AerialReader;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
+import com.github.mkolisnyk.aerial.document.Tokens;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
 import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
@@ -167,6 +168,7 @@ public class AerialParams implements AerialGlobalProperties {
         if (this.format == null) {
             this.format = AerialOutputFormat.fromString(System.getProperty(AERIAL_OUTPUT_FORMAT));
         }
+        Tokens.refresh();
     }
 
     public void validate() throws Exception {

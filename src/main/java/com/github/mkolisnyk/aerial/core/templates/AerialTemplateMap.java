@@ -1,24 +1,24 @@
-package com.github.mkolisnyk.aerial.core;
+package com.github.mkolisnyk.aerial.core.templates;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Map.Entry;
 
-public final class AerialTemplateMap {
+public class AerialTemplateMap {
 
     private Map<String, String> properties;
 
-    private AerialTemplateMap() {
+    public AerialTemplateMap() {
         properties = new HashMap<String, String>();
     }
 
     private static AerialTemplateMap instance;
 
     public String getProperty(String format, String name) throws IOException {
-        String propName = "aerial." + format + "." + name;
+        String propName = getPropertyName(format, name);
         if (!this.properties.containsKey(propName)) {
             readResource(format);
         }
@@ -27,7 +27,7 @@ public final class AerialTemplateMap {
 
     private void readResource(String format) throws IOException {
         InputStream in = this.getClass().getClassLoader().getResourceAsStream(
-                "main/resources/generator/" + format + ".properties");
+                getDefaultResourcePath(format));
         Properties props = new Properties();
         props.load(in);
 
@@ -41,5 +41,13 @@ public final class AerialTemplateMap {
             instance = new AerialTemplateMap();
         }
         return instance.getProperty(format, name);
+    }
+
+    public String getDefaultResourcePath(String format) {
+        return "main/resources/generator/" + format + ".properties";
+    }
+
+    public String getPropertyName(String format, String name) {
+        return "aerial." + format + "." + name;
     }
 }

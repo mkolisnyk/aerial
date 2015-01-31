@@ -32,27 +32,26 @@ public class CaseSection extends ContainerSection {
     }
 
     public String[] getSectionTokens() {
-        return new String[] {Tokens.ACTION_TOKEN,
-                Tokens.PREREQUISITES_TOKEN, Tokens.INPUT_TOKEN,
-                Tokens.VALID_OUTPUT_TOKEN, Tokens.ERROR_OUTPUT_TOKEN };
+        return new String[] {Tokens.getActionToken(),
+                Tokens.getPrerequisitesToken(), Tokens.getInputToken(),
+                Tokens.getValidOutputToken(), Tokens.getErrorOutputToken() };
     }
 
     public String[] getMandatoryTokens() {
-        return new String[] {Tokens.ACTION_TOKEN,
-                Tokens.INPUT_TOKEN, Tokens.VALID_OUTPUT_TOKEN,
-                Tokens.ERROR_OUTPUT_TOKEN };
+        return new String[] {Tokens.getActionToken(),
+                Tokens.getInputToken(), Tokens.getValidOutputToken(), Tokens.getErrorOutputToken() };
     }
 
     public Map<String, Class<?>> getCreationMap() {
         return new HashMap<String, Class<?>>() {
             private static final long serialVersionUID = 1L;
             {
-                put(Tokens.ACTION_TOKEN, ActionSection.class);
-                put(Tokens.PREREQUISITES_TOKEN,
+                put(Tokens.getActionToken(), ActionSection.class);
+                put(Tokens.getPrerequisitesToken(),
                         PrerequisitesSection.class);
-                put(Tokens.INPUT_TOKEN, InputSection.class);
-                put(Tokens.VALID_OUTPUT_TOKEN, ValidOutput.class);
-                put(Tokens.ERROR_OUTPUT_TOKEN, ErrorOutput.class);
+                put(Tokens.getInputToken(), InputSection.class);
+                put(Tokens.getValidOutputToken(), ValidOutput.class);
+                put(Tokens.getErrorOutputToken(), ErrorOutput.class);
             }
         };
     }
@@ -74,7 +73,7 @@ public class CaseSection extends ContainerSection {
     }
 
     public String generate() throws Exception {
-        InputSection input = (InputSection) this.getSections().get(Tokens.INPUT_TOKEN).get(0);
+        InputSection input = (InputSection) this.getSections().get(Tokens.getInputToken()).get(0);
         TestDataGenerator dataGenerator = new TestDataGenerator(input.getInputs());
         Map<String, List<String>> testData = dataGenerator.generateTestData();
         String content = "";

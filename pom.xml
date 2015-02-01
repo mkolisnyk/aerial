@@ -157,6 +157,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.kohsuke</groupId>
+			<artifactId>github-api</artifactId>
+			<version>1.59</version>
+		</dependency>
+		<dependency>
 		    <groupId>com.github.kristofa</groupId>
 		    <artifactId>mock-http-server</artifactId>
 		    <version>4.1</version>

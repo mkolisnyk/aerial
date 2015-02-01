@@ -3,33 +3,37 @@
  */
 package com.github.mkolisnyk.aerial;
 
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.document.Document;
 
 /**
  * @author Myk Kolisnyk
  *
  */
-public interface AerialWriter {
+public abstract class AerialWriter {
+    public AerialWriter(AerialParams params) {
+        params.toString();
+    }
     /**
      * .
      * @param params .
      * @throws Exception .
      */
-    void open(Document document, Object... params) throws Exception;
+    public abstract void open(Document document, Object... params) throws Exception;
     /**
      * .
      * @throws Exception .
      */
-    void close() throws Exception;
+    public abstract void close() throws Exception;
     /**
      * .
      * @return .
      * @throws Exception .
      */
-    String writeNext() throws Exception;
+    public abstract String writeNext() throws Exception;
     /**
      * .
      * @return .
      */
-    boolean hasNext();
+    public abstract boolean hasNext();
 }

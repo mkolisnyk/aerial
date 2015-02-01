@@ -31,7 +31,6 @@
 	</scm>
 	<properties>
 		<java.main.class>com.github.mkolisnyk.aerial.core.AerialMain</java.main.class>
-		
 		<release.preparation.goals>package install site</release.preparation.goals>
 		<spring.version>3.1.4.RELEASE</spring.version>
 	</properties>

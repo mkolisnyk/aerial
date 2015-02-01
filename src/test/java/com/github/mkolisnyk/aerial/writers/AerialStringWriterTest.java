@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
  * @author Myk Kolisnyk
@@ -22,7 +23,10 @@ public class AerialStringWriterTest {
      */
     @Before
     public void setUp() throws Exception {
-        this.writer = new AerialStringWriter();
+        AerialParams params = new AerialParams();
+        params.parse(new String[] {
+        });
+        this.writer = new AerialStringWriter(params);
     }
 
     /**

@@ -3,13 +3,15 @@ package com.github.mkolisnyk.aerial.writers;
 import java.util.Iterator;
 
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.document.Document;
 import com.github.mkolisnyk.aerial.document.FeatureSection;
 
-public class AerialStringWriter implements AerialWriter {
+public class AerialStringWriter extends AerialWriter {
 
     private Iterator<FeatureSection> iterator;
-    public AerialStringWriter() {
+    public AerialStringWriter(AerialParams params) {
+        super(params);
         this.iterator = null;
     }
 

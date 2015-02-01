@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
 
-public class AerialTemplateMap {
+public abstract class AerialTemplateMap {
 
     private Map<String, String> properties;
 
@@ -15,39 +15,24 @@ public class AerialTemplateMap {
         properties = new HashMap<String, String>();
     }
 
-    private static AerialTemplateMap instance;
-
     public String getProperty(String format, String name) throws IOException {
-        String propName = getPropertyName(format, name);
+        String propName = this.getPropertyName(format, name);
         if (!this.properties.containsKey(propName)) {
             readResource(format);
         }
         return properties.get(propName);
     }
 
-    private void readResource(String format) throws IOException {
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream(
-                getDefaultResourcePath(format));
+    public void readResource(String format) throws IOException {
+        String resourcePath = this.getDefaultResourcePath(format);
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourcePath);
         Properties props = new Properties();
         props.load(in);
-
+        in.close();
         for (Entry<Object, Object> property : props.entrySet()) {
             properties.put((String) property.getKey(), (String) property.getValue());
         }
     }
-
-    public static String get(String format, String name) throws IOException {
-        if (instance == null) {
-            instance = new AerialTemplateMap();
-        }
-        return instance.getProperty(format, name);
-    }
-
-    public String getDefaultResourcePath(String format) {
-        return "main/resources/generator/" + format + ".properties";
-    }
-
-    public String getPropertyName(String format, String name) {
-        return "aerial." + format + "." + name;
-    }
+    public abstract String getDefaultResourcePath(String format);
+    public abstract String getPropertyName(String format, String name);
 }

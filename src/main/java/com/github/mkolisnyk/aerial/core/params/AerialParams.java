@@ -125,6 +125,20 @@ public class AerialParams implements AerialGlobalProperties {
         };
     }
 
+    /**
+     * @return the readersMap
+     */
+    public final Map<AerialSourceType, Class<? extends AerialWriter>> getWritersMap() {
+        return new HashMap<AerialSourceType, Class<? extends AerialWriter>>() {
+            private static final long serialVersionUID = 1L;
+
+            {
+                put(AerialSourceType.STRING, AerialStringWriter.class);
+                put(AerialSourceType.FILE, AerialFileWriter.class);
+            }
+        };
+    }
+
     public void parse(String[] args) throws Exception {
         int index = 0;
         this.namedParams = new HashMap<String, String>();
@@ -179,12 +193,20 @@ public class AerialParams implements AerialGlobalProperties {
         Assert.assertNotNull("The source value is undefined", this.getSource());
         Assert.assertNotNull("The destination value is undefined", this.getDestination());
         if (this.getInputType().equals(AerialSourceType.CUSTOM)) {
-            Assert.assertTrue("If custom class is defined you must pass the 'inputClass' named parameter",
-                    this.getNamedParams().containsKey("inputClass"));
-            Class<?> clazz = Class.forName(this.getNamedParams().get("inputClass"));
+            Assert.assertTrue("If custom class is defined you must pass the 'readerClass' named parameter",
+                    this.getNamedParams().containsKey("readerClass"));
+            Class<?> clazz = Class.forName(this.getNamedParams().get("readerClass"));
             this.getReadersMap().put(
                     AerialSourceType.CUSTOM,
                     clazz.asSubclass(AerialReader.class));
+        }
+        if (this.getOutputType().equals(AerialSourceType.CUSTOM)) {
+            Assert.assertTrue("If custom class is defined you must pass the 'writerClass' named parameter",
+                    this.getNamedParams().containsKey("writerClass"));
+            Class<?> clazz = Class.forName(this.getNamedParams().get("writerClass"));
+            this.getWritersMap().put(
+                    AerialSourceType.CUSTOM,
+                    clazz.asSubclass(AerialWriter.class));
         }
     }
 
@@ -194,18 +216,9 @@ public class AerialParams implements AerialGlobalProperties {
         return reader;
     }
 
-    public AerialWriter getWriter() {
+    public AerialWriter getWriter() throws Exception {
         AerialWriter writer = null;
-        switch (this.getOutputType()) {
-            case STRING:
-                writer = new AerialStringWriter();
-                break;
-            case FILE:
-                writer = new AerialFileWriter(getDestination());
-                break;
-            default:
-                break;
-        }
+        writer = this.getWritersMap().get(this.getOutputType()).getConstructor(AerialParams.class).newInstance(this);
         return writer;
     }
 

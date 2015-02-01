@@ -25,6 +25,7 @@ public final class AerialMain {
         AerialParams params = new AerialParams();
         try {
             params.parse(args);
+            params.apply();
             params.validate();
         } catch (Throwable e) {
             params.usage();

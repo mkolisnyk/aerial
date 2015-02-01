@@ -28,6 +28,7 @@ public class AerialParamsTest {
     private AerialSourceType expectedOutputType;
     private String expectedDestination;
     private Map<String, String> expectedExtraParams;
+    private String expectedConfiguration;
     private AerialOutputFormat format;
     private boolean validationPass;
 
@@ -40,6 +41,7 @@ public class AerialParamsTest {
             String expectedSourceValue,
             AerialSourceType expectedOutputTypeValue,
             String expectedDestinationValue,
+            String expectedConfigurationValue,
             Map<String, String> expectedExtraParamsValue,
             AerialOutputFormat formatValue,
             boolean validationPassValue) {
@@ -48,6 +50,7 @@ public class AerialParamsTest {
         this.expectedSource = expectedSourceValue;
         this.expectedOutputType = expectedOutputTypeValue;
         this.expectedDestination = expectedDestinationValue;
+        this.expectedConfiguration = expectedConfigurationValue;
         this.expectedExtraParams = expectedExtraParamsValue;
         this.format = formatValue;
         this.validationPass = validationPassValue;
@@ -63,6 +66,22 @@ public class AerialParamsTest {
                     "",
                     AerialSourceType.NONE,
                     "",
+                    "main/resources/aerial.properties",
+                    new HashMap<String, String>(),
+                    AerialOutputFormat.CUCUMBER,
+                    false
+                },
+                {
+                    "No input defined. Check for Configuration",
+                    new String[] {
+                            AerialParamKeys.CONFIGURATION.toString(),
+                            "main/resources/input/plain.properties"
+                    },
+                    AerialSourceType.NONE,
+                    "",
+                    AerialSourceType.NONE,
+                    "",
+                    "main/resources/input/plain.properties",
                     new HashMap<String, String>(),
                     AerialOutputFormat.CUCUMBER,
                     false
@@ -81,6 +100,7 @@ public class AerialParamsTest {
                     "This is the sample String",
                     AerialSourceType.NONE,
                     "",
+                    "main/resources/aerial.properties",
                     new HashMap<String, String>(),
                     AerialOutputFormat.JBEHAVE,
                     false
@@ -103,6 +123,7 @@ public class AerialParamsTest {
                     "This is the sample String",
                     AerialSourceType.FILE,
                     "src/test/resources/sample",
+                    "main/resources/aerial.properties",
                     new HashMap<String, String>(),
                     AerialOutputFormat.JUNIT,
                     true
@@ -125,6 +146,7 @@ public class AerialParamsTest {
                     "This is the sample String",
                     AerialSourceType.FILE,
                     "src/test/resources/sample",
+                    "main/resources/aerial.properties",
                     new HashMap<String, String>() {
                         {
                             put("Test", "Value");
@@ -151,6 +173,7 @@ public class AerialParamsTest {
                     "This is the sample String",
                     AerialSourceType.FILE,
                     "src/test/resources/sample",
+                    "main/resources/aerial.properties",
                     new HashMap<String, String>() {
                         {
                             //put("TestValue", "");
@@ -172,8 +195,9 @@ public class AerialParamsTest {
     }
 
     @Test
-    public void testParse() {
+    public void testParse() throws Exception {
         params.parse(commandLine);
+        params.apply();
         Assert.assertEquals(expectedInputType, params.getInputType());
         Assert.assertEquals(expectedOutputType, params.getOutputType());
         Assert.assertEquals(expectedSource, params.getSource());
@@ -187,7 +211,7 @@ public class AerialParamsTest {
     }
 
     @Test
-    public void testValidate() {
+    public void testValidate() throws Exception {
         params.parse(commandLine);
         try {
             params.validate();

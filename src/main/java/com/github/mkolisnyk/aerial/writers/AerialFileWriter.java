@@ -9,6 +9,7 @@ import java.util.Iterator;
 import org.apache.commons.io.FileUtils;
 
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.document.Document;
 import com.github.mkolisnyk.aerial.document.FeatureSection;
 
@@ -16,15 +17,16 @@ import com.github.mkolisnyk.aerial.document.FeatureSection;
  * @author Myk Kolisnyk
  *
  */
-public class AerialFileWriter implements AerialWriter {
+public class AerialFileWriter extends AerialWriter {
     private Iterator<FeatureSection> iterator;
     private String outputFolder = "";
     /**
      * .
      */
-    public AerialFileWriter(String outputFolderValue) {
+    public AerialFileWriter(AerialParams params) {
+        super(params);
         this.iterator = null;
-        this.outputFolder = outputFolderValue;
+        this.outputFolder = params.getDestination();
     }
 
     public void open(Document document, Object... params)

@@ -65,16 +65,16 @@ public class FeatureSectionTest {
     @Test
     public void testValidateScenariosSectionIsOptional() throws Exception {
         section.parse(sampleFeatureText);
-        section.getSections().remove(Tokens.ADDITIONAL_SCENARIOS_TOKEN);
+        section.getSections().remove(Tokens.getAdditionalScenariosToken());
         Assert.assertNull(
-                section.getSections().get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
+                section.getSections().get(Tokens.getAdditionalScenariosToken()));
         section.validate();
     }
 
     @Test(expected = Throwable.class)
     public void testValidateScenariosSectionShouldFailIfSetWrong() throws Exception {
         section.parse(sampleFeatureText);
-        section.getSections().put(Tokens.ADDITIONAL_SCENARIOS_TOKEN, null);
+        section.getSections().put(Tokens.getAdditionalScenariosToken(), null);
         section.validate();
     }
 
@@ -108,9 +108,9 @@ public class FeatureSectionTest {
     public void testParseValidScenarioShouldFillAllSections() throws Exception {
         section.parse(sampleFeatureText);
         Assert.assertEquals(sampleFeatureDescription, section.getDescription());
-        Assert.assertNotNull(section.getSections().get(Tokens.CASE_TOKEN));
+        Assert.assertNotNull(section.getSections().get(Tokens.getCaseToken()));
         Assert.assertNotNull(section.getSections()
-                .get(Tokens.ADDITIONAL_SCENARIOS_TOKEN));
+                .get(Tokens.getAdditionalScenariosToken()));
     }
 
     @Test

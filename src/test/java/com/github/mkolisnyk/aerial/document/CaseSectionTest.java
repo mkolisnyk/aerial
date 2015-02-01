@@ -69,16 +69,16 @@ public class CaseSectionTest {
     @Test
     public void testValidatePrerequisitesSectionIsOptional() throws Exception {
         section.parse(sampleCaseText);
-        section.getSections().remove(Tokens.PREREQUISITES_TOKEN);
+        section.getSections().remove(Tokens.getPrerequisitesToken());
         Assert.assertNull(
-                section.getSections().get(Tokens.PREREQUISITES_TOKEN));
+                section.getSections().get(Tokens.getPrerequisitesToken()));
         section.validate();
     }
 
     @Test(expected = Throwable.class)
     public void testValidatePrerequisitesSectionShouldFailIfSetWrong() throws Exception {
         section.parse(sampleCaseText);
-        section.getSections().put(Tokens.PREREQUISITES_TOKEN, null);
+        section.getSections().put(Tokens.getPrerequisitesToken(), null);
         section.validate();
     }
 
@@ -121,15 +121,15 @@ public class CaseSectionTest {
         section.parse(sampleCaseText);
         Assert.assertEquals(sampleCaseDescription, section.getDescription());
         Assert.assertEquals(samplePrerequisites,
-           section.getSections().get(Tokens.PREREQUISITES_TOKEN).get(0).getContent());
+           section.getSections().get(Tokens.getPrerequisitesToken()).get(0).getContent());
         Assert.assertEquals(sampleCaseInput,
-           section.getSections().get(Tokens.INPUT_TOKEN).get(0).getContent());
+           section.getSections().get(Tokens.getInputToken()).get(0).getContent());
         Assert.assertEquals(sampleCaseAction,
-           section.getSections().get(Tokens.ACTION_TOKEN).get(0).getContent());
+           section.getSections().get(Tokens.getActionToken()).get(0).getContent());
         Assert.assertEquals(sampleCaseValidOutput,
-           section.getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).getContent());
+           section.getSections().get(Tokens.getValidOutputToken()).get(0).getContent());
         Assert.assertEquals(sampleCaseErrorOutput,
-           section.getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).getContent());
+           section.getSections().get(Tokens.getErrorOutputToken()).get(0).getContent());
     }
 
     @Test

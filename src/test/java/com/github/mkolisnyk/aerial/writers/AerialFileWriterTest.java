@@ -25,15 +25,15 @@ public class AerialFileWriterTest {
     @Before
     public void setUp() throws Exception {
         String fileName = "src/test/resources/SampleDocument1.document";
-        writer = new AerialFileWriter("src/test/resources/temp");
         AerialParams params = new AerialParams();
         params.parse(new String[] {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.FILE.toString(),
                 AerialParamKeys.SOURCE.toString(), "src/test/resources/",
-                AerialParamKeys.DESTINATION.toString(), "output",
+                AerialParamKeys.DESTINATION.toString(), "src/test/resources/temp",
                 fileName
         });
+        writer = new AerialFileWriter(params);
         reader = new AerialFileReader(params);
         reader.open(params);
     }

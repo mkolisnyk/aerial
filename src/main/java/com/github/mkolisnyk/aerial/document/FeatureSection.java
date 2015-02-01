@@ -10,8 +10,8 @@ import java.util.Map;
 
 import org.junit.Assert;
 
-import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 
 /**
  * @author Myk Kolisnyk
@@ -36,15 +36,15 @@ public class FeatureSection extends ContainerSection {
     @Override
     public String[] getSectionTokens() {
         return new String[] {
-                Tokens.CASE_TOKEN,
-                Tokens.ADDITIONAL_SCENARIOS_TOKEN
+                Tokens.getCaseToken(),
+                Tokens.getAdditionalScenariosToken()
         };
     }
 
     @Override
     public String[] getMandatoryTokens() {
         return new String[] {
-                Tokens.CASE_TOKEN
+                Tokens.getCaseToken()
         };
     }
 
@@ -53,8 +53,8 @@ public class FeatureSection extends ContainerSection {
         return new HashMap<String, Class<?>>() {
             private static final long serialVersionUID = 1L;
             {
-                put(Tokens.CASE_TOKEN, CaseSection.class);
-                put(Tokens.ADDITIONAL_SCENARIOS_TOKEN,
+                put(Tokens.getCaseToken(), CaseSection.class);
+                put(Tokens.getAdditionalScenariosToken(),
                         AdditionalScenariosSection.class);
             }
         };
@@ -66,7 +66,7 @@ public class FeatureSection extends ContainerSection {
     @Override
     public ContainerSection parse(String input) throws Exception {
         ContainerSection parsedSection = super.parse(input);
-        ArrayList<DocumentSection<?>> section = this.getSections().get(Tokens.CASE_TOKEN);
+        ArrayList<DocumentSection<?>> section = this.getSections().get(Tokens.getCaseToken());
         if (section != null) {
             for (DocumentSection<?> item : section) {
                 this.cases.add((CaseSection) item);
@@ -87,7 +87,7 @@ public class FeatureSection extends ContainerSection {
 
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
-        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "feature");
+        String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "feature");
         String content = template.replaceAll("\\{NAME\\}", this.getName());
         String caseContent = "";
         for (CaseSection section : this.cases) {
@@ -95,7 +95,7 @@ public class FeatureSection extends ContainerSection {
         }
         content = content.replaceAll("\\{CASES\\}", caseContent);
         content = content.replaceAll("\\{ADDITIONAL_SCENARIOS\\}",
-                this.generateAdditionalScenarios(sections.get(Tokens.ADDITIONAL_SCENARIOS_TOKEN)));
+                this.generateAdditionalScenarios(sections.get(Tokens.getAdditionalScenariosToken())));
         return content;
     }
 

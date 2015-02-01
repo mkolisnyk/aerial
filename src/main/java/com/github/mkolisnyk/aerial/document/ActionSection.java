@@ -3,8 +3,8 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 
 /**
  * @author Myk Kolisnyk
@@ -25,7 +25,7 @@ public class ActionSection extends DocumentSection<ActionSection> {
     }
 
     public String generate() throws Exception {
-        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "action");
+        String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "action");
         return template.replaceAll("\\{ACTION\\}", this.getContent().trim());
     }
 }

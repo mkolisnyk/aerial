@@ -110,6 +110,7 @@ public class HsqlDBWrapper {
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
+            e.printStackTrace();
         }
         statement.close();
         return output;

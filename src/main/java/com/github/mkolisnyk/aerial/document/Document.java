@@ -34,14 +34,14 @@ public class Document extends ContainerSection {
     @Override
     public String[] getSectionTokens() {
         return new String[] {
-                Tokens.FEATURE_TOKEN
+                Tokens.getFeatureToken()
         };
     }
 
     @Override
     public String[] getMandatoryTokens() {
         return new String[] {
-                Tokens.FEATURE_TOKEN
+                Tokens.getFeatureToken()
         };
     }
 
@@ -50,7 +50,7 @@ public class Document extends ContainerSection {
         return new HashMap<String, Class<?>>() {
             private static final long serialVersionUID = 1L;
             {
-                put(Tokens.FEATURE_TOKEN, FeatureSection.class);
+                put(Tokens.getFeatureToken(), FeatureSection.class);
             }
         };
     }
@@ -62,7 +62,7 @@ public class Document extends ContainerSection {
     public ContainerSection parse(String input) throws Exception {
         super.parse(input);
         features = new ArrayList<FeatureSection>();
-        ArrayList<DocumentSection<?>> section = this.getSections().get(Tokens.FEATURE_TOKEN);
+        ArrayList<DocumentSection<?>> section = this.getSections().get(Tokens.getFeatureToken());
         if (section != null) {
             for (DocumentSection<?> item : section) {
                 features.add((FeatureSection) item);

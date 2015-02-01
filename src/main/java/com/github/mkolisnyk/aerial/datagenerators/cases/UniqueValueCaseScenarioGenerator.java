@@ -13,8 +13,8 @@ import java.util.Set;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.github.mkolisnyk.aerial.core.AerialTemplateMap;
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.document.CaseSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -75,13 +75,13 @@ public class UniqueValueCaseScenarioGenerator extends
             Map<String, List<String>> testData, String[] uniqueFields) throws IOException {
         Map<String, List<String>> filteredData = filterBy(testData, "ValidInput", "true");
         Map<String, String> uniqueRow = new LinkedHashMap<String, String>();
-        String dataHeader = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
-        String dataHeaderDelimiter = AerialTemplateMap.get(
+        String dataHeader = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.header");
+        String dataHeaderDelimiter = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.header.delimiter");
-        String dataRow = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
-        String dataRowDelimiter = AerialTemplateMap.get(
+        String dataRow = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "data.row");
+        String dataRowDelimiter = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.row.delimiter");
-        String modifiedPrefix = AerialTemplateMap.get(
+        String modifiedPrefix = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.field.modified_prefix");
 
         for (Entry<String, List<String>> entry : filteredData.entrySet()) {
@@ -130,19 +130,19 @@ public class UniqueValueCaseScenarioGenerator extends
 
     @Override
     public String generate() throws Exception {
-        String template = AerialTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
-        String modifiedPrefix = AerialTemplateMap.get(
+        String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
+        String modifiedPrefix = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.field.modified_prefix");
-        String fieldPattern = AerialTemplateMap.get(
+        String fieldPattern = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.field");
 
         String[] uniqueRecords = getFieldsWithUniqueAttributes(this.getRecords());
         String content = "";
-        content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.PREREQUISITES_TOKEN));
-        content += this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate();
-        content += this.getSection().getSections().get(Tokens.VALID_OUTPUT_TOKEN).get(0).generate();
-        String secondPass = this.getSection().getSections().get(Tokens.ACTION_TOKEN).get(0).generate()
-                + this.getSection().getSections().get(Tokens.ERROR_OUTPUT_TOKEN).get(0).generate();
+        content += this.generatePreRequisites(this.getSection().getSections().get(Tokens.getPrerequisitesToken()));
+        content += this.getSection().getSections().get(Tokens.getActionToken()).get(0).generate();
+        content += this.getSection().getSections().get(Tokens.getValidOutputToken()).get(0).generate();
+        String secondPass = this.getSection().getSections().get(Tokens.getActionToken()).get(0).generate()
+                + this.getSection().getSections().get(Tokens.getErrorOutputToken()).get(0).generate();
         for (String field : uniqueRecords) {
             secondPass = secondPass.replaceAll(fieldPattern.replaceAll("\\{NAME\\}", field),
                     fieldPattern.replaceAll("\\{NAME\\}", modifiedPrefix + field));

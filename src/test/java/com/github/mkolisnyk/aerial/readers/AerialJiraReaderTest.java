@@ -49,6 +49,7 @@ public class AerialJiraReaderTest {
                 "project\\=Wallboards AND status\\=Open"
         });
         reader = new AerialJiraReader(params);
+        reader.open(params);
     }
 
     @Test

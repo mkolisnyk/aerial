@@ -49,7 +49,6 @@ public class AerialJiraReader extends AerialReader {
         this.userName = params.getNamedParams().get("user");
         this.password = params.getNamedParams().get("password");
         this.fieldName = params.getNamedParams().get("field");
-        this.open(params);
     }
 
     /* (non-Javadoc)

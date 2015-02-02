@@ -32,7 +32,6 @@ public class AerialGitHubReader extends AerialReader {
 
     public AerialGitHubReader(AerialParams params) throws Exception {
         super(params);
-        open(params);
     }
 
     @Override

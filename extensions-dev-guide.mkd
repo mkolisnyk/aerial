@@ -43,3 +43,23 @@ Since all the above methods are pretty typical by their structure and functions 
 ## Write Custom Reader
 
 ## Configure Aerial to Use Custom Reader
+
+# Custom Input Readers
+
+**Since version 0.0.4**
+
+## Overview
+
+All [Aerial](/aerial) output writers are defined via classes extending [AerialWriter](https://github.com/mkolisnyk/aerial/blob/master/src/main/java/com/github/mkolisnyk/aerial/AerialWriter.java) abstract class. It is abstract class defining common methods which should be implemented by any writer class. They are:
+
+| Method | Description |
+| ------ | ----------- |
+| **open** | Initializes internal data. Normally this method is designed to take the list of parsed documents and set the reference to iterator so that engine will use it when processing each document items iteratively |
+| **close** | Closes and removes all internal data. Mainly it is invoked after entire writing is done |
+| **writeNext** | Used for iterative output elements processing. It takes next available document item and writes it to specific output in specific format. Main output is the string containing final representation of the generated text |
+| **hasNext** | Used for iterative processing. Indicates whether writer has more document items to process |
+
+
+## Write Custom Writer
+
+## Configure Aerial to Use Custom Writer

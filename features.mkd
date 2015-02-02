@@ -16,9 +16,98 @@ More information can be found on [project documentation pages](http://mkolisnyk.
 
 ## Library
 
+# Test Engines Supported
+
+## JUnit
+
+Initially [Aerial](http://mkolisnyk.github.io/aerial) was designed as the wrapper on [Cucumber](http://cukes.info) and [JUnit](http://junit.org). So here is the typical configuration for test class:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+@RunWith(AerialRunner.class)
+public class AerialRunnerTest {
+    @AerialBeforeSuite
+    public static void setUp() {
+        System.out.println("setUp");
+    }
+    @AerialAfterSuite
+    public static void tearDown() {
+        System.out.println("tearDown");
+    }
+}
+{% endhighlight %}
+
+## TestNG
+
+**Since version 0.0.4**
+
+In some projects people use [TestNG](http://testng.org) instead of [JUnit](http://junit.org) as the engine which may provide some additional features (however in most cases they are pretty similar). For this purpose there was additional functionality added which wraps [TestNG](http://testng.org) tests into runnable structure:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial;
+
+import org.junit.runner.RunWith;
+import com.github.mkolisnyk.aerial.annotations.Aerial;
+import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(
+        format = {"html:target/cucumber-html-report",
+                  "json:target/cucumber.json",
+                  "pretty:target/cucumber-pretty.txt",
+                  "usage:target/cucumber-usage.json"
+                 },
+        features = {"output/" },
+        glue = {"com/github/mkolisnyk/aerial" },
+        tags = { }
+)
+@Aerial(
+    inputType = AerialSourceType.FILE,
+    source = "src/test/resources",
+    additionalParams = { "" },
+    destination = "output/")
+public class AerialRunnerTest extends AerialTestNGRunner {
+    @AerialBeforeSuite
+    public static void setUp() {
+        System.out.println("setUp");
+    }
+    @AerialAfterSuite
+    public static void tearDown() {
+        System.out.println("tearDown");
+    }
+}
+{% endhighlight %}
+
+All we have to do here is to extend our test class from [AerialTestNGRunner](https://github.com/mkolisnyk/aerial/blob/master/src/main/java/com/github/mkolisnyk/aerial/core/AerialTestNGRunner.java) class.
+
 # Input Sources Supported
 
 ## String
+
+This input source is rather done for testing purposes. However, it can be used to invoke test scenarios generation programmatically.
 
 ## File
 

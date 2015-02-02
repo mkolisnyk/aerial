@@ -40,6 +40,56 @@ Currently the following properties are in use:
 | aerial.gen.nwise.size | Case Generators | Used by [Combinatorial Tests Optimization](/aerial/features#combinatorial-tests-optimization) algorithms and defines the size of the record which unique combinations we should check. 0 means **Exhaustive Testing** | [0.0.4](/aerial/releases#v004) |
 | aerial.types.date.default | Data Types | Used for date values generation and defines the date format which is supposed to be used by default | [0.0.4](/aerial/releases#v004) |
 
+# Source document parsing templates
+
+**Since version 0.0.4**
+
+The default input document format is pretty generic and it doesn't include such simple things as formatting. Additionally, the set of keywords being used to indicate each specific block also can be different depending on input source and common requirements definition style. In order to adapt [Aerial](http://mkolisnyk.github.io/aerial) to such input format variations there was input format configuration designed.
+
+## Template Items Description
+
+Templates are defined in specific property files. There is a bunch of built-in templates located at **src/main/resources/input** location. Also, [Aerial](/aerial) provides functionality to define custom format in case we need to output generated content is some specific way.
+
+All configuration properties are defined in the specific format:
+
+{% highlight bat linenos=table %}
+aerial.<Format Name>.<Property Name>
+{% endhighlight %}
+
+Where:
+
+* **Format Name** is the general name of the format to use. It is the name which is specified while defining which format we want to use
+
+* **Property Name** is the suffix which uniquely identifies property to set.
+
+Here is the list of acceptable suffixes:
+
+| Property Suffix Name       | Description |
+| -------------------------- | ----------- |
+| token.action               | Indicates start of the actions block |
+| token.prerequisites        | Indicates pre-requisites block |
+| token.input                | Indicates input block |
+| token.valid_output         | Indicates block of actions on valid input |
+| token.error_output         | Indicates block of actions on invalid input |
+| token.feature              | Indicates feature block |
+| token.case                 | Indicates case block |
+| token.additional_scenarios | Indicates block for additional scenarios |
+
+## Example
+
+Here is an example of the properties file for the default input document template:
+
+{% highlight properties linenos=table %}
+aerial.plain.token.action=Action:
+aerial.plain.token.prerequisites=Pre-requisites:
+aerial.plain.token.input=Input:
+aerial.plain.token.valid_output=On Success:
+aerial.plain.token.error_output=On Failure:
+aerial.plain.token.feature=Feature:
+aerial.plain.token.case=Case:
+aerial.plain.token.additional_scenarios=Additional Scenarios:
+{% endhighlight %}
+
 # Scenario Generation Templates
 
 **Since version 0.0.3**

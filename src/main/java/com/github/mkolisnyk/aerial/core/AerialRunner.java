@@ -3,16 +3,12 @@ package com.github.mkolisnyk.aerial.core;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
-import com.github.mkolisnyk.aerial.annotations.Aerial;
 import com.github.mkolisnyk.aerial.annotations.AerialAfterSuite;
 import com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite;
-import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
-import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
 import cucumber.api.junit.Cucumber;
 
@@ -23,16 +19,7 @@ public class AerialRunner extends Runner {
 
     public AerialRunner(Class<?> clazzValue) throws Exception {
         clazz = clazzValue;
-        Aerial annotation = clazz.getAnnotation(Aerial.class);
-        String[] args = (String[]) ArrayUtils.addAll(new String[] {
-                AerialParamKeys.INPUT_TYPE.toString(),
-                annotation.inputType().toString(),
-                AerialParamKeys.SOURCE.toString(),
-                annotation.source(),
-                AerialParamKeys.OUTPUT_TYPE.toString(),
-                AerialSourceType.FILE.toString(),
-                AerialParamKeys.DESTINATION.toString(),
-                annotation.destination()}, annotation.additionalParams());
+        String[] args = AerialMain.toArgs(clazz);
         AerialMain.main(args);
         cucumber = new Cucumber(clazz);
     }

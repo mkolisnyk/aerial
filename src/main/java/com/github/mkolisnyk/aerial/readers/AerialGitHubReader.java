@@ -54,12 +54,14 @@ public class AerialGitHubReader extends AerialReader {
             HttpResponse response = client.execute(request);
             String responseText = EntityUtils.toString(response.getEntity());
             JSONObject json = new JSONObject(responseText);
-            JSONArray array = json.getJSONArray("items");
-            for (int i = 0; i < array.length(); i++) {
-                String value = null;
-                value = array.getJSONObject(i).getString("body");
-                if (value != null && !value.equals("null")) {
-                    content.add(value);
+            if (json.has("items")) {
+                JSONArray array = json.getJSONArray("items");
+                for (int i = 0; i < array.length(); i++) {
+                    String value = null;
+                    value = array.getJSONObject(i).getString("body");
+                    if (value != null && !value.equals("null")) {
+                        content.add(value);
+                    }
                 }
             }
         }
@@ -78,12 +80,15 @@ public class AerialGitHubReader extends AerialReader {
 
     @Override
     public String readNext() throws Exception {
+        if (iterator == null || !iterator.hasNext()) {
+            return null;
+        }
         return iterator.next();
     }
 
     @Override
     public boolean hasNext() {
-        return iterator.hasNext();
+        return iterator != null && iterator.hasNext();
     }
 
 }

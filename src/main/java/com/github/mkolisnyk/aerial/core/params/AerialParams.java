@@ -16,6 +16,7 @@ import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
 import com.github.mkolisnyk.aerial.document.Tokens;
 import com.github.mkolisnyk.aerial.readers.AerialFileReader;
+import com.github.mkolisnyk.aerial.readers.AerialGitHubReader;
 import com.github.mkolisnyk.aerial.readers.AerialJiraReader;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
 import com.github.mkolisnyk.aerial.writers.AerialFileWriter;
@@ -121,6 +122,7 @@ public class AerialParams implements AerialGlobalProperties {
                 put(AerialSourceType.STRING, AerialStringReader.class);
                 put(AerialSourceType.FILE, AerialFileReader.class);
                 put(AerialSourceType.JIRA, AerialJiraReader.class);
+                put(AerialSourceType.GITHUB, AerialGitHubReader.class);
             }
         };
     }
@@ -213,6 +215,7 @@ public class AerialParams implements AerialGlobalProperties {
     public AerialReader getReader() throws Exception {
         AerialReader reader = null;
         reader = this.getReadersMap().get(this.getInputType()).getConstructor(AerialParams.class).newInstance(this);
+        reader.open(this);
         return reader;
     }
 

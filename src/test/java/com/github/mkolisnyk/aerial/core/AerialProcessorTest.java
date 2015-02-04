@@ -57,6 +57,7 @@ public class AerialProcessorTest {
         AerialParams params = new AerialParams();
         params.parse(new String[] {sampleFeatureText, sampleFeatureText});
         this.input = new AerialStringReader(params);
+        this.input.open(params);
         this.output = new AerialStringWriter(params);
     }
 

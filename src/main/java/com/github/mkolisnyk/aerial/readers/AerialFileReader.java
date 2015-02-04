@@ -33,7 +33,6 @@ public class AerialFileReader extends AerialReader {
         if (params.getValueParams().size() == 0) {
             params.getValueParams().add("(.*)");
         }
-        this.open(params);
     }
 
     /**

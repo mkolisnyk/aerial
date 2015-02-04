@@ -3,30 +3,27 @@ package com.github.mkolisnyk.aerial.core;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import org.junit.runner.Description;
-import org.junit.runner.Runner;
-import org.junit.runner.notification.RunNotifier;
+import org.testng.IHookCallBack;
+import org.testng.ITestResult;
+import org.testng.annotations.Test;
 
 import com.github.mkolisnyk.aerial.annotations.AerialAfterSuite;
 import com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite;
 
-import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import cucumber.api.testng.TestNGCucumberRunner;
 
-public class AerialRunner extends Runner {
 
+public class AerialTestNGRunner extends AbstractTestNGCucumberTests {
     private Class<?> clazz;
-    private Cucumber cucumber;
 
-    public AerialRunner(Class<?> clazzValue) throws Exception {
-        clazz = clazzValue;
-        String[] args = AerialMain.toArgs(clazz);
-        AerialMain.main(args);
-        cucumber = new Cucumber(clazz);
-    }
-
+    /* (non-Javadoc)
+     * @see cucumber.api.testng.AbstractTestNGCucumberTests#run(org.testng.IHookCallBack, org.testng.ITestResult)
+     */
     @Override
-    public Description getDescription() {
-        return cucumber.getDescription();
+    public void run(IHookCallBack iHookCallBack,
+            ITestResult iTestResult) {
+        super.run(iHookCallBack, iTestResult);
     }
 
     private void runPredefinedMethods(Class<?> annotation) throws Exception {
@@ -45,14 +42,20 @@ public class AerialRunner extends Runner {
         }
     }
 
-    @Override
-    public void run(RunNotifier notifier) {
+    /* (non-Javadoc)
+     * @see cucumber.api.testng.AbstractTestNGCucumberTests#run_cukes()
+     */
+    @Test(groups = "cucumber", description = "Runs Cucumber Features")
+    public void runCukes() throws Exception {
+        clazz = this.getClass();
+        String[] args = AerialMain.toArgs(clazz);
+        AerialMain.main(args);
         try {
             runPredefinedMethods(AerialBeforeSuite.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        cucumber.run(notifier);
+        new TestNGCucumberRunner(clazz).runCukes();
         try {
             runPredefinedMethods(AerialAfterSuite.class);
         } catch (Exception e) {
@@ -60,4 +63,8 @@ public class AerialRunner extends Runner {
         }
     }
 
+    @Override
+    @Test(enabled = false)
+    public void run_cukes() {
+    }
 }

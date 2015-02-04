@@ -30,7 +30,6 @@ public class AerialStringReader extends AerialReader {
      */
     public AerialStringReader(AerialParams params) throws Exception {
         super(params);
-        this.open(params);
     }
 
     /* (non-Javadoc)

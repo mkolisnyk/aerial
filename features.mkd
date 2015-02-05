@@ -70,7 +70,7 @@ package com.github.mkolisnyk.aerial;
 
 import org.junit.runner.RunWith;
 import com.github.mkolisnyk.aerial.annotations.Aerial;
-import com.github.mkolisnyk.aerial.core.AerialRunner;
+import com.github.mkolisnyk.aerial.core.AerialTestNGRunner;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 import cucumber.api.CucumberOptions;
 
@@ -151,6 +151,58 @@ Here is the Maven example on how to set Jira as an input source:
 {% endhighlight %}
 
 More detailed description of the above example can be found [here](http://mkolisnyk.github.io/aerial/aerial-maven-plugin-0.0.2/usage.html#Generating_Features_Based_on_JIRA_Content_Example).
+
+## GitHub
+
+**Since version 0.0.4**
+
+[GitHub](http://github.com) itself contains built-in tracker which also can be the source for requirement documents. Thus we can query issues based on some search criteria.
+
+Mainly, in order to operate with GitHub input source we need to set the following parameters:
+
+* **Input Type** - **GITHUB** the pre-defined AerialSourceType enum value
+
+* **Source** - that should be base URL for [GitHub API](https://developer.github.com/v3/), e.g. for official GitHub it is **https://api.github.com**
+
+* **Value Parameters** - the list of search queries is to be defined as the set of value parameters. The list of query parameters and some sample queries can be found [here](https://developer.github.com/v3/search/#search-issues).
+
+In the code itself we can target input to GitHub via **Aerial** annotation:
+
+{% highlight java linenos=table %}
+@Aerial(
+    inputType = AerialSourceType.GITHUB,
+    source = "https://api.github.com",
+    additionalParams = { "repo:mkolisnyk/aerial state:open" },
+    destination = "output/")
+{% endhighlight %}
+
+The same input can be configured via Maven with the following configuration:
+
+{% highlight xml linenos=table %}
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.mkolisnyk.github</groupId>
+        <artifactId>aerial-maven-plugin</artifactId>
+        <version>0.0.4</version>
+        <configuration>
+            <inputType>GITHUB</inputType>
+            <source>https://api.github.com</source>
+            <outputType>FILE</outputType>
+            <destination>output/</destination>
+            <valueParams>
+                <param>repo:mkolisnyk/aerial state:open</param>
+            </valueParams>
+        </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+  ...
+</project>
+{% endhighlight %}
 
 ## Custom
 

@@ -23,6 +23,16 @@ layout: default
 
 # Release Notes
 
+## v0.0.4 (work in progress)
+
+* [TestNG](http://testng.org) support [was added](/aerial/features#testng)
+
+* Aerial [global configuration](/aerial/configuration-guide#general-configuration-options) was added
+
+* [GitHub](http://github.com) is now supported as [requirements input source](/aerial/features#github)
+
+* [Input requirement documents configuration](/aerial/configuration-guide#source-document-parsing-templates) was added
+
 ## v0.0.3
 
 * Functionality [to generate output files based on templates](/aerial/configuration-guide#scenario-generation-templates) was added

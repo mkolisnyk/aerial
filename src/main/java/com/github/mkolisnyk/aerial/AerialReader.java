@@ -10,13 +10,23 @@ import com.github.mkolisnyk.aerial.core.params.AerialParams;
  *
  */
 public abstract class AerialReader {
+    private AerialTagList tags;
     /**
      * .
      * @param params .
      */
-    public  AerialReader(AerialParams params) {
+    public  AerialReader(AerialParams params, AerialTagList tagsValue) {
         params.toString();
+        tags = tagsValue;
     }
+
+    /**
+     * @return the tags
+     */
+    public final AerialTagList getTags() {
+        return tags;
+    }
+
     /**
      * .
      * @param params .

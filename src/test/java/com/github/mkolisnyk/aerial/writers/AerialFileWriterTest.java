@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mkolisnyk.aerial.core.AerialProcessor;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -33,8 +33,8 @@ public class AerialFileWriterTest {
                 AerialParamKeys.DESTINATION.toString(), "src/test/resources/temp",
                 fileName
         });
-        writer = new AerialFileWriter(params);
-        reader = new AerialFileReader(params);
+        writer = new AerialFileWriter(params, new AerialTagList());
+        reader = new AerialFileReader(params, new AerialTagList());
         reader.open(params);
     }
 

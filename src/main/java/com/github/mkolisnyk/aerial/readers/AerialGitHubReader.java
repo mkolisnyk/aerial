@@ -17,6 +17,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 public class AerialGitHubReader extends AerialReader {
@@ -30,8 +31,8 @@ public class AerialGitHubReader extends AerialReader {
      */
     private Iterator<String> iterator;
 
-    public AerialGitHubReader(AerialParams params) throws Exception {
-        super(params);
+    public AerialGitHubReader(AerialParams params, AerialTagList tags) throws Exception {
+        super(params, tags);
     }
 
     @Override

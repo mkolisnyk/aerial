@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.util.LoggerFactory;
 
@@ -25,8 +26,8 @@ public class AerialFileReader extends AerialReader {
     private Iterator<File> iterator;
     private String rootDirectory;
 
-    public AerialFileReader(AerialParams params) throws Exception {
-        super(params);
+    public AerialFileReader(AerialParams params, AerialTagList tags) throws Exception {
+        super(params, tags);
         this.files = new ArrayList<File>();
         this.iterator = this.files.iterator();
         this.rootDirectory = params.getSource();

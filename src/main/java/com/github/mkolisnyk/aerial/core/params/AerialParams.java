@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
 import com.github.mkolisnyk.aerial.document.Tokens;
@@ -214,14 +215,18 @@ public class AerialParams implements AerialGlobalProperties {
 
     public AerialReader getReader() throws Exception {
         AerialReader reader = null;
-        reader = this.getReadersMap().get(this.getInputType()).getConstructor(AerialParams.class).newInstance(this);
+        AerialTagList tags = new AerialTagList();
+        reader = this.getReadersMap().get(this.getInputType())
+                        .getConstructor(AerialParams.class, AerialTagList.class).newInstance(this, tags);
         reader.open(this);
         return reader;
     }
 
     public AerialWriter getWriter() throws Exception {
         AerialWriter writer = null;
-        writer = this.getWritersMap().get(this.getOutputType()).getConstructor(AerialParams.class).newInstance(this);
+        AerialTagList tags = new AerialTagList();
+        writer = this.getWritersMap().get(this.getOutputType())
+                        .getConstructor(AerialParams.class, AerialTagList.class).newInstance(this, tags);
         return writer;
     }
 

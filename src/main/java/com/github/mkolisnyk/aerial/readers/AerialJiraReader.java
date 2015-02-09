@@ -21,6 +21,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
@@ -43,8 +44,8 @@ public class AerialJiraReader extends AerialReader {
      */
     private Iterator<String> iterator;
 
-    public AerialJiraReader(AerialParams params) throws Exception {
-        super(params);
+    public AerialJiraReader(AerialParams params, AerialTagList tags) throws Exception {
+        super(params, tags);
         this.url = params.getSource();
         this.userName = params.getNamedParams().get("user");
         this.password = params.getNamedParams().get("password");

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.readers.AerialStringReader;
@@ -56,9 +57,9 @@ public class AerialProcessorTest {
         this.processor = new AerialProcessor();
         AerialParams params = new AerialParams();
         params.parse(new String[] {sampleFeatureText, sampleFeatureText});
-        this.input = new AerialStringReader(params);
+        this.input = new AerialStringReader(params, new AerialTagList());
         this.input.open(params);
-        this.output = new AerialStringWriter(params);
+        this.output = new AerialStringWriter(params, new AerialTagList());
     }
 
     @After

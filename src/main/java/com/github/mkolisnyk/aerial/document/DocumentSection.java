@@ -17,11 +17,27 @@ public abstract class DocumentSection<T extends DocumentSection<?>>
     private String name;
     private DocumentSection<?> parent;
     private String content;
+    private String tag;
 
     public DocumentSection(DocumentSection<?> container) {
+        this(container, null);
+    }
+
+    public DocumentSection(DocumentSection<?> container, String tagValue) {
         this.name = "";
         this.parent = container;
         this.content = "";
+        this.tag = tagValue;
+    }
+
+    /**
+     * @return the tag
+     */
+    public final String getTag() {
+        if (tag == null) {
+            return "";
+        }
+        return tag;
     }
 
     /**

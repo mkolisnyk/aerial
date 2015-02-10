@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 
-import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.AerialWriter;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.document.Document;
@@ -24,8 +23,8 @@ public class AerialFileWriter extends AerialWriter {
     /**
      * .
      */
-    public AerialFileWriter(AerialParams params, AerialTagList tags) {
-        super(params, tags);
+    public AerialFileWriter(AerialParams params) {
+        super(params);
         this.iterator = null;
         this.outputFolder = params.getDestination();
     }

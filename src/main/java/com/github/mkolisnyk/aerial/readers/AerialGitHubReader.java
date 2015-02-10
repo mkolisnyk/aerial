@@ -17,7 +17,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.github.mkolisnyk.aerial.AerialReader;
-import com.github.mkolisnyk.aerial.AerialTagList;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 public class AerialGitHubReader extends AerialReader {
@@ -63,6 +63,11 @@ public class AerialGitHubReader extends AerialReader {
                     if (value != null && !value.equals("null")) {
                         content.add(value);
                     }
+                    String tag = null;
+                    tag = array.getJSONObject(i).getString("id");
+                    if (tag != null) {
+                        this.getTags().add(tag);
+                    }
                 }
             }
         }
@@ -91,5 +96,4 @@ public class AerialGitHubReader extends AerialReader {
     public boolean hasNext() {
         return iterator != null && iterator.hasNext();
     }
-
 }

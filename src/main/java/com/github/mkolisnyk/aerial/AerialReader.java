@@ -3,6 +3,7 @@
  */
 package com.github.mkolisnyk.aerial;
 
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**

@@ -27,6 +27,10 @@ public class InputSection extends DocumentSection<InputSection> {
         inputs = new ArrayList<InputRecord>();
     }
 
+    public InputSection(DocumentSection<?> container, String tagValue) {
+        super(container, tagValue);
+    }
+
     /**
      * @return the inputs
      */

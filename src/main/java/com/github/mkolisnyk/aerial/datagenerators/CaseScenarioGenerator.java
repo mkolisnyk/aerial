@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
+import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
 import com.github.mkolisnyk.aerial.document.CaseSection;
 import com.github.mkolisnyk.aerial.document.DocumentSection;
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -58,4 +60,18 @@ public abstract class CaseScenarioGenerator {
     public abstract boolean isApplicable();
 
     public abstract String getScenarioName();
+
+    public abstract List<String> getTags(String tagBase);
+
+    public String getTagsString() throws Exception {
+        String tagFormat = AerialOutputTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "tag.format");
+        String tagBase = this.getSection().getTag();
+        List<String> tags = getTags(tagBase);
+        String result = "";
+        for (String tag : tags) {
+            result = result.concat(tagFormat.replaceAll("\\{TAG\\}", tag));
+        }
+        return result;
+    }
 }

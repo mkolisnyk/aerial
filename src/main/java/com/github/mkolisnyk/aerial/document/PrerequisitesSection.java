@@ -17,7 +17,11 @@ public class PrerequisitesSection
      */
     public PrerequisitesSection(DocumentSection<CaseSection> container) {
         super(container);
-        // TODO Auto-generated constructor stub
+    }
+
+    public PrerequisitesSection(DocumentSection<?> container,
+            String tagValue) {
+        super(container, tagValue);
     }
 
     public PrerequisitesSection parse(String input) throws Exception {

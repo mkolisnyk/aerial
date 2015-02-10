@@ -13,5 +13,8 @@
               lines="68"/>
     <suppress checks="RegexpSingleline"
               files="cucumber.properties"
-              lines="15-19"/>
+              lines="15-23"/>
+    <suppress checks="RegexpSingleline"
+              files="jbehave.properties"
+              lines="13-21"/>
 </suppressions>

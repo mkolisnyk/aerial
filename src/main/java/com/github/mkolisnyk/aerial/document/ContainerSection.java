@@ -32,7 +32,11 @@ public abstract class ContainerSection
     }
 
     public ContainerSection(DocumentSection<?> container) {
-        super(container);
+        this(container, null);
+    }
+
+    public ContainerSection(DocumentSection<?> container, String tag) {
+        super(container, tag);
         this.description = "";
         this.sections = new HashMap<String, ArrayList<DocumentSection<?>>>();
     }
@@ -46,8 +50,8 @@ public abstract class ContainerSection
         if (creationMap.containsKey(token)) {
             Class<?> clazz = creationMap.get(token);
             return (DocumentSection<?>) clazz
-                        .getConstructor(DocumentSection.class)
-                        .newInstance(this);
+                        .getConstructor(DocumentSection.class, String.class)
+                        .newInstance(this, this.getTag());
         }
         return null;
     }

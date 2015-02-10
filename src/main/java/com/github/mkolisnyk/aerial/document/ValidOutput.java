@@ -17,7 +17,10 @@ public class ValidOutput extends DocumentSection<ValidOutput> {
      */
     public ValidOutput(DocumentSection<CaseSection> container) {
         super(container);
-        // TODO Auto-generated constructor stub
+    }
+
+    public ValidOutput(DocumentSection<?> container, String tagValue) {
+        super(container, tagValue);
     }
 
     public ValidOutput parse(String input) throws Exception {

@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.github.mkolisnyk.aerial.AerialReader;
-import com.github.mkolisnyk.aerial.AerialTagList;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**

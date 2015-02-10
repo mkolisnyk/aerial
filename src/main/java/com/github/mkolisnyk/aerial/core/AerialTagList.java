@@ -1,4 +1,4 @@
-package com.github.mkolisnyk.aerial;
+package com.github.mkolisnyk.aerial.core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,7 +23,7 @@ public class AerialTagList {
     }
 
     public String next() {
-        if (iterator == null) {
+        if (iterator == null || !iterator.hasNext()) {
             return null;
         }
         return iterator.next();

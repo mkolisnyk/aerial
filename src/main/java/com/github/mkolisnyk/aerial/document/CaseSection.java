@@ -23,7 +23,11 @@ import com.github.mkolisnyk.aerial.datagenerators.cases.UniqueValueCaseScenarioG
 public class CaseSection extends ContainerSection {
 
     public CaseSection(DocumentSection<?> container) {
-        super(container);
+        this(container, null);
+    }
+
+    public CaseSection(DocumentSection<?> container, String tag) {
+        super(container, tag);
     }
 
     public CaseSection parse(String input) throws Exception {

@@ -21,7 +21,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.github.mkolisnyk.aerial.AerialReader;
-import com.github.mkolisnyk.aerial.AerialTagList;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
@@ -84,6 +84,11 @@ public class AerialJiraReader extends AerialReader {
                 value = array.getJSONObject(i).getJSONObject("fields").getString(fieldName);
                 if (value != null && !value.equals("null")) {
                     content.add(value);
+                }
+                String tag = null;
+                tag = array.getJSONObject(i).getString("key");
+                if (tag != null) {
+                    this.getTags().add(tag);
                 }
             }
         }

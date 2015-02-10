@@ -95,7 +95,8 @@ public class PositiveCaseScenarioGenerator extends
         }
         String result = template.replaceAll("\\{NAME\\}", this.getSection().getName() + this.getScenarioName())
                             .replaceAll("\\{BODY\\}", content)
-                            .replaceAll("\\{DATA\\}", this.generateTestData(testData));
+                            .replaceAll("\\{DATA\\}", this.generateTestData(testData))
+                            .replaceAll("\\{TAGS\\}", this.getTagsString());
         return result;
     }
 
@@ -107,6 +108,19 @@ public class PositiveCaseScenarioGenerator extends
     @Override
     public String getScenarioName() {
         return " positive test";
+    }
+
+    @Override
+    public List<String> getTags(final String tagBase) {
+        List<String> tags = new ArrayList<String>() {
+            {
+                add("positive");
+                if (!tagBase.equals("")) {
+                    add(tagBase + "_positive");
+                }
+            }
+        };
+        return tags;
     }
 
 }

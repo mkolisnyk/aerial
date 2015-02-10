@@ -8,8 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mkolisnyk.aerial.AerialTagList;
 import com.github.mkolisnyk.aerial.AerialWriter;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
@@ -27,7 +27,7 @@ public class AerialStringWriterTest {
         AerialParams params = new AerialParams();
         params.parse(new String[] {
         });
-        this.writer = new AerialStringWriter(params, new AerialTagList());
+        this.writer = new AerialStringWriter(params);
     }
 
     /**

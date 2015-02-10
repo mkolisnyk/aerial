@@ -11,19 +11,8 @@ import com.github.mkolisnyk.aerial.document.Document;
  *
  */
 public abstract class AerialWriter {
-
-    private AerialTagList tags;
-
-    public AerialWriter(AerialParams params, AerialTagList tagsValue) {
+    public AerialWriter(AerialParams params) {
         params.toString();
-        tags = tagsValue;
-    }
-
-    /**
-     * @return the tags
-     */
-    public final AerialTagList getTags() {
-        return tags;
     }
     /**
      * .

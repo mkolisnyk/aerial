@@ -1,5 +1,6 @@
 package com.github.mkolisnyk.aerial.datagenerators.cases;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,4 +27,18 @@ public class NegativeCaseScenarioGenerator extends PositiveCaseScenarioGenerator
     public String getScenarioName() {
         return " negative test";
     }
+
+    @Override
+    public List<String> getTags(final String tagBase) {
+        List<String> tags = new ArrayList<String>() {
+            {
+                add("negative");
+                if (!tagBase.equals("")) {
+                    add(tagBase + "_negative");
+                }
+            }
+        };
+        return tags;
+    }
+
 }

@@ -25,6 +25,14 @@ public class Document extends ContainerSection {
     }
 
     /**
+     * .
+     */
+    public Document(String tag) {
+        super(null, tag);
+        features = new ArrayList<FeatureSection>();
+    }
+
+    /**
      * @return the cases
      */
     public final List<FeatureSection> getFeatures() {

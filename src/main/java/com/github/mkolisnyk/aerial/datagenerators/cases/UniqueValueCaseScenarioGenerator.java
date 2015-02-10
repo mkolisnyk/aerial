@@ -150,7 +150,8 @@ public class UniqueValueCaseScenarioGenerator extends
         content += secondPass;
         String result = template.replaceAll("\\{NAME\\}", this.getSection().getName() + this.getScenarioName())
                 .replaceAll("\\{BODY\\}", content)
-                .replaceAll("\\{DATA\\}", this.generateUniqueScenarioData(this.getTestData(), uniqueRecords));
+                .replaceAll("\\{DATA\\}", this.generateUniqueScenarioData(this.getTestData(), uniqueRecords))
+                .replaceAll("\\{TAGS\\}", this.getTagsString());
         return result;
     }
 
@@ -164,5 +165,18 @@ public class UniqueValueCaseScenarioGenerator extends
     @Override
     public String getScenarioName() {
         return " unique values test";
+    }
+
+    @Override
+    public List<String> getTags(final String tagBase) {
+        List<String> tags = new ArrayList<String>() {
+            {
+                add("unique");
+                if (!tagBase.equals("")) {
+                    add(tagBase + "_unique");
+                }
+            }
+        };
+        return tags;
     }
 }

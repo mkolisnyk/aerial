@@ -9,9 +9,9 @@ layout: default
 
 [![Aerial](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial)
 
-**Latest Snapshot**: 0.0.4-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.4-SNAPSHOT) )
+**Latest Snapshot**: 0.0.5-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.5-SNAPSHOT) )
 
-**Latest Release**: 0.0.3 ( [Project Documentation](/aerial/aerial-0.0.3) )
+**Latest Release**: 0.0.4 ( [Project Documentation](/aerial/aerial-0.0.4) )
 
 ## Aerial Maven Plugin
 
@@ -23,7 +23,11 @@ layout: default
 
 # Release Notes
 
-## v0.0.4 (work in progress)
+## v0.0.5 (work in progress)
+
+## v0.0.4
+
+* [Tags generation](/aerial/features#tags-generation) was added
 
 * [TestNG](http://testng.org) support [was added](/aerial/features#testng)
 

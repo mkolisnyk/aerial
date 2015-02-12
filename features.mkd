@@ -249,7 +249,7 @@ They are:
 Depending on scenario type different sections are used in different combinations.
 The below paragraphs contain more detailed description of each scenario generation.
 
-# Positive Scenarios
+## Positive Scenarios
 
 Positive scenarios operate with positive values and they are targeted to check expected behaviour. Mainly positive scenarios are generated from document description using the following structure:
 
@@ -262,7 +262,7 @@ Positive scenarios operate with positive values and they are targeted to check e
         <The positive test data table>
 {% endhighlight %}
 
-## Combinatorial tests optimization
+### Combinatorial tests optimization
 
 **Since version 0.0.3**
 
@@ -270,7 +270,7 @@ In order to decrease the number of test scenarios to be performed positive test 
 
 Main idea behind that approach is that potentially error is caused when we process some combination of N parameters. The smaller N is the bigger optimization we have. E.g. If we have total number of fields equal 10 and we look for any records where each value is present at least once (N = 1) the number of tests to perform is the biggest number of values among all 10 fields.
 
-# Negative Scenarios
+## Negative Scenarios
 
 Negative scenarios are built the same way as positive scenarios except they operate with negative test data where at least one item doesn't fit acceptable format. Also, since this scenario uses 
 invalid input it expects actions on errors to be expected results. So, mainly negative test scenario is build using the following template:
@@ -284,7 +284,7 @@ invalid input it expects actions on errors to be expected results. So, mainly ne
         <The negative test data table>
 {% endhighlight %}
 
-# Unique Value Scenarios
+## Unique Value Scenarios
 
 Unique value scenario generation is triggered as soon as at least one field has **Unique** column value set to **true** in the input data table.
 In this context the **Unique** term isn't restricted just with the case when we cannot create 2 records with the same value of some field. In this case uniqueness means
@@ -302,6 +302,40 @@ Thus, the unique value scenario can be described with the following template:
     Examples:
         <Unique scenario data>
 {% endhighlight %}
+
+## Tags Generation
+
+**Since version 0.0.4**
+
+In order to provide functionality to run just some sub-set of tests the Aerial generates tags. Mainly they are tags for Cucumber or JBehave (depending on which generation template is used). Tags are generated both on feature and scenario levels.
+
+There are some common tags as well as there are some tags which are defined only within some specific feature. Normally they contain some common part which uniquely identifies each specific feature. Further this tag common part will be named as **&lt;tag base&gt;** or **tag base**. This tag base is taken based on different information depending on source type. The table below describes what is the input for tag base depending on source type:
+
+| Source | Tag base input |
+| ------ | -------------- |
+| String | Nothing is used. Only common tags are generated |
+| File   | The requirements document file name (spaces are replaced with underscores) |
+| Jira   | Jira issue key where the initial requirements document was taken from |
+| GitHub | GitHub issue number where the initial requirements document was taken from |
+
+Feature mainly contain the following tags:
+
+| Tag | Description |
+| --- | ----------- |
+| all | Includes all test scenarios |
+| &lt;tag base&gt; | Limits test suite with current feature |
+
+Scenario tags are applied to individual scenarios. They are:
+
+| Tag | Description |
+| --- | ----------- |
+| positive | Common group for all positive scenarios |
+| &lt;tag base&gt;_positive | Runs positive scenarios for specific feature only |
+| negative | Common group for all negative scenarios |
+| &lt;tag base&gt;_negative | Runs negative scenarios for specific feature only |
+| unique | Common group for all unique value scenarios |
+| &lt;tag base&gt;_unique | Runs unique value scenarios for specific feature only |
+
 
 # Data Types Supported
 

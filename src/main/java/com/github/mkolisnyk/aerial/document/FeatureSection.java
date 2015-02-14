@@ -22,7 +22,11 @@ public class FeatureSection extends ContainerSection {
     private List<CaseSection> cases;
 
     public FeatureSection(DocumentSection<?> container) {
-        super(container);
+        this(container, null);
+    }
+
+    public FeatureSection(DocumentSection<?> container, String tagValue) {
+        super(container, tagValue);
         this.cases = new ArrayList<CaseSection>();
     }
 
@@ -85,10 +89,32 @@ public class FeatureSection extends ContainerSection {
         return result;
     }
 
+    private String getTagString(final String tagBase) throws Exception {
+        String tagFormat = AerialOutputTemplateMap.get(
+                AerialOutputFormat.getCurrent().toString(), "tag.format");
+        List<String> tags = new ArrayList<String>() {
+            {
+                add("all");
+                if (!tagBase.equals("")) {
+                    add(tagBase);
+                }
+            }
+        };
+        if (tagBase == null) {
+            return "";
+        }
+        String result = "";
+        for (String tag : tags) {
+            result = result.concat(tagFormat.replaceAll("\\{TAG\\}", tag));
+        }
+        return result;
+    }
+
     public String generate() throws Exception {
         Map<String, ArrayList<DocumentSection<?>>> sections = this.getSections();
         String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "feature");
         String content = template.replaceAll("\\{NAME\\}", this.getName());
+        content = content.replaceAll("\\{TAGS\\}", getTagString(this.getTag()));
         String caseContent = "";
         for (CaseSection section : this.cases) {
             caseContent = caseContent.concat(section.generate() + ls);

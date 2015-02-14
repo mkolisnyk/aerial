@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -36,7 +37,7 @@ public class AerialStringReaderTest {
                 "Text String 3",
                 "Text String 4"
         });
-        reader = new AerialStringReader(params);
+        reader = new AerialStringReader(params, new AerialTagList());
     }
 
     /**
@@ -58,7 +59,7 @@ public class AerialStringReaderTest {
                 AerialParamKeys.INPUT_TYPE.toString(), AerialSourceType.STRING.toString(),
                 AerialParamKeys.OUTPUT_TYPE.toString(), AerialSourceType.STRING.toString()
         });
-        reader = new AerialStringReader(params);
+        reader = new AerialStringReader(params, new AerialTagList());
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readNext());
     }

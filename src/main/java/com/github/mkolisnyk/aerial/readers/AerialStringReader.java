@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.github.mkolisnyk.aerial.AerialReader;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 
 /**
@@ -28,8 +29,8 @@ public class AerialStringReader extends AerialReader {
      * .
      * @throws Exception .
      */
-    public AerialStringReader(AerialParams params) throws Exception {
-        super(params);
+    public AerialStringReader(AerialParams params, AerialTagList tags) throws Exception {
+        super(params, tags);
     }
 
     /* (non-Javadoc)

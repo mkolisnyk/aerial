@@ -102,8 +102,10 @@ public class AerialMavenGeneratorPlugin extends AbstractMojo {
         params.add(outputType.toString());
         params.add(AerialParamKeys.DESTINATION.toString());
         params.add(destination);
-        params.add(AerialParamKeys.CONFIGURATION.toString());
-        params.add(configurationFile);
+        if (configurationFile != null) {
+            params.add(AerialParamKeys.CONFIGURATION.toString());
+            params.add(configurationFile);
+        }
         if (namedParams != null) {
             for (Entry<String, String> entry : namedParams.entrySet()) {
                 params.add(entry.getKey() + "=" + entry.getValue());

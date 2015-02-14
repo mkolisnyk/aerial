@@ -17,6 +17,10 @@ public class ErrorOutput extends DocumentSection<ErrorOutput> {
         // TODO Auto-generated constructor stub
     }
 
+    public ErrorOutput(DocumentSection<?> container, String tagValue) {
+        super(container, tagValue);
+    }
+
     public ErrorOutput parse(String input) throws Exception {
         super.parse(input);
         return this;

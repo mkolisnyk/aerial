@@ -13,6 +13,7 @@ import org.apache.http.HttpStatus;
 import com.github.kristofa.test.http.Method;
 import com.github.kristofa.test.http.MockHttpServer;
 import com.github.kristofa.test.http.SimpleHttpResponseProvider;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -47,7 +48,7 @@ public class AerialGitHubReaderTest {
                 AerialParamKeys.DESTINATION.toString(), "output",
                 "repo:mkolisnyk/aerial state:open"
         });
-        reader = new AerialGitHubReader(params);
+        reader = new AerialGitHubReader(params, new AerialTagList());
         reader.open(params);
     }
 

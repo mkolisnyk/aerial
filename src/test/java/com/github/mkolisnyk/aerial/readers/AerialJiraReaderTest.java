@@ -11,6 +11,7 @@ import org.apache.http.HttpStatus;
 import com.github.kristofa.test.http.Method;
 import com.github.kristofa.test.http.MockHttpServer;
 import com.github.kristofa.test.http.SimpleHttpResponseProvider;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -48,7 +49,7 @@ public class AerialJiraReaderTest {
                 "field=" + field,
                 "project\\=Wallboards AND status\\=Open"
         });
-        reader = new AerialJiraReader(params);
+        reader = new AerialJiraReader(params, new AerialTagList());
         reader.open(params);
     }
 

@@ -51,8 +51,7 @@ public class SimpleSectionTest {
      */
     @Before
     public void setUp() throws Exception {
-        section = (DocumentSection<?>) clazz.getConstructors()[0]
-                                            .newInstance(new Object[]{null});
+        section = (DocumentSection<?>) clazz.getConstructor(DocumentSection.class).newInstance(new Object[]{null});
         content = contentString;
     }
 

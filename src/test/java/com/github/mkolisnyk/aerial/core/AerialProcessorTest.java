@@ -56,7 +56,7 @@ public class AerialProcessorTest {
         this.processor = new AerialProcessor();
         AerialParams params = new AerialParams();
         params.parse(new String[] {sampleFeatureText, sampleFeatureText});
-        this.input = new AerialStringReader(params);
+        this.input = new AerialStringReader(params, new AerialTagList());
         this.input.open(params);
         this.output = new AerialStringWriter(params);
     }
@@ -69,7 +69,9 @@ public class AerialProcessorTest {
 
     @Test
     public void testProcessOnValidDocument() throws Exception {
-        String expected = "Feature: " + ls
+        String expected = "@all " + ls
+                + "Feature: " + ls
+                + "    @positive " + ls
                 + "    Scenario Outline:  positive test" + ls
                 + "        Given These are our pre-requisites" + ls
                 + "        When Sample action" + ls
@@ -80,6 +82,7 @@ public class AerialProcessorTest {
                 + "        | 50 | true  |" + ls
                 + "        | 51 | true  |" + ls
                 + "" + ls
+                + "    @negative " + ls
                 + "    Scenario Outline:  negative test" + ls
                 + "        Given These are our pre-requisites" + ls
                 + "        When Sample action" + ls

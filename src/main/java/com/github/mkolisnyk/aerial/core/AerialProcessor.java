@@ -31,7 +31,7 @@ public class AerialProcessor {
         LOG.info("Start processing input data");
         LOG.debug("Generation format is: " + AerialOutputFormat.getCurrent());
         while (input.hasNext()) {
-            Document document = new Document();
+            Document document = new Document(input.getTags().next());
             document = (Document) document.parse(input.readNext());
             output.open(document);
             while (output.hasNext()) {

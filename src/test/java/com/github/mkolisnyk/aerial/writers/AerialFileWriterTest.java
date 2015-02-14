@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mkolisnyk.aerial.core.AerialProcessor;
+import com.github.mkolisnyk.aerial.core.AerialTagList;
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
 import com.github.mkolisnyk.aerial.core.params.AerialParams;
 import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
@@ -34,7 +34,7 @@ public class AerialFileWriterTest {
                 fileName
         });
         writer = new AerialFileWriter(params);
-        reader = new AerialFileReader(params);
+        reader = new AerialFileReader(params, new AerialTagList());
         reader.open(params);
     }
 
@@ -47,7 +47,9 @@ public class AerialFileWriterTest {
 
     @Test
     public void testSampleGenerateDocumentShouldProduceValidFormattedFile() throws Exception {
-        String expected = "Feature:  Sample Feature" + lineSeparator
+        String expected = "@all @SampleDocument1.document " + lineSeparator
+          + "Feature:  Sample Feature" + lineSeparator
+          + "    @positive @SampleDocument1.document_positive " + lineSeparator
           + "    Scenario Outline:  Sample Test positive test" + lineSeparator
           + "        Given These are our pre-requisites" + lineSeparator
           + "        When Sample action" + lineSeparator
@@ -58,6 +60,7 @@ public class AerialFileWriterTest {
           + "        | 50 | true  |" + lineSeparator
           + "        | 51 | true  |" + lineSeparator
           + "" + lineSeparator
+          + "    @negative @SampleDocument1.document_negative " + lineSeparator
           + "    Scenario Outline:  Sample Test negative test" + lineSeparator
           + "        Given These are our pre-requisites" + lineSeparator
           + "        When Sample action" + lineSeparator
@@ -70,7 +73,7 @@ public class AerialFileWriterTest {
           + "" + lineSeparator
           + "" + lineSeparator
           + "    Scenario: Sample Scenario 1";
-        Document document = new Document();
+        Document document = new Document(reader.getTags().next());
         document = (Document) document.parse(reader.readNext());
         writer.open(document);
         Assert.assertTrue(writer.hasNext());

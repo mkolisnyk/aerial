@@ -12,6 +12,10 @@ import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
  */
 public class ActionSection extends DocumentSection<ActionSection> {
 
+    public ActionSection(DocumentSection<?> container, String tagValue) {
+        super(container, tagValue);
+    }
+
     /**
      * @param container
      */

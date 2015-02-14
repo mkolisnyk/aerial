@@ -17,9 +17,9 @@ layout: default
 
 [![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
 
-**Latest Snapshot**: 0.0.4-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.4-SNAPSHOT) )
+**Latest Snapshot**: 0.0.5-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.5-SNAPSHOT) )
 
-**Latest Release**: 0.0.3 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.3) )
+**Latest Release**: 0.0.4 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.4) )
 
 # Release Notes
 

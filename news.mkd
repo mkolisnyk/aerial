@@ -1,6 +1,11 @@
 ---
 title: Aerial User Guide
 ---
+## 14.02.2015 Aerial Maven Plugin 0.0.4 Version Release
+
+New 0.0.4 version was released for Aerial Maven plugin.
+For more details, please, view <a href="/aerial/releases#v004" target="_blank">Latest Release Notes</a>.
+
 ## 11.02.2015 0.0.4 Version Release
 
 New 0.0.4 version was released for Aerial.

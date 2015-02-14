@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aerial-maven-plugin</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<packaging>maven-plugin</packaging>
 	
 	<parent>
@@ -13,7 +13,7 @@
 		<connection>scm:git:git@github.com:mkolisnyk/aerial.git</connection>
 		<developerConnection>scm:git:git@github.com:mkolisnyk/aerial.git</developerConnection>
 		<url>https://github.com/mkolisnyk/aerial.git</url>
-		<tag>HEAD</tag>
+		<tag>aerial-maven-plugin-0.0.4</tag>
 	</scm>
 	<properties>
 		<scm.repository.name>aerial</scm.repository.name>

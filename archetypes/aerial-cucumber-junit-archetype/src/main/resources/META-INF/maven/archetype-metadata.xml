@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="basic">
+
+    <requiredProperties>
+        <!--Aerial version to use in generated project-->
+        <requiredProperty key="aerial-version">
+            <defaultValue>0.0.4</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="features-path">
+            <defaultValue>src/test/resources/features</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="glu-path">
+            <defaultValue></defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+
+    <fileSets>
+        <fileSet filtered="true">
+            <directory>src/test/resources</directory>
+
+            <!--Filters example-->
+            <includes>
+                <include>*.document</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.xml</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/test/java</directory>
+        </fileSet>
+    </fileSets>
+
+</archetype-descriptor>

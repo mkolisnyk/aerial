@@ -2,7 +2,6 @@ package com.github.mkolisnyk.aerial.datagenerators.cases;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,25 +38,6 @@ public class UniqueValueCaseScenarioGenerator extends
         }
         result = new String[fields.size()];
         result = fields.toArray(result);
-        return result;
-    }
-
-    Map<String, List<String>> filterBy(
-            Map<String, List<String>> testData, String field,
-            String value) {
-        Map<String, List<String>> result = new HashMap<String, List<String>>();
-        for (String key : testData.keySet()) {
-            result.put(key, new ArrayList<String>());
-        }
-        int count = testData.get(testData.keySet().iterator().next())
-                .size();
-        for (int i = 0; i < count; i++) {
-            if (testData.get(field).get(i).trim().equals(value)) {
-                for (String key : testData.keySet()) {
-                    result.get(key).add(testData.get(key).get(i));
-                }
-            }
-        }
         return result;
     }
 

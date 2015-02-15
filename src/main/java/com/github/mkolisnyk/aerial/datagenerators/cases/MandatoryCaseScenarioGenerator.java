@@ -1,16 +1,13 @@
 package com.github.mkolisnyk.aerial.datagenerators.cases;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.github.mkolisnyk.aerial.core.params.AerialOutputFormat;
@@ -27,16 +24,11 @@ public class MandatoryCaseScenarioGenerator extends
             List<InputRecord> recordsList,
             Map<String, List<String>> testDataMap) {
         super(sectionData, recordsList, testDataMap);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public String generate() throws Exception {
         String template = AerialOutputTemplateMap.get(AerialOutputFormat.getCurrent().toString(), "case");
-        String modifiedPrefix = AerialOutputTemplateMap.get(
-                AerialOutputFormat.getCurrent().toString(), "data.field.modified_prefix");
-        String fieldPattern = AerialOutputTemplateMap.get(
-                AerialOutputFormat.getCurrent().toString(), "data.field");
 
         String[] uniqueRecords = getFieldsWithMandatoryAttributes(this.getRecords());
         String content = "";
@@ -51,25 +43,6 @@ public class MandatoryCaseScenarioGenerator extends
 
     }
 
-    public Map<String, List<String>> filterBy(
-            Map<String, List<String>> testData, String field,
-            String value) {
-        Map<String, List<String>> result = new HashMap<String, List<String>>();
-        for (String key : testData.keySet()) {
-            result.put(key, new ArrayList<String>());
-        }
-        int count = testData.get(testData.keySet().iterator().next())
-                .size();
-        for (int i = 0; i < count; i++) {
-            if (testData.get(field).get(i).trim().equals(value)) {
-                for (String key : testData.keySet()) {
-                    result.get(key).add(testData.get(key).get(i));
-                }
-            }
-        }
-        return result;
-    }
-
     private String generateMandatoryScenarioData(
             Map<String, List<String>> testData, String[] mandatoryFields) throws Exception {
         Map<String, List<String>> filteredData = filterBy(testData, "ValidInput", "true");
@@ -80,9 +53,28 @@ public class MandatoryCaseScenarioGenerator extends
         String dataRowDelimiter = AerialOutputTemplateMap.get(
                 AerialOutputFormat.getCurrent().toString(), "data.row.delimiter");
 
+        Map<String, String> filteredRow = new LinkedHashMap<String, String>();
+        for (Entry<String, List<String>> entry : filteredData.entrySet()) {
+            filteredRow.put(entry.getKey(), entry.getValue().get(0));
+        }
         String content = "";
-
+        content = dataHeader.replaceAll(
+                "\\{TITLES\\}",
+                StringUtils.join(filteredRow.keySet().iterator(), dataHeaderDelimiter)
+        );
         for (String field : mandatoryFields) {
+            String[] row = new String[filteredRow.entrySet().size()];
+            int i = 0;
+            for (Entry<String, String> entry : filteredRow.entrySet()) {
+                if (entry.getKey().equals(field)) {
+                    row[i++] = "";
+                } else {
+                    row[i++] = entry.getValue();
+                }
+            }
+            String dataRowText = StringUtils.join(row, dataRowDelimiter);
+            dataRowText = dataRow.replaceAll("\\{DATA\\}", dataRowText);
+            content = content.concat(dataRowText);
         }
         return content;
     }
@@ -111,7 +103,7 @@ public class MandatoryCaseScenarioGenerator extends
 
     @Override
     public String getScenarioName() {
-        return "mandatory values";
+        return " mandatory values";
     }
 
     @Override

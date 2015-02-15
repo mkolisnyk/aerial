@@ -1,6 +1,7 @@
 package com.github.mkolisnyk.aerial.datagenerators;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,25 @@ public abstract class CaseScenarioGenerator {
         String result = "";
         for (String tag : tags) {
             result = result.concat(tagFormat.replaceAll("\\{TAG\\}", tag));
+        }
+        return result;
+    }
+
+    public Map<String, List<String>> filterBy(
+            Map<String, List<String>> testDataValue, String field,
+            String value) {
+        Map<String, List<String>> result = new HashMap<String, List<String>>();
+        for (String key : testDataValue.keySet()) {
+            result.put(key, new ArrayList<String>());
+        }
+        int count = testDataValue.get(testDataValue.keySet().iterator().next())
+                .size();
+        for (int i = 0; i < count; i++) {
+            if (testDataValue.get(field).get(i).trim().equals(value)) {
+                for (String key : testDataValue.keySet()) {
+                    result.get(key).add(testDataValue.get(key).get(i));
+                }
+            }
         }
         return result;
     }

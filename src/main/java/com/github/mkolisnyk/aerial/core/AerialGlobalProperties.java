@@ -8,4 +8,5 @@ public interface AerialGlobalProperties {
 
     String AERIAL_GEN_NWISE_SIZE = "aerial.gen.nwise.size";
     String AERIAL_TYPES_DATE_DEFAULT_FORMAT = "aerial.types.date.default";
+    String AERIAL_TYPES_CUSTOM_CLASSES = "aerial.types.custom.classes";
 }

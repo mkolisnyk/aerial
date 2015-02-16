@@ -21,6 +21,19 @@ public enum ValueExpressionType {
         this.valueType = value;
     }
 
+    public static ValueExpressionType fromString(String textValue) {
+        for (ValueExpressionType value : ValueExpressionType.values()) {
+            if (textValue.equals(value.toString())) {
+                return value;
+            }
+        }
+        return UNKNOWN;
+    }
+
+    public String toString() {
+        return valueType;
+    }
+
     public boolean isOfType(String inputType) {
         return this.valueType.equalsIgnoreCase(inputType.trim());
     }

@@ -3,9 +3,11 @@
  */
 package com.github.mkolisnyk.aerial.datagenerators;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.AerialDataGenerator;
@@ -71,8 +73,7 @@ public class TypedDataGenerator implements
      */
     public void validate() throws Exception {
         boolean validated = true;
-        ValueExpression[] expressions = this.getApplicableExpressions();
-        for (ValueExpression expression : expressions) {
+        for (ValueExpression expression : this.getApplicableExpressions()) {
             try {
                 expression.validate();
                 validated = true;
@@ -86,13 +87,37 @@ public class TypedDataGenerator implements
         Assert.assertTrue("At least one expression type should match the input", validated);
     }
 
-    public ValueExpression[] getApplicableExpressions() throws Exception {
-        return new ValueExpression[]{
-                new StringRegexpValueExpression(this.getInput()),
-                new SingleDateValueExpression(this.getInput(), this.clock),
-                new DateRangeValueExpression(this.getInput(), this.clock),
-                new SingleNumericValueExpression(this.getInput()),
-                new NumericRangeValueExpression(this.getInput()),
+    public List<ValueExpression> getApplicableExpressions() throws Exception {
+        String customClasses = System.getProperty("aerial.types.custom.classes");
+        String[] classNames = {};
+        if (StringUtils.isNotBlank(customClasses)) {
+            classNames = customClasses.split(";");
+        }
+        List<ValueExpression> expressions = new ArrayList<ValueExpression>() {
+            {
+                add(new StringRegexpValueExpression(getInput()));
+                add(new SingleDateValueExpression(getInput(), clock));
+                add(new DateRangeValueExpression(getInput(), clock));
+                add(new SingleNumericValueExpression(getInput()));
+                add(new NumericRangeValueExpression(getInput()));
+            }
         };
+        for (String name : classNames) {
+            Class<?> clazz = Class.forName(name);
+            Constructor<?> constructor = null;
+            ValueExpression expression = null;
+            if (clazz.isMemberClass()) {
+                Class<?> enclosingClass = clazz.getEnclosingClass();
+                constructor = clazz.getConstructor(enclosingClass, InputRecord.class);
+                expression = (ValueExpression) constructor.newInstance(
+                        enclosingClass.getConstructor().newInstance(),
+                        this.getInput());
+            } else {
+                constructor = clazz.getConstructor(InputRecord.class);
+                expression = (ValueExpression) constructor.newInstance(this.getInput());
+            }
+            expressions.add(expression);
+        }
+        return expressions;
     }
 }

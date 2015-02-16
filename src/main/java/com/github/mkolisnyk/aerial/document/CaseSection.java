@@ -13,6 +13,7 @@ import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.TestDataGenerator;
+import com.github.mkolisnyk.aerial.datagenerators.cases.MandatoryCaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.cases.NegativeCaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.cases.PositiveCaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.cases.UniqueValueCaseScenarioGenerator;
@@ -71,6 +72,7 @@ public class CaseSection extends ContainerSection {
                 add(PositiveCaseScenarioGenerator.class);
                 add(NegativeCaseScenarioGenerator.class);
                 add(UniqueValueCaseScenarioGenerator.class);
+                add(MandatoryCaseScenarioGenerator.class);
             }
         };
         return result;

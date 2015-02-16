@@ -196,4 +196,38 @@ public class CaseSectionTest {
         String actual = section.generate();
         Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name unique values test")[1]);
     }
+
+    @Test
+    public void testGenerateWithMandatoryFieldsShouldReturnMandatoryValueScenario() throws Exception {
+        String shortOffset = StringUtils.repeat("    ", 1);
+        String midOffset = StringUtils.repeat("    ", 2);
+        String sampleUniqueCaseText = sampleCaseDescription + ls
+                + "Action:" + ls
+                + "I test unique <Mandatory> value with <Non-Mandatory> value" + ls
+                + "and <Another Mandatory> value" + ls
+                + "Input:" + ls
+                + "| Name | Type | Value | Mandatory |" + ls
+                + "| Mandatory | int  | [0;100) | true |" + ls
+                + "| Another Mandatory | int  | [100;200) | true |" + ls
+                + "| Non-Mandatory | Date  | [01-01-2000;02-10-2010], Format: dd-MM-yyyy | false |" + ls
+                + "On Success:" + ls
+                + sampleCaseValidOutput + ls
+                + "On Failure:" + ls
+                + sampleCaseErrorOutput + ls
+                + "Pre-requisites:" + ls
+                + samplePrerequisites + ls;
+        String expected = ls
+                + midOffset + "Given These are our pre-requisites" + ls
+                + midOffset + "When I test unique <Mandatory> value with <Non-Mandatory> value" + ls
+                + "and <Another Mandatory> value" + ls
+                + midOffset + "Then This is what we see on error" + ls
+                + shortOffset + "Examples:" + ls
+                + midOffset + "| Non-Mandatory | Mandatory | ValidInput | Another Mandatory |" + ls
+                + midOffset + "| 17-05-2005 |  | true  | 150 |" + ls
+                + midOffset + "| 17-05-2005 | 50 | true  |  |" + ls
+                + ls;
+        section.parse(sampleUniqueCaseText);
+        String actual = section.generate();
+        Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name mandatory values")[1]);
+    }
 }

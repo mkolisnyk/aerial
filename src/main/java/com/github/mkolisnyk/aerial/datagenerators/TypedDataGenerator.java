@@ -3,6 +3,7 @@
  */
 package com.github.mkolisnyk.aerial.datagenerators;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,8 +103,19 @@ public class TypedDataGenerator implements
             }
         };
         for (String name : classNames) {
-            ValueExpression expression = (ValueExpression) Class.forName(name)
-                    .getConstructor(InputRecord.class).newInstance(this.getInput());
+            Class<?> clazz = Class.forName(name);
+            Constructor<?> constructor = null;
+            ValueExpression expression = null;
+            if (clazz.isMemberClass()) {
+                Class<?> enclosingClass = clazz.getEnclosingClass();
+                constructor = clazz.getConstructor(enclosingClass, InputRecord.class);
+                expression = (ValueExpression) constructor.newInstance(
+                        enclosingClass.getConstructor().newInstance(),
+                        this.getInput());
+            } else {
+                constructor = clazz.getConstructor(InputRecord.class);
+                expression = (ValueExpression) constructor.newInstance(this.getInput());
+            }
             expressions.add(expression);
         }
         return expressions;

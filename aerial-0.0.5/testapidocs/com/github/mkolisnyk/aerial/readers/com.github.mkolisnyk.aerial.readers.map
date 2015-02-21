@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./AerialStringReaderTest.html" title="com.github.mkolisnyk.aerial.readers.AerialStringReaderTest" alt="" coords="16,19,373,217"/>
+<area shape="rect" id="node1" href="./AerialStringReaderTest.html" title="&lt;TABLE&gt;" alt="" coords="5,14,384,222"/>
+<area shape="rect" id="node2_1" href="./AerialJiraReaderTest.html" title="com.github.mkolisnyk.aerial.readers.AerialJiraReaderTest" alt="" coords="419,28,807,208"/>
+<area shape="rect" id="node2" href="./AerialJiraReaderTest.html" title="&lt;TABLE&gt;" alt="" coords="409,23,818,213"/>
+<area shape="rect" id="node3_2" href="./AerialGitHubReaderTest.html" title="com.github.mkolisnyk.aerial.readers.AerialGitHubReaderTest" alt="" coords="853,28,1261,208"/>
+<area shape="rect" id="node3" href="./AerialGitHubReaderTest.html" title="&lt;TABLE&gt;" alt="" coords="843,23,1272,213"/>
+<area shape="rect" id="node4_3" href="./AerialFileReaderTest.html" title="com.github.mkolisnyk.aerial.readers.AerialFileReaderTest" alt="" coords="1307,11,1703,225"/>
+<area shape="rect" id="node4" href="./AerialFileReaderTest.html" title="&lt;TABLE&gt;" alt="" coords="1297,5,1714,231"/>
+</map>

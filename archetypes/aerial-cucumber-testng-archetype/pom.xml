@@ -3,6 +3,6 @@
 
   <groupId>com.github.mkolisnyk</groupId>
   <artifactId>aerial-cucumber-testng-archetype</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 </project>

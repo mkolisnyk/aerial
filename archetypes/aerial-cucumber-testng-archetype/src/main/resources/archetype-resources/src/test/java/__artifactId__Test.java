@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
                   "usage:target/cucumber-usage.json"
                  },
         features = {"${features-path}" },
-        glue = {"${glu-path}"},
+        glue = {"${packageInPathFormat}"},
         tags = { }
 )
 @Aerial(

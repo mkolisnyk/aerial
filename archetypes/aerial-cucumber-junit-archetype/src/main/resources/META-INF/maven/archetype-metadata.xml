@@ -9,9 +9,6 @@
         <requiredProperty key="features-path">
             <defaultValue>src/test/resources/features</defaultValue>
         </requiredProperty>
-        <requiredProperty key="glu-path">
-            <defaultValue></defaultValue>
-        </requiredProperty>
     </requiredProperties>
 
     <fileSets>

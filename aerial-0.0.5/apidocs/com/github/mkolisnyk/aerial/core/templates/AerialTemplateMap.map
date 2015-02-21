@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./AerialTemplateMap.html" title="com.github.mkolisnyk.aerial.core.templates.AerialTemplateMap" alt="" coords="216,11,571,156"/>
+<area shape="rect" id="node1" href="./AerialTemplateMap.html" title="&lt;TABLE&gt;" alt="" coords="205,5,581,161"/>
+<area shape="rect" id="node2_1" href="./AerialOutputTemplateMap.html" title="com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap" alt="" coords="16,215,371,325"/>
+<area shape="rect" id="node2" href="./AerialOutputTemplateMap.html" title="&lt;TABLE&gt;" alt="" coords="5,209,381,331"/>
+<area shape="rect" id="node3_2" href="./AerialInputTemplateMap.html" title="com.github.mkolisnyk.aerial.core.templates.AerialInputTemplateMap" alt="" coords="416,215,771,325"/>
+<area shape="rect" id="node3" href="./AerialInputTemplateMap.html" title="&lt;TABLE&gt;" alt="" coords="405,209,781,331"/>
+</map>

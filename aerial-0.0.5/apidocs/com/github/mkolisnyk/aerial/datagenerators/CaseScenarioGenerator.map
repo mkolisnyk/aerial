@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./cases/UniqueValueCaseScenarioGenerator.html" title="com.github.mkolisnyk.aerial.datagenerators.cases.UniqueValueCaseScenarioGenerator" alt="" coords="16,327,860,473"/>
+<area shape="rect" id="node1" href="./cases/UniqueValueCaseScenarioGenerator.html" title="&lt;TABLE&gt;" alt="" coords="5,322,871,478"/>
+<area shape="rect" id="node2_1" href="./cases/PositiveCaseScenarioGenerator.html" title="com.github.mkolisnyk.aerial.datagenerators.cases.PositiveCaseScenarioGenerator" alt="" coords="906,319,1722,481"/>
+<area shape="rect" id="node2" href="./cases/PositiveCaseScenarioGenerator.html" title="&lt;TABLE&gt;" alt="" coords="895,313,1733,487"/>
+<area shape="rect" id="node3_2" href="./cases/MandatoryCaseScenarioGenerator.html" title="com.github.mkolisnyk.aerial.datagenerators.cases.MandatoryCaseScenarioGenerator" alt="" coords="1767,327,2599,473"/>
+<area shape="rect" id="node3" href="./cases/MandatoryCaseScenarioGenerator.html" title="&lt;TABLE&gt;" alt="" coords="1757,322,2610,478"/>
+<area shape="rect" id="node4_3" href="./CaseScenarioGenerator.html" title="com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator" alt="" coords="929,11,1699,260"/>
+<area shape="rect" id="node4" href="./CaseScenarioGenerator.html" title="&lt;TABLE&gt;" alt="" coords="918,5,1710,265"/>
+</map>

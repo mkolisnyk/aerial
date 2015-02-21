@@ -1,0 +1,28 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ValidOutput.html" title="com.github.mkolisnyk.aerial.document.ValidOutput" alt="" coords="16,518,420,646"/>
+<area shape="rect" id="node1" href="./ValidOutput.html" title="&lt;TABLE&gt;" alt="" coords="5,513,431,651"/>
+<area shape="rect" id="node2_1" href="./Tokens.html" title="com.github.mkolisnyk.aerial.document.Tokens" alt="" coords="1887,106,2141,321"/>
+<area shape="rect" id="node2" href="./Tokens.html" title="&lt;TABLE&gt;" alt="" coords="1877,101,2151,326"/>
+<area shape="rect" id="node3_2" href="./PrerequisitesSection.html" title="com.github.mkolisnyk.aerial.document.PrerequisitesSection" alt="" coords="466,518,922,646"/>
+<area shape="rect" id="node3" href="./PrerequisitesSection.html" title="&lt;TABLE&gt;" alt="" coords="455,513,933,651"/>
+<area shape="rect" id="node4_3" href="./InputSection.html" title="com.github.mkolisnyk.aerial.document.InputSection" alt="" coords="967,501,1375,663"/>
+<area shape="rect" id="node4" href="./InputSection.html" title="&lt;TABLE&gt;" alt="" coords="957,495,1386,669"/>
+<area shape="rect" id="node5_4" href="./InputRecord.html" title="com.github.mkolisnyk.aerial.document.InputRecord" alt="" coords="2186,11,3231,416"/>
+<area shape="rect" id="node5" href="./InputRecord.html" title="&lt;TABLE&gt;" alt="" coords="2175,5,3242,421"/>
+<area shape="rect" id="node6_5" href="./FeatureSection.html" title="com.github.mkolisnyk.aerial.document.FeatureSection" alt="" coords="1459,748,1883,963"/>
+<area shape="rect" id="node6" href="./FeatureSection.html" title="&lt;TABLE&gt;" alt="" coords="1449,743,1894,968"/>
+<area shape="rect" id="node7_6" href="./ErrorOutput.html" title="com.github.mkolisnyk.aerial.document.ErrorOutput" alt="" coords="1421,518,1823,646"/>
+<area shape="rect" id="node7" href="./ErrorOutput.html" title="&lt;TABLE&gt;" alt="" coords="1410,513,1834,651"/>
+<area shape="rect" id="node8_7" href="./DocumentSection.html" title="com.github.mkolisnyk.aerial.document.DocumentSection" alt="" coords="1403,89,1841,338"/>
+<area shape="rect" id="node8" href="./DocumentSection.html" title="&lt;TABLE&gt;" alt="" coords="1392,83,1852,343"/>
+<area shape="rect" id="node10_8" href="./ContainerSection.html" title="com.github.mkolisnyk.aerial.document.ContainerSection" alt="" coords="1869,475,2271,689"/>
+<area shape="rect" id="node10" href="./ContainerSection.html" title="&lt;TABLE&gt;" alt="" coords="1859,469,2281,695"/>
+<area shape="rect" id="node12_9" href="./AdditionalScenariosSection.html" title="com.github.mkolisnyk.aerial.document.AdditionalScenariosSection" alt="" coords="2316,518,2811,646"/>
+<area shape="rect" id="node12" href="./AdditionalScenariosSection.html" title="&lt;TABLE&gt;" alt="" coords="2305,513,2821,651"/>
+<area shape="rect" id="node13_10" href="./ActionSection.html" title="com.github.mkolisnyk.aerial.document.ActionSection" alt="" coords="2857,518,3273,646"/>
+<area shape="rect" id="node13" href="./ActionSection.html" title="&lt;TABLE&gt;" alt="" coords="2846,513,3283,651"/>
+<area shape="rect" id="node9_11" href="./Document.html" title="com.github.mkolisnyk.aerial.document.Document" alt="" coords="1929,757,2211,954"/>
+<area shape="rect" id="node9" href="./Document.html" title="&lt;TABLE&gt;" alt="" coords="1919,751,2221,959"/>
+<area shape="rect" id="node11_12" href="./CaseSection.html" title="com.github.mkolisnyk.aerial.document.CaseSection" alt="" coords="2257,748,2633,963"/>
+<area shape="rect" id="node11" href="./CaseSection.html" title="&lt;TABLE&gt;" alt="" coords="2246,743,2643,968"/>
+</map>

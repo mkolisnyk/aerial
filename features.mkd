@@ -16,6 +16,15 @@ More information can be found on [project documentation pages](http://mkolisnyk.
 
 ## Library
 
+# Maven Archetypes
+
+Since 0.0.5 version Aerial was updated with the set of archetypes which generate sample test project with consistent references to Aerial and other test engines. Currently available archetypes:
+
+| Name | Description | Latest Version |
+| ---- | ----------- | -------------- |
+| aerial-cucumber-junit-archetype | Generates sample Aerial project integrated with Cucumber + JUnit | [![Aerial Cucumber + JUnit archetype](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-cucumber-junit-archetype/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-cucumber-junit-archetype) |
+| aerial-cucumber-testng-archetype | Generates sample Aerial project integrated with Cucumber + TestNG | [![Aerial Cucumber + TestNG archetype](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-cucumber-testng-archetype/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-cucumber-testng-archetype) |
+
 # Test Engines Supported
 
 ## JUnit
@@ -293,7 +302,7 @@ that we cannot perform some action twice having the same value for some field.
 Getting to the technical side of the scenario generation we should get the scenario when we run action successfully at first turn but on the second turn we get the error if we use the same value in some field.
 Thus, the unique value scenario can be described with the following template:
 {% highlight bat linenos=table %}
-    Scenario: < Case Name > negative test
+    Scenario: < Case Name > unique value test
         Given < Pre-requisites steps >
         When < Action text >
         Then < Actions in case of success >
@@ -301,6 +310,28 @@ Thus, the unique value scenario can be described with the following template:
         Then < Actions in case of error >
     Examples:
         <Unique scenario data>
+{% endhighlight %}
+
+## Mandatory Value Scenarios
+
+**Since version 0.0.5**
+
+Mandatory value scenario generation is triggered as soon as at least one field has **Mandatory** column value set to **true** in the input data table.
+For Aerial the term "Mandatory" means that value cannot be empty. So, the generation for such scenario type is based on the following algorithm:
+
+1. Take any valid data row
+2. Replace mandatory field with empty value
+3. Add the row to the list of test data
+4. Repeat previous steps for all mandatory fields
+
+Scenario itself is generated based on the following structure:
+{% highlight bat linenos=table %}
+    Scenario: < Case Name > mandatory value test
+        Given < Pre-requisites steps >
+        When < Action text >
+        Then < Actions in case of error >
+    Examples:
+        <Mandatory scenario data>
 {% endhighlight %}
 
 ## Tags Generation
@@ -339,13 +370,13 @@ Scenario tags are applied to individual scenarios. They are:
 
 # Data Types Supported
 
-# Int
+## Int
 
-# Date
+## Date
 
-# String
+## String
 
-# Enums
+## Enums
 
 **Since version 0.0.3**
 
@@ -374,3 +405,7 @@ When test data is generated based on this type it generates 2 set of values:
 * Positive - contains every single value which belongs to the enum
 
 * Negative - contains value which doesn't belong to enum
+
+## Custom
+
+**Since version 0.0.5**

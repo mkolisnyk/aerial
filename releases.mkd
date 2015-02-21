@@ -23,7 +23,13 @@ layout: default
 
 # Release Notes
 
-## v0.0.5 (work in progress)
+## v0.0.5
+
+* [Aerial archetypes](/aerial/features#maven-archetypes) were added to support tool chains or Cucumber + JUnit and Cucumber + Test NG
+
+* [Mandatory values scenario generation](/aerial/features#mandatory-value-scenarios) was added
+
+* [Custom input types](/aerial/extensions-dev-guide#custom-types-definition) support was added
 
 ## v0.0.4
 

@@ -44,7 +44,7 @@ Since all the above methods are pretty typical by their structure and functions 
 
 ## Configure Aerial to Use Custom Reader
 
-# Custom Input Readers
+# Custom Output Writers
 
 **Since version 0.0.4**
 
@@ -63,3 +63,13 @@ All [Aerial](/aerial) output writers are defined via classes extending [AerialWr
 ## Write Custom Writer
 
 ## Configure Aerial to Use Custom Writer
+
+# Custom Types Definition
+
+**Since version 0.0.5**
+
+## Overview
+
+## Write Custom Input Type
+
+## Configure Aerial to Use Custom Input Type

@@ -147,6 +147,7 @@ Input section is represented as the table with the following columns:
 | Value       | Identifies rule the current field should meet in order to be of acceptable value |
 | Condition   | Identifies boolean condition when the Value is applied |
 | Unique      | Flag identifying whether the value of this field should be unique in this scenario. This is needed for specific scenario generation |
+| Mandatory   | Flag identifying whether the value of this field should be mandatory (cannot be empty). This is needed for mandatory values scenario generation |
 
 ## Data Types in Use and Acceptable Value Patterns
 

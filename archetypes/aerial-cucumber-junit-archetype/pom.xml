@@ -3,6 +3,6 @@
 
   <groupId>com.github.mkolisnyk</groupId>
   <artifactId>aerial-cucumber-junit-archetype</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 </project>

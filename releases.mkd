@@ -9,17 +9,24 @@ layout: default
 
 [![Aerial](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial)
 
-**Latest Snapshot**: 0.0.5-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.5-SNAPSHOT) )
+**Latest Snapshot**: 0.0.6-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.6-SNAPSHOT) )
 
-**Latest Release**: 0.0.4 ( [Project Documentation](/aerial/aerial-0.0.4) )
+**Latest Release**: 0.0.5 ( [Project Documentation](/aerial/aerial-0.0.5) )
 
 ## Aerial Maven Plugin
 
 [![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
 
-**Latest Snapshot**: 0.0.5-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.5-SNAPSHOT) )
+**Latest Snapshot**: 0.0.6-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.6-SNAPSHOT) )
 
-**Latest Release**: 0.0.4 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.4) )
+**Latest Release**: 0.0.5 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.5) )
+
+## Archetypes
+
+| Name | Latest Version |
+| ---- | -------------- |
+| aerial-cucumber-junit-archetype | [![Aerial Cucumber + JUnit archetype](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-cucumber-junit-archetype/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-cucumber-junit-archetype) |
+| aerial-cucumber-testng-archetype | [![Aerial Cucumber + TestNG archetype](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-cucumber-testng-archetype/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-cucumber-testng-archetype) |
 
 # Release Notes
 

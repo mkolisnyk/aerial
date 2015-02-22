@@ -310,3 +310,39 @@ public class AerialRunnerTest {
     }
 }
 {% endhighlight %}
+
+# Using archetypes
+
+For several project types there are dedicated archetypes to simplify projects creation. Simple project using archetype is created in several steps:
+
+## Step 1: Create New Project
+
+![Step 1: Start New Project](/aerial/img/archetype/archetype_step01.png)
+
+## Step 2: Select Maven Project
+
+![Step 2: Select Maven Project](/aerial/img/archetype/archetype_step02.png)
+
+Click on **Next**
+
+## Step 3: Define New Maven Project Location
+
+![Step 3: Define New Maven Project Location](/aerial/img/archetype/archetype_step03.png)
+
+Make sure the highlighted check box is unchecked and click on **Next**
+
+## Step 4: Select Archetype
+
+![Step 4: Select Archetype](/aerial/img/archetype/archetype_step04.png)
+
+Click on **Next**
+
+## Step 5: Fill in Archetype Parameters
+
+![Step 5: Fill in Archetype Parameters](/aerial/img/archetype/archetype_step05.png)
+
+Click on **Finish**
+
+## Step 6: View Project Structure
+
+![Step 6: View Project Structure](/aerial/img/archetype/archetype_step06.png)

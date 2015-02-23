@@ -4,7 +4,7 @@ title: Aerial News
 
 ## 22.02.2015 New Demo Video Available
 
-New Create New Project Demo video is available on YouTube. It can be watched [here](https://www.youtube.com/watch?v=YR87Fs3BZeU)
+New Create New Project Demo video is available on YouTube. It can be watched <a href="https://www.youtube.com/watch?v=YR87Fs3BZeU" target="_blank">here</a>.
 
 ## 21.02.2015 0.0.5 Version Release
 

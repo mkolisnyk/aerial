@@ -42,7 +42,19 @@ Since all the above methods are pretty typical by their structure and functions 
 
 ## Write Custom Reader
 
+All classes inherited from **AerialReader** class should have constructor like:
+
+{% highlight java linenos=table %}
+public  AerialReader(AerialParams params, AerialTagList tagsValue) {
+...
+}
+{% endhighlight %}
+
+Tags handling isn't really required. It is still desired feature but the actual tags handling is up to each specific implementation. There is no any specific interface for it. Actually, all user needs to do for tags is to fill their values depending on some rule. If tags are empty they simply won't be used in generated files.
+
 ## Configure Aerial to Use Custom Reader
+
+Custom reader class can be passed as **readerClass** named parameter, e.g. **readerClass=com.sample.CustomReaderClass**. At the same time the input type parameter should be defined as **CUSTOM**.
 
 # Custom Output Writers
 
@@ -64,12 +76,98 @@ All [Aerial](/aerial) output writers are defined via classes extending [AerialWr
 
 ## Configure Aerial to Use Custom Writer
 
+Custom writer class can be passed as **writerClass** named parameter, e.g. **writerClass=com.sample.CustomWriterClass**. At the same time the output type parameter should be defined as **CUSTOM**.
+
 # Custom Types Definition
 
 **Since version 0.0.5**
 
 ## Overview
 
+In some cases we have some data which is either very specific to application under test or it is some data which is logically grouped and you need to apply data generation for that using some specific rules. This is the case where built-in types are not enough and we need to use some custom type. For instance, we can create some custom type to operate with address which is the combination of strings and numbers in specific order.
+
 ## Write Custom Input Type
 
+Every custom type should be an extension of [ValueExpression]() class. In this class we should override the following methods:
+
+| Method | Description |
+| ------ | ----------- |
+| public String getMatchPattern() | Returns the regular expression which should be the pattern for any acceptable value of this type. In other words all positive values of this type should match the pattern |
+| public String getValueTypeName() | Returns the name of the custom type. This name should then be used in input data table |
+| public List<InputRecord> generate() | Returns the list of generated data |
+
+Here is an example of custom input type:
+
+{% highlight java linenos=table %}
+package com.github.mkolisnyk.aerial.datagenerators;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.mkolisnyk.aerial.document.InputRecord;
+import com.github.mkolisnyk.aerial.expressions.ValueExpression;
+
+public class CustomExternalTypeExpression extends ValueExpression {
+
+    @Override
+    public String getMatchPattern() {
+        return "(.*)";
+    }
+
+    @Override
+    public String getValueTypeName() {
+        return "Season";
+    }
+
+    public CustomExternalTypeExpression(InputRecord inputValue) {
+        super(inputValue);
+    }
+
+    @Override
+    public List<InputRecord> generate() throws Exception {
+        List<InputRecord> result = new ArrayList<InputRecord>() {
+            {
+                new InputRecord(
+                        getInput().getName(),
+                        getInput().getType(),
+                        "Winter",
+                        getInput().getCondition(),
+                        true);
+                new InputRecord(
+                        getInput().getName(),
+                        getInput().getType(),
+                        "Spring",
+                        getInput().getCondition(),
+                        true);
+                new InputRecord(
+                        getInput().getName(),
+                        getInput().getType(),
+                        "Summer",
+                        getInput().getCondition(),
+                        true);
+                new InputRecord(
+                        getInput().getName(),
+                        getInput().getType(),
+                        "Autumn",
+                        getInput().getCondition(),
+                        true);
+                new InputRecord(
+                        getInput().getName(),
+                        getInput().getType(),
+                        "Unknown",
+                        getInput().getCondition(),
+                        false);
+            }
+        };
+        return result;
+    }
+}
+{% endhighlight %}
+
+In some cases we may need to define custom input type as an inner class. It can be done in the same fashion but with some restrictions:
+1. That should be just a top level sub-class. So, inner class of inner class wouldn't work
+2. The container class should have default constructor
+
 ## Configure Aerial to Use Custom Input Type
+
+The list of classes representing custom types is defined either via **aerial.types.custom.classes** global property or via similar named system property. The value should contain canonical names as well as those classes should be available in the classpath.

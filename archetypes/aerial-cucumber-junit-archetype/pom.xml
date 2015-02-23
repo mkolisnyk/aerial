@@ -4,7 +4,7 @@
   <groupId>com.github.mkolisnyk</groupId>
   <artifactId>aerial-cucumber-junit-archetype</artifactId>
   <version>0.0.3-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>maven-archetype</packaging>
   <parent>
     <groupId>com.github.mkolisnyk</groupId>
     <artifactId>aerial-archetypes</artifactId>

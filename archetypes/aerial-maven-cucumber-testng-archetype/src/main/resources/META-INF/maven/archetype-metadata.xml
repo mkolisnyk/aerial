@@ -4,10 +4,13 @@
     <requiredProperties>
         <!--Aerial version to use in generated project-->
         <requiredProperty key="aerial-version">
-            <defaultValue>0.0.4</defaultValue>
+            <defaultValue>0.0.6</defaultValue>
         </requiredProperty>
-        <requiredProperty key="features-path">
-            <defaultValue>src/test/resources/features</defaultValue>
+        <requiredProperty key="inputType">
+            <defaultValue>FILE</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="source">
+            <defaultValue>src/test/resources/(.*)\.document</defaultValue>
         </requiredProperty>
     </requiredProperties>
 

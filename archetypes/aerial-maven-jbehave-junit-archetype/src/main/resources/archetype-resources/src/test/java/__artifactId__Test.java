@@ -1,36 +1,29 @@
 package ${package};
 
 import org.junit.runner.RunWith;
-import com.github.mkolisnyk.aerial.annotations.Aerial;
-import com.github.mkolisnyk.aerial.annotations.AerialAfterSuite;
-import com.github.mkolisnyk.aerial.annotations.AerialBeforeSuite;
-import com.github.mkolisnyk.aerial.core.AerialRunner;
-import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
-import cucumber.api.CucumberOptions;
 
-@CucumberOptions(
-        format = {"html:target/cucumber-html-report",
-                  "json:target/cucumber.json",
-                  "pretty:target/cucumber-pretty.txt",
-                  "usage:target/cucumber-usage.json"
-                 },
-        features = {"${features-path}" },
-        glue = {"${packageInPathFormat}"},
-        tags = { }
-)
-@Aerial(
-    inputType = AerialSourceType.FILE,
-    source = "src/test/resources",
-    additionalParams = { "" },
-    destination = "${features-path}")
-@RunWith(AerialRunner.class)
-public class ${artifactId}Test {
-    @AerialBeforeSuite
-    public static void setUp() {
-        System.out.println("setUp");
+public class ${artifactId}Test extends JUnitStory {
+
+    public LinkedList<Object> stepDefinitions = new LinkedList<Object>();
+
+    @Override
+    public Configuration configuration() {
+     return new MostUsefulConfiguration()
+       .useStoryLoader(new LoadFromClasspath(this.getClass()))
+       .useStoryReporterBuilder(
+         new StoryReporterBuilder()
+           .withRelativeDirectory("")
+           .withDefaultFormats()
+           .withFormats(Format.CONSOLE, Format.TXT,
+             Format.XML, Format.HTML));
     }
-    @AerialAfterSuite
-    public static void tearDown() {
-        System.out.println("tearDown");
+
+    @Override
+    public InjectableStepsFactory stepsFactory() {
+     return new InstanceStepsFactory(configuration(), this.stepDefinitions);
     }
-}
+
+    public ${artifactId}Test() {
+     this.stepDefinitions.add(new ${artifactId}Steps());
+    }
+   }

@@ -14,23 +14,10 @@ import cucumber.api.CucumberOptions;
                   "pretty:target/cucumber-pretty.txt",
                   "usage:target/cucumber-usage.json"
                  },
-        features = {"${features-path}" },
+        features = {"src/test/resources" },
         glue = {"${packageInPathFormat}"},
         tags = { }
 )
-@Aerial(
-    inputType = AerialSourceType.FILE,
-    source = "src/test/resources",
-    additionalParams = { "" },
-    destination = "${features-path}")
-@RunWith(AerialRunner.class)
+@RunWith(Cucumber.class)
 public class ${artifactId}Test {
-    @AerialBeforeSuite
-    public static void setUp() {
-        System.out.println("setUp");
-    }
-    @AerialAfterSuite
-    public static void tearDown() {
-        System.out.println("tearDown");
-    }
 }

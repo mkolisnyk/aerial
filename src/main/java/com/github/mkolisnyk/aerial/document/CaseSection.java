@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 
+import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
 import com.github.mkolisnyk.aerial.datagenerators.CaseScenarioGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.TestDataGenerator;
 import com.github.mkolisnyk.aerial.datagenerators.cases.MandatoryCaseScenarioGenerator;
@@ -21,7 +22,7 @@ import com.github.mkolisnyk.aerial.datagenerators.cases.UniqueValueCaseScenarioG
 /**
  * @author Myk Kolisnyk
  */
-public class CaseSection extends ContainerSection {
+public class CaseSection extends ContainerSection implements AerialGlobalProperties {
 
     public CaseSection(DocumentSection<?> container) {
         this(container, null);
@@ -61,7 +62,7 @@ public class CaseSection extends ContainerSection {
         };
     }
 
-    public List<Class<? extends CaseScenarioGenerator>> getScenarioGenerators() {
+    public List<Class<? extends CaseScenarioGenerator>> getScenarioGenerators() throws Exception {
         List<Class<? extends CaseScenarioGenerator>> result = new ArrayList<Class<? extends CaseScenarioGenerator>>() {
             /**
              * .
@@ -73,6 +74,12 @@ public class CaseSection extends ContainerSection {
                 add(NegativeCaseScenarioGenerator.class);
                 add(UniqueValueCaseScenarioGenerator.class);
                 add(MandatoryCaseScenarioGenerator.class);
+                String[] customClasses = System.getProperty(AERIAL_GEN_CUSTOM_CLASSES).split(";");
+                for (String customClass : customClasses) {
+                    Class<? extends CaseScenarioGenerator> clazz =
+                            (Class<? extends CaseScenarioGenerator>) Class.forName(customClass);
+                    add(clazz);
+                }
             }
         };
         return result;

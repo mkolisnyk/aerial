@@ -74,11 +74,14 @@ public class CaseSection extends ContainerSection implements AerialGlobalPropert
                 add(NegativeCaseScenarioGenerator.class);
                 add(UniqueValueCaseScenarioGenerator.class);
                 add(MandatoryCaseScenarioGenerator.class);
-                String[] customClasses = System.getProperty(AERIAL_GEN_CUSTOM_CLASSES).split(";");
-                for (String customClass : customClasses) {
-                    Class<? extends CaseScenarioGenerator> clazz =
-                            (Class<? extends CaseScenarioGenerator>) Class.forName(customClass);
-                    add(clazz);
+                String customClassesString = System.getProperty(AERIAL_GEN_CUSTOM_CLASSES, "");
+                if (!customClassesString.trim().equals("")) {
+                    String[] customClasses = customClassesString.split(";");
+                    for (String customClass : customClasses) {
+                        Class<? extends CaseScenarioGenerator> clazz =
+                                (Class<? extends CaseScenarioGenerator>) Class.forName(customClass);
+                        add(clazz);
+                    }
                 }
             }
         };

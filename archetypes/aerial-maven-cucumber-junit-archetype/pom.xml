@@ -7,4 +7,7 @@
   </parent>
   <artifactId>aerial-maven-cucumber-junit-archetype</artifactId>
   <description>Generates Aerial project which involves Maven, Cucumber and JUnit</description>
+  <properties>
+    <ncss.skip>true</ncss.skip>
+  </properties>
 </project>

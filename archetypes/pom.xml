@@ -38,6 +38,9 @@
 		<module>aerial-maven-jbehave-junit-archetype</module>
 		<module>aerial-maven-jbehave-testng-archetype</module>
 	</modules>
+	<properties>
+		<ncss.skip>true</ncss.skip>
+	</properties>
 	<build>
 		<extensions>
 			<extension>

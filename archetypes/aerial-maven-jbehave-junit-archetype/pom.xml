@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.github.mkolisnyk</groupId>
     <artifactId>aerial-archetypes</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
   </parent>
   <artifactId>aerial-maven-jbehave-junit-archetype</artifactId>
 </project>

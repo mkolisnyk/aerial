@@ -37,6 +37,7 @@ Currently the following properties are in use:
 | aerial.output.config | Input/output | Relevant to **aerial.output.format** property and it is used to point to custom template configuration in case **aerial.output.format** is set to **custom** | [0.0.4](/aerial/releases#v004) |
 | aerial.input.format  | Input/output | Identifies the template being used for input formats parsing | [0.0.4](/aerial/releases#v004) |
 | aerial.input.config  | Input/output | Used when **aerial.input.format** is set to **custom** and points to configuration file containing input format properties | [0.0.4](/aerial/releases#v004) |
+| aerial.gen.custom.classes | Case Generators | Defines the list of custom classes responsible for case scenario generation | [0.0.6](/aerial/releases#v006) |
 | aerial.gen.nwise.size | Case Generators | Used by [Combinatorial Tests Optimization](/aerial/features#combinatorial-tests-optimization) algorithms and defines the size of the record which unique combinations we should check. 0 means **Exhaustive Testing** | [0.0.4](/aerial/releases#v004) |
 | aerial.types.date.default | Data Types | Used for date values generation and defines the date format which is supposed to be used by default | [0.0.4](/aerial/releases#v004) |
 | aerial.types.custom.classes | Data Types | Defines the colon separated list of classes to be used for custom types | [0.0.5](/aerial/releases#v005) |

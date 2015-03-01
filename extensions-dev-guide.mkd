@@ -171,3 +171,26 @@ In some cases we may need to define custom input type as an inner class. It can 
 ## Configure Aerial to Use Custom Input Type
 
 The list of classes representing custom types is defined either via **aerial.types.custom.classes** global property or via similar named system property. The value should contain canonical names as well as those classes should be available in the classpath.
+
+# Custom Scenario Generators
+
+**Since version 0.0.6**
+
+## Overview
+
+Besides [standard generated scenarios](/aerial/features#scenarios-generated) Aerial provides an ability to extend case scenario generation engine to define specific scenarios which should be generated based on input. 
+
+## Write Custom Scenario Generator
+
+All custom scenarios must be an implementation of [CaseScenarioGenerator](https://github.com/mkolisnyk/aerial/blob/master/src/main/java/com/github/mkolisnyk/aerial/datagenerators/CaseScenarioGenerator.java) class. Mainly we should implement the following methods:
+
+| Method | Description |
+| ------ | ----------- |
+| **generate** | Returns final generated scenario or scenario outline. This is the main method which is being used by Aerial |
+| **isApplicable** | Returns **true** when this scenario is applicable for some specific data set. E.g. we may avoid the scenario generation if some specific test data attribute isn't set |
+| **getScenarioName** | Returns string which defines suffix uniquely identifying the scenario name |
+| **getTags** | Returns the list of tags which should be applied to the scenario of current custom type |
+
+## Configure Aerial to Use Custom Scenario Generator
+
+The list of custom classes can be configured via **aerial.gen.custom.classes** configuration property or the same system property.

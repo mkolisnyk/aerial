@@ -15,11 +15,11 @@ public class PrerequisitesSection
     /**
      * @param container
      */
-    public PrerequisitesSection(DocumentSection<CaseSection> container) {
+    public PrerequisitesSection(ContainerSection container) {
         super(container);
     }
 
-    public PrerequisitesSection(DocumentSection<?> container,
+    public PrerequisitesSection(ContainerSection container,
             String tagValue) {
         super(container, tagValue);
     }

@@ -22,12 +22,12 @@ public class InputSection extends DocumentSection<InputSection> {
     /**
      * @param container
      */
-    public InputSection(DocumentSection<CaseSection> container) {
+    public InputSection(ContainerSection container) {
         super(container);
         inputs = new ArrayList<InputRecord>();
     }
 
-    public InputSection(DocumentSection<?> container, String tagValue) {
+    public InputSection(ContainerSection container, String tagValue) {
         super(container, tagValue);
     }
 

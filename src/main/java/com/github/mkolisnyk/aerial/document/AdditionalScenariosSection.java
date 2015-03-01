@@ -9,7 +9,7 @@ package com.github.mkolisnyk.aerial.document;
  */
 public class AdditionalScenariosSection extends
         DocumentSection<AdditionalScenariosSection> {
-    public AdditionalScenariosSection(DocumentSection<?> container,
+    public AdditionalScenariosSection(ContainerSection container,
             String tagValue) {
         super(container, tagValue);
     }
@@ -17,7 +17,7 @@ public class AdditionalScenariosSection extends
     /**
      * @param container
      */
-    public AdditionalScenariosSection(DocumentSection<?> container) {
+    public AdditionalScenariosSection(ContainerSection container) {
         super(container);
     }
 

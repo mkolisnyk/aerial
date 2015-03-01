@@ -15,15 +15,15 @@ import com.github.mkolisnyk.aerial.AerialParser;
 public abstract class DocumentSection<T extends DocumentSection<?>>
         implements AerialParser<T>, AerialGenerator {
     private String name;
-    private DocumentSection<?> parent;
+    private ContainerSection parent;
     private String content;
     private String tag;
 
-    public DocumentSection(DocumentSection<?> container) {
+    public DocumentSection(ContainerSection container) {
         this(container, null);
     }
 
-    public DocumentSection(DocumentSection<?> container, String tagValue) {
+    public DocumentSection(ContainerSection container, String tagValue) {
         this.name = "";
         this.parent = container;
         this.content = "";
@@ -43,7 +43,7 @@ public abstract class DocumentSection<T extends DocumentSection<?>>
     /**
      * @return the parent
      */
-    public final DocumentSection<?> getParent() {
+    public final ContainerSection getParent() {
         return parent;
     }
 

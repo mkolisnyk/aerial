@@ -12,12 +12,12 @@ import com.github.mkolisnyk.aerial.core.templates.AerialOutputTemplateMap;
  */
 public class ErrorOutput extends DocumentSection<ErrorOutput> {
 
-    public ErrorOutput(DocumentSection<CaseSection> container) {
+    public ErrorOutput(ContainerSection container) {
         super(container);
         // TODO Auto-generated constructor stub
     }
 
-    public ErrorOutput(DocumentSection<?> container, String tagValue) {
+    public ErrorOutput(ContainerSection container, String tagValue) {
         super(container, tagValue);
     }
 

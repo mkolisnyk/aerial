@@ -31,11 +31,11 @@ public abstract class ContainerSection
         return sections;
     }
 
-    public ContainerSection(DocumentSection<?> container) {
+    public ContainerSection(ContainerSection container) {
         this(container, null);
     }
 
-    public ContainerSection(DocumentSection<?> container, String tag) {
+    public ContainerSection(ContainerSection container, String tag) {
         super(container, tag);
         this.description = "";
         this.sections = new HashMap<String, ArrayList<DocumentSection<?>>>();
@@ -50,7 +50,7 @@ public abstract class ContainerSection
         if (creationMap.containsKey(token)) {
             Class<?> clazz = creationMap.get(token);
             return (DocumentSection<?>) clazz
-                        .getConstructor(DocumentSection.class, String.class)
+                        .getConstructor(ContainerSection.class, String.class)
                         .newInstance(this, this.getTag());
         }
         return null;
@@ -98,7 +98,7 @@ public abstract class ContainerSection
                 if (trimLine.equals(tokenFound)) {
                     currentSection.setName("");
                 } else {
-                    currentSection.setName(trimLine.substring(tokenFound.length()));
+                    currentSection.setName(trimLine.substring(tokenFound.length()).trim());
                 }
                 content = "";
             } else {
@@ -128,5 +128,13 @@ public abstract class ContainerSection
                 }
             }
         }
+    }
+
+    public DocumentSection<?> findNamedSection(String name, String token) {
+        ContainerSection container = (ContainerSection) this.getParent();
+        while (container != null) {
+            ;//container.get
+        }
+        return null;
     }
 }

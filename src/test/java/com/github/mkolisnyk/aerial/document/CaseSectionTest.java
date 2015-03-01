@@ -11,6 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.mkolisnyk.aerial.core.AerialGlobalProperties;
+import com.github.mkolisnyk.aerial.datagenerators.CustomCaseScenarioGenerator;
+
 /**
  * @author Myk Kolisnyk
  *
@@ -47,6 +50,7 @@ public class CaseSectionTest {
     public void setUp() throws Exception {
         section = new CaseSection(null);
         section.setName("Sample Name");
+        System.setProperty(AerialGlobalProperties.AERIAL_GEN_CUSTOM_CLASSES, "");
     }
 
     /**
@@ -54,6 +58,7 @@ public class CaseSectionTest {
      */
     @After
     public void tearDown() throws Exception {
+        System.setProperty(AerialGlobalProperties.AERIAL_GEN_CUSTOM_CLASSES, "");
     }
 
     /**
@@ -229,5 +234,33 @@ public class CaseSectionTest {
         section.parse(sampleUniqueCaseText);
         String actual = section.generate();
         Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name mandatory values")[1]);
+    }
+
+    @Test
+    public void testGenerateWithCustomGeneratorShouldReturnCustomScenario() throws Exception {
+        System.setProperty(AerialGlobalProperties.AERIAL_GEN_CUSTOM_CLASSES,
+                CustomCaseScenarioGenerator.class.getCanonicalName());
+        String shortOffset = StringUtils.repeat("    ", 1);
+        String midOffset = StringUtils.repeat("    ", 2);
+        String sampleUniqueCaseText = sampleCaseDescription + ls
+                + "Action:" + ls
+                + "I test unique <Mandatory> value with <Non-Mandatory> value" + ls
+                + "and <Another Mandatory> value" + ls
+                + "Input:" + ls
+                + "| Name | Type | Value | Mandatory |" + ls
+                + "| Mandatory | int  | [0;100) | true |" + ls
+                + "| Another Mandatory | int  | [100;200) | true |" + ls
+                + "| Non-Mandatory | Date  | [01-01-2000;02-10-2010], Format: dd-MM-yyyy | false |" + ls
+                + "On Success:" + ls
+                + sampleCaseValidOutput + ls
+                + "On Failure:" + ls
+                + sampleCaseErrorOutput + ls
+                + "Pre-requisites:" + ls
+                + samplePrerequisites + ls;
+        String expected = ls
+                + "This is generated scenario    Examples:" + ls + ls;
+        section.parse(sampleUniqueCaseText);
+        String actual = section.generate();
+        Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name custom scenario")[1]);
     }
 }

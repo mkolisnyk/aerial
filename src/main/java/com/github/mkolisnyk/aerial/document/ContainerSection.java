@@ -130,10 +130,20 @@ public abstract class ContainerSection
         }
     }
 
-    public DocumentSection<?> findNamedSection(String name, String token) {
+    @SuppressWarnings("unchecked")
+    public <T extends DocumentSection<?>> T findNamedSectionInParent(String name, String token, Class<T> clazz) {
         ContainerSection container = (ContainerSection) this.getParent();
         while (container != null) {
-            ;//container.get
+            Map<String, ArrayList<DocumentSection<?>>> sectionMap = container.getSections();
+            if (sectionMap.containsKey(token)) {
+                ArrayList<DocumentSection<?>> sectionsList = sectionMap.get(token);
+                for (DocumentSection<?> section : sectionsList) {
+                    if (section.getName().equals(name) && section != (DocumentSection<T>) this) {
+                        return (T) section;
+                    }
+                }
+            }
+            container = container.getParent();
         }
         return null;
     }

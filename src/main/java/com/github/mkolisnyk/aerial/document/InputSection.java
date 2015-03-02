@@ -42,9 +42,23 @@ public class InputSection extends DocumentSection<InputSection> {
         inputs = new ArrayList<InputRecord>();
         this.setContent(input);
         String[] lines = input.split(lineSeparator);
-        Assert.assertTrue(
-                "At least header and data row should be defined for input",
-                lines.length > 1);
+        if (this.getName().trim().equals("")) {
+            Assert.assertTrue(
+                    "At least header and data row should be defined for input",
+                    lines.length > 1);
+        } else {
+            if (lines.length < 1) {
+                InputSection section = this.getParent()
+                        .findNamedSectionInParent(
+                        getName(),
+                        Tokens.getInputToken(),
+                        InputSection.class);
+                Assert.assertNotNull("Section with the '" + getName() + "' was not found", section);
+                section.parse(section.getContent());
+                this.inputs = section.getInputs();
+                return this;
+            }
+        }
         for (int i = 1; i < lines.length; i++) {
             InputRecord record = new InputRecord();
             record.read(lines[i], lines[0]);

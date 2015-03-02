@@ -59,6 +59,7 @@ public class Document extends ContainerSection {
             private static final long serialVersionUID = 1L;
             {
                 put(Tokens.getFeatureToken(), FeatureSection.class);
+                put(Tokens.getInputToken(), InputSection.class);
             }
         };
     }

@@ -15,11 +15,11 @@ public class ValidOutput extends DocumentSection<ValidOutput> {
     /**
      * @param container
      */
-    public ValidOutput(DocumentSection<CaseSection> container) {
+    public ValidOutput(ContainerSection container) {
         super(container);
     }
 
-    public ValidOutput(DocumentSection<?> container, String tagValue) {
+    public ValidOutput(ContainerSection container, String tagValue) {
         super(container, tagValue);
     }
 

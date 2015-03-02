@@ -118,7 +118,7 @@ public class FeatureSectionTest {
         String expected = "@all " + lineSeparator
         + "Feature: Sample Feature" + lineSeparator
         + "    @positive " + lineSeparator
-        + "    Scenario Outline:  Sample Case 001 positive test" + lineSeparator
+        + "    Scenario Outline: Sample Case 001 positive test" + lineSeparator
         + "        Given These are our pre-requisites" + lineSeparator
         + "        When Sample action" + lineSeparator
         + "        Then This is what we see on success" + lineSeparator
@@ -129,7 +129,7 @@ public class FeatureSectionTest {
         + "        | 51 | true  |" + lineSeparator
         + "" + lineSeparator
         + "    @negative " + lineSeparator
-        + "    Scenario Outline:  Sample Case 001 negative test" + lineSeparator
+        + "    Scenario Outline: Sample Case 001 negative test" + lineSeparator
         + "        Given These are our pre-requisites" + lineSeparator
         + "        When Sample action" + lineSeparator
         + "        Then This is what we see on error" + lineSeparator

@@ -21,11 +21,11 @@ public class FeatureSection extends ContainerSection {
     private String ls = System.lineSeparator();
     private List<CaseSection> cases;
 
-    public FeatureSection(DocumentSection<?> container) {
+    public FeatureSection(ContainerSection container) {
         this(container, null);
     }
 
-    public FeatureSection(DocumentSection<?> container, String tagValue) {
+    public FeatureSection(ContainerSection container, String tagValue) {
         super(container, tagValue);
         this.cases = new ArrayList<CaseSection>();
     }

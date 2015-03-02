@@ -48,9 +48,9 @@ public class AerialFileWriterTest {
     @Test
     public void testSampleGenerateDocumentShouldProduceValidFormattedFile() throws Exception {
         String expected = "@all @SampleDocument1.document " + lineSeparator
-          + "Feature:  Sample Feature" + lineSeparator
+          + "Feature: Sample Feature" + lineSeparator
           + "    @positive @SampleDocument1.document_positive " + lineSeparator
-          + "    Scenario Outline:  Sample Test positive test" + lineSeparator
+          + "    Scenario Outline: Sample Test positive test" + lineSeparator
           + "        Given These are our pre-requisites" + lineSeparator
           + "        When Sample action" + lineSeparator
           + "        Then This is what we see on success" + lineSeparator
@@ -61,7 +61,7 @@ public class AerialFileWriterTest {
           + "        | 51 | true  |" + lineSeparator
           + "" + lineSeparator
           + "    @negative @SampleDocument1.document_negative " + lineSeparator
-          + "    Scenario Outline:  Sample Test negative test" + lineSeparator
+          + "    Scenario Outline: Sample Test negative test" + lineSeparator
           + "        Given These are our pre-requisites" + lineSeparator
           + "        When Sample action" + lineSeparator
           + "        Then This is what we see on error" + lineSeparator

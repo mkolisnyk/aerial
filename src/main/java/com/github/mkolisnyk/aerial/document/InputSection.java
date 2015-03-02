@@ -22,12 +22,12 @@ public class InputSection extends DocumentSection<InputSection> {
     /**
      * @param container
      */
-    public InputSection(DocumentSection<CaseSection> container) {
+    public InputSection(ContainerSection container) {
         super(container);
         inputs = new ArrayList<InputRecord>();
     }
 
-    public InputSection(DocumentSection<?> container, String tagValue) {
+    public InputSection(ContainerSection container, String tagValue) {
         super(container, tagValue);
     }
 
@@ -42,9 +42,24 @@ public class InputSection extends DocumentSection<InputSection> {
         inputs = new ArrayList<InputRecord>();
         this.setContent(input);
         String[] lines = input.split(lineSeparator);
-        Assert.assertTrue(
-                "At least header and data row should be defined for input",
-                lines.length > 1);
+        if (this.getName().trim().equals("")) {
+            Assert.assertTrue(
+                    "At least header and data row should be defined for input",
+                    lines.length > 1);
+        } else {
+            if (lines.length < 2) {
+                InputSection section = this.getParent()
+                        .findNamedSectionInParent(
+                        getName(),
+                        Tokens.getInputRefToken(),
+                        InputSection.class);
+                Assert.assertNotNull("Section with the '" + getName() + "' was not found", section);
+                section.parse(section.getContent());
+                this.setContent(section.getContent());
+                this.inputs = section.getInputs();
+                return this;
+            }
+        }
         for (int i = 1; i < lines.length; i++) {
             InputRecord record = new InputRecord();
             record.read(lines[i], lines[0]);

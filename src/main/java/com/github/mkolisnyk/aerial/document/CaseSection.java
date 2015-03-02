@@ -24,11 +24,11 @@ import com.github.mkolisnyk.aerial.datagenerators.cases.UniqueValueCaseScenarioG
  */
 public class CaseSection extends ContainerSection implements AerialGlobalProperties {
 
-    public CaseSection(DocumentSection<?> container) {
+    public CaseSection(ContainerSection container) {
         this(container, null);
     }
 
-    public CaseSection(DocumentSection<?> container, String tag) {
+    public CaseSection(ContainerSection container, String tag) {
         super(container, tag);
     }
 

@@ -22,6 +22,7 @@ public final class Tokens {
     private static String caseToken = "Case:";
     private static String additionalScenariosToken
                                     = "Additional Scenarios:";
+    private static String inputRefToken = "Input Ref:";
 
     /**
      * @return the actionToken
@@ -65,6 +66,14 @@ public final class Tokens {
     public static String getCaseToken() {
         return caseToken;
     }
+
+    /**
+     * @return the inputRefToken
+     */
+    public static String getInputRefToken() {
+        return inputRefToken;
+    }
+
     /**
      * @return the additionalScenariosToken
      */
@@ -76,6 +85,7 @@ public final class Tokens {
         actionToken = AerialInputTemplateMap.get(format, "token.action");
         prerequisitesToken = AerialInputTemplateMap.get(format, "token.prerequisites");
         inputToken = AerialInputTemplateMap.get(format, "token.input");
+        inputRefToken = AerialInputTemplateMap.get(format, "token.input_ref");
         validOutputToken = AerialInputTemplateMap.get(format, "token.valid_output");
         errorOutputToken = AerialInputTemplateMap.get(format, "token.error_output");
 

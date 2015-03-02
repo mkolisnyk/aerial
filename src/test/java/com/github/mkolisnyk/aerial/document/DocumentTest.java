@@ -1,7 +1,9 @@
 package com.github.mkolisnyk.aerial.document;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -97,5 +99,21 @@ public class DocumentTest {
         document.parse(sampleFeatureText);
         String actual = document.generate();
         Assert.assertNull(actual);
+    }
+
+    @Test
+    public void testGenerateWithExternalInputsShouldResolveReferences() throws Exception {
+        document.parse(FileUtils.readFileToString(new File("src/test/resources/SampleGlobalInput.document")));
+        InputSection globalInput = (InputSection) document.getSections().get(Tokens.getInputRefToken()).get(0);
+        Assert.assertNotNull(globalInput);
+        ContainerSection feature = (ContainerSection) document.getSections().get(Tokens.getFeatureToken()).get(0);
+        Assert.assertNotNull(feature);
+        ContainerSection caseSection = (ContainerSection) feature.getSections().get(Tokens.getCaseToken()).get(0);
+        Assert.assertNotNull(caseSection);
+        InputSection localInput = (InputSection) caseSection.getSections().get(Tokens.getInputToken()).get(0);
+        Assert.assertNotNull(localInput);
+        Assert.assertEquals(globalInput.getName(), localInput.getName());
+        Assert.assertEquals(globalInput.getContent(), localInput.getContent());
+        Assert.assertEquals(globalInput.getInputs(), localInput.getInputs());
     }
 }

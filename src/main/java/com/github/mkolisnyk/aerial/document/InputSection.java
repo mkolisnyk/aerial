@@ -47,14 +47,15 @@ public class InputSection extends DocumentSection<InputSection> {
                     "At least header and data row should be defined for input",
                     lines.length > 1);
         } else {
-            if (lines.length < 1) {
+            if (lines.length < 2) {
                 InputSection section = this.getParent()
                         .findNamedSectionInParent(
                         getName(),
-                        Tokens.getInputToken(),
+                        Tokens.getInputRefToken(),
                         InputSection.class);
                 Assert.assertNotNull("Section with the '" + getName() + "' was not found", section);
                 section.parse(section.getContent());
+                this.setContent(section.getContent());
                 this.inputs = section.getInputs();
                 return this;
             }

@@ -42,7 +42,8 @@ public class Document extends ContainerSection {
     @Override
     public String[] getSectionTokens() {
         return new String[] {
-                Tokens.getFeatureToken()
+                Tokens.getFeatureToken(),
+                Tokens.getInputRefToken()
         };
     }
 
@@ -59,7 +60,7 @@ public class Document extends ContainerSection {
             private static final long serialVersionUID = 1L;
             {
                 put(Tokens.getFeatureToken(), FeatureSection.class);
-                put(Tokens.getInputToken(), InputSection.class);
+                put(Tokens.getInputRefToken(), InputSection.class);
             }
         };
     }

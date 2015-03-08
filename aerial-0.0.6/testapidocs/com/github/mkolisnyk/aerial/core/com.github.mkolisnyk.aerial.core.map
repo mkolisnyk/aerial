@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./AerialTagListTest.html" title="com.github.mkolisnyk.aerial.core.AerialTagListTest" alt="" coords="16,45,156,173"/>
+<area shape="rect" id="node1" href="./AerialTagListTest.html" title="&lt;TABLE&gt;" alt="" coords="5,40,167,179"/>
+<area shape="rect" id="node2_1" href="./AerialSourceTypeTest.html" title="com.github.mkolisnyk.aerial.core.AerialSourceTypeTest" alt="" coords="202,11,599,208"/>
+<area shape="rect" id="node2" href="./AerialSourceTypeTest.html" title="&lt;TABLE&gt;" alt="" coords="191,5,610,213"/>
+<area shape="rect" id="node3_2" href="./AerialProcessorTest.html" title="com.github.mkolisnyk.aerial.core.AerialProcessorTest" alt="" coords="645,45,860,173"/>
+<area shape="rect" id="node3" href="./AerialProcessorTest.html" title="&lt;TABLE&gt;" alt="" coords="635,40,871,179"/>
+<area shape="rect" id="node4_3" href="./AerialParamsTest.html" title="com.github.mkolisnyk.aerial.core.AerialParamsTest" alt="" coords="905,28,3155,191"/>
+<area shape="rect" id="node4" href="./AerialParamsTest.html" title="&lt;TABLE&gt;" alt="" coords="895,23,3165,196"/>
+<area shape="rect" id="node5_4" href="./AerialParamKeysTest.html" title="com.github.mkolisnyk.aerial.core.AerialParamKeysTest" alt="" coords="3201,28,3598,191"/>
+<area shape="rect" id="node5" href="./AerialParamKeysTest.html" title="&lt;TABLE&gt;" alt="" coords="3190,23,3609,196"/>
+<area shape="rect" id="node6_5" href="./AerialOutputFormatTest.html" title="com.github.mkolisnyk.aerial.core.AerialOutputFormatTest" alt="" coords="3644,19,3931,199"/>
+<area shape="rect" id="node6" href="./AerialOutputFormatTest.html" title="&lt;TABLE&gt;" alt="" coords="3633,14,3941,205"/>
+<area shape="rect" id="node7_6" href="./AerialInputFormatTest.html" title="com.github.mkolisnyk.aerial.core.AerialInputFormatTest" alt="" coords="3976,28,4263,191"/>
+<area shape="rect" id="node7" href="./AerialInputFormatTest.html" title="&lt;TABLE&gt;" alt="" coords="3965,23,4273,196"/>
+</map>

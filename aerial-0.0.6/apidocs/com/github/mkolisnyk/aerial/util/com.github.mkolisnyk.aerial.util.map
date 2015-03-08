@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SystemClock.html" title="com.github.mkolisnyk.aerial.util.SystemClock" alt="" coords="16,267,133,360"/>
+<area shape="rect" id="node1" href="./SystemClock.html" title="&lt;TABLE&gt;" alt="" coords="5,261,144,365"/>
+<area shape="rect" id="node2_1" href="./LoggerFactory.html" title="com.github.mkolisnyk.aerial.util.LoggerFactory" alt="" coords="171,63,399,156"/>
+<area shape="rect" id="node2" href="./LoggerFactory.html" title="&lt;TABLE&gt;" alt="" coords="161,57,410,161"/>
+<area shape="rect" id="node3_2" href="./HsqlDBWrapper.html" title="com.github.mkolisnyk.aerial.util.HsqlDBWrapper" alt="" coords="445,11,809,208"/>
+<area shape="rect" id="node3" href="./HsqlDBWrapper.html" title="&lt;TABLE&gt;" alt="" coords="434,5,819,213"/>
+<area shape="rect" id="node4_3" href="./Clock.html" title="com.github.mkolisnyk.aerial.util.Clock" alt="" coords="24,63,125,156"/>
+<area shape="rect" id="node4" href="./Clock.html" title="&lt;TABLE&gt;" alt="" coords="13,57,136,161"/>
+</map>

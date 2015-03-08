@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SimpleSectionTest.html" title="com.github.mkolisnyk.aerial.document.SimpleSectionTest" alt="" coords="16,28,553,277"/>
+<area shape="rect" id="node1" href="./SimpleSectionTest.html" title="&lt;TABLE&gt;" alt="" coords="5,23,564,283"/>
+<area shape="rect" id="node2_1" href="./InputSectionTest.html" title="com.github.mkolisnyk.aerial.document.InputSectionTest" alt="" coords="599,80,1295,225"/>
+<area shape="rect" id="node2" href="./InputSectionTest.html" title="&lt;TABLE&gt;" alt="" coords="589,75,1306,231"/>
+<area shape="rect" id="node3_2" href="./InputRecordTest.html" title="com.github.mkolisnyk.aerial.document.InputRecordTest" alt="" coords="1341,80,2879,225"/>
+<area shape="rect" id="node3" href="./InputRecordTest.html" title="&lt;TABLE&gt;" alt="" coords="1330,75,2890,231"/>
+<area shape="rect" id="node4_3" href="./GenerateTest.html" title="com.github.mkolisnyk.aerial.document.GenerateTest" alt="" coords="2925,89,3273,217"/>
+<area shape="rect" id="node4" href="./GenerateTest.html" title="&lt;TABLE&gt;" alt="" coords="2915,83,3284,222"/>
+<area shape="rect" id="node5_4" href="./FeatureSectionTest.html" title="com.github.mkolisnyk.aerial.document.FeatureSectionTest" alt="" coords="3319,28,3711,277"/>
+<area shape="rect" id="node5" href="./FeatureSectionTest.html" title="&lt;TABLE&gt;" alt="" coords="3309,23,3722,283"/>
+<area shape="rect" id="node6_5" href="./DocumentTest.html" title="com.github.mkolisnyk.aerial.document.DocumentTest" alt="" coords="3757,45,4149,260"/>
+<area shape="rect" id="node6" href="./DocumentTest.html" title="&lt;TABLE&gt;" alt="" coords="3746,40,4159,265"/>
+<area shape="rect" id="node7_6" href="./CaseSectionTest.html" title="com.github.mkolisnyk.aerial.document.CaseSectionTest" alt="" coords="4195,11,4655,295"/>
+<area shape="rect" id="node7" href="./CaseSectionTest.html" title="&lt;TABLE&gt;" alt="" coords="4184,5,4665,300"/>
+</map>

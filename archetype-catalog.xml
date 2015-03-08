@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-catalog  xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/1.0.0 http://maven.apache.org/xsd/archetype-catalog-1.0.0.xsd">
+    <archetypes>
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-cucumber-junit-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Cucumber + JUnit</description>
+        </archetype>
+
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-cucumber-testng-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Cucumber + TestNG</description>
+        </archetype>
+
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-maven-cucumber-junit-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Maven + Cucumber + JUnit</description>
+        </archetype>
+
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-maven-cucumber-testng-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Maven + Cucumber + TestNG</description>
+        </archetype>
+
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-maven-jbehave-junit-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Maven + JBehave + JUnit</description>
+        </archetype>
+
+        <archetype>
+            <groupId>com.github.mkolisnyk</groupId>
+            <artifactId>aerial-maven-jbehave-testng-archetype</artifactId>
+            <version>0.0.4</version>
+            <repository>https://oss.sonatype.org/content/repositories/releases/</repository>
+            <description>Generates sample Aerial project integrated with Maven + JBehave + TestNG</description>
+        </archetype>
+
+    </archetypes>
+</archetype-catalog>

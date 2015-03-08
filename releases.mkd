@@ -9,17 +9,17 @@ layout: default
 
 [![Aerial](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial)
 
-**Latest Snapshot**: 0.0.6-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.6-SNAPSHOT) )
+**Latest Snapshot**: 0.0.7-SNAPSHOT ( [Project Documentation](/aerial/aerial-0.0.7-SNAPSHOT) )
 
-**Latest Release**: 0.0.5 ( [Project Documentation](/aerial/aerial-0.0.5) )
+**Latest Release**: 0.0.6 ( [Project Documentation](/aerial/aerial-0.0.6) )
 
 ## Aerial Maven Plugin
 
 [![Aerial Maven Plugin](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-maven-plugin/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-maven-plugin)
 
-**Latest Snapshot**: 0.0.6-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.6-SNAPSHOT) )
+**Latest Snapshot**: 0.0.7-SNAPSHOT ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.7-SNAPSHOT) )
 
-**Latest Release**: 0.0.5 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.5) )
+**Latest Release**: 0.0.6 ( [Project Documentation](/aerial/aerial-maven-plugin-0.0.6) )
 
 ## Archetypes
 
@@ -29,6 +29,16 @@ layout: default
 | aerial-cucumber-testng-archetype | [![Aerial Cucumber + TestNG archetype](https://maven-badges.herokuapp.com/maven-central/com.github.mkolisnyk/aerial-cucumber-testng-archetype/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.github.mkolisnyk/aerial-cucumber-testng-archetype) |
 
 # Release Notes
+
+## v0.0.6
+
+* [Archetypes Catalog](/aerial/archetypes-catalog.xml) for currently available [Aerial archetypes](/aerial/features#maven-archetypes) was added
+
+* [Aerial archetypes](/aerial/features#maven-archetypes) were extended to support Maven projects using Cucumber, JBehave, JUnit and TestNG combinations.
+
+* [Aerial custom scenarios generation](/aerial/extensions-dev-guide#custom-scenario-generators) support was added
+
+* [Named input section](/aerial/user-guide#using-references-for-input-data) support was added
 
 ## v0.0.5
 

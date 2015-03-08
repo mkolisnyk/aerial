@@ -40,6 +40,10 @@ Each Aerial document has the structure like:
 {% highlight bat linenos=table %}
 < Entire document description >
 
+[Input Ref: <Name>
+    <Input Data Table>
+]
+
 Feature: < Feature Name >
     < Feature description >
 
@@ -48,8 +52,8 @@ Feature: < Feature Name >
 
         Action:
             < Action text >
-        Input:
-            < Input Data Table >
+        Input: [ <Reference Name> |
+            < Input Data Table > ]
         On Success:
             < Actions in case of success >
         On Failure:
@@ -67,6 +71,10 @@ Feature: < Feature Name >
 | **Multiple Entries** | Yes |
 | **Mandatory** | No |
 | **If Not Specified** | If not defined only document description is allowed |
+
+## Input Ref Section
+
+This section is targeted to use external definitions for [Input sections](/aerial/user-guide#input). The structure is the same as for [Input section](/aerial/user-guide#input) except it also uses the name attribute to identify the reference uniquely.
 
 ## Case Section
 
@@ -310,6 +318,76 @@ public class AerialRunnerTest {
     }
 }
 {% endhighlight %}
+
+# Using References for Input Data
+
+**Since version 0.0.6**
+
+In some cases the same input data description may be applied to multiple cases. Mainly it is related to cases which operate with the same input values but check some specific flows. In order to minimize duplication in test scenarios there was **Input Ref** feature introduced.
+
+Imagine we have document with multiple cases operating with the same set of data:
+
+{% highlight bat linenos=table %}
+Feature: Sample Feature
+    Case: Sample Test
+        Action:
+            Sample action
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+        Pre-requisites:
+            These are our pre-requisites
+
+    Case: Another Sample Test
+        Action:
+            Sample alternative action
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            Some alternative results on success
+        On Failure:
+            Some alternative results on error
+        Pre-requisites:
+            These are our pre-requisites
+{% endhighlight %}
+
+As it is seen from the above example we have 2 cases which operate with the same set of input data. If for any occasion we need to update the input data we need to do it in 2 places. And if the data is really related to the same input form or at least to the same input we always should do this as soon as we change something in the input. In order to minimize such duplication we can add global input definition and each case just uses reference to it. So, using this feature we can modify our requirements document like this:
+
+{% highlight bat linenos=table %}
+Input Ref: Test Data
+    | Name | Type | Value   |
+    | Test | Int  | [0;100) |
+
+Feature: Sample Feature
+    Case: Sample Test
+        Action:
+            Sample action
+        Input: Test Data
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+        Pre-requisites:
+            These are our pre-requisites
+
+    Case: Another Sample Test
+        Action:
+            Sample alternative action
+        Input: Test Data
+        On Success:
+            Some alternative results on success
+        On Failure:
+            Some alternative results on error
+        Pre-requisites:
+            These are our pre-requisites
+{% endhighlight %}
+
+Pay attention to new **Input Ref:** section at the top level of the document hierarchy. It contains global definition for the input. The name of this section (which goes right after **Input Ref:** keyword) is used then as reference in any **Input** section. So, the modified document does the same as the original one. When we have many input data definitions which are widely used we get an advantage and at the same time we don't lose document structure and visibility.
 
 # Using archetypes
 

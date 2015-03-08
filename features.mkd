@@ -18,7 +18,9 @@ More information can be found on [project documentation pages](http://mkolisnyk.
 
 # Maven Archetypes
 
-Since 0.0.5 version Aerial was updated with the set of archetypes which generate sample test project with consistent references to Aerial and other test engines. Currently available archetypes:
+Since 0.0.5 version Aerial was updated with the set of archetypes which generate sample test project with consistent references to Aerial and other test engines. Archetypes catalog can be references from [here](/aerial/archetypes-catalog.xml).
+
+Currently available archetypes are:
 
 | Name | Description | Latest Version |
 | ---- | ----------- | -------------- |

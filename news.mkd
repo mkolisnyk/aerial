@@ -2,6 +2,11 @@
 title: Aerial News
 ---
 
+## 08.03.2015 0.0.6 Version Release
+
+New 0.0.6 version was released both for Aerial and Aerial Maven plugin.
+For more details, please, view <a href="/aerial/releases#v006" target="_blank">Latest Release Notes</a>.
+
 ## 22.02.2015 New Demo Video Available
 
 New Create New Project Demo video is available on YouTube. It can be watched <a href="https://www.youtube.com/watch?v=YR87Fs3BZeU" target="_blank">here</a>.

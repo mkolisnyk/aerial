@@ -3,11 +3,11 @@
 
   <groupId>com.github.mkolisnyk</groupId>
   <artifactId>aerial-cucumber-junit-archetype</artifactId>
-  <version>0.0.6.1</version>
+  <version>0.0.6.2-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
   <parent>
     <groupId>com.github.mkolisnyk</groupId>
     <artifactId>aerial-archetypes</artifactId>
-    <version>0.0.6.1</version>
+    <version>0.0.6.2-SNAPSHOT</version>
   </parent>
 </project>

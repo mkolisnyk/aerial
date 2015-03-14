@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.github.mkolisnyk</groupId>
     <artifactId>aerial-archetypes</artifactId>
-    <version>0.0.6.1</version>
+    <version>0.0.6.2-SNAPSHOT</version>
   </parent>
   <artifactId>aerial-maven-cucumber-junit-archetype</artifactId>
   <description>Generates Aerial project which involves Maven, Cucumber and JUnit</description>

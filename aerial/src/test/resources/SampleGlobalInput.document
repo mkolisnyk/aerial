@@ -1,0 +1,26 @@
+This is a sample document
+For global input section testing
+
+Input Ref: Test Data
+    | Name | Type | Value   |
+    | Test | Int  | [0;100) |
+
+Feature: Sample Global Values Feature
+    This is a sample feature
+    With multiline description
+
+    Case: Sample Test
+        This is a sample test case
+        With multiline description
+
+        Action:
+            Sample action
+        Input: Test Data
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+        Pre-requisites:
+            These are our pre-requisites
+    Additional Scenarios:
+    Scenario: Sample Scenario 1

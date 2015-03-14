@@ -1,0 +1,56 @@
+This document contains multiple features. Also, some of document sections are missing
+to make sure the engine handles data properly.
+
+Feature: No Additional Scenario and pre-conditions
+    Additional scenario and pre-conditions section is optional
+
+    Case: Sample Test
+        Action:
+            Sample action with <Test>
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+
+Feature: Multiple Additional scenario without cases
+    This feature doesn't contain specific cases. Only additional scenarios
+    Additional Scenarios:
+        Scenario: Sample Scenario 1
+            Given I do action 1
+
+        Scenario: Sample Scenario 2
+            Given I do action 2
+    Additional Scenarios:
+        Scenario: Sample Scenario 3
+            Given I do action 3
+
+        Scenario: Sample Scenario 4
+            Given I do action 4
+
+Feature: Multiple Cases
+    Feature containing multiple cases
+
+    Case: Sample Test 1
+        Action:
+            Sample action with <Test>
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;100) |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error
+
+    Case: Sample Test 2
+        Action:
+            Sample action with <Test>
+        Input:
+            | Name | Type | Value   |
+            | Test | Int  | [0;10] |
+        On Success:
+            This is what we see on success
+        On Failure:
+            This is what we see on error

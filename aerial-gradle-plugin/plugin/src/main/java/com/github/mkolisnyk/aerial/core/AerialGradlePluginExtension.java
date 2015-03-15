@@ -7,10 +7,10 @@ import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
 public class AerialGradlePluginExtension {
 
-    private AerialSourceType inputType;
+    private String inputType;
     private String source;
     private String configurationFile;
-    private AerialSourceType outputType;
+    private String outputType;
     private String destination;
     private Map<String, String> namedParams;
     private List<String> valueParams;
@@ -19,7 +19,7 @@ public class AerialGradlePluginExtension {
     /**
      * @return the inputType
      */
-    public final AerialSourceType getInputType() {
+    public final String getInputType() {
         return inputType;
     }
 
@@ -27,7 +27,7 @@ public class AerialGradlePluginExtension {
     /**
      * @param inputTypeValue the inputType to set
      */
-    public final void setInputType(AerialSourceType inputTypeValue) {
+    public final void setInputType(String inputTypeValue) {
         this.inputType = inputTypeValue;
     }
 
@@ -67,7 +67,7 @@ public class AerialGradlePluginExtension {
     /**
      * @return the outputType
      */
-    public final AerialSourceType getOutputType() {
+    public final String getOutputType() {
         return outputType;
     }
 
@@ -75,7 +75,7 @@ public class AerialGradlePluginExtension {
     /**
      * @param outputTypeValue the outputType to set
      */
-    public final void setOutputType(AerialSourceType outputTypeValue) {
+    public final void setOutputType(String outputTypeValue) {
         this.outputType = outputTypeValue;
     }
 

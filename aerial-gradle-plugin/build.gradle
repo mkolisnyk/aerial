@@ -11,11 +11,14 @@ repositories {
     maven {
         url 'C:/Maven-3.0.4/repo'
     }
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
     testCompile 'junit:junit:4.11'
+    testCompile 'com.github.kristofa:mock-http-server:4.1'
+    
     compile 'com.github.mkolisnyk:aerial:0.0.6.2-SNAPSHOT'
     compile 'com.github.mkolisnyk:aerial-gradle-plugin:1.0-SNAPSHOT'
 }
@@ -25,6 +28,7 @@ buildscript {
         maven {
             url uri('C:/Maven-3.0.4/repo')
         }
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -35,6 +39,7 @@ buildscript {
 }
 apply plugin: 'aerial'
 
-aerial {
-    
-}
+aerial.inputType = 'FILE'
+aerial.source = 'plugin/src/test/resources/SampleDocument1.document'
+aerial.outputType = 'FILE'
+aerial.destination = './output'

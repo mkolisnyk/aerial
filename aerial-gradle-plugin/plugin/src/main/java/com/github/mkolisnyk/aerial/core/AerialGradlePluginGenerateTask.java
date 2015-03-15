@@ -7,6 +7,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
 import com.github.mkolisnyk.aerial.core.params.AerialParamKeys;
+import com.github.mkolisnyk.aerial.core.params.AerialSourceType;
 
 public class AerialGradlePluginGenerateTask  extends DefaultTask {
 
@@ -16,11 +17,11 @@ public class AerialGradlePluginGenerateTask  extends DefaultTask {
                 .findByType(AerialGradlePluginExtension.class);
         ArrayList<String> params = new ArrayList<String>();
         params.add(AerialParamKeys.INPUT_TYPE.toString());
-        params.add(extension.getInputType().toString());
+        params.add(AerialSourceType.fromString(extension.getInputType()).toString());
         params.add(AerialParamKeys.SOURCE.toString());
         params.add(extension.getSource());
         params.add(AerialParamKeys.OUTPUT_TYPE.toString());
-        params.add(extension.getOutputType().toString());
+        params.add(AerialSourceType.fromString(extension.getOutputType()).toString());
         params.add(AerialParamKeys.DESTINATION.toString());
         params.add(extension.getDestination());
         if (extension.getConfigurationFile() != null) {

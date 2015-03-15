@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.github.mkolisnyk</groupId>
-  <artifactId>aerial-cucumber-testng-archetype</artifactId>
-  <version>0.0.5-SNAPSHOT</version>
-  <packaging>maven-archetype</packaging>
   <parent>
     <groupId>com.github.mkolisnyk</groupId>
     <artifactId>aerial-archetypes</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6.2-SNAPSHOT</version>
   </parent>
+  <artifactId>aerial-maven-cucumber-junit-archetype</artifactId>
+  <description>Generates Aerial project which involves Maven, Cucumber and JUnit</description>
+  <properties>
+    <ncss.skip>true</ncss.skip>
+  </properties>
 </project>

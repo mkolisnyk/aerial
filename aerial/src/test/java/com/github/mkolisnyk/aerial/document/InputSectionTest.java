@@ -31,9 +31,9 @@ public class InputSectionTest {
     @Parameters(name = "Test read input record: {0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {"Normal set of fields",  "| Name | Type | Value | Condition |" + ls + "| nameValue | int | [0;100) | a > 0 |", true, 1},
+                {"Normal set of fields", "| Name | Type | Value | Condition |" + ls + "| nameValue | int | [0;100) | a > 0 |", true, 1},
                 {"Only header is defined",  "| Name | Type | Value | Condition |", false, 0},
-                {"No header defined",  "| nameValue2 | int | [0;100) | a > 0 |" + ls + "| nameValue | int | [0;100) | a > 0 |", false, 0},
+                {"No header defined", "| nameValue2 | int | [0;100) | a > 0 |" + ls + "| nameValue | int | [0;100) | a > 0 |", false, 0},
         });
     }
 

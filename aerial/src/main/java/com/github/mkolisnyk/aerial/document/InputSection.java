@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.datagenerators.TypedDataGenerator;
@@ -73,9 +74,36 @@ public class InputSection extends DocumentSection<InputSection> {
     }
 
     public void validateConditions(String fieldName, List<String> conditions, Set<String> availableFields) {
-        ;
+        for (String condition : conditions) {
+            // Rule 1: field should not depend on itself. So, field doesn't contain itself in the condition
+            Assert.assertFalse("Apparently field " + fieldName + " has dependency on itself",
+                    condition.matches("([^A-Za-z_0-9]*)" + fieldName + "([^A-Za-z_0-9]*)"));
+            // Rule 2: if condition exists it shouldn't be empty
+            Assert.assertFalse("The condition for the '" + fieldName + "' field shouldn't be empty",
+                    condition.trim().equals(""));
+            // Rule 3: condition should depend on at least 1 field
+            int dependenciesCount = 0;
+            for (String availableField : availableFields) {
+                if (condition.matches("(.*)" + availableField + "(.*)")) {
+                    dependenciesCount++;
+                    break;
+                }
+            }
+            Assert.assertTrue("The condition for the '" + fieldName
+                    + "' should depend at least on one available fields: ["
+                    + StringUtils.join(availableFields.iterator(), ",") + "]",
+                    dependenciesCount > 0);
+            // Rule 4: condition should have matching number of brackets and quotes
+            Assert.assertTrue("Quote doesn't have closing pair", (condition.split("'").length - 1) % 2 == 0);
+            Assert.assertTrue("Double quote doesn't have closing pair", (condition.split("\"").length - 1) % 2 == 0);
+            Assert.assertEquals(condition.split("\\(").length, condition.split("\\)").length);
+            Assert.assertEquals(condition.split("\\[").length, condition.split("]").length);
+        }
+        // Rule 5: the number of conditions for each field must not be equal to 1
+        // (each condition should have at least one counter-condition)
+        Assert.assertNotEquals(1, conditions.size());
     }
-    
+
     public void validate(String input) throws Exception {
         if (inputs == null) {
             this.parse(input);
@@ -88,7 +116,8 @@ public class InputSection extends DocumentSection<InputSection> {
             if (!nameConditionMap.containsKey(record.getName())) {
                 nameConditionMap.put(record.getName(), new ArrayList<String>());
             }
-            if (!nameConditionMap.get(record.getName()).contains(record.getCondition().trim())) {
+            if (!nameConditionMap.get(record.getName()).contains(record.getCondition().trim())
+                    && StringUtils.isNotBlank(record.getCondition().trim())) {
                 nameConditionMap.get(record.getName()).add(record.getCondition().trim());
             }
             for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {

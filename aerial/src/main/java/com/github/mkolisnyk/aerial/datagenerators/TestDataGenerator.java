@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
@@ -32,7 +33,18 @@ public class TestDataGenerator {
         return result;
     }
 
-    String generateQueryString(String[] names) {
+    private String[] getUniqueConditions() {
+        List<String> conditions = new ArrayList<String>();
+        for (InputRecord record : this.records) {
+            if (!conditions.contains(record.getCondition()) && !StringUtils.isBlank(record.getCondition())) {
+                conditions.add(record.getCondition());
+            }
+        }
+        String[] result = new String[conditions.size()];
+        result = conditions.toArray(result);
+        return result;
+    }
+    private String singleQueryString(String[] names) {
         String query = "SELECT ";
         for (int i = 0; i < names.length; i++) {
             query = query.concat(String.format("S%d.Value AS \"%s\", ", i, names[i]));
@@ -55,6 +67,18 @@ public class TestDataGenerator {
                         + "FROM input WHERE Name = '%s') AS S%d ORDER BY \"ValidInput\" DESC",
                         names[names.length - 1], names.length - 1));
         return query;
+    }
+    String generateQueryString(String[] names, String[] conditions) {
+        String queryResult = "";
+        if (conditions.length < 1) {
+            return singleQueryString(names);
+        }
+        String[] queries = new String[conditions.length];
+        for (int i = 0; i < conditions.length; i++) {
+            queries[i] = singleQueryString(names) + " WHERE " + conditions[i];
+        }
+        queryResult = StringUtils.join(queries, " UNION ");
+        return queryResult;
     }
 
     public Map<String, List<String>> generateTestData() throws Exception {
@@ -86,7 +110,8 @@ public class TestDataGenerator {
         }
 
         String[] names = this.getUniqueNames();
-        String query = this.generateQueryString(names);
+        String[] conditions = this.getUniqueConditions();
+        String query = this.generateQueryString(names, conditions);
 
         Map<String, List<String>> output = db.executeQuery(query);
         for (String name: names) {

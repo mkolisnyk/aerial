@@ -73,7 +73,7 @@ public class ScenarioGeneratorTest {
                                         + "  CROSS JOIN (SELECT Name,Value,Condition,ValidInput"
                                             + " FROM input WHERE Name = 'Count') AS S2"
                                         + " ORDER BY \"ValidInput\" DESC";
-        String query = generator.generateQueryString(generator.getUniqueNames());
+        String query = generator.generateQueryString(generator.getUniqueNames(),new String[]{});
         Assert.assertEquals(expectedQuery, query);
     }
 

@@ -4,7 +4,11 @@
 package com.github.mkolisnyk.aerial.document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Assert;
 
@@ -68,14 +72,28 @@ public class InputSection extends DocumentSection<InputSection> {
         return this;
     }
 
+    public void validateConditions(String fieldName, List<String> conditions, Set<String> availableFields) {
+        ;
+    }
+    
     public void validate(String input) throws Exception {
         if (inputs == null) {
             this.parse(input);
         }
+        Map<String, List<String>> nameConditionMap = new HashMap<String, List<String>>();
         for (InputRecord record : inputs) {
             Assert.assertFalse("The name must be non-empty", record.getName().trim().equals(""));
             TypedDataGenerator generator = new TypedDataGenerator(record);
             generator.validate();
+            if (!nameConditionMap.containsKey(record.getName())) {
+                nameConditionMap.put(record.getName(), new ArrayList<String>());
+            }
+            if (!nameConditionMap.get(record.getName()).contains(record.getCondition().trim())) {
+                nameConditionMap.get(record.getName()).add(record.getCondition().trim());
+            }
+            for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
+                validateConditions(entry.getKey(), entry.getValue(), nameConditionMap.keySet());
+            }
         }
     }
 

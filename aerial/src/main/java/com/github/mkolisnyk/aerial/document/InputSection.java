@@ -108,6 +108,17 @@ public class InputSection extends DocumentSection<InputSection> {
         if (inputs == null) {
             this.parse(input);
         }
+        Map<String, List<String>> nameConditionMap = getNameConditionMap(inputs);
+        for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
+            validateConditions(entry.getKey(), entry.getValue(), nameConditionMap.keySet());
+        }
+    }
+
+    public String generate() throws Exception {
+        return null;
+    }
+    
+    public static Map<String, List<String>> getNameConditionMap(List<InputRecord> inputs) throws Exception {
         Map<String, List<String>> nameConditionMap = new HashMap<String, List<String>>();
         for (InputRecord record : inputs) {
             Assert.assertFalse("The name must be non-empty", record.getName().trim().equals(""));
@@ -120,13 +131,7 @@ public class InputSection extends DocumentSection<InputSection> {
                     && StringUtils.isNotBlank(record.getCondition().trim())) {
                 nameConditionMap.get(record.getName()).add(record.getCondition().trim());
             }
-            for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
-                validateConditions(entry.getKey(), entry.getValue(), nameConditionMap.keySet());
-            }
         }
-    }
-
-    public String generate() throws Exception {
-        return null;
+        return nameConditionMap;
     }
 }

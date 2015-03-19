@@ -236,12 +236,33 @@ public class CaseSectionTest {
         Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name mandatory values")[1]);
     }
 
+
+    @Test
+    public void testGenerateWithCustomConditionsShouldHaveSplitInputResults() throws Exception {
+        String sampleCaseText = sampleCaseDescription + ls
+                + "Action:" + ls
+                + "I test conditional <test> value" + ls
+                + "Input:" + ls
+                + "| Name | Type | Value | Condition |" + ls
+                + "| test | String  | Condition1 | item <= 150 |" + ls
+                + "| test | String  | Condition2 | item > 150 |" + ls
+                + "| item | int  | [100;200) | |" + ls
+                + "On Success:" + ls
+                + "Successful completion" + ls
+                + "On Failure:" + ls
+                + "Error case" + ls
+                + "Pre-requisites:" + ls
+                + "Some pre-conditions" + ls;
+        section.parse(sampleCaseText);
+        String actual = section.generate();
+        String expected = "";
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test
     public void testGenerateWithCustomGeneratorShouldReturnCustomScenario() throws Exception {
         System.setProperty(AerialGlobalProperties.AERIAL_GEN_CUSTOM_CLASSES,
                 CustomCaseScenarioGenerator.class.getCanonicalName());
-        String shortOffset = StringUtils.repeat("    ", 1);
-        String midOffset = StringUtils.repeat("    ", 2);
         String sampleUniqueCaseText = sampleCaseDescription + ls
                 + "Action:" + ls
                 + "I test unique <Mandatory> value with <Non-Mandatory> value" + ls

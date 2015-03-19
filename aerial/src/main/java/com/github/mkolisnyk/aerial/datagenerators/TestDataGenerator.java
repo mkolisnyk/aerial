@@ -1,13 +1,16 @@
 package com.github.mkolisnyk.aerial.datagenerators;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 
 import com.github.mkolisnyk.aerial.document.InputRecord;
+import com.github.mkolisnyk.aerial.document.InputSection;
 import com.github.mkolisnyk.aerial.util.HsqlDBWrapper;
 
 public class TestDataGenerator {
@@ -44,7 +47,31 @@ public class TestDataGenerator {
         result = conditions.toArray(result);
         return result;
     }
-    private String singleQueryString(String[] names) {
+
+    private List<Map<String, String>> getConditionCombinations() throws Exception {
+        Map<String, List<String>> nameConditionMap = InputSection.getNameConditionMap(this.records);
+        List<Map<String, String>> results = new ArrayList<Map<String, String>>();
+        int total = 0;
+        for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
+            if (total == 0) {
+                total = 1;
+            }
+            total *= entry.getValue().size();
+        }
+        for (int i = 0 ; i < total ; i++) {
+            Map<String,String> row = new HashMap<String, String>();
+            int multiplier = 1;
+            for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
+                int index = i / multiplier % entry.getValue().size();
+                row.put(entry.getKey(), entry.getValue().get(index));
+                multiplier *= entry.getValue().size();
+            }
+            results.add(row);
+        }
+        return results;
+    }
+
+    private String singleQueryString(String[] names, Map<String, String> conditionRow) {
         String query = "SELECT ";
         for (int i = 0; i < names.length; i++) {
             query = query.concat(String.format("S%d.Value AS \"%s\", ", i, names[i]));
@@ -54,30 +81,37 @@ public class TestDataGenerator {
             query = query.concat(String.format("S%d.ValidInput = 'true' AND ", i));
         }
         query = query.concat(" 1 = 1 ) THEN 'true' ELSE 'false' END AS \"ValidInput\" FROM ");
-        for (int i = 0; i < names.length - 1; i++) {
-            query = query.concat(
-                    String.format(
-                            "(SELECT Name,Value,Condition,ValidInput "
-                            + "FROM input WHERE Name = '%s') AS S%d  CROSS JOIN ",
-                            names[i], i));
+        String[] queryParts = new String[names.length];
+        for (int i = 0; i < names.length; i++) {
+            if (conditionRow.containsKey(names[i])) {
+                queryParts[i] = 
+                        String.format(
+                                "(SELECT Name,Value,Condition,ValidInput "
+                                + "FROM input WHERE Name = '%s') AS S%d WHERE Condition='%s'",
+                                names[i], i, conditionRow.get(names[i]));
+            } else {
+                queryParts[i] = 
+                        String.format(
+                                "(SELECT Name,Value,Condition,ValidInput "
+                                + "FROM input WHERE Name = '%s') AS S%d",
+                                names[i], i);
+            }
         }
-        query = query.concat(
-                String.format(
-                        "(SELECT Name,Value,Condition,ValidInput "
-                        + "FROM input WHERE Name = '%s') AS S%d ORDER BY \"ValidInput\" DESC",
-                        names[names.length - 1], names.length - 1));
+        query = query.concat(StringUtils.join(queryParts, " CROSS JOIN "));
         return query;
     }
-    String generateQueryString(String[] names, String[] conditions) {
+    String generateQueryString(String[] names, List<Map<String, String>> conditions) {
         String queryResult = "";
-        if (conditions.length < 1) {
-            return singleQueryString(names);
+        if (conditions.size() < 1) {
+            return singleQueryString(names, new HashMap<String, String>()) + " ORDER BY \"ValidInput\" DESC";
         }
-        String[] queries = new String[conditions.length];
-        for (int i = 0; i < conditions.length; i++) {
-            queries[i] = singleQueryString(names) + " WHERE " + conditions[i];
+        String[] queries = new String[conditions.size()];
+        for (int i = 0; i < conditions.size(); i++) {
+            queries[i] = "(SELECT * FROM (" + singleQueryString(names, conditions.get(i)) + ")) AS T" + i + " WHERE "
+                    + StringUtils.join(conditions.get(i).values().iterator(), " AND ");
+            
         }
-        queryResult = StringUtils.join(queries, " UNION ");
+        queryResult = StringUtils.join(queries, " UNION ") + " ORDER BY \"ValidInput\" DESC";
         return queryResult;
     }
 
@@ -110,7 +144,7 @@ public class TestDataGenerator {
         }
 
         String[] names = this.getUniqueNames();
-        String[] conditions = this.getUniqueConditions();
+        List<Map<String, String>> conditions = this.getConditionCombinations();
         String query = this.generateQueryString(names, conditions);
 
         Map<String, List<String>> output = db.executeQuery(query);

@@ -73,7 +73,7 @@ public class ScenarioGeneratorTest {
                                             + " FROM input WHERE Name = 'Date') AS S1"
                                         + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput"
                                             + " FROM input WHERE Name = 'Count') AS S2"
-                                        + " ORDER BY \"ValidInput\" DESC";
+                                        + " ORDER BY ValidInput DESC";
         String query = generator.generateQueryString(generator.getUniqueNames(),new ArrayList<Map<String, String>>());
         Assert.assertEquals(expectedQuery, query);
     }
@@ -91,15 +91,15 @@ public class ScenarioGeneratorTest {
                 + "SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Name') AS S0"
                 + " CROSS JOIN"
                 + " (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Date') AS S1"
-                + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Count') AS S2"
-                + " WHERE Condition='Name > 'abc'')) AS T0 WHERE Name > 'abc' "
+                + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Count' AND Condition='Name > 'abc'') AS S2"
+                + ") AS T0 WHERE \"Name\" > 'abc') "
             + "UNION ("
             + "SELECT * FROM ("
                 + "SELECT S0.Value AS \"Name\", S1.Value AS \"Date\", S2.Value AS \"Count\","
                 + "  CASE WHEN (S0.ValidInput = 'true' AND S1.ValidInput = 'true' AND S2.ValidInput = 'true' AND  1 = 1 ) THEN 'true' ELSE 'false' END AS \"ValidInput\""
                 + " FROM (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Name') AS S0"
                 + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Date') AS S1"
-                + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Count') AS S2 WHERE Condition='Name <= 'abc'')) AS T1 WHERE Name <= 'abc' ORDER BY \"ValidInput\" DESC";
+                + " CROSS JOIN (SELECT Name,Value,Condition,ValidInput FROM input WHERE Name = 'Count' AND Condition='Name <= 'abc'') AS S2) AS T1 WHERE \"Name\" <= 'abc') ORDER BY \"ValidInput\" DESC";
         String query = generator.generateQueryString(generator.getUniqueNames(),new ArrayList<Map<String, String>>() {
             {
                 add(

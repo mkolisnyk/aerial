@@ -194,9 +194,8 @@ public class CaseSectionTest {
                 + midOffset + "Then This is what we see on error" + ls
                 + shortOffset + "Examples:" + ls
                 + midOffset + "| Unique | Modified Unique | ValidInput | Non-Unique | Unique2 | Modified Unique2 |" + ls
-                + midOffset + "| 50 | 50 | true | 01-01-2000 | 150 | 151 |" + ls
-                + midOffset + "| 50 | 51 | true | 01-01-2000 | 150 | 150 |" + ls
-                + ls;
+                + midOffset + "| 50 | 50 | true | 02-10-2010 | 150 | 151 |" + ls
+                + midOffset + "| 50 | 0 | true | 02-10-2010 | 150 | 150 |" + ls + ls;
         section.parse(sampleUniqueCaseText);
         String actual = section.generate();
         Assert.assertEquals(expected, actual.split("Scenario Outline: Sample Name unique values test")[1]);
@@ -255,7 +254,39 @@ public class CaseSectionTest {
                 + "Some pre-conditions" + ls;
         section.parse(sampleCaseText);
         String actual = section.generate();
-        String expected = "";
+        String expected = "    @positive " + ls
+        + "    Scenario Outline: Sample Name positive test" + ls
+        + "        Given Some pre-conditions" + ls
+        + "        When I test conditional <test> value" + ls
+        + "        Then Successful completion" + ls
+        + "    Examples:" + ls
+        + "        | test | item | ValidInput |" + ls
+        + "        | Condition1 | 100 | true  |" + ls
+        + "        | Condition2 | 151 | true  |" + ls
+        + "        | Condition1 | 150 | true  |" + ls
+        + "" + ls
+        + "    @negative " + ls
+        + "    Scenario Outline: Sample Name negative test" + ls
+        + "        Given Some pre-conditions" + ls
+        + "        When I test conditional <test> value" + ls
+        + "        Then Error case" + ls
+        + "    Examples:" + ls
+        + "        | test | item | ValidInput |" + ls
+        + "        |  | 100 | false |" + ls
+        + "        | Condition2Condition2 | 151 | false |" + ls
+        + "        | Condition2 | 201 | false |" + ls
+        + "        | Condition2 | 200 | false |" + ls
+        + "        | Condition1Condition1 | 99 | false |" + ls
+        + "        | Condition1Condition1 | 150 | false |" + ls
+        + "        | Condition1Condition1 | 100 | false |" + ls
+        + "        | Condition1 | 99 | false |" + ls
+        + "        |  | 99 | false |" + ls
+        + "        |  | 201 | false |" + ls
+        + "        |  | 200 | false |" + ls
+        + "        |  | 151 | false |" + ls
+        + "        |  | 150 | false |" + ls
+        + "        | Condition2Condition2 | 200 | false |" + ls
+        + "        | Condition2Condition2 | 201 | false |" + ls + ls;
         Assert.assertEquals(expected, actual);
     }
 

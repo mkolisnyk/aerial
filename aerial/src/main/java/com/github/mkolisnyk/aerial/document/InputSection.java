@@ -117,7 +117,7 @@ public class InputSection extends DocumentSection<InputSection> {
     public String generate() throws Exception {
         return null;
     }
-    
+
     public static Map<String, List<String>> getNameConditionMap(List<InputRecord> inputs) throws Exception {
         Map<String, List<String>> nameConditionMap = new HashMap<String, List<String>>();
         for (InputRecord record : inputs) {
@@ -130,6 +130,11 @@ public class InputSection extends DocumentSection<InputSection> {
             if (!nameConditionMap.get(record.getName()).contains(record.getCondition().trim())
                     && StringUtils.isNotBlank(record.getCondition().trim())) {
                 nameConditionMap.get(record.getName()).add(record.getCondition().trim());
+            }
+        }
+        for (InputRecord record : inputs) {
+            if (nameConditionMap.get(record.getName()).size() == 0) {
+                nameConditionMap.remove(record.getName());
             }
         }
         return nameConditionMap;

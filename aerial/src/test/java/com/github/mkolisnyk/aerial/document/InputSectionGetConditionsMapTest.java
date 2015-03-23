@@ -12,7 +12,15 @@ import org.junit.Test;
 
 public class InputSectionGetConditionsMapTest {
     private InputSection section;
-
+    private String ls = System.lineSeparator();
+    private String inputText = "| Name | Type | Value | Condition |" + ls
+            + "| nameValue | int | [0;100) | a > 0 |" + ls
+            + "| nameValue | int | [0;100) | a <= 0 |" + ls
+            + "| a | int | [-100;100) | |" + ls;
+    private String invalidInputText = "| Name | Type | Value | Condition |" + ls
+            + "| nameValue | int | [0;100) | nameValue > 0 |" + ls
+            + "| nameValue | int | [0;100) | a <= 0 |" + ls
+            + "| a | int | [-100;100) | |" + ls;
     @Before
     public void setUp() throws Exception {
         section = new InputSection(null);
@@ -20,11 +28,6 @@ public class InputSectionGetConditionsMapTest {
 
     @Test
     public void testGetConditionsMapForValidConditionSet() throws Exception {
-        String ls = System.lineSeparator();
-        String inputText = "| Name | Type | Value | Condition |" + ls
-                + "| nameValue | int | [0;100) | a > 0 |" + ls
-                + "| nameValue | int | [0;100) | a <= 0 |" + ls
-                + "| a | int | [-100;100) | |";
         section.parse(inputText);
         Map<String, List<String>> expected = new HashMap<String, List<String>>() {
             {
@@ -50,5 +53,22 @@ public class InputSectionGetConditionsMapTest {
                 Assert.assertTrue(expected.get(entry.getKey()).contains(value));
             }
         }
+    }
+
+    @Test
+    public void testValidateShouldPassOnCorrectInput() throws Exception {
+        section.parse(inputText);
+        section.validate(inputText);
+    }
+
+    @Test
+    public void testValidateShouldProceedIfDataWasNotParsed() throws Exception {
+        section.validate(inputText);
+    }
+
+    @Test(expected=AssertionError.class)
+    public void testValidateShouldFailOnIncorrectInput() throws Exception {
+        section.parse(invalidInputText);
+        section.validate(invalidInputText);
     }
 }

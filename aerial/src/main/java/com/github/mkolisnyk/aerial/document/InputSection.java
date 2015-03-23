@@ -5,6 +5,7 @@ package com.github.mkolisnyk.aerial.document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -77,7 +78,7 @@ public class InputSection extends DocumentSection<InputSection> {
         for (String condition : conditions) {
             // Rule 1: field should not depend on itself. So, field doesn't contain itself in the condition
             Assert.assertFalse("Apparently field " + fieldName + " has dependency on itself",
-                    condition.matches("([^A-Za-z_0-9]*)" + fieldName + "([^A-Za-z_0-9]*)"));
+                    condition.matches("(^|([^A-Za-z0-9]+))" + fieldName  + "($|([^A-Za-z]+))"));
             // Rule 2: if condition exists it shouldn't be empty
             Assert.assertFalse("The condition for the '" + fieldName + "' field shouldn't be empty",
                     condition.trim().equals(""));
@@ -105,12 +106,16 @@ public class InputSection extends DocumentSection<InputSection> {
     }
 
     public void validate(String input) throws Exception {
-        if (inputs == null) {
+        if (inputs.size() <= 0) {
             this.parse(input);
+        }
+        Set<String> allFields = new HashSet<String>();
+        for (InputRecord inputRecord : inputs) {
+            allFields.add(inputRecord.getName().trim());
         }
         Map<String, List<String>> nameConditionMap = getNameConditionMap(inputs);
         for (Entry<String, List<String>> entry : nameConditionMap.entrySet()) {
-            validateConditions(entry.getKey(), entry.getValue(), nameConditionMap.keySet());
+            validateConditions(entry.getKey(), entry.getValue(), allFields);
         }
     }
 

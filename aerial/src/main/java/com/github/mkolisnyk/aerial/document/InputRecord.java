@@ -3,8 +3,6 @@
  */
 package com.github.mkolisnyk.aerial.document;
 
-import java.util.List;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
@@ -164,10 +162,6 @@ public class InputRecord implements Cloneable {
         Assert.assertFalse(
                 "The name field shouldn't be empty",
                 this.name.trim().equals(""));
-    }
-
-    public List<InputRecord> expand() {
-        return null;
     }
 
     /* (non-Javadoc)

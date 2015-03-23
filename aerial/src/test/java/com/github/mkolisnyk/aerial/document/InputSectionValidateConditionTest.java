@@ -118,6 +118,18 @@ public class InputSectionValidateConditionTest {
                     true
                 },
                 {
+                    "Consistent double-quotes should pass",
+                    "test",
+                    new ArrayList<String>() {
+                        {
+                            add("test1 < \"3\"");
+                            add("test2 > 4");
+                        }
+                    },
+                    sampleSet,
+                    false
+                },
+                {
                     "Inconsistent brackets should fail",
                     "test",
                     new ArrayList<String>() {

@@ -116,6 +116,19 @@ public class InputRecordTest {
                         "" + this.unique,
                         "" + this.mandatory),
                 this.record);
+        Assert.assertEquals(
+                "Hash codes aren't the same",
+                this.record.hashCode(),
+                (new InputRecord(
+                        this.name,
+                        this.type,
+                        this.value,
+                        this.condition,
+                        true,
+                        "" + this.unique,
+                        "" + this.mandatory)).hashCode());
+        Assert.assertFalse(this.record.equals(null));
+        Assert.assertFalse(this.record.equals(this.unique));
         Assert.assertEquals(this.unique, this.record.isUnique());
         Assert.assertEquals(this.mandatory, this.record.isMandatory());
     }

@@ -119,11 +119,11 @@ public class InputSectionValidateConditionTest {
                 },
                 {
                     "Consistent double-quotes should pass",
-                    "test",
+                    "test1",
                     new ArrayList<String>() {
                         {
-                            add("test1 < \"3\"");
-                            add("test2 > 4");
+                            add("test2 < \"3\"");
+                            add("test > 4");
                         }
                     },
                     sampleSet,

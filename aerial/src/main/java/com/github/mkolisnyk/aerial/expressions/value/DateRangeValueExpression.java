@@ -46,7 +46,7 @@ public class DateRangeValueExpression extends ValueExpression {
 
     public DateRangeValueExpression(InputRecord inputValue, Clock clockValue) throws Exception {
         super(inputValue);
-        this.clock = clockValue;
+        this.setClock(clockValue);
         this.lower = clock.now();
         this.upper = clock.now();
         this.formatString = "dd-MM-yyyy";

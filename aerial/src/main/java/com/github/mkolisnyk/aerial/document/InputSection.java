@@ -95,10 +95,11 @@ public class InputSection extends DocumentSection<InputSection> {
                     + StringUtils.join(availableFields.iterator(), ",") + "]",
                     dependenciesCount > 0);
             // Rule 4: condition should have matching number of brackets and quotes
-            Assert.assertTrue("Quote doesn't have closing pair", (condition.split("'").length - 1) % 2 == 0);
-            Assert.assertTrue("Double quote doesn't have closing pair", (condition.split("\"").length - 1) % 2 == 0);
-            Assert.assertEquals(condition.split("\\(").length, condition.split("\\)").length);
-            Assert.assertEquals(condition.split("\\[").length, condition.split("]").length);
+            Assert.assertTrue("Quote doesn't have closing pair", StringUtils.countMatches(condition, "'") % 2 == 0);
+            Assert.assertTrue("Double quote doesn't have closing pair",
+                                StringUtils.countMatches(condition, "\"") % 2 == 0);
+            Assert.assertEquals(StringUtils.countMatches(condition, "("), StringUtils.countMatches(condition, ")"));
+            Assert.assertEquals(StringUtils.countMatches(condition, "["), StringUtils.countMatches(condition, "]"));
         }
         // Rule 5: the number of conditions for each field must not be equal to 1
         // (each condition should have at least one counter-condition)

@@ -102,6 +102,7 @@ public class FeatureSectionTest {
         section.parse(descriptionText);
         Assert.assertEquals(descriptionText, section.getDescription());
         Assert.assertEquals(0, section.getSections().size());
+        Assert.assertEquals(0, section.getCases().size());
     }
 
     @Test
@@ -109,6 +110,7 @@ public class FeatureSectionTest {
         section.parse(sampleFeatureText);
         Assert.assertEquals(sampleFeatureDescription, section.getDescription());
         Assert.assertNotNull(section.getSections().get(Tokens.getCaseToken()));
+        Assert.assertNotNull(section.getCases());
         Assert.assertNotNull(section.getSections()
                 .get(Tokens.getAdditionalScenariosToken()));
     }

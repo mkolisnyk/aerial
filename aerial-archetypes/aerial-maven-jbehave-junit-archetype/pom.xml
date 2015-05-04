@@ -6,4 +6,5 @@
     <version>0.0.6.2-SNAPSHOT</version>
   </parent>
   <artifactId>aerial-maven-jbehave-junit-archetype</artifactId>
+  <packaging>maven-archetype</packaging>
 </project>
